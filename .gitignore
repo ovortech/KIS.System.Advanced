@@ -1,0 +1,15 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/KIS.System.Advanced.Business/bin/Debug
+/KIS.System.Advanced.Business/obj/Debug
+/KIS.System.Advanced.Domain/bin/Debug
+/KIS.System.Advanced.Domain/obj/Debug
+/KIS.System.Advanced.Infra.Data/bin/Debug
+/KIS.System.Advanced.Infra.Data/obj/Debug
+/KIS.System.Advanced.MVC/bin
+/KIS.System.Advanced.MVC/obj/Debug
+/KIS.System.Advanced.Services/bin/Debug
+/packages
+/KIS.System.Advanced.Services/obj/Debug
