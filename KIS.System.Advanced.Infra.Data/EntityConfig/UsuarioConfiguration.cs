@@ -13,7 +13,12 @@ namespace KIS.System.Advanced.Infra.Data.EntityConfig
         public UsuarioConfiguration()
         {
             ToTable("Usuario");
-            HasKey(p => p.UsuarioId);
+            HasKey(e => e.UsuarioId);
+            Property(e => e.Nome).HasMaxLength(150).IsRequired();
+            Property(e => e.Sexo).HasMaxLength(1).IsFixedLength().IsRequired();
+            Property(e => e.Email).HasMaxLength(150).IsRequired();
+            Property(e => e.Ativo).IsRequired();
+            Property(e => e.CargoId).IsRequired();
         }
     }
 }

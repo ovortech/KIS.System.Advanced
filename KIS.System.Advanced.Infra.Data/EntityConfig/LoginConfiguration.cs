@@ -13,12 +13,9 @@ namespace KIS.System.Advanced.Infra.Data.EntityConfig
         public LoginConfiguration()
         {
             ToTable("Login");
-            
-            HasKey(p => p.LoginId);
-
-            Property(p => p.UserName).IsRequired();
-            Property(p => p.Password).IsRequired();
-            //Property(p => p.UsuarioId).IsRequired();
+            HasKey(e => e.LoginId);
+            Property(e => e.UserName).HasMaxLength(50).IsRequired();
+            Property(e => e.Password).HasMaxLength(50).IsRequired();
         }
     }
 }

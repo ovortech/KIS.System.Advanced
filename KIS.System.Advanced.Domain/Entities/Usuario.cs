@@ -10,10 +10,9 @@ namespace KIS.System.Advanced.Domain.Entities
     {
         public int UsuarioId { get; set; }
         public string Nome { get; set; }
-        public string Sobrenome { get; set; }
+        public string Sexo { get; set; }
         public string Email { get; set; }
-        public string DataCadastro { get; set; }
-        public bool Ativo { get; set; }
- 
+        public bool Ativo { get; set; } 
+        public int CargoId { get; set; }
     }
 }

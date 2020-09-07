@@ -18,11 +18,11 @@ namespace KIS.System.Advanced.Business
             dbLogin = new LoginRepository();
         }
 
-        public IEnumerable<Login> Logar(Login login)
+        public IEnumerable<Login> Logar()
         {
             try
             {
-                var alllogins = dbLogin.GetAll().ToList();
+                var alllogins = dbLogin.GetAll();
                 return alllogins;
             }
             catch (EntityException ex)

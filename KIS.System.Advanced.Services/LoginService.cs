@@ -18,7 +18,7 @@ namespace KIS.System.Advanced.Services
         }
         public IEnumerable<Login> Logar(Login login)
         {
-            return loginBS.Logar(login);
+            return loginBS.Logar();
         }
     }
 }

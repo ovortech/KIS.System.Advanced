@@ -20,6 +20,12 @@ namespace KIS.System.Advanced.MVC.Controllers.Acesso
         public ActionResult Index()
         {
             var logins = _loginService.Logar(new Login());
+            string nome = "";
+            foreach (var item in logins)
+            {
+                
+                nome += item.UserName;
+            }
             return View();
         }
 

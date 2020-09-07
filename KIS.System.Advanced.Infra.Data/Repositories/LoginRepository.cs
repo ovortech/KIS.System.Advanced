@@ -7,6 +7,8 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
 {
     public class LoginRepository : RepositoryBase<Login>, ILoginRepository
     {
-       
+        public LoginRepository():base()
+        {
+        }
     }
 }
