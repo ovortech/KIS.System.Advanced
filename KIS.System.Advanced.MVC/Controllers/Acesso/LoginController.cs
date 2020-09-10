@@ -1,4 +1,7 @@
-﻿using KIS.System.Advanced.Domain.Entities;
+﻿using AutoMapper;
+using KIS.System.Advanced.Domain.Entities;
+using KIS.System.Advanced.MVC.Support;
+using KIS.System.Advanced.MVC.ViewModels;
 using KIS.System.Advanced.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -15,83 +18,27 @@ namespace KIS.System.Advanced.MVC.Controllers.Acesso
         public LoginController(ILoginService loginService)
         {
             _loginService = loginService;
+            AutoMapperHelper.InitiazeMapper();
         }
         // GET: Login
         public ActionResult Index()
         {
-            var logins = _loginService.Logar(new Login());
-            string nome = "";
+            var loginmodel = _loginService.Logar(new Login());
+
+            var logins = Mapper.Map<List<LoginVM>>(loginmodel);
             foreach (var item in logins)
             {
-                
-                nome += item.UserName;
+                ViewBag.nome += item.UserName;
             }
-            return View();
+            return View(logins.First());
         }
 
-        // GET: Login/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Login/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Login/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Logar(LoginVM loginVM)
         {
             try
             {
                 // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Login/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Login/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Login/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Login/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
 
                 return RedirectToAction("Index");
             }

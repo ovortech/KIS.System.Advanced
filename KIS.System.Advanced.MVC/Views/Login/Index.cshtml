@@ -7,10 +7,10 @@
 
 <h2>Index</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>LoginVM</h4>
         <hr />
@@ -46,7 +46,7 @@
         </div>
     </div>
 }
-
+{{ViewBag.nome}}
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
