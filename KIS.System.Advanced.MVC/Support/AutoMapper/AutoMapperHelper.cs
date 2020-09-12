@@ -8,9 +8,28 @@ using System.Web.UI.WebControls;
 
 namespace KIS.System.Advanced.MVC.Support
 {
-    public static class AutoMapperHelper
+    public sealed class AutoMapperHelper
     {
-        public static void InitiazeMapper()
+
+        private static volatile AutoMapperHelper _instance;
+        private static object syncRoot = new object();
+        public static AutoMapperHelper Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    lock (syncRoot)
+                    {
+                        if (_instance == null)
+                            _instance = new AutoMapperHelper();
+                    }
+                }
+                return _instance;
+            }
+        }
+
+        public void InitiazeMapper()
         {
             Mapper.Initialize(cfg =>
             {
