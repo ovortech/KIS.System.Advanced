@@ -20,7 +20,7 @@ namespace Kist.System.Adavanced.Test.Data
         {
             var login = new Login { UserName = "marcosmelo", Password = "123456" };
             var user =_loginRepository.Logar(login);
-            Assert.AreEqual(2, user.LoginId);
+            Assert.AreEqual(2, user.UserId);
         }
     }
 }

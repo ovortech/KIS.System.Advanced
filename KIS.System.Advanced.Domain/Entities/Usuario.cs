@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,13 +8,12 @@ using System.Threading.Tasks;
 namespace KIS.System.Advanced.Domain.Entities
 {
     public class Usuario
-    {
+    {        
         public int UsuarioId { get; set; }
         public string Nome { get; set; }
         public string Sexo { get; set; }
         public string Email { get; set; }
         public bool Ativo { get; set; } 
-        public int CargoId { get; set; }
-        public virtual Login Login { get; set; }
+        public int CargoId { get; set; }        
     }
 }

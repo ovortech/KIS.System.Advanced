@@ -36,8 +36,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Contexto\ProjetoDataContext.cs" />
-    <Compile Include="EntityConfig\LoginConfiguration.cs" />
-    <Compile Include="EntityConfig\UsuarioConfiguration.cs" />
+    <Compile Include="EntityConfig\LoginMapping.cs" />
+    <Compile Include="EntityConfig\UsuarioMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\LoginRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace KIS.System.Advanced.Infra.Data.EntityConfig
 {
-    public class UsuarioConfiguration : EntityTypeConfiguration<Usuario>
+    public class UsuarioMapping : EntityTypeConfiguration<Usuario>
     {
-        public UsuarioConfiguration()
+        public UsuarioMapping()
         {
             ToTable("Usuario");
             HasKey(e => e.UsuarioId);
@@ -19,8 +19,6 @@ namespace KIS.System.Advanced.Infra.Data.EntityConfig
             Property(e => e.Email).HasMaxLength(150).IsRequired();
             Property(e => e.Ativo).IsRequired();
             Property(e => e.CargoId).IsRequired();
-            HasRequired(e => e.Login)
-                .WithRequiredPrincipal(r => r.Usuario);
         }
     }
 }

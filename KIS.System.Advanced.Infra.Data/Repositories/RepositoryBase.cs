@@ -3,6 +3,7 @@ using KIS.System.Advanced.Infra.Data.Contexto;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 
 namespace KIS.System.Advanced.Infra.Data.Repositories
 {
@@ -23,7 +24,7 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
 
         public IEnumerable<TEntity> GetAll()
         {
-            return Db.Set<TEntity>();
+            return Db.Set<TEntity>().ToList();
         }
 
         public TEntity GetById(int id)

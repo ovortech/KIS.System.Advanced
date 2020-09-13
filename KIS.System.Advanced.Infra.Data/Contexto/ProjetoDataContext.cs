@@ -29,8 +29,8 @@ namespace KIS.System.Advanced.Infra.Data.Contexto
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Configurations.Add(new UsuarioConfiguration());
-            modelBuilder.Configurations.Add(new LoginConfiguration());
+            modelBuilder.Configurations.Add(new UsuarioMapping());
+            modelBuilder.Configurations.Add(new LoginMapping());
         }
     }
 }

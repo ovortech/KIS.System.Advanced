@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace KIS.System.Advanced.Infra.Data.EntityConfig
 {
-    public class LoginConfiguration : EntityTypeConfiguration<Login>
+    public class LoginMapping : EntityTypeConfiguration<Login>
     {
-        public LoginConfiguration()
+        public LoginMapping()
         {
             ToTable("Login");
-            HasKey(e => e.LoginId);
+            HasKey(e => e.UserId);
             Property(e => e.UserName).HasMaxLength(50).IsRequired();
             Property(e => e.Password).HasMaxLength(50).IsRequired();
-            HasRequired(e => e.Usuario);
+            Property(e => e.UsuarioId).IsRequired();           
         }
     }
 }
