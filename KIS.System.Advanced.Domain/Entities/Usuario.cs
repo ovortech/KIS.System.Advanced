@@ -14,5 +14,6 @@ namespace KIS.System.Advanced.Domain.Entities
         public string Email { get; set; }
         public bool Ativo { get; set; } 
         public int CargoId { get; set; }
+        public virtual Login Login { get; set; }
     }
 }

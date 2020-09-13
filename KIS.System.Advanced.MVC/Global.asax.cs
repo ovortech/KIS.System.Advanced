@@ -1,3 +1,4 @@
+using KIS.System.Advanced.MVC.Support;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace KIS.System.Advanced.MVC
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            AutoMapperHelper.Instance();
         }
     }
 }

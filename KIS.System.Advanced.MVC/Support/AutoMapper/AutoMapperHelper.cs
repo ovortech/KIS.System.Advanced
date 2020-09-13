@@ -1,9 +1,5 @@
 ﻿using AutoMapper;
 using KIS.System.Advanced.MVC.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI.WebControls;
 
 namespace KIS.System.Advanced.MVC.Support
@@ -13,10 +9,14 @@ namespace KIS.System.Advanced.MVC.Support
 
         private static volatile AutoMapperHelper _instance;
         private static object syncRoot = new object();
-        public static AutoMapperHelper Instance
+        public AutoMapperHelper()
         {
-            get
-            {
+            InitiazeMapper();
+        }
+        public static void Instance()
+        {
+            //get
+            //{
                 if (_instance == null)
                 {
                     lock (syncRoot)
@@ -25,8 +25,8 @@ namespace KIS.System.Advanced.MVC.Support
                             _instance = new AutoMapperHelper();
                     }
                 }
-                return _instance;
-            }
+            //    return _instance;
+            //}
         }
 
         public void InitiazeMapper()

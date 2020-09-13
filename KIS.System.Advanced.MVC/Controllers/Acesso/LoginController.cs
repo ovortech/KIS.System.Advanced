@@ -18,7 +18,6 @@ namespace KIS.System.Advanced.MVC.Controllers.Acesso
         public LoginController(ILoginService loginService)
         {
             _loginService = loginService;
-            AutoMapperHelper.InitiazeMapper();
         }
         // GET: Login
         public ActionResult Index()

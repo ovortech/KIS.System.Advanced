@@ -21,6 +21,7 @@ namespace KIS.System.Advanced.Infra.Data.Contexto
     {
         public ProjetoDataContext() : base("name=DBKisContext")
         {
+            this.Configuration.ProxyCreationEnabled = false;
         }
 
         public virtual DbSet<Usuario> Usuarios { get; set; }

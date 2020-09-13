@@ -19,6 +19,8 @@ namespace KIS.System.Advanced.Infra.Data.EntityConfig
             Property(e => e.Email).HasMaxLength(150).IsRequired();
             Property(e => e.Ativo).IsRequired();
             Property(e => e.CargoId).IsRequired();
+            HasRequired(e => e.Login)
+                .WithRequiredPrincipal(r => r.Usuario);
         }
     }
 }
