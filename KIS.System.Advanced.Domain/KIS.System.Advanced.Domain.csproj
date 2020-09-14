@@ -34,7 +34,7 @@
   <ItemGroup>
     <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Entities\Login.cs" />
-    <Compile Include="Interfaces\ILoginRepositoty.cs" />
+    <Compile Include="Interfaces\ILoginRepository.cs" />
     <Compile Include="Interfaces\IRepositoryBase.cs" />
     <Compile Include="Interfaces\IUsuarioRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

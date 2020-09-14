@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using KIS.System.Advanced.MVC.ViewModels;
 using System.Web.UI.WebControls;
+using KIS.System.Advanced.Domain.Entities;
 
 namespace KIS.System.Advanced.MVC.Support
 {
@@ -40,12 +41,14 @@ namespace KIS.System.Advanced.MVC.Support
 
         private static void ViewModelForModel(IMapperConfigurationExpression cfg)
         {
-            cfg.CreateMap<LoginVM, Login>();
+            cfg.CreateMap<LoginVM, Domain.Entities.Login>();
         }
 
         private static void ModelForViewModel(IMapperConfigurationExpression cfg)
         {
-            cfg.CreateMap<Login, LoginVM>();
+            cfg.CreateMap<Domain.Entities.Login, LoginVM>()
+                .ForMember(destinationMember: vm => vm.LoginId, memberOptions: map => map.MapFrom(sourceMember: s => s.UserId));
+            ;
         }
     }
 }

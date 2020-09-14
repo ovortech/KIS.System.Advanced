@@ -22,8 +22,8 @@ namespace Kist.System.Adavanced.Test.Data
         [TestMethod]
         public void AddUser()
         {
-            var sss = _usuarioRepository.BuscarPorNome("mar");
-            var aaa = sss.ToList();
+            var users = _usuarioRepository.BuscarPorNome("mar").ToList();
+            
             var usuariosantes = _usuarioRepository.GetAll();
             Usuario user = new Usuario
             {

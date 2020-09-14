@@ -25,11 +25,8 @@ namespace KIS.System.Advanced.MVC.Controllers.Acesso
             var loginmodel = _loginService.Logar(new Login());
 
             var logins = Mapper.Map<List<LoginVM>>(loginmodel);
-            foreach (var item in logins)
-            {
-                ViewBag.nome += item.UserName;
-            }
-            return View(logins.First());
+           
+            return View(logins.FirstOrDefault());
         }
 
         [HttpPost]

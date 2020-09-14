@@ -9,14 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace KIS.System.Advanced.Infra.Data.Contexto
-{
-    //public class Configuration : DbMigrationsConfiguration<ProjetoDataContext>
-    //{
-    //    public Configuration()
-    //    {
-    //        AutomaticMigrationsEnabled = false;
-    //    }
-    //}
+{   
     public class ProjetoDataContext : DbContext
     {
         public ProjetoDataContext() : base("name=DBKisContext")
