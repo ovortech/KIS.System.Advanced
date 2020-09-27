@@ -5,15 +5,15 @@ using System.Linq;
 
 namespace KIS.System.Advanced.Infra.Data.Repositories
 {
-    public class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioRepository
-    {
-        public UsuarioRepository():base()
-        {
+    //public class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioRepository
+    //{
+    //    public UsuarioRepository():base()
+    //    {
 
-        }
-        public IEnumerable<Usuario> BuscarPorNome(string nome)
-        {
-            return Db.Usuarios.Where(p => p.Nome.Contains(nome));
-        }
-    }
+    //    }
+    //    public IEnumerable<Usuario> BuscarPorNome(string nome)
+    //    {
+    //        return Db.Usuarios.Where(p => p.Nome.Contains(nome));
+    //    }
+    //}
 }

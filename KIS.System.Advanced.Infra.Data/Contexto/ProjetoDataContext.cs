@@ -17,13 +17,11 @@ namespace KIS.System.Advanced.Infra.Data.Contexto
             this.Configuration.ProxyCreationEnabled = false;
         }
 
-        public virtual DbSet<Usuario> Usuarios { get; set; }
-        public virtual DbSet<Login> Logins { get; set; }
+      //  public virtual DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Configurations.Add(new UsuarioMapping());
-            modelBuilder.Configurations.Add(new LoginMapping());
+        //    modelBuilder.Configurations.Add(new UsuarioMapping());
         }
     }
 }

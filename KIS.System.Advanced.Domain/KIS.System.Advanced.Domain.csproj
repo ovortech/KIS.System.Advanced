@@ -32,9 +32,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Entities\Usuario.cs" />
-    <Compile Include="Entities\Login.cs" />
-    <Compile Include="Interfaces\ILoginRepository.cs" />
+    <Compile Include="Entities\TipoPg.cs" />
+    <Compile Include="Entities\FormaPg.cs" />
+    <Compile Include="Entities\Cliente.cs" />
+    <Compile Include="Entities\Contrato.cs" />
+    <Compile Include="Entities\PedidoCancelamento .cs" />
+    <Compile Include="Entities\TipoCancelamento.cs" />
+    <Compile Include="Interfaces\ITipoPgRepository.cs" />
     <Compile Include="Interfaces\IRepositoryBase.cs" />
     <Compile Include="Interfaces\IUsuarioRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
