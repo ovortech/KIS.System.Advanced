@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KIS.System.Advanced.Domain.Entities
 {
-    class Comissão
+    public class Comissao
     {
         public int ID_ITEM_PEDIDO { get; set; }
         public float VALOR_COMPRA_COMISSAO { get; set; }

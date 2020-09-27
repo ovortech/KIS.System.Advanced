@@ -78,10 +78,6 @@
       <Project>{b8bf5c6c-65a5-46e0-91ea-ecf0a9ce33a6}</Project>
       <Name>KIS.System.Advanced.Infra.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\KIS.System.Advanced.MVC\KIS.System.Advanced.MVC.csproj">
-      <Project>{fa57a156-8357-4b9c-a7f3-9b4047c8a29b}</Project>
-      <Name>KIS.System.Advanced.MVC</Name>
-    </ProjectReference>
     <ProjectReference Include="..\KIS.System.Advanced.Services\KIS.System.Advanced.Services.csproj">
       <Project>{523cbfec-1448-4eec-abb4-8f072109a2f8}</Project>
       <Name>KIS.System.Advanced.Services</Name>

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace KIS.System.Advanced.Domain.Entities
 {
-    class Tipo_de_Acesso
+    public class TipoDespesa
     {
-        public int ID_TIPO_ACESSO { get; set; }
-        public string DESC_TIPO_ACESSO { get; set; }
+        public int ID_TIPO_DESPESA { get; set; }
+        public string NOME_TIPO_DESPESA { get; set; }
 
     }
 }

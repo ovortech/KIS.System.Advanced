@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KIS.System.Advanced.Domain.Entities
 {
-    class Item_Pedido
+    public class ItemPedido
     {
         public int ID_ITEM_PEDIDO { get; set; }
         public int ID_PEDIDO { get; set; }

@@ -8,10 +8,10 @@ namespace KIS.System.Advanced.Domain.Entities
 {
    public class PedidoCancelamento
     {
-        public int id_pedido_cancelamento { get; set; }
-        public int id_pedido { get; set; }
-        public int id_tipo_cancelamento { get; set; }
-        public string desc_pedido_cancelamento { get; set; }
-        public DateTime data_cancelamento { get; set; }
+        public int ID_PEDIDO_CANCELAMENTO { get; set; }
+        public int ID_PEDIDO { get; set; }
+        public int ID_TIPO_CANCELAMENTO { get; set; }
+        public string DESC_PEDIDO_CANCELAMENTO { get; set; }
+        public DateTime DATA_CANCELAMENTO { get; set; }
     }
 }
