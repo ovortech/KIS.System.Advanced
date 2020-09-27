@@ -13,20 +13,17 @@ namespace KIS.System.Advanced.MVC.Controllers.Acesso
 {
     public class LoginController : Controller
     {
-        private readonly ILoginService _loginService;
+        private readonly IUsuarioService _usuarioService;
 
-        public LoginController(ILoginService loginService)
+        public LoginController(IUsuarioService usuarioService)
         {
-            _loginService = loginService;
+            _usuarioService = usuarioService;
         }
         // GET: Login
         public ActionResult Index()
-        {
-            var loginmodel = _loginService.Logar(new Login());
-
-            var logins = Mapper.Map<List<LoginVM>>(loginmodel);
+        {          
            
-            return View(logins.FirstOrDefault());
+            return View();
         }
 
         [HttpPost]

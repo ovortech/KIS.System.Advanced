@@ -2,7 +2,7 @@
 
 namespace KIS.System.Advanced.Domain.Interfaces
 {
-    public interface ILoginRepository : IRepositoryBase<Login>
+    public interface ITipoPgRepository : IRepositoryBase<TipoPg>
     {
     }
 }

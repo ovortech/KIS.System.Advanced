@@ -41,14 +41,14 @@ namespace KIS.System.Advanced.MVC.Support
 
         private static void ViewModelForModel(IMapperConfigurationExpression cfg)
         {
-            cfg.CreateMap<LoginVM, Domain.Entities.Login>();
+            //cfg.CreateMap<LoginVM, Domain.Entities.Usuario>();
         }
 
         private static void ModelForViewModel(IMapperConfigurationExpression cfg)
         {
-            cfg.CreateMap<Domain.Entities.Login, LoginVM>()
-                .ForMember(destinationMember: vm => vm.LoginId, memberOptions: map => map.MapFrom(sourceMember: s => s.UserId));
-            ;
+            //cfg.CreateMap<Domain.Entities.Usuario, LoginVM>()
+            //    .ForMember(destinationMember: vm => vm.LoginId, memberOptions: map => map.MapFrom(sourceMember: s => s.UserId));
+            //;
         }
     }
 }

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace KIS.System.Advanced.Services.Interfaces
 {
-    public interface ILoginService
+    public interface IUsuarioService
     {
-        IEnumerable<Login> Logar(Login login);
+        //IEnumerable<Usuario> Logar(Usuario login);
     }
 }

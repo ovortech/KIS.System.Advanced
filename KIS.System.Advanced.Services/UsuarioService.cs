@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace KIS.System.Advanced.Services
 {
-    public class LoginService : ILoginService
+    public class UsuarioService : IUsuarioService
     {
-        private readonly LoginBS loginBS;
-        public LoginService()
+        private readonly UsuarioBS usuarioBS;
+        public UsuarioService()
         {
-            loginBS = new LoginBS();
+            usuarioBS = new UsuarioBS();
         }
-        public IEnumerable<Login> Logar(Login login)
-        {
-            return loginBS.Logar();
-        }
+        //public IEnumerable<Usuario> Logar(Usuario login)
+        //{
+        //    return usuarioBS.Logar();
+        //}
     }
 }

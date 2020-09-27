@@ -35,6 +35,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Entities\TipoPg.cs" />
+    <Compile Include="Entities\FormaPg.cs" />
+    <Compile Include="Entities\Cliente.cs" />
+    <Compile Include="Entities\Contrato.cs" />
+    <Compile Include="Entities\PedidoCancelamento .cs" />
+    <Compile Include="Entities\TipoCancelamento.cs" />
+    <Compile Include="Interfaces\ITipoPgRepository.cs" />
     <Compile Include="Entities\Comissão.cs" />
     <Compile Include="Entities\Contrato.cs" />
     <Compile Include="Entities\Despesa.cs" />
