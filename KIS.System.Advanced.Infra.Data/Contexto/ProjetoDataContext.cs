@@ -17,11 +17,17 @@ namespace KIS.System.Advanced.Infra.Data.Contexto
             this.Configuration.ProxyCreationEnabled = false;
         }
 
-      //  public virtual DbSet<Usuario> Usuarios { get; set; }
+        //  public virtual DbSet<Usuario> Usuarios { get; set; }
+        public virtual DbSet<TipoPg> TipoPgs { get; set; } // Alterar aqui
+
+        public virtual DbSet<Cliente> Clientes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-        //    modelBuilder.Configurations.Add(new UsuarioMapping());
+            //    modelBuilder.Configurations.Add(new UsuarioMapping());
+            modelBuilder.Configurations.Add(new TipoPgMapping()); // Alterar aqui
+
+            modelBuilder.Configurations.Add(new ClienteMapping());
         }
     }
 }
