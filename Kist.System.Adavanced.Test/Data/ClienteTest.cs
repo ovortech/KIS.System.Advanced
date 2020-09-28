@@ -3,6 +3,7 @@ using KIS.System.Advanced.Infra.Data.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,17 +23,26 @@ namespace Kist.System.Adavanced.Test.Data
         [TestMethod]
         public void AddUser()
         {
-           
-            var clientes = _clienteRepository.GetAll();
-            Cliente cliente = new Cliente
+
+            try
             {
-                NOME_CLIENTE = "Everton",
-            };
+                var clientes = _clienteRepository.GetAll();
 
-            _clienteRepository.Add(cliente);
-            var clientedepopis = _clienteRepository.GetAll();
 
-            Assert.IsTrue(clientes.Count() < clientedepopis.Count());
+                Cliente cliente = new Cliente
+                {
+                    NOME_CLIENTE = "Everton",
+                };
+
+                _clienteRepository.Add(cliente);
+                var clientedepopis = _clienteRepository.GetAll();
+
+                Assert.IsTrue(clientes.Count() < clientedepopis.Count());
+            }
+            catch (EntityException ex)
+            {
+                throw ex;
+            }
         }
 
 

@@ -14,7 +14,7 @@ namespace KIS.System.Advanced.Infra.Data.EntityConfig
         {
             ToTable("CLIENTE");
             HasKey(e => e.ID_CLIENTE);
-            Property(e => e.NOME_CLIENTE).HasMaxLength(50).IsRequired();  // IsRequired() não permitir nulo
+            Property(e => e.NOME_CLIENTE);  // IsRequired() não permitir nulo
         }
     }
 }
