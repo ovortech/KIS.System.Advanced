@@ -30,7 +30,10 @@ namespace KIS.System.Advanced.MVC.Controllers.Acesso
         {
             try
             {
-                // TODO: Add insert logic here
+                if (!ModelState.IsValid)
+                {
+                    return View(loginVM);
+                }
 
                 return RedirectToAction("Index");
             }
