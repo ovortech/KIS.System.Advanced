@@ -6,27 +6,27 @@ using System.Web.Mvc;
 
 namespace KIS.System.Advanced.MVC.Controllers
 {
-    public class PipocaController : Controller
+    public class UsuarioController : Controller
     {
-        // GET: Pipoca
+        // GET: Usuario
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Pipoca/Details/5
+        // GET: Usuario/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Pipoca/Create
+        // GET: Usuario/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Pipoca/Create
+        // POST: Usuario/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -42,13 +42,13 @@ namespace KIS.System.Advanced.MVC.Controllers
             }
         }
 
-        // GET: Pipoca/Edit/5
+        // GET: Usuario/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Pipoca/Edit/5
+        // POST: Usuario/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -64,13 +64,13 @@ namespace KIS.System.Advanced.MVC.Controllers
             }
         }
 
-        // GET: Pipoca/Delete/5
+        // GET: Usuario/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Pipoca/Delete/5
+        // POST: Usuario/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
