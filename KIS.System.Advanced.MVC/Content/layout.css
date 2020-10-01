@@ -1,0 +1,29 @@
+body,
+  padding-top: 56px;
+.conteudo_dir {
+    float: right;
+    }
+.conteudo_esq {
+    float: left;
+    }
+.rowc {
+    margin: 15% 0 15% 0;
+}
+.icon-color{
+    color: white;
+}
+.icon_espace-rig {
+    margin-right: 30px;
+}
+.icon_espace-lef {
+    margin-left: 50px;
+}
+.rodape {
+    margin: auto;
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+}

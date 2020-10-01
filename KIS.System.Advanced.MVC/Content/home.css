@@ -1,0 +1,27 @@
+﻿.venda {
+    color: #FF4040;
+}
+.produto {
+    color: #BDB76B;
+}
+.historico {
+    color: #436EEE;
+}
+.financeiro {
+    color: #32CD32;
+}
+.usuarios {
+    color: #696969;
+}
+.color-white {
+    color: #ffffff;
+}
+.bkp-btn {
+    background-color:#4682B4;
+}
+.box-shadow {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+}
