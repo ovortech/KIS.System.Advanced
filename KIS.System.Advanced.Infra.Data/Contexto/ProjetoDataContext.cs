@@ -21,6 +21,7 @@ namespace KIS.System.Advanced.Infra.Data.Contexto
         public virtual DbSet<TipoPg> TipoPgs { get; set; } // Alterar aqui
 
         public virtual DbSet<Cliente> Clientes { get; set; }
+        public virtual DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -28,6 +29,7 @@ namespace KIS.System.Advanced.Infra.Data.Contexto
             modelBuilder.Configurations.Add(new TipoPgMapping()); // Alterar aqui
 
             modelBuilder.Configurations.Add(new ClienteMapping());
+            modelBuilder.Configurations.Add(new UsuarioMapping());
         }
     }
 }

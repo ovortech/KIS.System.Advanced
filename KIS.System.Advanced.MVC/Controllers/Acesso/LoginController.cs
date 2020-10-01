@@ -21,8 +21,7 @@ namespace KIS.System.Advanced.MVC.Controllers.Acesso
         }
         // GET: Login
         public ActionResult Index()
-        {          
-           
+        {
             return View();
         }
 
