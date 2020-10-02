@@ -9,8 +9,8 @@ body,
 .rowc {
     margin: 15% 0 15% 0;
 }
-.icon-color{
-    color: white;
+.icon-color {
+    color: #767676;
 }
 .icon_espace-rig {
     margin-right: 30px;
@@ -26,4 +26,11 @@ body,
     padding-top: 10px;
     padding-bottom: 10px;
 }
+.rodapebkg {
+    background-color: #767676 !important;
+}
+    .shaddowbx {
+        -webkit-box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 7px 0 rgba(0, 0, 0, 0.19);
+    }
+.
 }
