@@ -12,27 +12,27 @@ namespace KIS.System.Advanced.Business
 {
     public class UsuarioBS
     {
-        //    ILoginRepository dbLogin;
-        //    public LoginBS()
-        //    {
-        //        dbLogin = new LoginRepository();
-        //    }
+        IUsuarioRepository dbUsuario;
+        public UsuarioBS()
+        {
+            dbUsuario = new UsuarioRepository();
+        }
 
-        //    public IEnumerable<Login> Logar()
-        //    {
-        //        try
-        //        {
-        //            var alllogins = dbLogin.GetAll();
-        //            return alllogins;
-        //        }
-        //        catch (EntityException ex)
-        //        {
-        //            throw ex;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            throw ex;
-        //        }
-        //    }
+        public Usuario Logar(Usuario usuario)
+        {
+            try
+            {
+                var usuarioLogado = dbUsuario.Login(usuario);
+                return usuarioLogado;
+            }
+            catch (EntityException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

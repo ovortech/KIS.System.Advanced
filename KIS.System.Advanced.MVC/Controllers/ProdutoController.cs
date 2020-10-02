@@ -29,7 +29,7 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         // POST: Produto/Create
         [HttpPost]
-        public ActionResult Create(UsuarioVM usuarioVM)
+        public ActionResult Create(ProdutoVM produtoVM)
         {
             try
             {
@@ -44,14 +44,14 @@ namespace KIS.System.Advanced.MVC.Controllers
         }
 
         // GET: Produto/Edit/5
-        public ActionResult Edit(UsuarioVM usuarioVM)
+        public ActionResult Edit(ProdutoVM produtoVM)
         {
             return View();
         }
 
         // POST: Produto/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, UsuarioVM usuarioVM)
+        public ActionResult Edit(int id, ProdutoVM produtoVM)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         // POST: Produto/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, UsuarioVM usuarioVM)
+        public ActionResult Delete(int id, ProdutoVM produtoVM)
         {
             try
             {

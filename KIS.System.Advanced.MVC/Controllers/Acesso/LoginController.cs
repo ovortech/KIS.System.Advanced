@@ -30,10 +30,13 @@ namespace KIS.System.Advanced.MVC.Controllers.Acesso
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return View(loginVM);
-                }
+                //if (!ModelState.IsValid)
+                //{
+                //    return View(loginVM);
+                //}
+
+                var usuario = AutoMapper.Mapper.Map<Usuario>(loginVM);
+                _usuarioService.Logar(usuario);
 
                 return RedirectToAction("Index");
             }

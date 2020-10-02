@@ -2,6 +2,7 @@
 using KIS.System.Advanced.MVC.ViewModels;
 using System.Web.UI.WebControls;
 using KIS.System.Advanced.Domain.Entities;
+using System;
 
 namespace KIS.System.Advanced.MVC.Support
 {
@@ -34,21 +35,25 @@ namespace KIS.System.Advanced.MVC.Support
         {
             Mapper.Initialize(cfg =>
             {
-                ModelForViewModel(cfg);
-                ViewModelForModel(cfg);
+                MappingUsuario(cfg);
             });
         }
 
-        private static void ViewModelForModel(IMapperConfigurationExpression cfg)
+        private static void MappingModel(IMapperConfigurationExpression cfg)
         {
-            //cfg.CreateMap<LoginVM, Domain.Entities.Usuario>();
+            MappingUsuario(cfg);
         }
 
-        private static void ModelForViewModel(IMapperConfigurationExpression cfg)
+        private static void MappingUsuario(IMapperConfigurationExpression cfg)
         {
-            //cfg.CreateMap<Domain.Entities.Usuario, LoginVM>()
-            //    .ForMember(destinationMember: vm => vm.LoginId, memberOptions: map => map.MapFrom(sourceMember: s => s.UserId));
-            //;
+            cfg.CreateMap<LoginVM, Domain.Entities.Usuario>()
+               .ForMember(destinationMember: vm => vm.LOGIN_USUARIO, memberOptions: map => map.MapFrom(sourceMember: s => s.UserName))
+               .ForMember(destinationMember: vm => vm.SENHA_USUARIO, memberOptions: map => map.MapFrom(sourceMember: s => s.Password));
+
+            cfg.CreateMap<Domain.Entities.Usuario, LoginVM>()
+               .ForMember(destinationMember: vm => vm.UserName, memberOptions: map => map.MapFrom(sourceMember: s => s.LOGIN_USUARIO))
+               .ForMember(destinationMember: vm => vm.Password, memberOptions: map => map.MapFrom(sourceMember: s => s.SENHA_USUARIO));
         }
+
     }
 }

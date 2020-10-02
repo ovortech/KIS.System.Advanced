@@ -1,5 +1,4 @@
-﻿function callActionPost(controler, action, parameter, errorMetod, successMetod) {
-    debugger;
+﻿function callActionPost(controler, action, parameter) {
     $.ajax({
         type: "POST",
         url: "/" + controler + "/" + action,
@@ -8,7 +7,7 @@
     });
 }
 
-function callActionGet(controler, action, parameter, errorMetod, successMetod) {
+function callActionGet(controler, action, parameter) {
     debugger;
     $.ajax({
         type: "Get",

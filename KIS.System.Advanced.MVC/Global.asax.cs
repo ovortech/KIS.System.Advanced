@@ -17,6 +17,8 @@ namespace KIS.System.Advanced.MVC
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AutoMapperHelper.Instance();
+            HtmlHelper.ClientValidationEnabled = true;
+            HtmlHelper.UnobtrusiveJavaScriptEnabled = true;
         }
     }
 }
