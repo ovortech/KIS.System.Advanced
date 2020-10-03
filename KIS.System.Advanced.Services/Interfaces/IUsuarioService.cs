@@ -9,6 +9,6 @@ namespace KIS.System.Advanced.Services.Interfaces
 {
     public interface IUsuarioService
     {
-        //IEnumerable<Usuario> Logar(Usuario login);
+        Usuario Logar(Usuario login);
     }
 }

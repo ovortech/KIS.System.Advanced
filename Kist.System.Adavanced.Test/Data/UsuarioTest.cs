@@ -12,40 +12,49 @@ namespace Kist.System.Adavanced.Test.Data
     [TestClass]
     public class UsuarioTest
     {
-        //protected UsuarioRepository _usuarioRepository;
-        //[TestInitialize]
-        //public void Initialize()
-        //{
-        //    _usuarioRepository = new UsuarioRepository();
-        //}
+        protected UsuarioRepository _usuarioRepository;
+        [TestInitialize]
+        public void Initialize()
+        {
+            _usuarioRepository = new UsuarioRepository();
+        }
 
-        //[TestMethod]
-        //public void AddUser()
-        //{
-        //    var users = _usuarioRepository.BuscarPorNome("mar").ToList();
+        [TestMethod]
+        public void AddUser()
+        {
+            var usuariosantes = _usuarioRepository.Login(new Usuario { LOGIN_USUARIO = "mnmelo", SENHA_USUARIO = "1234" });
+                        
+            Usuario user = new Usuario
+            {
+                LOGIN_USUARIO = "mnmelo",
+                SENHA_USUARIO = "1234",
+                ID_TIPO_ACESSO_USUARIO = 1,
+                NOME_USUARIO = "Marcio Melo",
+                EMAIL_USUARIO = "marciondemelo@gmail.com",
+                ID_FUNCAO_USUARIO = 1
+            };
 
-        //    var usuariosantes = _usuarioRepository.GetAll();
-        //    Usuario user = new Usuario
-        //    {
-        //        Nome = "Gomes Gomes",
-        //        Email = "gomes@gmail.com",
-        //        CargoId = 1,
-        //        Sexo = "M",
-        //        Ativo = true
-        //    };
+            _usuarioRepository.Add(user);
+            var usuariosdepopis = _usuarioRepository.Login(new Usuario { LOGIN_USUARIO = "mnmelo", SENHA_USUARIO = "1234" });
+            //_usuarioRepository.GetAll();
 
-        //    _usuarioRepository.Add(user);
-        //    var usuariosdepopis = _usuarioRepository.GetAll();
+            Assert.IsTrue(usuariosdepopis != usuariosantes);
+        }
 
-        //    Assert.IsTrue(usuariosantes.Count() < usuariosdepopis.Count());
-        //}
+        [TestMethod]
+        public void Remove()
+        {
+            var a = _usuarioRepository.GetAll().FirstOrDefault();
+            _usuarioRepository.Remove(a);
+            var b = _usuarioRepository.GetAll();
+            Assert.IsTrue(b.Count() == 0);
+        }
 
-
-        //[TestMethod]
-        //public void GetAllUser()
-        //{
-        //    var aa = _usuarioRepository.GetAll().ToList();
-        //    Assert.IsTrue(aa != null);
-        //}
+        [TestMethod]
+        public void GetAllUser()
+        {
+            var aa = _usuarioRepository.GetAll().ToList();
+            Assert.IsTrue(aa != null);
+        }
     }
 }

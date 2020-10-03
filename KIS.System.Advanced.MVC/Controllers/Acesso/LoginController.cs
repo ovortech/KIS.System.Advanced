@@ -21,17 +21,23 @@ namespace KIS.System.Advanced.MVC.Controllers.Acesso
         }
         // GET: Login
         public ActionResult Index()
-        {          
-           
+        {
             return View();
         }
-
+        
+        //é nois o/
         [HttpPost]
         public ActionResult Logar(LoginVM loginVM)
         {
             try
             {
-                // TODO: Add insert logic here
+                //if (!ModelState.IsValid)
+                //{
+                //    return View(loginVM);
+                //}
+
+                var usuario = AutoMapper.Mapper.Map<Usuario>(loginVM);
+                _usuarioService.Logar(usuario);
 
                 return RedirectToAction("Index");
             }

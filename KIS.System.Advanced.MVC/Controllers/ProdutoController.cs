@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KIS.System.Advanced.MVC.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,29 +7,29 @@ using System.Web.Mvc;
 
 namespace KIS.System.Advanced.MVC.Controllers
 {
-    public class PipocaController : Controller
+    public class ProdutoController : Controller
     {
-        // GET: Pipoca
+        // GET: Produto
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Pipoca/Details/5
+        // GET: Produto/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Pipoca/Create
+        // GET: Produto/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Pipoca/Create
+        // POST: Produto/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(ProdutoVM produtoVM)
         {
             try
             {
@@ -42,15 +43,15 @@ namespace KIS.System.Advanced.MVC.Controllers
             }
         }
 
-        // GET: Pipoca/Edit/5
-        public ActionResult Edit(int id)
+        // GET: Produto/Edit/5
+        public ActionResult Edit(ProdutoVM produtoVM)
         {
             return View();
         }
 
-        // POST: Pipoca/Edit/5
+        // POST: Produto/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, ProdutoVM produtoVM)
         {
             try
             {
@@ -64,15 +65,15 @@ namespace KIS.System.Advanced.MVC.Controllers
             }
         }
 
-        // GET: Pipoca/Delete/5
+        // GET: Produto/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Pipoca/Delete/5
+        // POST: Produto/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, ProdutoVM produtoVM)
         {
             try
             {

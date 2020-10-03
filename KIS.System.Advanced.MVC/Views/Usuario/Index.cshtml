@@ -1,0 +1,148 @@
+﻿@model IEnumerable<KIS.System.Advanced.MVC.ViewModels.UsuarioVM>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Bootstrap core CSS -->
+<link href="~/Content/bootstrap.min.css" rel="stylesheet">
+<link href="~/Content/usuarios.css" rel="stylesheet">
+
+<body class="" style="margin-top: 10%;">
+    <header class="header fixed-top clearfix">
+        <div class="top-nav clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-2">
+                        <a data-toggle="tooltip" data-placement="bottom" title="" href="" data-original-title="Usuários">
+                            <i class="icon mdi-navigation-menu"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="theme-lockup">
+            <h1>Usuários</h1>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="" id="box_configs">
+                    <div>
+                        <a href="#" class="btn btn-success" data-toggle="modal" data-target="#novo-usuario" data-direction="bottom">Adicionar Novo Usuário</a>
+                    </div>
+                    <br>
+                    <table id="lista-usuarios" class="table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Login</th>
+                                <th>Nome</th>
+                                <th>E-mail</th>
+                                <th>Cargo</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>01</td>
+                                <td>paulohenrique</td>
+                                <td>Paulo Henrique</td>
+                                <td>paulodemuro@gmail.com</td>
+                                <td>Analista de TI</td>
+                                <td></td>
+                                <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-primary">Editar</a></td>
+                                <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-danger">Excluir</a></td>
+                            </tr>
+                            <tr>
+                                <td>02</td>
+                                <td>everton</td>
+                                <td>Everton Alvestd</td>
+                                <td>evertonalves@gmail.com</td>
+                                <td>Desenvolvedor</td>
+                                <td></td>
+                                <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-primary">Editar</a></td>
+                                <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-danger">Excluir</a></td>
+                            </tr>
+                            <tr>
+                                <td>03</td>
+                                <td>guilherme</td>
+                                <td>Guilherme Carbonesi</td>
+                                <td>guilhermecarbonesi@gmail.com</td>
+                                <td>Dba</td>
+                                <td></td>
+                                <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-primary">Editar</a></td>
+                                <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-danger">Excluir</a></td>
+                            </tr>
+                     
+                    </table>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bottom" id="novo-usuario" tabindex="-1" role="dialog" aria-labelledby="desativar" aria-hidden="true" novalidate="novalidate" style="display: none;">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Novo Usuário</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" id="form-usuario" autocomplete="off" novalidate="novalidate">
+                        <div class="form-group">
+                            <label class="control-label" for="nome">Nome</label>
+                            <input type="text" autocomplete="off" class="form-control" id="nomeUsuairo" name="nome" placeholder="Digite o Nome do Usuário">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="email">E-mail</label>
+                            <input type="text" autocomplete="off" class="form-control" id="email" name="email" placeholder="Digite o e-mail do Usuário">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="login">Login</label>
+                                    <input type="text" autocomplete="off" class="form-control" id="login" name="login" placeholder="Digite o Login" novalidate="novalidate">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label" for="senha">Senha</label>
+                                    <input type="password" autocomplete="off" class="form-control" id="senha" name="senha" placeholder="Digite a senha" onkeyup="checkPasswordStrong(this)">
+                                    <span class="help-password" style="color: orange;">Senha Fraca.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Cargo</label>
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                <option>Sim</option>
+                                <option>Não</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Perfil</label>
+                            <select class="form-control" id="exampleFormControlSelect1">
+                                <option>Analista de TI</option>
+                                <option>Desenvolvedor</option>
+                                <option>DBA</option>
+                            </select>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default float-left" data-dismiss="modal">Fechar</button>
+                            <button type="submit" class="btn btn-primary btn-primary">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

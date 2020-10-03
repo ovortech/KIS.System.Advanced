@@ -1,0 +1,36 @@
+body,
+  padding-top: 56px;
+.conteudo_dir {
+    float: right;
+    }
+.conteudo_esq {
+    float: left;
+    }
+.rowc {
+    margin: 15% 0 15% 0;
+}
+.icon-color {
+    color: #767676;
+}
+.icon_espace-rig {
+    margin-right: 30px;
+}
+.icon_espace-lef {
+    margin-left: 50px;
+}
+.rodape {
+    margin: auto;
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.rodapebkg {
+    background-color: #767676 !important;
+}
+    .shaddowbx {
+        -webkit-box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 7px 0 rgba(0, 0, 0, 0.19);
+    }
+.
+}
