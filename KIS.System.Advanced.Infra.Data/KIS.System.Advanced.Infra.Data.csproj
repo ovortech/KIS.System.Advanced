@@ -37,12 +37,22 @@
   <ItemGroup>
     <Compile Include="Contexto\ProjetoDataContext.cs" />
     <Compile Include="EntityConfig\ClienteMapping.cs" />
+    <Compile Include="EntityConfig\TipoCancelamentoMapping.cs" />
+    <Compile Include="EntityConfig\FormaPgMapping.cs" />
+    <Compile Include="EntityConfig\PedidoCancelamentoMapping.cs" />
+    <Compile Include="EntityConfig\ContratoMapping.cs" />
     <Compile Include="EntityConfig\TipoPgMapping.cs" />
+    <Compile Include="EntityConfig\FuncaoMapping.cs" />
     <Compile Include="EntityConfig\UsuarioMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\LoginRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\ClienteRepository.cs" />
+    <Compile Include="Repositories\FuncaoRepository.cs" />
+    <Compile Include="Repositories\TipoCancelamentoRepository.cs" />
+    <Compile Include="Repositories\FormaPgRepository.cs" />
+    <Compile Include="Repositories\PedidoCancelamentoRepository.cs" />
+    <Compile Include="Repositories\ContratoRepository.cs" />
     <Compile Include="Repositories\TipoPgRepository.cs" />
     <Compile Include="Repositories\UsuarioRepository.cs" />
   </ItemGroup>
