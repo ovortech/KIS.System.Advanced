@@ -29,8 +29,9 @@ body,
 .rodapebkg {
     background-color: #767676 !important;
 }
-    .shaddowbx {
-        -webkit-box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 7px 0 rgba(0, 0, 0, 0.19);
-    }
+.shaddowbx {
+    position: fixed;
+    box-shadow: 1px 0 3px rgba(0,0,0,0.15);
+}
 .
 }
