@@ -26,7 +26,7 @@
 
     <div class="container bkp-cont">
         <div class="theme-lockup">
-            <h1>Produtos</h1>
+            <h3 class="pad-top-20">Produtos</h3>
         </div>
         <br>
         <div class="row">
@@ -44,7 +44,7 @@
 
                     <br>
                     <table id="lista-usuarios" class=" tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%">
-                        <thead>
+                        <thead >
                             <tr>
                                 <th>ID</th>
                                 <th>Nome Produto</th>
@@ -52,16 +52,18 @@
                                 <th>Produto Serviço</th>
                                 <th>Valor Unitário</th>
                                 <th></th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>101</td>
-                                <td>Chave Carro</td>
-                                <td>Ford KA 2016</td>
-                                <td>Sim</td>
-                                <td>300,00</td>
-                                <td></td>
+                                <td class="tb-style">101</td>
+                                <td class="tb-style">Chave Carro</td>
+                                <td class="tb-style">Ford KA 2016</td>
+                                <td class="tb-style">Sim</td>
+                                <td class="tb-style">300,00</td>
+                                <td class="tb-style"></td>
                                 <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-primary">Editar</a></td>
                                 <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-danger">Excluir</a></td>
                             </tr>
@@ -88,16 +90,17 @@
 
                     </table>
                     <div class="clearfix"></div>
-                    <div class="form-group form-style" style="width: 6%;">
-                        <select name="qtdRegistro" class="form-control">                         
+                    <div class="form-group form-style" >
+                        <select name="qtdRegistro" class="form-control" style="width: 6%;">                         
                             <option>5</option>
                             <option>10</option>
                             <option>20</option>
                             <option>30</option>
                             <option>40</option>
                             <option>50</option>
-                        </select>         
-                        <label>Registros</label>
+                        </select>   
+                        <br>
+                        <label>Exibir Registros</label>
                     </div>
                 </div>
             </div>

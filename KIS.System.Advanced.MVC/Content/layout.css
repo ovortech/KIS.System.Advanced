@@ -10,13 +10,13 @@ body,
     margin: 15% 0 15% 0;
 }
 .icon-color {
-    color: #767676;
+    color: #A9A9A9;
 }
 .icon_espace-rig {
-    margin-right: 30px;
+    margin-right: 15px;
 }
 .icon_espace-lef {
-    margin-left: 50px;
+    margin-left: 100px;
 }
 .rodape {
     margin: auto;
@@ -27,7 +27,7 @@ body,
     padding-bottom: 10px;
 }
 .rodapebkg {
-    background-color: #767676 !important;
+    background-color: #A9A9A9 !important;
 }
 .shaddowbx {
     position: fixed;

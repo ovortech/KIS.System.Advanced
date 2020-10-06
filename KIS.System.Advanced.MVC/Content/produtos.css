@@ -6,10 +6,10 @@
 }
 .tb-style {
     color: #767676;
-    background: #f1f2f7;
     font-family: 'Open Sans',sans-serif;
     font-size: 13px;
     text-rendering: optimizeLegibility;
+    vertical-align: middle !important;
 }
 .form-style {
     color: #767676;
@@ -17,3 +17,8 @@
     font-family: 'Open Sans',sans-serif;
     text-rendering: optimizeLegibility;
 }
+.pad-top-20 {
+    padding-top: 20px;
+    color: #767676;
+}
+
