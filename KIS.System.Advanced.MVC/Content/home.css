@@ -1,27 +1,55 @@
 ﻿.venda {
     color: #FF4040;
+    background-color: #00c0ef;
+}
+.bkp-venda {
+    background-color: #129bb9;
 }
 .produto {
     color: #BDB76B;
+    background-color: #f39c11;
+}
+.bkp-produto {
+    background-color: #bc821e;
 }
 .historico {
     color: #436EEE;
+    background-color: #00a65a;
+}
+.bkp-historico {
+    background-color: #128951;
 }
 .financeiro {
     color: #32CD32;
+    background-color: #dd4c39;
+}
+.bkp-financeiro {
+    background-color: #ac4a3a;
 }
 .usuarios {
     color: #696969;
+    background-color: #9939dd;
+}
+.bkp-usuarios {
+    background-color: #7d3dac;
 }
 .color-white {
     color: #ffffff;
-}
-.bkp-btn {
-    background-color:#4682B4;
+    font-weight: 300;
 }
 .box-shadow {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 10px 0 rgba(0, 0, 0, 0.10);
+    -webkit-box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 10px 0 rgba(0, 0, 0, 0.10);
+    -moz-box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 10px 0 rgba(0, 0, 0, 0.10);
 }
+.icon-style {
+    float: right;
+    margin-top: 25px;
+     color: rgb(59 68 60 / 30%);
+}
+.mb-5 {
+    margin-bottom: 2rem !important;
+}
+.rowc {
+    margin: 15% 0 0% 0;
 }
