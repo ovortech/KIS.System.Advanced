@@ -57,37 +57,37 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="tb-style">01</td>
-                                <td class="tb-style">paulohenrique</td>
-                                <td class="tb-style">Paulo Henrique</td>
-                                <td class="tb-style">paulodemuro@gmail.com</td>
-                                <td class="tb-style">Analista de TI</td>
-                                <td></td>
-                                <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-primary">Editar</a></td>
-                                <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-danger">Excluir</a></td>
-                            </tr>
-                            <tr>
-                                <td>02</td>
-                                <td>everton</td>
-                                <td>Everton Alvestd</td>
-                                <td>evertonalves@gmail.com</td>
-                                <td>Desenvolvedor</td>
-                                <td></td>
-                                <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-primary">Editar</a></td>
-                                <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-danger">Excluir</a></td>
-                            </tr>
-                            <tr>
-                                <td>03</td>
-                                <td>guilherme</td>
-                                <td>Guilherme Carbonesi</td>
-                                <td>guilhermecarbonesi@gmail.com</td>
-                                <td>Dba</td>
-                                <td></td>
-                                <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-primary">Editar</a></td>
-                                <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-danger">Excluir</a></td>
-                            </tr>
-
+                            @foreach (var usuario in Model)
+                            {
+                                <tr>
+                                    <td class="tb-style">@usuario.IdUsuario</td>
+                                    <td class="tb-style">@usuario.Login</td>
+                                    <td class="tb-style">@usuario.Nome</td>
+                                    <td class="tb-style">@usuario.Email</td>
+                                    <td class="tb-style">@usuario.FuncaoUsuario Analista de TI</td>
+                                    <td></td>
+                                    <td>
+                                        @Html.ActionLink("Editar", "Edit", "Usuario", new { id = usuario.IdUsuario },
+                                                                                            new
+                                                                                                 {
+                                                                                                     @class = "btn btn-primary",
+                                                                                            data_target = "editar-usuario",
+                                                                                            data_toggle = "modal",
+                                                                                            data_id = usuario.IdUsuario
+                                                                                                 })
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Excluir", "Delete", "Usuario", new { id = usuario.IdUsuario },
+                                                                                            new
+                                                                                                 {
+                                                                                                     @class = "btn btn-danger",
+                                                                                            data_target = "excluir-usuario",
+                                                                                            data_toggle = "modal",
+                                                                                            data_id = usuario.IdUsuario
+                                                                                                 })
+                                    </td>
+                                </tr>
+                            }
                     </table>
                     <div class="clearfix"></div>
                     <div class="form-group form-style">
@@ -107,7 +107,8 @@
         </div>
     </div>
 
-    <div class="modal fade bottom" id="novo-usuario" tabindex="-1" role="dialog" aria-labelledby="desativar" aria-hidden="true" novalidate="novalidate" style="display: none;">
+    <div class="modal fade bottom" id="novo-usuario" tabindex="-1" role="dialog" aria-labelledby="desativar" aria-hidden="true" novalidate="novalidate">
+        @*TODO: Retornar essa div como view*@
         <div class="modal-dialog ">
             <div class="modal-content">
                 <div class="modal-header">
@@ -167,3 +168,4 @@
         </div>
     </div>
 </body>
+
