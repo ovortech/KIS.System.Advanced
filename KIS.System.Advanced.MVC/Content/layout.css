@@ -10,27 +10,27 @@ body,
     margin: 15% 0 15% 0;
 }
 .icon-color {
-    color: #767676;
+    color: #A9A9A9;
 }
 .icon_espace-rig {
-    margin-right: 30px;
+    margin-right: 15px;
 }
 .icon_espace-lef {
-    margin-left: 50px;
+    margin-left: 100px;
 }
 .rodape {
     margin: auto;
     width: 100%;
     bottom: 0;
     position: fixed;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 15px;
 }
 .rodapebkg {
-    background-color: #767676 !important;
+    background-color: #A9A9A9 !important;
 }
-    .shaddowbx {
-        -webkit-box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 7px 0 rgba(0, 0, 0, 0.19);
-    }
+.shaddowbx {
+    position: fixed;
+    box-shadow: 1px 0 3px rgba(0,0,0,0.15);
+}
 .
 }
