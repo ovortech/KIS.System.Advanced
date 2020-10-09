@@ -39,7 +39,7 @@ namespace KIS.System.Advanced.MVC.Controllers.Acesso
                 var usuario = AutoMapper.Mapper.Map<Usuario>(loginVM);
                 _usuarioService.Logar(usuario);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "home");
             }
             catch
             {

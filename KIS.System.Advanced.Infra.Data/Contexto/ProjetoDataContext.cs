@@ -20,12 +20,14 @@ namespace KIS.System.Advanced.Infra.Data.Contexto
         public virtual DbSet<TipoPg> TipoPgs { get; set; } 
         public virtual DbSet<Cliente> Clientes { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
+        public virtual DbSet<Funcao>  Funcoes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new TipoPgMapping()); 
             modelBuilder.Configurations.Add(new ClienteMapping());
             modelBuilder.Configurations.Add(new UsuarioMapping());
+            modelBuilder.Configurations.Add(new FuncaoMapping());
         }
     }
 }
