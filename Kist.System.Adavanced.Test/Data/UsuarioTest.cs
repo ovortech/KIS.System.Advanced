@@ -56,5 +56,13 @@ namespace Kist.System.Adavanced.Test.Data
             var aa = _usuarioRepository.GetAll().ToList();
             Assert.IsTrue(aa != null);
         }
+
+        [TestMethod]
+        public void Logar()
+        {
+            var usuario = _usuarioRepository.Login(new Usuario { LOGIN_USUARIO = "mnmelo", SENHA_USUARIO = "1234" });
+
+            Assert.IsTrue(usuario != null);
+        }
     }
 }

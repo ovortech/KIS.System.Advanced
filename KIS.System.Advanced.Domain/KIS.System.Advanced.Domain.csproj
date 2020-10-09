@@ -43,6 +43,7 @@
     <Compile Include="Entities\TipoCancelamento.cs" />
     <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Interfaces\IClienteRepository.cs" />
+    <Compile Include="Interfaces\IFuncaoRepository.cs" />
     <Compile Include="Interfaces\ITipoPgRepository.cs" />
     <Compile Include="Entities\Comissao.cs" />
     <Compile Include="Entities\Despesa.cs" />
