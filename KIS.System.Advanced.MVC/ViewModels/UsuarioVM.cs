@@ -10,21 +10,20 @@ namespace KIS.System.Advanced.MVC.ViewModels
         public int IdUsuario { get; set; }
         public string Login { get; set; }
         public string Senha { get; set; }
-        public List<TipoAcessoVM> TipoAcessos { get; set; }
-        public TipoAcessoVM TipoAcesso { get; set; }
+        public TipoAcesso TipoAcessos { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
-        public FuncaoUsuarioVM ID_FUNCAO_USUARIO { get; set; }
+        public FuncaoUsuario FuncaoUsuario { get; set; }
     }
 
-    public class TipoAcessoVM
+    public enum TipoAcesso
     {
-        public int Id { get; set; }
-        public string Nome { get; set; }
+        Admin = 1,
+        Vendas = 2
     }
-    public class FuncaoUsuarioVM
+    public enum FuncaoUsuario
     {
-        public int Id { get; set; }
-        public string Nome { get; set; }
+        Gerente = 1,
+        Vendedor = 2
     }
 }
