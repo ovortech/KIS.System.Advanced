@@ -1,0 +1,36 @@
+body,
+  padding-top: 56px;
+.conteudo_dir {
+    float: right;
+    }
+.conteudo_esq {
+    float: left;
+    }
+.rowc {
+    margin: 15% 0 15% 0;
+}
+.icon-color {
+    color: #A9A9A9;
+}
+.icon_espace-rig {
+    margin-right: 15px;
+}
+.icon_espace-lef {
+    margin-left: 100px;
+}
+.rodape {
+    margin: auto;
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    padding-top: 15px;
+}
+.rodapebkg {
+    background-color: #A9A9A9 !important;
+}
+.shaddowbx {
+    position: fixed;
+    box-shadow: 1px 0 3px rgba(0,0,0,0.15);
+}
+.
+}

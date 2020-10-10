@@ -56,10 +56,12 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\ClienteTest.cs" />
-    <Compile Include="Data\FormaPgTest.cs" />
+    <Compile Include="Data\FuncaoTest.cs" />
     <Compile Include="Data\TipoPgTest.cs" />
     <Compile Include="Data\UsuarioTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

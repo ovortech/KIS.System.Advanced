@@ -1,14 +1,14 @@
 ﻿using KIS.System.Advanced.Domain.Entities;
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace KIS.System.Advanced.Domain.Interfaces
-{  
-    
+{
     public interface IFuncaoRepository : IRepositoryBase<Funcao>
     {
 
-      //  IEnumerable<Funcao> BuscarPorNome(string DESC_FUNCAO);  OBS: verificar função
     }
-    
 }

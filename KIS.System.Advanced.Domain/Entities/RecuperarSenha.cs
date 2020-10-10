@@ -10,6 +10,7 @@ namespace KIS.System.Advanced.Domain.Entities
     {
         public int ID_RECUPERAR_SENHA { get; set; }
         public int ID_USUARIO { get; set; }
+        public Usuario Usuario { get; set; }
         public string PRIVATE_TOKEN { get; set; }
         public int ALTERADO_SENHA { get; set; }
     }

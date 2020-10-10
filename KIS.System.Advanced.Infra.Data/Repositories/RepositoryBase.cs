@@ -1,9 +1,11 @@
 ﻿using KIS.System.Advanced.Domain.Interfaces;
 using KIS.System.Advanced.Infra.Data.Contexto;
 using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Data.Entity.Core;
 
 namespace KIS.System.Advanced.Infra.Data.Repositories
 {

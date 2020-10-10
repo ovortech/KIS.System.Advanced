@@ -41,11 +41,10 @@
     <Compile Include="Entities\Cliente.cs" />
     <Compile Include="Entities\PedidoCancelamento .cs" />
     <Compile Include="Entities\TipoCancelamento.cs" />
-    <Compile Include="Interfaces\IContratoRepository.cs" />
+    <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Interfaces\IClienteRepository.cs" />
-    <Compile Include="Interfaces\ITipoCancelamentoRepository.cs" />
-    <Compile Include="Interfaces\IFormaPgRepository.cs" />
-    <Compile Include="Interfaces\IPedidoCancelamentoRepository.cs" />
+    <Compile Include="Interfaces\IProdutoRepository.cs" />
+    <Compile Include="Interfaces\IFuncaoRepository.cs" />
     <Compile Include="Interfaces\ITipoPgRepository.cs" />
     <Compile Include="Entities\Comissao.cs" />
     <Compile Include="Entities\Despesa.cs" />
@@ -56,7 +55,6 @@
     <Compile Include="Entities\TipoAcesso.cs" />
     <Compile Include="Entities\TipoDespesa.cs" />
     <Compile Include="Interfaces\IRepositoryBase.cs" />
-    <Compile Include="Interfaces\IFuncaoRepository.cs" />
     <Compile Include="Interfaces\IUsuarioRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -16,9 +16,9 @@ namespace KIS.System.Advanced.Services
         {
             usuarioBS = new UsuarioBS();
         }
-        //public IEnumerable<Usuario> Logar(Usuario login)
-        //{
-        //    return usuarioBS.Logar();
-        //}
+        public Usuario Logar(Usuario login)
+        {
+            return usuarioBS.Logar(login);
+        }
     }
 }
