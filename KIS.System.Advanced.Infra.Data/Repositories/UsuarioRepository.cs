@@ -42,7 +42,9 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
                 ID_TIPO_ACESSO_USUARIO = result.ID_TIPO_ACESSO_USUARIO,
                 EMAIL_USUARIO = result.EMAIL_USUARIO,
                 ID_FUNCAO_USUARIO = result.ID_FUNCAO_USUARIO,
-                Funcao = result.Funcao
+                Funcao = result.Funcao,
+                TipoAcessos = new List<TipoAcesso> { new TipoAcesso { ID_TIPO_ACESSO = 1, DESC_TIPO_ACESSO = "Admin" } }
+                
             };
 
             return userLogado;

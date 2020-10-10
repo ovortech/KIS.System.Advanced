@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using KIS.System.Advanced.Domain.Entities;
 using KIS.System.Advanced.MVC.Support;
+using KIS.System.Advanced.MVC.Support.Security;
 using KIS.System.Advanced.MVC.ViewModels;
 using KIS.System.Advanced.Services.Interfaces;
 using System;
@@ -24,10 +25,10 @@ namespace KIS.System.Advanced.MVC.Controllers.Acesso
         {
             return View();
         }
-        
+
         //é nois o/
         [HttpPost]
-        public ActionResult Logar(LoginVM loginVM)
+        public JsonResult Logar(LoginVM loginVM)
         {
             try
             {
@@ -36,15 +37,22 @@ namespace KIS.System.Advanced.MVC.Controllers.Acesso
                 //    return View(loginVM);
                 //}
 
-                var usuario = AutoMapper.Mapper.Map<Usuario>(loginVM);
-                _usuarioService.Logar(usuario);
-
-                return RedirectToAction("Index", "home");
+                var usuarioLogado = _usuarioService.Logar(AutoMapper.Mapper.Map<Usuario>(loginVM));
+                SessionPersister.User = new CustomPrincipal(usuarioLogado);
+                return Json("Sucesso");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return Json("erro");
             }
+        }
+
+        //é nois o/
+        [HttpGet]
+        public RedirectToRouteResult Deslogar()
+        {
+            SessionPersister.Deslogar();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

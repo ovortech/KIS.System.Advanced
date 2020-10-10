@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using KIS.System.Advanced.MVC.Support.Security;
 using KIS.System.Advanced.MVC.ViewModels;
 
 namespace KIS.System.Advanced.MVC.Controllers
@@ -16,6 +17,7 @@ namespace KIS.System.Advanced.MVC.Controllers
         //}
 
         // GET: Usuario
+        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
         public ActionResult Index()
         {
             var usuarios = new List<UsuarioVM> 
@@ -27,12 +29,14 @@ namespace KIS.System.Advanced.MVC.Controllers
         }
 
         // GET: Usuario/Details/5
+        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
         public ActionResult Details(int id)
         {
             return View();
         }
 
         // GET: Usuario/Create
+        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
         public ActionResult Create()
         {
             return View();
@@ -40,6 +44,7 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         // POST: Usuario/Create
         [HttpPost]
+        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
         public ActionResult Create(FormCollection collection)
         {
             try
@@ -55,6 +60,7 @@ namespace KIS.System.Advanced.MVC.Controllers
         }
 
         // GET: Usuario/Edit/5
+        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
         public ActionResult Edit(int id)
         {
             var usuario = new UsuarioVM { IdUsuario = id, Email = "teste@user1.com", FuncaoUsuario = FuncaoUsuario.Gerente, Nome = "Everton1", TipoAcessos = TipoAcesso.Admin, Login = "everton1" };
@@ -63,6 +69,7 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         // POST: Usuario/Edit/5
         [HttpPost]
+        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
         public ActionResult Edit(int id, FormCollection collection)
         {
             try
@@ -78,6 +85,7 @@ namespace KIS.System.Advanced.MVC.Controllers
         }
 
         // GET: Usuario/Delete/5
+        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
         public ActionResult Delete(int id)
         {
             return View();
@@ -85,6 +93,7 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         // POST: Usuario/Delete/5
         [HttpPost]
+        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try

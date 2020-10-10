@@ -15,11 +15,11 @@
     @Scripts.Render("~/bundles/Javascript")
 </head>
 <body class="bg-light">
-
+    @{ var Nome = KIS.System.Advanced.MVC.Support.Security.SessionPersister.User.Nome; }
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-white fixed-top shaddowbx">
         <div class="container">
-            <a href="~/Views/Home/Index.cshtml">
+            <a href="~/Home/Index.cshtml">
                 <img src="~/Content/vortech_logo.png" class="brand_logo" alt="Logo">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,12 +32,16 @@
                             <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                         </svg>
                     </li>
-                    <p style="margin-top: 2rem;">Usuário Logado</p>
+                    <p style="margin-top: 2rem;">@Nome</p>
+
                     <li class="nav-item icon_espace-lef">
-                        <svg width="2em" height="5em" viewBox="0 0 16 16" class="bi bi-power" fill="currentColor">
-                            <path fill-rule="evenodd" d="M5.578 4.437a5 5 0 1 0 4.922.044l.5-.866a6 6 0 1 1-5.908-.053l.486.875z"/>
-                            <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z"/>
-</svg>
+                        <a href="~/Login/Deslogar">
+                            <svg width="2em" height="5em" viewBox="0 0 16 16" class="bi bi-power" fill="currentColor">
+
+                                <path fill-rule="evenodd" d="M5.578 4.437a5 5 0 1 0 4.922.044l.5-.866a6 6 0 1 1-5.908-.053l.486.875z" />
+                                <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z" />
+                            </svg>
+                        </a>
                     </li>
                 </ul>
             </div>

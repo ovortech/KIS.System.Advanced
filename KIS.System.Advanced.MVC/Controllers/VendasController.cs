@@ -7,10 +7,9 @@ using System.Web.Mvc;
 
 namespace KIS.System.Advanced.MVC.Controllers
 {
-    
-    public class HomeController : Controller
+    public class VendasController : Controller
     {
-        // GET: Home
+        // GET: Vendas
         [CustomAuthorize(Roles = "ADMIN, VENDAS")]
         public ActionResult Index()
         {

@@ -1,4 +1,5 @@
-﻿using KIS.System.Advanced.MVC.ViewModels;
+﻿using KIS.System.Advanced.MVC.Support.Security;
+using KIS.System.Advanced.MVC.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,18 +11,21 @@ namespace KIS.System.Advanced.MVC.Controllers
     public class ProdutoController : Controller
     {
         // GET: Produto
+        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
         public ActionResult Index()
         {
             return View();
         }
 
         // GET: Produto/Details/5
+        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
         public ActionResult Details(int id)
         {
             return View();
         }
 
         // GET: Produto/Create
+        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
         public ActionResult Create()
         {
             return View();
@@ -29,6 +33,7 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         // POST: Produto/Create
         [HttpPost]
+        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
         public ActionResult Create(ProdutoVM produtoVM)
         {
             try
@@ -44,6 +49,7 @@ namespace KIS.System.Advanced.MVC.Controllers
         }
 
         // GET: Produto/Edit/5
+        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
         public ActionResult Edit(ProdutoVM produtoVM)
         {
             return View();
@@ -51,6 +57,7 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         // POST: Produto/Edit/5
         [HttpPost]
+        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
         public ActionResult Edit(int id, ProdutoVM produtoVM)
         {
             try
@@ -66,6 +73,7 @@ namespace KIS.System.Advanced.MVC.Controllers
         }
 
         // GET: Produto/Delete/5
+        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
         public ActionResult Delete(int id)
         {
             return View();
@@ -73,6 +81,7 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         // POST: Produto/Delete/5
         [HttpPost]
+        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
         public ActionResult Delete(int id, ProdutoVM produtoVM)
         {
             try
