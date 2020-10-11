@@ -267,7 +267,6 @@
     <Compile Include="Support\AutoMapper\AutoMapperHelper.cs" />
     <Compile Include="Support\Security\CustomAuthorizeAttribute.cs" />
     <Compile Include="Support\Security\CustomPrincipal.cs" />
-    <Compile Include="Support\Security\CustomAuthenticationAttribute.cs" />
     <Compile Include="Support\Security\SessionPersister.cs" />
     <Compile Include="ViewModels\LoginVM.cs" />
     <Compile Include="ViewModels\ProdutoVM.cs" />

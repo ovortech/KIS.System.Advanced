@@ -24,7 +24,7 @@ namespace KIS.System.Advanced.Infra.Data.Contexto
         public virtual DbSet<Contrato>  Contratos { get; set; }
         public virtual DbSet<Pedido>  Pedidos { get; set; }
         public virtual DbSet<ItemPedido> ItemPedidos { get; set; }
-        public virtual DbSet<TipoAcesso> TipoAcesso { get; set; }
+        public virtual DbSet<TipoAcesso> TipoAcessos { get; set; }
         //public virtual DbSet<Pedido> FormaPg { get; set; }
         //public virtual DbSet<Pedido> Comissao { get; set; }
         //public virtual DbSet<Pedido> PedidoCancelamento { get; set; }

@@ -21,7 +21,7 @@ namespace KIS.System.Advanced.Domain.Entities
         public string SENHA_USUARIO { get; set; }
         public int ID_TIPO_ACESSO_USUARIO { get; set; }
         [NotMapped]
-        public virtual List<TipoAcesso> TipoAcessos { get; set; }
+        public virtual TipoAcesso TipoAcessos { get; set; }
         public string NOME_USUARIO { get; set; }
         public string EMAIL_USUARIO { get; set; }
         public int ID_FUNCAO_USUARIO { get; set; }
