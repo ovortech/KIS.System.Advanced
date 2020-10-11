@@ -16,5 +16,5 @@ namespace KIS.System.Advanced.Domain.Entities
         public TipoCancelamento TipoCancelamento { get; set; }
         public string DESC_PEDIDO_CANCELAMENTO { get; set; }
         public DateTime DATA_CANCELAMENTO { get; set; }
+        }
     }
-}
