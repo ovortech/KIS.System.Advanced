@@ -17,27 +17,17 @@ namespace KIS.System.Advanced.Infra.Data.Contexto
             this.Configuration.ProxyCreationEnabled = false;
         }
 
-        //  public virtual DbSet<Usuario> Usuarios { get; set; }
-        public virtual DbSet<TipoPg> TipoPgs { get; set; } // Alterar aqui
-
+        public virtual DbSet<TipoPg> TipoPgs { get; set; } 
         public virtual DbSet<Cliente> Clientes { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
-        public virtual DbSet<Comissao> Comissaos { get; set; }
-        public virtual DbSet<RecuperarSenha> RecuperarSenhas { get; set; }
-        public virtual DbSet<TipoDespesa> TipoDespesas { get; set; }
-        public virtual DbSet<TipoAcesso> TipoAcessos { get; set; }
+        public virtual DbSet<Funcao>  Funcoes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //    modelBuilder.Configurations.Add(new UsuarioMapping());
-            modelBuilder.Configurations.Add(new TipoPgMapping()); // Alterar aqui
-
+            modelBuilder.Configurations.Add(new TipoPgMapping()); 
             modelBuilder.Configurations.Add(new ClienteMapping());
             modelBuilder.Configurations.Add(new UsuarioMapping());
-            modelBuilder.Configurations.Add(new ComissaoMapping());
-            modelBuilder.Configurations.Add(new RecuperarSenhaMapping());
-            modelBuilder.Configurations.Add(new TipoDespesaMapping());
-            modelBuilder.Configurations.Add(new TipoAcessoMapping());
+            modelBuilder.Configurations.Add(new FuncaoMapping());
         }
     }
 }

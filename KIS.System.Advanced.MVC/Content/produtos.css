@@ -1,0 +1,24 @@
+﻿body {
+    margin-top: 10%;
+}
+.bkp-cont {
+    background-color: white;
+}
+.tb-style {
+    color: #767676;
+    font-family: 'Open Sans',sans-serif;
+    font-size: 13px;
+    text-rendering: optimizeLegibility;
+    vertical-align: middle !important;
+}
+.form-style {
+    color: #767676;
+    font-size: 14px;
+    font-family: 'Open Sans',sans-serif;
+    text-rendering: optimizeLegibility;
+}
+.pad-top-20 {
+    padding-top: 20px;
+    color: #767676;
+}
+

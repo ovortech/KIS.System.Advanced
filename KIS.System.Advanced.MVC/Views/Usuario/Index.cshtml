@@ -9,7 +9,7 @@
 <link href="~/Content/bootstrap.min.css" rel="stylesheet">
 <link href="~/Content/usuarios.css" rel="stylesheet">
 
-<body class="" style="margin-top: 10%;">
+<body>
     <header class="header fixed-top clearfix">
         <div class="top-nav clearfix">
             <div class="container">
@@ -24,9 +24,9 @@
         </div>
     </header>
 
-    <div class="container">
+    <div class="container bkp-cont">
         <div class="theme-lockup">
-            <h1>Usuários</h1>
+            <h3 class="pad-top-20">Usuários</h3>
         </div>
         <br>
         <div class="row">
@@ -34,9 +34,16 @@
                 <div class="" id="box_configs">
                     <div>
                         <a href="#" class="btn btn-success" data-toggle="modal" data-target="#novo-usuario" data-direction="bottom">Adicionar Novo Usuário</a>
+                        <nav class="navbar-light bg-light float-right">
+                            <form class="form-inline">
+                                <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar por..." aria-label="Search">
+                                <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
+                            </form>
+                        </nav>
                     </div>
+
                     <br>
-                    <table id="lista-usuarios" class="table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%">
+                    <table id="lista-usuarios" class=" tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -45,48 +52,63 @@
                                 <th>E-mail</th>
                                 <th>Cargo</th>
                                 <th></th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>01</td>
-                                <td>paulohenrique</td>
-                                <td>Paulo Henrique</td>
-                                <td>paulodemuro@gmail.com</td>
-                                <td>Analista de TI</td>
-                                <td></td>
-                                <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-primary">Editar</a></td>
-                                <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-danger">Excluir</a></td>
-                            </tr>
-                            <tr>
-                                <td>02</td>
-                                <td>everton</td>
-                                <td>Everton Alvestd</td>
-                                <td>evertonalves@gmail.com</td>
-                                <td>Desenvolvedor</td>
-                                <td></td>
-                                <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-primary">Editar</a></td>
-                                <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-danger">Excluir</a></td>
-                            </tr>
-                            <tr>
-                                <td>03</td>
-                                <td>guilherme</td>
-                                <td>Guilherme Carbonesi</td>
-                                <td>guilhermecarbonesi@gmail.com</td>
-                                <td>Dba</td>
-                                <td></td>
-                                <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-primary">Editar</a></td>
-                                <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-danger">Excluir</a></td>
-                            </tr>
-                     
+                            @foreach (var usuario in Model)
+                            {
+                                <tr>
+                                    <td class="tb-style">@usuario.IdUsuario</td>
+                                    <td class="tb-style">@usuario.Login</td>
+                                    <td class="tb-style">@usuario.Nome</td>
+                                    <td class="tb-style">@usuario.Email</td>
+                                    <td class="tb-style">@usuario.FuncaoUsuario Analista de TI</td>
+                                    <td></td>
+                                    <td>
+                                        @Html.ActionLink("Editar", "Edit", "Usuario", new { id = usuario.IdUsuario },
+                                                                                            new
+                                                                                                 {
+                                                                                                     @class = "btn btn-primary",
+                                                                                            data_target = "editar-usuario",
+                                                                                            data_toggle = "modal",
+                                                                                            data_id = usuario.IdUsuario
+                                                                                                 })
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Excluir", "Delete", "Usuario", new { id = usuario.IdUsuario },
+                                                                                            new
+                                                                                                 {
+                                                                                                     @class = "btn btn-danger",
+                                                                                            data_target = "excluir-usuario",
+                                                                                            data_toggle = "modal",
+                                                                                            data_id = usuario.IdUsuario
+                                                                                                 })
+                                    </td>
+                                </tr>
+                            }
                     </table>
                     <div class="clearfix"></div>
+                    <div class="form-group form-style">
+                        <select name="qtdRegistro" class="form-control" style="width: 6%;">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>30</option>
+                            <option>40</option>
+                            <option>50</option>
+                        </select>
+                        <br>
+                        <label>Exibir Registros</label>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade bottom" id="novo-usuario" tabindex="-1" role="dialog" aria-labelledby="desativar" aria-hidden="true" novalidate="novalidate" style="display: none;">
+    <div class="modal fade bottom" id="novo-usuario" tabindex="-1" role="dialog" aria-labelledby="desativar" aria-hidden="true" novalidate="novalidate">
+        @*TODO: Retornar essa div como view*@
         <div class="modal-dialog ">
             <div class="modal-content">
                 <div class="modal-header">
@@ -146,3 +168,4 @@
         </div>
     </div>
 </body>
+
