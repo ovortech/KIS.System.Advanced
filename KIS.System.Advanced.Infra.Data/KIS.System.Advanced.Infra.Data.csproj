@@ -37,12 +37,22 @@
   <ItemGroup>
     <Compile Include="Contexto\ProjetoDataContext.cs" />
     <Compile Include="EntityConfig\ClienteMapping.cs" />
+    <Compile Include="EntityConfig\ComissaoMapping.cs" />
+    <Compile Include="EntityConfig\RecuperarSenhaMapping.cs" />
+    <Compile Include="EntityConfig\TipoDespesaMapping.cs" />
+    <Compile Include="EntityConfig\TipoAcessoMapping.cs" />
+    <Compile Include="EntityConfig\DespesaMapping.cs" />
     <Compile Include="EntityConfig\TipoPgMapping.cs" />
     <Compile Include="EntityConfig\UsuarioMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\LoginRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\ClienteRepository.cs" />
+    <Compile Include="Repositories\ComissaoRepository.cs" />
+    <Compile Include="Repositories\RecuperarSenhaRepository .cs" />
+    <Compile Include="Repositories\TipoDespesaRepository.cs" />
+    <Compile Include="Repositories\TipoAcessoRepository .cs" />
+    <Compile Include="Repositories\DespesaRepository .cs" />
     <Compile Include="Repositories\TipoPgRepository.cs" />
     <Compile Include="Repositories\UsuarioRepository.cs" />
   </ItemGroup>
