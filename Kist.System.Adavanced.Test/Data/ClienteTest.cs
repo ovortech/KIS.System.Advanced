@@ -32,6 +32,7 @@ namespace Kist.System.Adavanced.Test.Data
                 Cliente cliente = new Cliente
                 {
                     NOME_CLIENTE = "Everton",
+
                 };
 
                 _clienteRepository.Add(cliente);

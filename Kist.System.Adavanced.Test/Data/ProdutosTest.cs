@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Kist.System.Adavanced.Test.Data
 {
     [TestClass]
-    public class ProdutoTest
+    public class ProdutosTest
     {
         protected ProdutoRepository _produtoRepository;
         [TestInitialize]
@@ -26,13 +26,17 @@ namespace Kist.System.Adavanced.Test.Data
             var produtos = _produtoRepository.GetAll();
             Produto produto = new Produto
             {
-            //    NOME_PG = "debito",
+                CODIGO_PRODUTO = "",
+                NOME_PRODUTO = "CHAVE",
+                SERVICO_PRODUTO = true,
+                VALOR_PRODUTO = 1,
+
             };
 
         _produtoRepository.Add(produto);
-            var produtodepois = _produtoRepository.GetAll();
+            var produtosdepois = _produtoRepository.GetAll();
 
-            Assert.IsTrue(produtos.Count() < produtodepois.Count());
+            Assert.IsTrue(produtos.Count() < produtosdepois.Count());
         }
 
 

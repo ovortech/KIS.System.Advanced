@@ -21,6 +21,7 @@ namespace KIS.System.Advanced.Infra.Data.Contexto
         public virtual DbSet<Cliente> Clientes { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
         public virtual DbSet<Funcao>  Funcoes { get; set; }
+        public virtual DbSet<Produto> Produtos { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -28,6 +29,7 @@ namespace KIS.System.Advanced.Infra.Data.Contexto
             modelBuilder.Configurations.Add(new ClienteMapping());
             modelBuilder.Configurations.Add(new UsuarioMapping());
             modelBuilder.Configurations.Add(new FuncaoMapping());
+            modelBuilder.Configurations.Add(new ProdutoMapping());
         }
     }
 }
