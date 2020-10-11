@@ -11,7 +11,7 @@ namespace KIS.System.Advanced.MVC.Controllers
     public class ProdutoController : Controller
     {
         // GET: Produto
-        [CustomAuthorize(Roles = "ADMIN")]
+        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
         public ActionResult Index()
         {
             return View();

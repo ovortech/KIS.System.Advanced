@@ -10,7 +10,6 @@ namespace KIS.System.Advanced.MVC.Controllers
     public class RecuperarSenhaController : Controller
     {
         // GET: RecuperarSenha
-        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
         public ActionResult Index()
         {
             return View();

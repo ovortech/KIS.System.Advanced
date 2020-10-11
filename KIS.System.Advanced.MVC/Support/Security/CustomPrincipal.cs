@@ -10,13 +10,15 @@ namespace KIS.System.Advanced.MVC.Support.Security
 {
     public class CustomPrincipal : IPrincipal
     {
-        public IIdentity Identity { get; set; }
-        public String Nome { get; set; }
+        public IIdentity Identity { get; protected set; }
+        public String Nome { get; protected set; }
+        public String Email { get; protected set; }
 
         public CustomPrincipal(Usuario usuario)
         {
             Identity = new GenericIdentity(usuario.LOGIN_USUARIO);
             Nome = usuario.NOME_USUARIO;
+            Email = usuario.EMAIL_USUARIO;
             Role = usuario.TipoAcessos.DESC_TIPO_ACESSO.ToUpper();
         }
 
