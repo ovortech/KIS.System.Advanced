@@ -23,16 +23,15 @@ namespace KIS.System.Advanced.Infra.Data.Contexto
         public virtual DbSet<Funcao>  Funcoes { get; set; }
         public virtual DbSet<Contrato>  Contratos { get; set; }
         public virtual DbSet<Pedido>  Pedidos { get; set; }
-        public virtual DbSet<Pedido>  ItemPedidos { get; set; }
-        public virtual DbSet<Pedido>  Produto { get; set; }
-        public virtual DbSet<Pedido> FormaPg { get; set; }
-        public virtual DbSet<Pedido>  Comissao { get; set; }
-        public virtual DbSet<Pedido>  PedidoCancelamento { get; set; }
-        public virtual DbSet<Pedido> TipoCancelamento { get; set; }
-        public virtual DbSet<Pedido> RecuperarSenha { get; set; }
-        public virtual DbSet<Pedido> TipoAcesso { get; set; }
-        public virtual DbSet<Pedido> Despesa { get; set; }
-        public virtual DbSet<Pedido> TipoDespesa { get; set; }
+        public virtual DbSet<ItemPedido> ItemPedidos { get; set; }
+        public virtual DbSet<TipoAcesso> TipoAcesso { get; set; }
+        //public virtual DbSet<Pedido> FormaPg { get; set; }
+        //public virtual DbSet<Pedido> Comissao { get; set; }
+        //public virtual DbSet<Pedido> PedidoCancelamento { get; set; }
+        //public virtual DbSet<Pedido> TipoCancelamento { get; set; }
+        //public virtual DbSet<Pedido> RecuperarSenha { get; set; }
+        //public virtual DbSet<Pedido> Despesa { get; set; }
+        //public virtual DbSet<Pedido> TipoDespesa { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -44,14 +43,14 @@ namespace KIS.System.Advanced.Infra.Data.Contexto
             modelBuilder.Configurations.Add(new PedidoMapping());
             modelBuilder.Configurations.Add(new ItemPedidoMapping());
             modelBuilder.Configurations.Add(new ProdutoMapping());
-            modelBuilder.Configurations.Add(new FormaPgMapping());
-            modelBuilder.Configurations.Add(new ComissaoMapping());
-            modelBuilder.Configurations.Add(new PedidoCancelamentoMapping());
-            modelBuilder.Configurations.Add(new TipoCancelamentoMapping());
-            modelBuilder.Configurations.Add(new RecuperarSenhaMapping());
             modelBuilder.Configurations.Add(new TipoAcessoMapping());
-            modelBuilder.Configurations.Add(new DespesaMapping());
-            modelBuilder.Configurations.Add(new TipoDespesaMapping());
+            //modelBuilder.Configurations.Add(new FormaPgMapping());
+            //modelBuilder.Configurations.Add(new ComissaoMapping());
+            //modelBuilder.Configurations.Add(new PedidoCancelamentoMapping());
+            //modelBuilder.Configurations.Add(new TipoCancelamentoMapping());
+            //modelBuilder.Configurations.Add(new RecuperarSenhaMapping());
+            //modelBuilder.Configurations.Add(new DespesaMapping());
+            //modelBuilder.Configurations.Add(new TipoDespesaMapping());
         }
     }
 }

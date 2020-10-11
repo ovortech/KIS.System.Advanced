@@ -6,6 +6,7 @@
         data: parameter,
         processData: true,
         success: function (data) {
+            alert(data)
             if (redirect != "" && redirect != undefined) {
                 window.location = redirect;
             }

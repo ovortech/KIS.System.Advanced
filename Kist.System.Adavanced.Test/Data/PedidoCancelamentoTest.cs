@@ -30,7 +30,7 @@ namespace Kist.System.Adavanced.Test.Data
                 ID_PEDIDO = 1,
                 ID_TIPO_CANCELAMENTO = 1,
                 DESC_PEDIDO_CANCELAMENTO = "nada",
-                DATA_CANCELAMENTO = //"Erro ref a config de datetime",//
+                DATA_CANCELAMENTO = DateTime.Now
             };
 
         _PedidoCancelamentoRepository.Add(pedidoCancelamento);
