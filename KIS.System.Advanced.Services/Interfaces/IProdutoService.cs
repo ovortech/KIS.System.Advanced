@@ -1,12 +1,12 @@
-﻿using System;
+﻿using KIS.System.Advanced.Domain.Entities;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KIS.System.Advanced.Services.Interfaces
 {
-    interface IProdutoService
+    public interface IProdutoService
     {
+        List<Produto> GetAll();
+        void Save(Produto produto);
+        Produto Get(int idProduto);
     }
 }

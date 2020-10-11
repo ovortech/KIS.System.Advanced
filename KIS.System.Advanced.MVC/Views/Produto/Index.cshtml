@@ -33,7 +33,7 @@
             <div class="col-md-12">
                 <div class="" id="box_configs">
                     <div>
-                        <a href="#" class="btn btn-success" data-toggle="modal" data-target="#novo-usuario" data-direction="bottom">Adicionar Novo Produto</a>
+                        <a href="#" class="btn btn-success" data-toggle="modal" data-target="#novo-produto" data-direction="bottom">Adicionar Novo Produto</a>
                         <nav class="navbar-light bg-light float-right">
                             <form class="form-inline">
                                 <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar por..." aria-label="Search">
@@ -44,11 +44,10 @@
 
                     <br>
                     <table id="lista-usuarios" class=" tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%">
-                        <thead >
+                        <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>Código</th>
                                 <th>Nome Produto</th>
-                                <th>Descrição</th>
                                 <th>Produto Serviço</th>
                                 <th>Valor Unitário</th>
                                 <th></th>
@@ -57,48 +56,29 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="tb-style">101</td>
-                                <td class="tb-style">Chave Carro</td>
-                                <td class="tb-style">Ford KA 2016</td>
-                                <td class="tb-style">Sim</td>
-                                <td class="tb-style">300,00</td>
-                                <td class="tb-style"></td>
-                                <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-primary">Editar</a></td>
-                                <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-danger">Excluir</a></td>
-                            </tr>
-                            <tr>
-                                <td>210</td>
-                                <td>Fechadura Completa</td>
-                                <td>Porta de apto</td>
-                                <td>Sim</td>
-                                <td>120,00</td>
-                                <td></td>
-                                <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-primary">Editar</a></td>
-                                <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-danger">Excluir</a></td>
-                            </tr>
-                            <tr>
-                                <td>59</td>
-                                <td>Chaveiro simples</td>
-                                <td>Coleção Palmeiras</td>
-                                <td>Não</td>
-                                <td>10,00</td>
-                                <td></td>
-                                <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-primary">Editar</a></td>
-                                <td><a href="#" data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-danger">Excluir</a></td>
-                            </tr>
-
+                            @foreach (var produto in Model)
+                            {
+                                <tr>
+                                    <td class="tb-style">@produto.CodProduto<input type="hidden" value="@produto.IdProduto" /></td>
+                                    <td class="tb-style">@produto.NomeProduto</td>
+                                    <td class="tb-style">@produto.IsServico</td>
+                                    <td class="tb-style">@produto.ValorProduto</td>
+                                    <td class="tb-style"></td>
+                                    <td><a data-toggle="modal" data-target="#novo-produto" data-direction="bottom" onclick="javascript: edit(@produto.IdProduto)" class="btn btn-primary">Editar</a></td>
+                                    <td><a data-target="#editar-usuario" data-toggle="modal" data-id="3" class="btn btn-danger">Excluir</a></td>
+                                </tr>
+                            }
                     </table>
                     <div class="clearfix"></div>
-                    <div class="form-group form-style" >
-                        <select name="qtdRegistro" class="form-control" style="width: 6%;">                         
+                    <div class="form-group form-style">
+                        <select name="qtdRegistro" class="form-control" style="width: 6%;">
                             <option>5</option>
                             <option>10</option>
                             <option>20</option>
                             <option>30</option>
                             <option>40</option>
                             <option>50</option>
-                        </select>   
+                        </select>
                         <br>
                         <label>Exibir Registros</label>
                     </div>
@@ -107,7 +87,7 @@
         </div>
     </div>
 
-    <div class="modal fade bottom" id="novo-usuario" tabindex="-1" role="dialog" aria-labelledby="desativar" aria-hidden="true" novalidate="novalidate" style="display: none;">
+    <div class="modal fade bottom" id="novo-produto" tabindex="-1" role="dialog" aria-labelledby="desativar" aria-hidden="true" novalidate="novalidate" style="display: none;">
         <div class="modal-dialog ">
             <div class="modal-content">
                 <div class="modal-header">
@@ -121,26 +101,23 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label class="control-label" for="">ID Produto</label>
-                                    <input type="text" autocomplete="off" class="form-control" id="" name="" placeholder="" novalidate="novalidate">
+                                    <label class="control-label" for="">Código</label>
+                                    <input type="hidden" id="idProduto">
+                                    <input type="text" autocomplete="off" class="form-control" id="codProduto" name="" placeholder="" novalidate="novalidate">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="email">Nome Produto</label>
-                            <input type="text" autocomplete="off" class="form-control" id="email" name="email" placeholder="Digite o nome do produto">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="email">Descrição do Produto</label>
-                            <input type="text" autocomplete="off" class="form-control" id="email" name="email" placeholder="Digite a descrição do produto">
+                            <label class="control-label" for="nomeProduto">Nome Produto</label>
+                            <input type="text" autocomplete="off" class="form-control" id="nomeProduto" name="nomeProduto" placeholder="Digite o nome do produto">
                         </div>
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="exampleFormControlSelect1">Serviço</label>
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                        <option>Sim</option>
-                                        <option>Não</option>
+                                    <label for="isServico">É um serviço?</label>
+                                    <select class="form-control" id="isServico" name="isServico">
+                                        <option value="true">Sim</option>
+                                        <option value="false">Não</option>
                                     </select>
                                 </div>
                             </div>
@@ -148,14 +125,14 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="control-label" for="">Valor Unitário</label>
-                                    <input type="text" autocomplete="off" class="form-control" id="" name="" placeholder="Digite o Valor Unitário" novalidate="novalidate">
+                                    <label class="control-label" for="valorProduto">Valor Unitário</label>
+                                    <input type="text" autocomplete="off" class="form-control" id="valorProduto" name="valorProduto" placeholder="Digite o Valor Unitário" novalidate="novalidate">
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default float-left" data-dismiss="modal">Fechar</button>
-                            <button type="submit" class="btn btn-primary btn-primary">Salvar</button>
+                            <button type="button" id="btnSalvarProduto" class="btn btn-primary btn-primary" data-dismiss="modal" aria-label="Close">Salvar</button>
                         </div>
                     </form>
                 </div>
@@ -163,3 +140,33 @@
         </div>
     </div>
 </body>
+<script>
+    $("#btnSalvarProduto").click(() => {
+        let produto = {
+            IdProduto: $("#idProduto").val(),
+            CodProduto: $("#codProduto").val(),
+            NomeProduto: $("#nomeProduto").val(),
+            IsServico: $("#isServico").val(),
+            ValorProduto: $("#valorProduto").val()
+        };
+        callActionPost("Produto", "Create", produto);
+    });
+
+    function edit(idProduto) {
+        let data = `{idProduto: ${idProduto}}`;
+        let produto = callActionGet("Produto", "Get", data);
+        //TODO: Finalizar essa requisição para a tela de editar
+        //produto = formataProduto(produto);
+
+        //$("#idProduto").val(produto.IdProduto);
+        //$("#codProduto").val(produto.CodProduto);
+        //$("#nomeProduto").val(produto.NomeProduto);
+        //$("#isServico").val(produto.IsServico);
+        //$("#valorProduto").val(produto.ValorProduto);
+    }
+
+    function formataProduto(produto) {
+        debugger;
+        return produto;
+    }
+</script>

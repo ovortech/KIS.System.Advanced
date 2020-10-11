@@ -64,6 +64,7 @@ namespace KIS.System.Advanced.MVC.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IUsuarioService>().To<UsuarioService>();
+            kernel.Bind<IProdutoService>().To<ProdutoService>();
         }
     }
 }
