@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Entities\Contrato.cs" />
+    <Compile Include="Entities\Pedido .cs" />
     <Compile Include="Entities\TipoPg.cs" />
     <Compile Include="Entities\FormaPg.cs" />
     <Compile Include="Entities\Cliente.cs" />
@@ -43,12 +44,19 @@
     <Compile Include="Entities\TipoCancelamento.cs" />
     <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Interfaces\IClienteRepository.cs" />
+    <Compile Include="Interfaces\IComissaoRepository.cs" />
     <Compile Include="Interfaces\IContratoRepository.cs" />
+    <Compile Include="Interfaces\IDespesaRepository.cs" />
     <Compile Include="Interfaces\IFormaPgRepository.cs" />
     <Compile Include="Interfaces\IPedidoCancelamentoRepository.cs" />
+    <Compile Include="Interfaces\IPedidoRepository.cs" />
+    <Compile Include="Interfaces\IItemPedidoRepository.cs" />
     <Compile Include="Interfaces\IProdutoRepository.cs" />
     <Compile Include="Interfaces\IFuncaoRepository.cs" />
+    <Compile Include="Interfaces\IRecuperarSenhaRepository .cs" />
+    <Compile Include="Interfaces\ITipoAcessoRepository.cs" />
     <Compile Include="Interfaces\ITipoCancelamentoRepository.cs" />
+    <Compile Include="Interfaces\ITipoDespesaRepository.cs" />
     <Compile Include="Interfaces\ITipoPgRepository.cs" />
     <Compile Include="Entities\Comissao.cs" />
     <Compile Include="Entities\Despesa.cs" />

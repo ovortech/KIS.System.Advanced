@@ -12,18 +12,18 @@ namespace KIS.System.Advanced.MVC.Support.Security
     {
         public IIdentity Identity { get; set; }
         public String Nome { get; set; }
-        
+
         public CustomPrincipal(Usuario usuario)
         {
             Identity = new GenericIdentity(usuario.LOGIN_USUARIO);
             Nome = usuario.NOME_USUARIO;
-            Roles = new ReadOnlyCollection<string>(usuario.TipoAcessos.Select(r => r.DESC_TIPO_ACESSO.ToUpper()).ToList());
+            Role = usuario.TipoAcessos.DESC_TIPO_ACESSO.ToUpper();
         }
 
-        public IReadOnlyList<String> Roles { get; protected set; }
-        public bool IsInRole(string role)
+        public String Role { get; protected set; }
+        public bool IsInRole(string roles)
         {
-            var result = Roles.Any(r => role.ToUpper().Split(',').Contains(r));
+            var result = roles.ToUpper().Split(',').Any(r => r.Trim().Equals(Role));
             return result;
         }
     }

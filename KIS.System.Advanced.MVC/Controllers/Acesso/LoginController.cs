@@ -43,7 +43,7 @@ namespace KIS.System.Advanced.MVC.Controllers.Acesso
             }
             catch (Exception ex)
             {
-                return Json("erro");
+                return Json(ex.Message);
             }
         }
 

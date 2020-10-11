@@ -5,7 +5,7 @@
         url: "/" + controler + "/" + action,
         data: parameter,
         processData: true,
-        success: function (data) {
+        success: function (data) {            
             if (redirect != "" && redirect != undefined) {
                 window.location = redirect;
             }
