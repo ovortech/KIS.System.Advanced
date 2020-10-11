@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Entities\Contrato.cs" />
+    <Compile Include="Entities\Pedido .cs" />
     <Compile Include="Entities\TipoPg.cs" />
     <Compile Include="Entities\FormaPg.cs" />
     <Compile Include="Entities\Cliente.cs" />
@@ -46,6 +47,7 @@
     <Compile Include="Interfaces\IContratoRepository.cs" />
     <Compile Include="Interfaces\IFormaPgRepository.cs" />
     <Compile Include="Interfaces\IPedidoCancelamentoRepository.cs" />
+    <Compile Include="Interfaces\IPedidoRepository.cs" />
     <Compile Include="Interfaces\IProdutoRepository.cs" />
     <Compile Include="Interfaces\IFuncaoRepository.cs" />
     <Compile Include="Interfaces\ITipoCancelamentoRepository.cs" />

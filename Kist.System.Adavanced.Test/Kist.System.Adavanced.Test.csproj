@@ -62,6 +62,8 @@
   <ItemGroup>
     <Compile Include="Data\ClienteTest.cs" />
     <Compile Include="Data\FuncaoTest.cs" />
+    <Compile Include="Data\ContratoTest .cs" />
+    <Compile Include="Data\PedidoTest .cs" />
     <Compile Include="Data\ProdutoTest .cs" />
     <Compile Include="Data\TipoPgTest.cs" />
     <Compile Include="Data\UsuarioTest.cs" />
