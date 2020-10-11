@@ -1,4 +1,5 @@
-﻿function callActionPost(controler, action, parameter, redirect = null) {
+﻿
+function callActionPost(controler, action, parameter, redirect = null) {
 
     $.ajax({
         type: "POST",
@@ -9,6 +10,8 @@
             if (redirect != "" && redirect != undefined) {
                 window.location = redirect;
             }
+            if(data)
+                return parseJSON(data);
         }
     });
 }
@@ -24,6 +27,9 @@ function callActionGet(controler, action, parameter = null) {
             if (redirect != "" && redirect != undefined) {
                 window.location = redirect;
             }
+            if (data)
+                return parseJSON(data);
         }
     });
 }
+
