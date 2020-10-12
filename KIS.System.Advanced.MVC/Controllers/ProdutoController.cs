@@ -4,6 +4,7 @@ using KIS.System.Advanced.MVC.ViewModels;
 using KIS.System.Advanced.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,14 +13,17 @@ namespace KIS.System.Advanced.MVC.Controllers
 {
     public class ProdutoController : Controller
     {
-        private IProdutoService _produtoService;
+        #region PROPRIEDADES / CONSTRUTOR
+
+        private readonly IProdutoService _produtoService;
 
         public ProdutoController(IProdutoService produtoService)
         {
             _produtoService = produtoService;
         }
 
-        // GET: Produto
+        #endregion
+
         [CustomAuthorize(Roles = "ADMIN, VENDAS")]
         public ActionResult Index()
         {
@@ -28,30 +32,25 @@ namespace KIS.System.Advanced.MVC.Controllers
             return View(produtosVM);
         }
 
-        // GET: Produto/Details/5
         [CustomAuthorize(Roles = "ADMIN, VENDAS")]
-        public ActionResult Details(int id)
+        public JsonResult Get(int idProduto)
         {
-            return View();
+            var produto = _produtoService.Get(idProduto);
+            var produtoVM = AutoMapper.Mapper.Map<ProdutoVM>(produto);
+            return Json(produtoVM, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Produto/Create
-        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
-        public ActionResult Get(ProdutoVM produtoVM)
-        {
-            var produto = _produtoService.Get(produtoVM.IdProduto);
-            return Json(produto);
-        }
-
-        // POST: Produto/Create
         [HttpPost]
         [CustomAuthorize(Roles = "ADMIN, VENDAS")]
-        public RedirectToRouteResult Create(ProdutoVM produtoVM)
+        public ActionResult Save(ProdutoVM produtoVM)
         {
             try
             {
                 var produto = AutoMapper.Mapper.Map<Produto>(produtoVM);
-                _produtoService.Save(produto);
+                if (produto.ID_PRODUTO > 0)
+                    _produtoService.Update(produto);
+                else
+                    _produtoService.Save(produto);
                 return RedirectToAction("Index");
             }
             catch (Exception)
@@ -60,46 +59,14 @@ namespace KIS.System.Advanced.MVC.Controllers
             }
         }
 
-        // GET: Produto/Edit/5
-        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
-        public ActionResult Edit(ProdutoVM produtoVM)
-        {
-            return View();
-        }
-
-        // POST: Produto/Edit/5
-        [HttpPost]
-        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
-        public ActionResult Edit(int id, ProdutoVM produtoVM)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Produto/Delete/5
-        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
         // POST: Produto/Delete/5
         [HttpPost]
         [CustomAuthorize(Roles = "ADMIN, VENDAS")]
-        public ActionResult Delete(int id, ProdutoVM produtoVM)
+        public ActionResult Delete(int idProduto)
         {
             try
             {
-                // TODO: Add delete logic here
-
+                _produtoService.Delete(idProduto);
                 return RedirectToAction("Index");
             }
             catch

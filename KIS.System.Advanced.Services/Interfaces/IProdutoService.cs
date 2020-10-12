@@ -8,5 +8,7 @@ namespace KIS.System.Advanced.Services.Interfaces
         List<Produto> GetAll();
         void Save(Produto produto);
         Produto Get(int idProduto);
+        void Delete(int idProduto);
+        void Update(Produto produto);
     }
 }

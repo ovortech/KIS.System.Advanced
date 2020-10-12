@@ -14,6 +14,16 @@ namespace KIS.System.Advanced.Services
             produtoBS = new ProdutoBS();
         }
 
+        public void Delete(int idProduto)
+        {
+            produtoBS.Delete(idProduto);
+        }
+
+        public void Update(Produto produto)
+        {
+            produtoBS.Edit(produto);
+        }
+
         public Produto Get(int idProduto)
         {
             return produtoBS.Get(idProduto);
