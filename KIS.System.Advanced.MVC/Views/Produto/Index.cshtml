@@ -36,7 +36,7 @@
                         <a href="#" class="btn btn-success" data-toggle="modal" data-target="#novo-produto" data-direction="bottom" onclick="javascript: ajustaTituloModal('Novo Produto')">Adicionar Novo Produto</a>
                         <nav class="navbar-light bg-light float-right">
                             <form class="form-inline">
-                                <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar por..." aria-label="Search">
+                                <input class="form-control mr-sm-2" id="inputPesquisa" type="search" placeholder="Pesquisar por..." aria-label="Search">
                                 <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
                             </form>
                         </nav>
@@ -65,24 +65,24 @@
                                     <td class="tb-style">@servico</td>
                                     <td class="tb-style">@produto.ValorProduto</td>
                                     <td class="tb-style"></td>
-                                    <td><a data-toggle="modal" data-target="#novo-produto" data-direction="bottom" onclick="javascript: edit(@produto.IdProduto)" class="btn btn-primary">Editar</a></td>
-                                    <td><a onclick="javascript: exclude(@produto.IdProduto)" class="btn btn-danger">Excluir</a></td>
+                                    <td><a data-toggle="modal" data-target="#novo-produto" data-direction="bottom" onclick="javascript: editarProduto(@produto.IdProduto)" class="btn btn-primary">Editar</a></td>
+                                    <td><a onclick="javascript: excluirProduto(@produto.IdProduto)" class="btn btn-danger">Excluir</a></td>
                                 </tr>
                             }
                     </table>
                     <div class="clearfix"></div>
                     @*<div class="form-group form-style">
-                        <select name="qtdRegistro" class="form-control" style="width: 6%;">
-                            <option>5</option>
-                            <option>10</option>
-                            <option>20</option>
-                            <option>30</option>
-                            <option>40</option>
-                            <option>50</option>
-                        </select>
-                        <br>
-                        <label>Exibir Registros</label>
-                    </div>*@
+                            <select name="qtdRegistro" class="form-control" style="width: 6%;">
+                                <option>5</option>
+                                <option>10</option>
+                                <option>20</option>
+                                <option>30</option>
+                                <option>40</option>
+                                <option>50</option>
+                            </select>
+                            <br>
+                            <label>Exibir Registros</label>
+                        </div>*@
                 </div>
             </div>
         </div>
@@ -155,7 +155,14 @@
         callActionPost("Produto", "Save", produto, 'Index');
     });
 
-    function edit(idProduto) {
+    $("#inputPesquisa").on("keyup", function () {
+        let value = $(this).val().toLowerCase();
+        $("#lista-usuarios tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+
+    function editarProduto(idProduto) {
         let data = { idProduto: `${idProduto}` };
         let produto = callActionGet("Produto", "Get", data);
 
@@ -172,7 +179,7 @@
         $(".modal-title").text(texto)
     }
 
-    function exclude(idProduto) {
+    function excluirProduto(idProduto) {
         bootbox.confirm("Confirma a exclusão do produto?", function (confirmou) {
             if (confirmou) {
                 let data = { idProduto: idProduto };
@@ -188,4 +195,5 @@
         $("#isServico").val('true');
         $("#valorProduto").val('')
     }
+
 </script>
