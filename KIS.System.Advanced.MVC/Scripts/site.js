@@ -9,7 +9,7 @@ function callActionPost(controler, action, parameter, redirect = null) {
         async: false,
         success: function (data) {
             if (redirect != "" && redirect != undefined) {
-                window.location = redirect;
+                window.location = window.location.origin + '/' + redirect;
             }
             if (data)
                 retorno = data;
@@ -32,7 +32,7 @@ function callActionGet(controler, action, parameter, redirect = null) {
         async: false,
         success: function (data) {
             if (redirect != "" && redirect != undefined) {
-                window.location = redirect;
+                window.location = window.location.origin + '/' + redirect;
             }
             if (data)
                 retorno = data;
