@@ -47,7 +47,32 @@ namespace KIS.System.Advanced.Business
             }
             catch (Exception ex)
             {
-                throw new Exception($"Erro ao salvar produtos: {ex.Message}.");
+                throw new Exception($"Erro ao salvar produto: {ex.Message}.");
+            }
+        }
+
+        public void Edit(Produto produto)
+        {
+            try
+            {
+                dbProduto.Update(produto);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao salvar produto: {ex.Message}.");
+            }
+        }
+
+        public void Delete(int idProduto)
+        {
+            try
+            {
+                var produto = dbProduto.GetById(idProduto);
+                dbProduto.Remove(produto);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao excluir produto: {ex.Message}.");
             }
         }
 
