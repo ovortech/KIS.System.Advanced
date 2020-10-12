@@ -24,17 +24,17 @@ namespace Kist.System.Adavanced.Test.Data
         {
            
             var recuperarSenhas = _recuperarSenhaRepository.GetAll();
-            RecuperarSenha recuperarSenha = new RecuperarSenha
+             RecuperarSenha recuperarSenha = new RecuperarSenha
             {
                 ID_USUARIO = 2,
                 PRIVATE_TOKEN = "nada",
-                ALTERADO_SENHA = 1,
+                ALTERADO_SENHA =  true,
             };
 
         _recuperarSenhaRepository.Add(recuperarSenha);
-            var recuperarSenhasdepois = _recuperarSenhaRepository.GetAll();
+            var recuperarSenhadepois = _recuperarSenhaRepository.GetAll();
 
-            Assert.IsTrue(recuperarSenhas.Count() < recuperarSenhasdepois.Count());
+            Assert.IsTrue(recuperarSenhas.Count() < recuperarSenhadepois.Count());
         }
 
 

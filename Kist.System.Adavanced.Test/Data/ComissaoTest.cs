@@ -23,19 +23,21 @@ namespace Kist.System.Adavanced.Test.Data
         public void AddUser()
         {
            
-            var comissoes = _comissaoRepository.GetAll();
-            Comissao comissao = new Comissao
+            var comissaos = _comissaoRepository.GetAll();
+              Comissao comissao = new Comissao
             {
-                ID_ITEM_PEDIDO = 2,
-                VALOR_COMPRA_COMISSAO = 1,
-                VALOR_LUCRO_COMISSAO = 1,
-                PERCENTUAL_COMISSAO = 1,
+              
+               ID_ITEM_PEDIDO = 2,
+               VALOR_COMPRA_COMISSAO = 1,
+               VALOR_LUCRO_COMISSAO = 1,
+               PERCENTUAL_COMISSAO = 1,
+               
             };
 
         _comissaoRepository.Add(comissao);
-            var comissaodepois = _comissaoRepository.GetAll();
+            var comissaosdepois = _comissaoRepository.GetAll();
 
-            Assert.IsTrue(comissoes.Count() < comissaodepois.Count());
+            Assert.IsTrue(comissaos.Count() < comissaosdepois.Count());
         }
 
 

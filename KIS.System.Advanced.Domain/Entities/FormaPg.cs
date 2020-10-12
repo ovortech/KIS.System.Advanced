@@ -12,7 +12,6 @@ namespace KIS.System.Advanced.Domain.Entities
         public int ID_PEDIDO { get; set; }
         //public Pedido Pedido { get; set; }
         public int ID_TIPO_PG { get; set; }
-        public TipoPg TipoPg { get; set; }
-        public float VALOR_FORM_PG { get; set; }
+        public double VALOR_FORM_PG { get; set; }
     }
 }

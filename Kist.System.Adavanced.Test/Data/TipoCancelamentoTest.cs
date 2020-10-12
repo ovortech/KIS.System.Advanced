@@ -26,6 +26,7 @@ namespace Kist.System.Adavanced.Test.Data
             var tipoCancelamentos = _tipoCancelamentoRepository.GetAll();
             TipoCancelamento tipoCancelamento = new TipoCancelamento
             {
+                desc_tipo_cancelamento = "nd",
             };
 
         _tipoCancelamentoRepository.Add(tipoCancelamento);

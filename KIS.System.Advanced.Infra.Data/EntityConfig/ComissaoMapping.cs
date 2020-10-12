@@ -13,10 +13,10 @@ namespace KIS.System.Advanced.Infra.Data.EntityConfig
         public ComissaoMapping()
         {
             ToTable("COMISSAO");
-            HasKey(e => e.ID_ITEM_PEDIDO);
-            Property(e => e.VALOR_COMPRA_COMISSAO).IsRequired(); // Verificar
-            Property(e => e.VALOR_LUCRO_COMISSAO).IsRequired(); // Verificar
-            Property(e => e.PERCENTUAL_COMISSAO).IsRequired(); // Verificar
+            Property(e => e.ID_ITEM_PEDIDO).IsRequired();
+            Property(e => e.VALOR_COMPRA_COMISSAO).IsRequired();
+            Property(e => e.VALOR_LUCRO_COMISSAO).IsRequired();
+            Property(e => e.PERCENTUAL_COMISSAO).IsRequired();
         }
     }
 }

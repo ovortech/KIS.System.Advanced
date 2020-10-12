@@ -26,8 +26,8 @@ namespace Kist.System.Adavanced.Test.Data
             var pedidoCancelamentos = _PedidoCancelamentoRepository.GetAll();
             PedidoCancelamento pedidoCancelamento = new PedidoCancelamento
             {
-                ID_PEDIDO_CANCELAMENTO = 1,
-                ID_PEDIDO = 1,
+                
+                ID_PEDIDO = 2,
                 ID_TIPO_CANCELAMENTO = 1,
                 DESC_PEDIDO_CANCELAMENTO = "nada",
                 DATA_CANCELAMENTO = DateTime.Now

@@ -62,16 +62,17 @@
   <ItemGroup>
     <Compile Include="Data\ClienteTest.cs" />
     <Compile Include="Data\ComissaoTest.cs" />
-    <Compile Include="Data\RecuperarSenhaTest.cs" />
+    <Compile Include="Data\TipoDespesaTest.cs" />
     <Compile Include="Data\PedidoCancelamentoTest.cs" />
     <Compile Include="Data\ItemPedidoTest.cs" />
-    <Compile Include="Data\FormaPgTest.cs" />
     <Compile Include="Data\FuncaoTest.cs" />
     <Compile Include="Data\ContratoTest .cs" />
     <Compile Include="Data\PedidoTest .cs" />
     <Compile Include="Data\ProdutoTest.cs" />
-    <Compile Include="Data\TipoAcessoTest.cs" />
     <Compile Include="Data\TipoCancelamentoTest.cs" />
+    <Compile Include="Data\RecuperarSenhaTest.cs" />
+    <Compile Include="Data\FormaPgTest.cs" />
+    <Compile Include="Data\DespesaTest.cs" />
     <Compile Include="Data\TipoPgTest.cs" />
     <Compile Include="Data\UsuarioTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -10,38 +10,36 @@ using System.Threading.Tasks;
 namespace Kist.System.Adavanced.Test.Data
 {
     [TestClass]
-    public class FormaPgTest
+    public class TipoDespesaTest
     {
-        protected FormaPgRepository _FormaPgRepository;
+        protected TipoDespesaRepository _tipoDespesaRepository;
         [TestInitialize]
         public void Initialize()
         {
-            _FormaPgRepository = new FormaPgRepository();
+            _tipoDespesaRepository = new TipoDespesaRepository();
         }
 
         [TestMethod]
         public void AddUser()
         {
            
-            var formaPgs = _FormaPgRepository.GetAll();
-            FormaPg formaPg = new FormaPg
+            var tipoDespesas = _tipoDespesaRepository.GetAll();
+             TipoDespesa tipoDespesa = new TipoDespesa
             {
-                ID_PEDIDO = 2,
-                ID_TIPO_PG = 1,
-                VALOR_FORM_PG = 1
+               NOME_TIPO_DESPESA = "nd",
             };
 
-        _FormaPgRepository.Add(formaPg);
-            var tipoPgsdepopis = _FormaPgRepository.GetAll();
+        _tipoDespesaRepository.Add(tipoDespesa);
+            var tipoDespesasdepois = _tipoDespesaRepository.GetAll();
 
-            Assert.IsTrue(formaPgs.Count() < tipoPgsdepopis.Count());
+            Assert.IsTrue(tipoDespesas.Count() < tipoDespesasdepois.Count());
         }
 
 
         [TestMethod]
         public void GetAllUser()
         {
-            var aa = _FormaPgRepository.GetAll().ToList();
+            var aa = _tipoDespesaRepository.GetAll().ToList();
             Assert.IsTrue(aa != null);
         }
     }

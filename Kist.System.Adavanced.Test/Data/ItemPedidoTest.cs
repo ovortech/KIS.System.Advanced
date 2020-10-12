@@ -26,7 +26,7 @@ namespace Kist.System.Adavanced.Test.Data
             var itemPedidos = _ItemPedidoRepository.GetAll();
             ItemPedido itemPedido = new ItemPedido
             {
-                ID_PEDIDO = 1,
+                ID_PEDIDO = 2,
                 ID_PRODUTO = 1,
                 OBS_PRODUTO = "nada",
                 QTD_PEDIDO = 1,

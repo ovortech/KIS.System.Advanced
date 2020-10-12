@@ -26,7 +26,7 @@ namespace Kist.System.Adavanced.Test.Data
             var tipoPGs = _tipoPgRepository.GetAll();
             TipoPg tipoPg = new TipoPg
             {
-                NOME_PG = "debito",
+                NOME_PG = "credito",
             };
 
         _tipoPgRepository.Add(tipoPg);

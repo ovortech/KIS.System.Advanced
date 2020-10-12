@@ -18,6 +18,7 @@ namespace KIS.System.Advanced.Infra.Data.Contexto
         }
 
         public virtual DbSet<TipoPg> TipoPgs { get; set; } 
+        public virtual DbSet<Comissao> Comissaos { get; set; }
         public virtual DbSet<Cliente> Clientes { get; set; }
         public virtual DbSet<Usuario> Usuarios { get; set; }
         public virtual DbSet<Funcao>  Funcoes { get; set; }
@@ -25,17 +26,17 @@ namespace KIS.System.Advanced.Infra.Data.Contexto
         public virtual DbSet<Pedido>  Pedidos { get; set; }
         public virtual DbSet<ItemPedido> ItemPedidos { get; set; }
         public virtual DbSet<TipoAcesso> TipoAcessos { get; set; }
-        //public virtual DbSet<Pedido> FormaPg { get; set; }
-        //public virtual DbSet<Pedido> Comissao { get; set; }
-        //public virtual DbSet<Pedido> PedidoCancelamento { get; set; }
-        //public virtual DbSet<Pedido> TipoCancelamento { get; set; }
-        //public virtual DbSet<Pedido> RecuperarSenha { get; set; }
-        //public virtual DbSet<Pedido> Despesa { get; set; }
-        //public virtual DbSet<Pedido> TipoDespesa { get; set; }
+        public virtual DbSet<FormaPg> FormaPg { get; set; }
+        public virtual DbSet<PedidoCancelamento> PedidoCancelamento { get; set; }
+        public virtual DbSet<TipoCancelamento> TipoCancelamento { get; set; }
+        public virtual DbSet<RecuperarSenha> RecuperarSenha { get; set; }
+        public virtual DbSet<Despesa> Despesa { get; set; }
+        public virtual DbSet<TipoDespesa> TipoDespesa { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new TipoPgMapping()); 
+            modelBuilder.Configurations.Add(new ComissaoMapping());
             modelBuilder.Configurations.Add(new ClienteMapping());
             modelBuilder.Configurations.Add(new UsuarioMapping());
             modelBuilder.Configurations.Add(new FuncaoMapping());
@@ -44,13 +45,12 @@ namespace KIS.System.Advanced.Infra.Data.Contexto
             modelBuilder.Configurations.Add(new ItemPedidoMapping());
             modelBuilder.Configurations.Add(new ProdutoMapping());
             modelBuilder.Configurations.Add(new TipoAcessoMapping());
-            //modelBuilder.Configurations.Add(new FormaPgMapping());
-            //modelBuilder.Configurations.Add(new ComissaoMapping());
-            //modelBuilder.Configurations.Add(new PedidoCancelamentoMapping());
-            //modelBuilder.Configurations.Add(new TipoCancelamentoMapping());
-            //modelBuilder.Configurations.Add(new RecuperarSenhaMapping());
-            //modelBuilder.Configurations.Add(new DespesaMapping());
-            //modelBuilder.Configurations.Add(new TipoDespesaMapping());
+            modelBuilder.Configurations.Add(new FormaPgMapping());
+            modelBuilder.Configurations.Add(new PedidoCancelamentoMapping());
+            modelBuilder.Configurations.Add(new TipoCancelamentoMapping());
+            modelBuilder.Configurations.Add(new RecuperarSenhaMapping());
+            modelBuilder.Configurations.Add(new DespesaMapping());
+            modelBuilder.Configurations.Add(new TipoDespesaMapping());
         }
     }
 }
