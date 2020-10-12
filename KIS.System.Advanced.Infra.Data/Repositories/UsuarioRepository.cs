@@ -33,6 +33,9 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
                               Funcao = funcao
                           }).FirstOrDefault();
 
+            if (result == null)
+                return null;
+
             Usuario userLogado = new Usuario
             {
                 ID_USUARIO = result.ID_USUARIO,

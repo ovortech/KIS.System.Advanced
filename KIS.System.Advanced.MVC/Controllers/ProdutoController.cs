@@ -1,5 +1,7 @@
-﻿using KIS.System.Advanced.MVC.Support.Security;
+﻿using KIS.System.Advanced.Domain.Entities;
+using KIS.System.Advanced.MVC.Support.Security;
 using KIS.System.Advanced.MVC.ViewModels;
+using KIS.System.Advanced.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +12,20 @@ namespace KIS.System.Advanced.MVC.Controllers
 {
     public class ProdutoController : Controller
     {
+        private IProdutoService _produtoService;
+
+        public ProdutoController(IProdutoService produtoService)
+        {
+            _produtoService = produtoService;
+        }
+
         // GET: Produto
-        [CustomAuthorize(Roles = "ADMIN")]
+        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
         public ActionResult Index()
         {
-            return View();
+            var produtos = _produtoService.GetAll();
+            var produtosVM = AutoMapper.Mapper.Map<List<ProdutoVM>>(produtos);
+            return View(produtosVM);
         }
 
         // GET: Produto/Details/5
@@ -26,25 +37,26 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         // GET: Produto/Create
         [CustomAuthorize(Roles = "ADMIN, VENDAS")]
-        public ActionResult Create()
+        public ActionResult Get(ProdutoVM produtoVM)
         {
-            return View();
+            var produto = _produtoService.Get(produtoVM.IdProduto);
+            return Json(produto);
         }
 
         // POST: Produto/Create
         [HttpPost]
         [CustomAuthorize(Roles = "ADMIN, VENDAS")]
-        public ActionResult Create(ProdutoVM produtoVM)
+        public RedirectToRouteResult Create(ProdutoVM produtoVM)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                var produto = AutoMapper.Mapper.Map<Produto>(produtoVM);
+                _produtoService.Save(produto);
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                throw;
             }
         }
 

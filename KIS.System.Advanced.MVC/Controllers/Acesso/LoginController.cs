@@ -28,7 +28,7 @@ namespace KIS.System.Advanced.MVC.Controllers.Acesso
 
         //é nois o/
         [HttpPost]
-        public JsonResult Logar(LoginVM loginVM)
+        public ActionResult Logar(LoginVM loginVM)
         {
             try
             {
@@ -38,6 +38,9 @@ namespace KIS.System.Advanced.MVC.Controllers.Acesso
                 //}
 
                 var usuarioLogado = _usuarioService.Logar(AutoMapper.Mapper.Map<Usuario>(loginVM));
+                if (usuarioLogado == null)
+                  return View("Index");
+
                 SessionPersister.User = new CustomPrincipal(usuarioLogado);
                 return Json("Sucesso");
             }
