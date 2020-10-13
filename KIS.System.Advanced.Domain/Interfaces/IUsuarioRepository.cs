@@ -8,6 +8,7 @@ namespace KIS.System.Advanced.Domain.Interfaces
     public interface IUsuarioRepository : IRepositoryBase<Usuario>
     {
         Usuario Login(Usuario usuario);
+        Usuario GetByUserName(string userName);
     }
 
 }

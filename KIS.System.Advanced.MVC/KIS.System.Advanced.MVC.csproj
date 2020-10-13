@@ -254,12 +254,13 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Acesso\AccessDeniedController.cs" />
+    <Compile Include="Controllers\Acesso\AlterarSenhaController.cs" />
     <Compile Include="Controllers\Acesso\LoginController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\ComissaoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
-    <Compile Include="Controllers\RecuperarSenhaController.cs" />
+    <Compile Include="Controllers\Acesso\RecuperarSenhaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\VendasController.cs" />
     <Compile Include="Global.asax.cs">
@@ -302,6 +303,7 @@
     <Content Include="Views\Comissao\Index.cshtml" />
     <Content Include="Views\Cliente\Index.cshtml" />
     <Content Include="Views\RecuperarSenha\Index.cshtml" />
+    <Content Include="Views\AlterarSenha\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -326,6 +328,10 @@
     <ProjectReference Include="..\KIS.System.Advanced.Services\KIS.System.Advanced.Services.csproj">
       <Project>{523CBFEC-1448-4EEC-ABB4-8F072109A2F8}</Project>
       <Name>KIS.System.Advanced.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KIS.System.Advanced.Support\KIS.System.Advanced.Support.csproj">
+      <Project>{e8a10879-5b76-4100-ae0c-8ce43a41e2b9}</Project>
+      <Name>KIS.System.Advanced.Support</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -34,5 +34,11 @@ namespace KIS.System.Advanced.Business
                 throw ex;
             }
         }
+
+        internal Usuario GetByUserName(string userName)
+        {
+            var usuario = dbUsuario.GetByUserName(userName);
+            return usuario;
+        }
     }
 }

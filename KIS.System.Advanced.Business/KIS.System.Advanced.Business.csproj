@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ProdutoBS.cs" />
+    <Compile Include="RecuperarSenhaBS.cs" />
     <Compile Include="UsuarioBS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -43,6 +44,10 @@
     <ProjectReference Include="..\KIS.System.Advanced.Infra.Data\KIS.System.Advanced.Infra.Data.csproj">
       <Project>{b8bf5c6c-65a5-46e0-91ea-ecf0a9ce33a6}</Project>
       <Name>KIS.System.Advanced.Infra.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KIS.System.Advanced.Support\KIS.System.Advanced.Support.csproj">
+      <Project>{e8a10879-5b76-4100-ae0c-8ce43a41e2b9}</Project>
+      <Name>KIS.System.Advanced.Support</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
