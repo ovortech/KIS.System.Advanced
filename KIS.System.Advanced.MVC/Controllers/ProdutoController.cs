@@ -1,4 +1,5 @@
 ﻿using KIS.System.Advanced.Domain.Entities;
+using KIS.System.Advanced.MVC.Support;
 using KIS.System.Advanced.MVC.Support.Security;
 using KIS.System.Advanced.MVC.ViewModels;
 using KIS.System.Advanced.Services.Interfaces;
@@ -11,7 +12,7 @@ using System.Web.Mvc;
 
 namespace KIS.System.Advanced.MVC.Controllers
 {
-    public class ProdutoController : Controller
+    public class ProdutoController : CustomControllerBase
     {
         #region PROPRIEDADES / CONSTRUTOR
 
@@ -24,7 +25,7 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         #endregion
 
-        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         public ActionResult Index()
         {
             var produtos = _produtoService.GetAll();
@@ -32,7 +33,7 @@ namespace KIS.System.Advanced.MVC.Controllers
             return View(produtosVM);
         }
 
-        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         public JsonResult Get(int idProduto)
         {
             var produto = _produtoService.Get(idProduto);
@@ -41,7 +42,7 @@ namespace KIS.System.Advanced.MVC.Controllers
         }
 
         [HttpPost]
-        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         public ActionResult Save(ProdutoVM produtoVM)
         {
             try
@@ -61,7 +62,7 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         // POST: Produto/Delete/5
         [HttpPost]
-        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         public ActionResult Delete(int idProduto)
         {
             try
