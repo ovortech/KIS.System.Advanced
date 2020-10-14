@@ -26,4 +26,6 @@ namespace KIS.System.Advanced.MVC.ViewModels
         Gerente = 1,
         Vendedor = 2
     }
+
+
 }

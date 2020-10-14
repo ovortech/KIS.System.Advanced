@@ -69,9 +69,9 @@ namespace KIS.System.Advanced.MVC.Controllers
                 _produtoService.Delete(idProduto);
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                throw;
             }
         }
     }

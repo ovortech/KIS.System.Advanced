@@ -43,7 +43,7 @@
                     </div>
 
                     <br>
-                    <table id="lista-usuarios" class=" tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%">
+                    <table id="lista-produtos" class=" tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%">
                         <thead>
                             <tr>
                                 <th>Código</th>
@@ -71,18 +71,6 @@
                             }
                     </table>
                     <div class="clearfix"></div>
-                    @*<div class="form-group form-style">
-                            <select name="qtdRegistro" class="form-control" style="width: 6%;">
-                                <option>5</option>
-                                <option>10</option>
-                                <option>20</option>
-                                <option>30</option>
-                                <option>40</option>
-                                <option>50</option>
-                            </select>
-                            <br>
-                            <label>Exibir Registros</label>
-                        </div>*@
                 </div>
             </div>
         </div>
@@ -98,7 +86,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="form-usuario" autocomplete="off" novalidate="novalidate">
+                    <form method="POST" id="form-produto" autocomplete="off" novalidate="novalidate">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -157,7 +145,7 @@
 
     $("#inputPesquisa").on("keyup", function () {
         let value = $(this).val().toLowerCase();
-        $("#lista-usuarios tr").filter(function () {
+        $("#lista-produtos tr").filter(function () {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
     });

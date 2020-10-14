@@ -51,7 +51,7 @@ namespace KIS.System.Advanced.Business
             }
         }
 
-        public void Edit(Produto produto)
+        public void Update(Produto produto)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace KIS.System.Advanced.Business
             }
             catch (Exception ex)
             {
-                throw new Exception($"Erro ao salvar produto: {ex.Message}.");
+                throw new Exception($"Erro ao atualizar os dados do produto: {ex.Message}.");
             }
         }
 

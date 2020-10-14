@@ -39,7 +39,29 @@ namespace KIS.System.Advanced.MVC.Support
         private static void MappingModel(IMapperConfigurationExpression cfg)
         {
             MappingUsuario(cfg);
+            MappingUsuarioVM(cfg);
             MappingProduto(cfg);
+        }
+
+        private static void MappingUsuarioVM(IMapperConfigurationExpression cfg)
+        {
+            cfg.CreateMap<UsuarioVM, Usuario>()
+                .ForMember(destinationMember: vm => vm.ID_USUARIO, memberOptions: map => map.MapFrom(sourceMember: s => s.IdUsuario))
+                .ForMember(destinationMember: vm => vm.LOGIN_USUARIO, memberOptions: map => map.MapFrom(sourceMember: s => s.Login))
+                .ForMember(destinationMember: vm => vm.SENHA_USUARIO, memberOptions: map => map.MapFrom(sourceMember: s => s.Senha))
+                .ForMember(destinationMember: vm => vm.NOME_USUARIO, memberOptions: map => map.MapFrom(sourceMember: s => s.Nome))
+                .ForMember(destinationMember: vm => vm.ID_TIPO_ACESSO_USUARIO, memberOptions: map => map.MapFrom(sourceMember: s => s.TipoAcessos))
+                .ForMember(destinationMember: vm => vm.ID_FUNCAO_USUARIO, memberOptions: map => map.MapFrom(sourceMember: s => s.FuncaoUsuario))
+                .ForMember(destinationMember: vm => vm.EMAIL_USUARIO, memberOptions: map => map.MapFrom(sourceMember: s => s.Email));
+
+            cfg.CreateMap<Usuario, UsuarioVM>()
+                .ForMember(destinationMember: vm => vm.IdUsuario, memberOptions: map => map.MapFrom(sourceMember: s => s.ID_USUARIO))
+                .ForMember(destinationMember: vm => vm.Login, memberOptions: map => map.MapFrom(sourceMember: s => s.LOGIN_USUARIO))
+                .ForMember(destinationMember: vm => vm.Senha, memberOptions: map => map.MapFrom(sourceMember: s => s.SENHA_USUARIO))
+                .ForMember(destinationMember: vm => vm.Nome, memberOptions: map => map.MapFrom(sourceMember: s => s.NOME_USUARIO))
+                .ForMember(destinationMember: vm => vm.TipoAcessos, memberOptions: map => map.MapFrom(sourceMember: s => s.ID_TIPO_ACESSO_USUARIO))
+                .ForMember(destinationMember: vm => vm.FuncaoUsuario, memberOptions: map => map.MapFrom(sourceMember: s => s.ID_FUNCAO_USUARIO))
+                .ForMember(destinationMember: vm => vm.Email, memberOptions: map => map.MapFrom(sourceMember: s => s.EMAIL_USUARIO));
         }
 
         private static void MappingUsuario(IMapperConfigurationExpression cfg)
