@@ -2,19 +2,21 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/KIS.System.Advanced.Business/bin/Debug
-/KIS.System.Advanced.Business/obj/Debug
-/KIS.System.Advanced.Domain/bin/Debug
-/KIS.System.Advanced.Domain/obj/Debug
-/KIS.System.Advanced.Infra.Data/bin/Debug
-/KIS.System.Advanced.Infra.Data/obj/Debug
+/KIS.System.Advanced.Business/bin/
+/KIS.System.Advanced.Business/obj/
+/KIS.System.Advanced.Domain/bin/
+/KIS.System.Advanced.Domain/obj/
+/KIS.System.Advanced.Infra.Data/bin/
+/KIS.System.Advanced.Infra.Data/obj/
 /KIS.System.Advanced.MVC/bin
-/KIS.System.Advanced.MVC/obj/Debug
-/KIS.System.Advanced.Services/bin/Debug
+/KIS.System.Advanced.MVC/obj/
+/KIS.System.Advanced.Support/bin
+/KIS.System.Advanced.Support/obj
+/KIS.System.Advanced.Services/bin/
 /packages
-/KIS.System.Advanced.Services/obj/Debug
-/Kist.System.Adavanced.Test/bin/Debug
-/Kist.System.Adavanced.Test/obj/Debug
+/KIS.System.Advanced.Services/obj/
+/Kist.System.Adavanced.Test/bin/
+/Kist.System.Adavanced.Test/obj/
 /.vs/KIS.System.Advanced/v16/TestStore/0/testlog.manifest
 /.vs/KIS.System.Advanced/v16/TestStore/0/000.testlog
 /.vs/KIS.System.Advanced/v16/.suo
