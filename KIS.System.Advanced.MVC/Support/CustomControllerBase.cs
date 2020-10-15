@@ -14,11 +14,11 @@ namespace KIS.System.Advanced.MVC.Support
         /// </summary>
         public CustomPrincipal CurrentUser { get; set; }
 
-        public static string AuthorizationRoles(AcessRole[] acessos)
-        {
+        //public static string AuthorizationRoles(AcessRole[] acessos)
+        //{
 
-            return "";
-        }
+        //    return "";
+        //}
     }
     [Flags]
     public enum AcessRole
