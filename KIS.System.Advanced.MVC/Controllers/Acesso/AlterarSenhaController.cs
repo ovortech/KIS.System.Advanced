@@ -19,6 +19,7 @@ namespace KIS.System.Advanced.MVC.Controllers.Acesso
         public ActionResult Index(string token)
         {
             var usuario = _recuperarSenhaService.ValidateToken(token);
+            ViewBag.token = token;
             return View(usuario);
         }
 

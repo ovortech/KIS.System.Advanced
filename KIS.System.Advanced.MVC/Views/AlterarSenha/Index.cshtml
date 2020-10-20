@@ -4,5 +4,69 @@
     Layout = "~/Views/Shared/_Layoutlogin.cshtml";
 }
 
-<h2>Index</h2>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/login.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+</head>
+<!--Coded with love by Mutiullah Samim-->
+<body>
+    <div class="container h-100 position-fixed">
+        <div class="d-flex justify-content-center h-100">
+            <div class="user_card">
+                <div class="d-flex justify-content-center">
+                    <div class="brand_logo_container">
+                        <img src="~/Content/vortech_logo.png" class="brand_logo" alt="Logo">
+                    </div>
+                </div>
+                <div class="" style="margin-top: 75px;margin-bottom: 10px;">
+                    <h4 class="text-center">Alterar Senha</h4>
+                    <p class="text-center">
+                        Esta é a área em que você altera a senha para acessar o seu perfil <br/>
+                        Obs: Mínimo de 6 caractéres
+                    </p>
+                    
+                </div>
+                <div class="d-flex justify-content-center">
+
+                    <form>
+                        <input type="hidden" id="txtToken" value="@ViewBag.token" />
+                        <div class="input-group mb-2">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input type="password" id="pws1" name="" class="form-control input_pass" value="" placeholder="Informe sua nova senha">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="input-group mb-2">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input type="password" id="pws2" name="" class="form-control input_pass" value="" placeholder="Confirme sua nova senha">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="d-flex justify-content-center mt-3 login_container">
+                            <button type="button" name="button" id="confirmar" class="btn login_btn">Confirmar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    $('#confirmar').click(function () {
+        let data = { token: $("#txtToken").val(), senha1: $("#pws1").val(), senha2: $("#pws2").val() };
+        callActionGet("AlterarSenha", "NovaSenha", data);
+    });
+</script>

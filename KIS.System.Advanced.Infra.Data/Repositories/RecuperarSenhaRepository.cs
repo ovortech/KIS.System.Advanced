@@ -25,7 +25,7 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
 
         public void CloseTokens(int iD_USUARIO)
         {
-            var recuperarSenha = Db.RecuperarSenhas.Where(r => r.ID_USUARIO == iD_USUARIO).ToList();
+            var recuperarSenha = Db.RecuperarSenhas.Where(r => r.ID_USUARIO == iD_USUARIO && r.ALTERADO_SENHA == false).ToList();
 
             foreach (var item in recuperarSenha)
             {
