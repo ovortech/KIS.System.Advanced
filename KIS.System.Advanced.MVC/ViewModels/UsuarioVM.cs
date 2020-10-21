@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Web;
 
 namespace KIS.System.Advanced.MVC.ViewModels
@@ -13,7 +14,7 @@ namespace KIS.System.Advanced.MVC.ViewModels
         public TipoAcesso TipoAcessos { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
-        public FuncaoUsuario FuncaoUsuario { get; set; }
+        public FuncaoUsuario Funcao { get; set; }
     }
 
     public enum TipoAcesso

@@ -62,7 +62,7 @@
                                     <td class="tb-style">@usuario.Login<input type="hidden" value="@usuario.IdUsuario" /></td>
                                     <td class="tb-style">@usuario.Nome</td>
                                     <td class="tb-style">@usuario.Email</td>
-                                    <td class="tb-style">@usuario.FuncaoUsuario</td>
+                                    <td class="tb-style">@usuario.Funcao</td>
                                     <td></td>
                                     <td><a data-toggle="modal" data-target="#novo-usuario" data-direction="bottom" onclick="javascript: editarUsuario(@usuario.IdUsuario)" class="btn btn-primary">Editar</a></td>
                                     <td><a onclick="javascript: excluirUsuario(@usuario.IdUsuario)" class="btn btn-danger">Excluir</a></td>
@@ -102,27 +102,26 @@
                                     <input type="text" autocomplete="off" class="form-control" id="login" name="login" placeholder="Digite o Login" novalidate="novalidate">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            @*<div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label" for="senha">Senha</label>
                                     <input type="password" autocomplete="off" class="form-control" id="senha" name="senha" placeholder="Digite a senha" onkeyup="checkPasswordStrong(this)">
                                     <span class="help-password" style="color: orange;">Senha Fraca.</span>
                                 </div>
-                            </div>
+                            </div>*@
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlSelect1">Cargo</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>Sim</option>
-                                <option>Não</option>
+                            <label for="funcaoUsuario">Função</label>
+                            <select class="form-control" id="funcaoUsuario" name="funcaoUsuario">
+                                <option value="1">Gerente</option>
+                                <option value="2">Vendedor</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlSelect1">Perfil</label>
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>Analista de TI</option>
-                                <option>Desenvolvedor</option>
-                                <option>DBA</option>
+                            <label for="tipoAcesso">Tipo Acesso</label>
+                            <select class="form-control" id="tipoAcesso" name="tipoAcesso">
+                                <option value="1">Administrador</option>
+                                <option value="2">Vendas</option>
                             </select>
                         </div>
 
@@ -141,11 +140,11 @@
         let usuario = {
             IdUsuario: $("#idUsuario").val(),
             login: $("#login").val(),
-            senha: $("#senha").val(),
-            nomeUsuario: $("#nomeUsuario").val(),
-            email: $("#email").val()
+            Nome: $("#nomeUsuario").val(),
+            Email: $("#email").val(),
+            Funcao: $("#funcaoUsuario").val(),
+            TipoAcessos: $("#tipoAcesso").val()
         };
-
         callActionPost("Usuario", "Save", usuario, 'Usuario/Index');
     });
 
@@ -159,12 +158,14 @@
     function editarUsuario(idUsuario) {
         let data = { idUsuario: `${idUsuario}` };
         let usuario = callActionGet("Usuario", "Get", data);
-
+        debugger;
         $("#idUsuario").val(usuario.IdUsuario);
         $("#login").val(usuario.Login);
-        $("#senha").val(usuario.Senha);
+        //$("#senha").val(usuario.Senha);
         $("#nomeUsuario").val(usuario.Nome);
         $("#email").val(usuario.Email);
+        $("#funcaoUsuario").val(usuario.Funcao);
+        $("#tipoAcesso").val(usuario.TipoAcessos);
 
         ajustaTituloModal("Editar Usuario");
     }
@@ -185,9 +186,11 @@
     function resetaModal() {
         $("#idUsuario").val('0');
         $("#login").val('');
-        $("#senha").val('');
+        //$("#senha").val('');
         $("#nomeUsuario").val('');
         $("#email").val('')
+        $("#funcaoUsuario").val('1');
+        $("#tipoAcesso").val('1');
     }
 </script>
 
