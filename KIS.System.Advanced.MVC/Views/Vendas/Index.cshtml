@@ -4,5 +4,128 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Vendas</h2>
+@model IEnumerable<KIS.System.Advanced.MVC.ViewModels.ProdutoVM>
 
+
+<!-- Bootstrap core CSS -->
+<link href="~/Content/bootstrap.min.css" rel="stylesheet">
+<link href="~/Content/produtos.css" rel="stylesheet">
+
+<body>
+    <header class="header fixed-top clearfix">
+        <div class="top-nav clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-2">
+                        <a data-toggle="tooltip" data-placement="bottom" title="" href="" data-original-title="Nova Venda">
+                            <i class="icon mdi-navigation-menu"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container bkp-cont">
+        <div class="theme-lockup">
+            <h3 class="pad-top-20">Nova Venda</h3>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="" id="box_configs">
+                    <input class="form-control" type="text" placeholder="Default input">
+                    <br>
+                    <table id="lista-produtos" class=" tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Cod. Produto</th>
+                                <th>Produto</th>
+                                <th>Descrição</th>
+                                <th>Quantidade</th>
+                                <th>Valor Un.</th>
+                                <th>Desconto Un.</th>
+                                <th>Valor</th>
+                                <th>                                 
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="tb-style"><div class="form-group">                          
+                                  <input type="text" id="disabledTextInput" class="form-control" placeholder="">
+                                </div></td>
+                                <td class="tb-style"></td>
+                                <td class="tb-style"><div class="form-group">
+                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+                                </div></td>
+                                <td class="tb-style">
+                                    <input type="button" value="-" id="decrease" onclick="decreaseQty();" style="float: left; display: inline;" />
+                                    <input type="text" name="qty" id="qty" value="1" style="float: left; display: inline;" />
+                                    <input type="button" value="+" id="increase" onclick="increaseQty();" style="float: left; display: inline;" />
+                                </td>
+                                <td class="tb-style"></td>
+                                <td class="tb-style"></td>
+                                <td class="tb-style"></td>
+                                <td class="tb-style"><button type="button" class="btn btn-danger">Remover</button></td>
+                            </tr>
+
+                    </table>
+                </div>
+                <div class="clearfix"></div>
+
+            </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    var count = 1;
+    $('#items').live('pageinit', function (event) {
+        $('#additem').click(function () {
+            //alert("add clicked");
+            var request = $.ajax({
+                url: "http://www.furnguy.com/app-pages/additem.php",
+                type: "POST",
+                data: { COUNTER: count },
+                dataType: "html"
+            });
+
+            request.done(function (html) {
+                //alert("here");
+                if (html != '') {
+                    $('#salesitems').append(html).trigger('create');
+                }
+            });
+
+            request.fail(function (jqXHR, textStatus) {
+                alert("Request failed: " + textStatus);
+            });
+            count++;
+        });
+    });
+
+
+    function deleteItem() {
+        $('table').click(function () {
+            $(this).parent().remove();
+        });
+    };
+    function increaseQty() {
+        var currentVal = parseInt($("#qty").val());
+        if (currentVal != NaN) {
+            $("#qty").val(currentVal + 1);
+        }
+    };
+    function decreaseQty() {
+        var currentVal = parseInt($("#qty").val());
+        if (currentVal != NaN) {
+            $("#qty").val(currentVal - 1);
+        }
+    };
+
+
+
+</script>

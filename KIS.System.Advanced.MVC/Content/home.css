@@ -1,4 +1,15 @@
-﻿.venda {
+﻿body {
+    background: rgb(66,87,118);
+    background: linear-gradient(0deg, rgba(66,87,118,1) 0%, rgba(105,92,122,1) 30%, rgba(219,114,128,1) 65%, rgba(254,188,102,1) 100%) no-repeat center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.card {
+    background-color: transparent !important;
+}
+.venda {
     color: #FF4040;
     background-color: #00c0ef;
 }

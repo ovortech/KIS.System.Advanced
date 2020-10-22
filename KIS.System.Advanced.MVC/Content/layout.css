@@ -10,7 +10,7 @@ body,
     margin: 15% 0 15% 0;
 }
 .icon-color {
-    color: #A9A9A9;
+    color: black;
 }
 .icon_espace-rig {
     margin-right: 15px;
@@ -24,13 +24,13 @@ body,
     bottom: 0;
     position: fixed;
     padding-top: 15px;
+    box-shadow: 1px 0 3px rgba(0,0,0,0.15);
 }
 .rodapebkg {
-    background-color: #A9A9A9 !important;
+    background-color: white !important;
 }
 .shaddowbx {
     position: fixed;
     box-shadow: 1px 0 3px rgba(0,0,0,0.15);
 }
-.
 }

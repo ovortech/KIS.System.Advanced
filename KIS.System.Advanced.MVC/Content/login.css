@@ -3,7 +3,8 @@ html {
     margin: 0;
     padding: 0;
     height: 100%;
-    background: #f8f9fa !important;
+    background-image: url("/Content/bkg.png");
+    background-repeat: round;
 }
 
 .user_card {
