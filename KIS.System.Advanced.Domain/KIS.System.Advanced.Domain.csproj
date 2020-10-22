@@ -43,6 +43,8 @@
     <Compile Include="Entities\PedidoCancelamento .cs" />
     <Compile Include="Entities\TipoCancelamento.cs" />
     <Compile Include="Entities\Usuario.cs" />
+    <Compile Include="Enums\FuncaoEnum.cs" />
+    <Compile Include="Enums\TipoAcessoEnum.cs" />
     <Compile Include="Interfaces\IClienteRepository.cs" />
     <Compile Include="Interfaces\IContratoRepository.cs" />
     <Compile Include="Interfaces\IDespesaRepository.cs" />

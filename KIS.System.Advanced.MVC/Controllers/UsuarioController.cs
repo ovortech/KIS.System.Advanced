@@ -45,6 +45,7 @@ namespace KIS.System.Advanced.MVC.Controllers
             try
             {
                 var usuario = AutoMapper.Mapper.Map<Usuario>(usuarioVM);
+                usuario.SENHA_USUARIO = string.Empty;
                 if (usuario.ID_USUARIO > 0)
                     _usuarioService.Update(usuario);
                 else
