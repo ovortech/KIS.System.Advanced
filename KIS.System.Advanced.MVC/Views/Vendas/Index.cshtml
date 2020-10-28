@@ -40,11 +40,18 @@
             <div class="col-md-12">
                 <div class="" id="box_configs">
                     <label class="float-left mg-10">Pedido Nº  </label> <input class="wd-100 mb-10 form-control btn-disable" type="text" placeholder="">
-                    <label class="float-left mg-10">Vendador:   </label> <input class="wd-150 mb-10 form-control btn-disable" type="text" placeholder="">
+                    <label class="float-left mg-10 mb-10">Vendedor:   </label>
+                    <select class="mb-10 browser-default custom-select col-3">
+                        <option selected>Selecione</option>
+                        <option value="1">Guilherme</option>
+                        <option value="2">Marcio</option>
+                        <option value="3">J Rubens</option>
+                        <option value="3">Everton</option>
+                    </select>
                     <div class="form-group row">
 
                         <div class="col-sm-1" style="max-width:13.2%" ;>
-                            <label for="" class=" mg-10 form-control-label">Busca Produto:</label>
+                            <label for="" class="mg-10 form-control-label">Produto:</label>
                         </div>
                         <div class="col-sm-6">
                             <select class="form-control selectpicker" id="select-country" data-live-search="true">
@@ -58,47 +65,108 @@
                         </div>
                     </div>
                     <br>
-                    <table id="lista-produtos" class="tb-b tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%">
-                        <thead>
-                            <tr>
-                                <th>Cod. Produto</th>
-                                <th>Produto</th>
-                                <th>Descrição</th>
-                                <th>Quantidade</th>
-                                <th>Valor Un.</th>
-                                <th>Desconto Un.</th>
-                                <th>Valor</th>
-                                <th>
-                                </th>
+                    <div class="">
+                        <table id="lista-produtos" class="col-12 tb-b tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%" style="padding-left:0px;">
+                            <thead>
+                                <tr class="">
+                                    <th>Cod. Produto</th>
+                                    <th>Nome do Produto</th>
+                                    <th>Descrição</th>
+                                    <th>Quantidade</th>
+                                    <th>Valor Unitário</th>
+                                    <th>Desconto Unitário</th>
+                                    <th>Valor</th>
+                                    <th>
+                                    </th>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="tb-style">101</td>
-                                <td class="tb-style">Chave de carro</td>
-                                <td class="tb-style">
-                                    <div class="form-group">
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
-                                    </div>
-                                </td>
-                                <td class="tb-style">
-                                    <input class="qtdem" type="button" value="-" id="decrease" onclick="decreaseQty();" />
-                                    <input class="qtde" type="text" name="qty" id="qty" value="1" />
-                                    <input class="qtdema" type="button" value="+" id="increase" onclick="increaseQty();" />
-                                </td>
-                                <td class="tb-style"><input class="wd-100 form-control" type="text" placeholder=""></td>
-                                <td class="tb-style"><input class="wd-100 form-control" type="text" placeholder=""></td>
-                                <td class="tb-style">110,00</td>
-                                <td class="tb-style"><button type="button" class="btn-remove">Remover</button></td>
-                            </tr>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="tb-style text-center">101</td>
+                                    <td class="tb-style ">Chave de carro</td>
+                                    <td class="tb-style">
+                                        <div class="form-group">
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+                                        </div>
+                                    </td>
+                                    <td class="tb-style">
+                                        <input class="qtdem" type="button" value="-" id="decrease" onclick="decreaseQty();" />
+                                        <input class="qtde" type="text" name="qty" id="qty" value="1" />
+                                        <input class="qtdema" type="button" value="+" id="increase" onclick="increaseQty();" />
+                                    </td>
+                                    <td class="tb-style"><input class="wd-100 form-control" type="text" placeholder=""></td>
+                                    <td class="tb-style"><input class="wd-100 form-control" type="text" placeholder=""></td>
+                                    <td class="tb-style">110,00</td>
+                                    <td class="tb-style"><button type="button" class="btn-remove">Remover</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="tb-style text-center">101</td>
+                                    <td class="tb-style">Chave de carro</td>
+                                    <td class="tb-style">
+                                        <div class="form-group">
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+                                        </div>
+                                    </td>
+                                    <td class="tb-style">
+                                        <input class="qtdem" type="button" value="-" id="decrease" onclick="decreaseQty();" />
+                                        <input class="qtde" type="text" name="qty" id="qty" value="1" />
+                                        <input class="qtdema" type="button" value="+" id="increase" onclick="increaseQty();" />
+                                    </td>
+                                    <td class="tb-style"><input class="wd-100 form-control" type="text" placeholder=""></td>
+                                    <td class="tb-style"><input class="wd-100 form-control" type="text" placeholder=""></td>
+                                    <td class="tb-style">110,00</td>
+                                    <td class="tb-style"><button type="button" class="btn-remove">Remover</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="tb-style text-center">101</td>
+                                    <td class="tb-style">Chave de carro</td>
+                                    <td class="tb-style">
+                                        <div class="form-group">
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+                                        </div>
+                                    </td>
+                                    <td class="tb-style">
+                                        <input class="qtdem" type="button" value="-" id="decrease" onclick="decreaseQty();" />
+                                        <input class="qtde" type="text" name="qty" id="qty" value="1" />
+                                        <input class="qtdema" type="button" value="+" id="increase" onclick="increaseQty();" />
+                                    </td>
+                                    <td class="tb-style"><input class="wd-100 form-control" type="text" placeholder=""></td>
+                                    <td class="tb-style"><input class="wd-100 form-control" type="text" placeholder=""></td>
+                                    <td class="tb-style">110,00</td>
+                                    <td class="tb-style"><button type="button" class="btn-remove">Remover</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="tb-style text-center">101</td>
+                                    <td class="tb-style">Chave de carro</td>
+                                    <td class="tb-style">
+                                        <div class="form-group">
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+                                        </div>
+                                    </td>
+                                    <td class="tb-style">
+                                        <input class="qtdem" type="button" value="-" id="decrease" onclick="decreaseQty();" />
+                                        <input class="qtde" type="text" name="qty" id="qty" value="1" />
+                                        <input class="qtdema" type="button" value="+" id="increase" onclick="increaseQty();" />
+                                    </td>
+                                    <td class="tb-style"><input class="wd-100 form-control" type="text" placeholder=""></td>
+                                    <td class="tb-style"><input class="wd-100 form-control" type="text" placeholder=""></td>
+                                    <td class="tb-style">110,00</td>
+                                    <td class="tb-style"><button type="button" class="btn-remove">Remover</button></td>
+                                </tr>
+                        </table>
 
-                    </table>
-                    <div class="col-12">
-                        <label class="float-right mg-10">
-                            Total Desconto: <input class="float-right wd-100 mb-10 form-control btn-disable" type="text" placeholder="">
-                            <label class="float-right mg-10"> % </label> <input class="float-right wd-150 mb-10 form-control btn-disable" type="text" placeholder="">
                     </div>
+                    <div class="col-12">
+                        <label class="float-right mg-10 mr-10"> TOTAL DA COMPRA
+                        <input class="mr-10 float-right wd-100 mb-10 form-control btn-disable" type="text" placeholder="">
+                    </div>
+                    <div class="col-12">
+                        <label class="float-right mg-10 mr-10">
+                            Total Desconto: <input class="float-right wd-100 mb-10 form-control btn-disable" type="text" placeholder="">
+                            <label class="float-right mg-10"> % </label>
+                            <input class="mr-10 float-right wd-150 mb-10 form-control btn-disable" type="text" placeholder="">
+</div>
                     <div>
                         <label class="float-left mg-10">
                             </labelclass="float-right>
@@ -112,13 +180,9 @@
                     </div>
 
                     <div class="clearfix"></div>
-                    <div class="col-12">
-                        <label class="float-right mg-10"> TOTAL: <input class="float-right wd-100 mb-10 form-control btn-disable" type="text" placeholder="">
-                    </div>
-                    <div class="clearfix"></div>
                     <div class="col-sm-12">
-                        <button type="button" class="btn-add btn btn-block float-right ">Finalizar Venda</button>
-                        <button type="button" class="btn-remove float-right">Cancelar</button>
+                        <button type="button" class="mb-10 mr-10 btn-add btn btn-block float-right ">Finalizar Venda</button>
+                        <button type="button" class="mb-10 mr-10 btn-remove float-right">Cancelar</button>
                     </div>
                     <br>
                 </div>
@@ -175,5 +239,14 @@
 
     $(function () {
         $('.selectpicker').selectpicker();
+    });
+
+
+    $(document).ready(function () {
+        $('#dtVerticalScrollExample').DataTable({
+            "scrollY": "200px",
+            "scrollCollapse": true,
+        });
+        $('.dataTables_length').addClass('bs-select');
     });
 </script>
