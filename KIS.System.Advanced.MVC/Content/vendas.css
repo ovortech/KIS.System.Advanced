@@ -156,11 +156,6 @@
     border-radius: .25rem;
 }
 
-table {
-    overflow-y: auto;
-    height: 200px;
-    display: block;
-}
 .btn-disable {
     cursor: not-allowed;
     pointer-events: none;
