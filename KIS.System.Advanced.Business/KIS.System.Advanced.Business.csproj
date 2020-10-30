@@ -31,8 +31,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ClienteBS.cs" />
+    <Compile Include="ComissaoBS.cs" />
+    <Compile Include="ContratoBS.cs" />
+    <Compile Include="DespesaBS.cs" />
+    <Compile Include="FormaPgBS.cs" />
+    <Compile Include="FuncaoBS.cs" />
+    <Compile Include="ItemPedidoBS.cs" />
+    <Compile Include="PedidoBS.cs" />
+    <Compile Include="PedidoCancelamentoBS.cs" />
     <Compile Include="ProdutoBS.cs" />
     <Compile Include="RecuperarSenhaBS.cs" />
+    <Compile Include="TipoAcessoBS.cs" />
+    <Compile Include="TipoCancelamentoBS.cs" />
+    <Compile Include="TipoDespesaBS.cs" />
+    <Compile Include="TipoPgBS.cs" />
     <Compile Include="UsuarioBS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VendedorBS.cs" />
