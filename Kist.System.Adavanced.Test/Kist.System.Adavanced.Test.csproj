@@ -76,6 +76,7 @@
     <Compile Include="Data\DespesaTest.cs" />
     <Compile Include="Data\TipoPgTest.cs" />
     <Compile Include="Data\UsuarioTest.cs" />
+    <Compile Include="Data\VendedorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

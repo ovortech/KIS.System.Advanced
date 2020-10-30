@@ -16,6 +16,7 @@ namespace KIS.System.Advanced.Domain.Entities
         public int DATA_REG_PEDIDO { get; set; }
         public int ID_CLIENTE { get; set; }
         public Boolean FATURADO_PEDIDO { get; set; }
+        public int ID_VENDEDOR { get; set; }
 
     }
 }

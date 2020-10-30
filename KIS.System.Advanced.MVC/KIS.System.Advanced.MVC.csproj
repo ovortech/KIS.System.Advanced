@@ -17,7 +17,8 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44345</IISExpressSSLPort>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
@@ -284,6 +285,7 @@
     <Compile Include="ViewModels\ProdutoVM.cs" />
     <Compile Include="ViewModels\UsuarioVM.cs" />
     <Compile Include="ViewModels\VendasVM.cs" />
+    <Compile Include="ViewModels\VendedorVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

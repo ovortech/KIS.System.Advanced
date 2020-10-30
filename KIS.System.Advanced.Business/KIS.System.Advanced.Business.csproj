@@ -35,6 +35,7 @@
     <Compile Include="RecuperarSenhaBS.cs" />
     <Compile Include="UsuarioBS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VendedorBS.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KIS.System.Advanced.Domain\KIS.System.Advanced.Domain.csproj">

@@ -20,6 +20,7 @@ namespace KIS.System.Advanced.Infra.Data.EntityConfig
             Property(e => e.DATA_REG_PEDIDO).IsRequired();
             Property(e => e.ID_CLIENTE).IsRequired();
             Property(e => e.FATURADO_PEDIDO).IsRequired();
+            Property(e => e.ID_VENDEDOR).IsRequired();
         }
     }
 }

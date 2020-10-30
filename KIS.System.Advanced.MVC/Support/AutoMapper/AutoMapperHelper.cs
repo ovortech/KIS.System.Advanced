@@ -44,6 +44,18 @@ namespace KIS.System.Advanced.MVC.Support
             MappingUsuario(cfg);
             MappingUsuarioVM(cfg);
             MappingProduto(cfg);
+            MappingVendedor(cfg);
+        }
+
+        private static void MappingVendedor(IMapperConfigurationExpression cfg)
+        {
+            cfg.CreateMap<VendedorVM, Vendedor>()
+               .ForMember(destinationMember: vm => vm.ID_VENDEDOR, memberOptions: map => map.MapFrom(sourceMember: s => s.Id))
+               .ForMember(destinationMember: vm => vm.NOME_VENDEDOR, memberOptions: map => map.MapFrom(sourceMember: s => s.Nome));
+
+            cfg.CreateMap<Vendedor, VendedorVM>()
+              .ForMember(destinationMember: vm => vm.Id, memberOptions: map => map.MapFrom(sourceMember: s => s.ID_VENDEDOR))
+              .ForMember(destinationMember: vm => vm.Nome, memberOptions: map => map.MapFrom(sourceMember: s => s.NOME_VENDEDOR));
         }
 
         private static void MappingUsuarioVM(IMapperConfigurationExpression cfg)

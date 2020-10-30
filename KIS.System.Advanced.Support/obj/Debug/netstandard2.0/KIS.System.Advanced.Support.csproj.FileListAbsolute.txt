@@ -1,7 +1,6 @@
 E:\Projetos\KIS\KIS.System.Advanced.Support\bin\Debug\netstandard2.0\KIS.System.Advanced.Support.deps.json
 E:\Projetos\KIS\KIS.System.Advanced.Support\bin\Debug\netstandard2.0\KIS.System.Advanced.Support.dll
 E:\Projetos\KIS\KIS.System.Advanced.Support\bin\Debug\netstandard2.0\KIS.System.Advanced.Support.pdb
-E:\Projetos\KIS\KIS.System.Advanced.Support\obj\Debug\netstandard2.0\KIS.System.Advanced.Support.csprojAssemblyReference.cache
 E:\Projetos\KIS\KIS.System.Advanced.Support\obj\Debug\netstandard2.0\KIS.System.Advanced.Support.AssemblyInfoInputs.cache
 E:\Projetos\KIS\KIS.System.Advanced.Support\obj\Debug\netstandard2.0\KIS.System.Advanced.Support.AssemblyInfo.cs
 E:\Projetos\KIS\KIS.System.Advanced.Support\obj\Debug\netstandard2.0\KIS.System.Advanced.Support.csproj.CoreCompileInputs.cache

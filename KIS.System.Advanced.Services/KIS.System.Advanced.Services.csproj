@@ -34,10 +34,12 @@
     <Compile Include="Interfaces\IProdutoService.cs" />
     <Compile Include="Interfaces\IRecuperarSenhaService.cs" />
     <Compile Include="Interfaces\IUsuarioService.cs" />
+    <Compile Include="Interfaces\IVendedorService.cs" />
     <Compile Include="ProdutoService.cs" />
     <Compile Include="RecuperarSenhaService.cs" />
     <Compile Include="UsuarioService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VendedorService.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

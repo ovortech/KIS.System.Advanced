@@ -32,6 +32,7 @@ namespace KIS.System.Advanced.Infra.Data.Contexto
         public virtual DbSet<RecuperarSenha> RecuperarSenhas { get; set; }
         public virtual DbSet<Despesa> Despesas { get; set; }
         public virtual DbSet<TipoDespesa> TipoDespesas { get; set; }
+        public virtual DbSet<Vendedor> Vendedores { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -51,6 +52,7 @@ namespace KIS.System.Advanced.Infra.Data.Contexto
             modelBuilder.Configurations.Add(new RecuperarSenhaMapping());
             modelBuilder.Configurations.Add(new DespesaMapping());
             modelBuilder.Configurations.Add(new TipoDespesaMapping());
+            modelBuilder.Configurations.Add(new VendedorMapping());
         }
     }
 }

@@ -43,6 +43,7 @@
     <Compile Include="Entities\PedidoCancelamento .cs" />
     <Compile Include="Entities\TipoCancelamento.cs" />
     <Compile Include="Entities\Usuario.cs" />
+    <Compile Include="Entities\Vendedor.cs" />
     <Compile Include="Enums\FuncaoEnum.cs" />
     <Compile Include="Enums\TipoAcessoEnum.cs" />
     <Compile Include="Interfaces\IClienteRepository.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Entities\TipoDespesa.cs" />
     <Compile Include="Interfaces\IRepositoryBase.cs" />
     <Compile Include="Interfaces\IUsuarioRepository.cs" />
+    <Compile Include="Interfaces\IVendedorRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

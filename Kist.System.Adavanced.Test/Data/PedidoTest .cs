@@ -32,6 +32,7 @@ namespace Kist.System.Adavanced.Test.Data
                 DATA_REG_PEDIDO = 1,
                 ID_CLIENTE = 1,
                 FATURADO_PEDIDO = true,
+                ID_VENDEDOR = 2,
             };
 
         _pedidoRepository.Add(pedido);

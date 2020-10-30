@@ -13,6 +13,6 @@ namespace KIS.System.Advanced.MVC.ViewModels
         public string Observacao { get; set; }
         public ClienteVM ClienteVM { get; set; }        
         public List<ItemPedidoVM>   ItemPedidosVM { get; set; }
-        public List<FormaPG> FormaPGs { get; set; }
+        public List<FormaPGVM> FormaPGs { get; set; }
     }
 }

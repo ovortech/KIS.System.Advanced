@@ -1,4 +1,8 @@
-﻿using System;
+﻿using KIS.System.Advanced.Domain.Entities;
+using KIS.System.Advanced.MVC.Support;
+using KIS.System.Advanced.MVC.ViewModels;
+using KIS.System.Advanced.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,12 +10,68 @@ using System.Web.Mvc;
 
 namespace KIS.System.Advanced.MVC.Controllers
 {
-    public class VendedorController : Controller
+    public class VendedorController : CustomControllerBase
     {
-        // GET: Vendedor
+        #region PROPRIEDADES / CONTRUTOR
+        private static List<VendedorVM> vendedorVMs;
+        private IVendedorService _vendedorService;
+        public static List<VendedorVM> vendedores
+        {
+            get { return vendedorVMs; }
+            set { vendedorVMs = value; }
+        }
+        public VendedorController(IVendedorService vendedorService)
+        {
+            _vendedorService = vendedorService;
+        }
+
+        #endregion
+        // GET: Vendedor                
         public ActionResult Index()
         {
-            return View();
+            var vendedores = _vendedorService.GetAll();
+            var vendedoresVM = AutoMapper.Mapper.Map<List<VendedorVM>>(vendedores);
+            return View(vendedoresVM);
+        }
+
+        public JsonResult Get(int id)
+        {
+            var vendedor = _vendedorService.Get(id);
+            var vendedorVM = AutoMapper.Mapper.Map<VendedorVM>(vendedor);
+            return Json(vendedorVM, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult Save(VendedorVM vendedorVM)
+        {
+            try
+            {
+                var vendedor = AutoMapper.Mapper.Map<Vendedor>(vendedorVM);
+                if (vendedor.ID_VENDEDOR > 0)
+                    _vendedorService.Update(vendedor);
+                else
+                    _vendedorService.Save(vendedor);
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost]
+        //[CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                _vendedorService.Delete(id);
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
