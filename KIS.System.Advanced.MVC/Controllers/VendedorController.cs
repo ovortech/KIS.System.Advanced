@@ -1,5 +1,6 @@
 ﻿using KIS.System.Advanced.Domain.Entities;
 using KIS.System.Advanced.MVC.Support;
+using KIS.System.Advanced.MVC.Support.Security;
 using KIS.System.Advanced.MVC.ViewModels;
 using KIS.System.Advanced.Services.Interfaces;
 using System;
@@ -27,6 +28,7 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         #endregion
         // GET: Vendedor                
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         public ActionResult Index()
         {
             var vendedores = _vendedorService.GetAll();
@@ -34,6 +36,7 @@ namespace KIS.System.Advanced.MVC.Controllers
             return View(vendedoresVM);
         }
 
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         public JsonResult Get(int id)
         {
             var vendedor = _vendedorService.Get(id);
@@ -42,6 +45,7 @@ namespace KIS.System.Advanced.MVC.Controllers
         }
 
         [HttpPost]
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         public ActionResult Save(VendedorVM vendedorVM)
         {
             try
@@ -61,6 +65,7 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         [HttpPost]
         //[CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         public ActionResult Delete(int id)
         {
             try
