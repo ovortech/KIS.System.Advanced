@@ -23,7 +23,7 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         #endregion
 
-        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN)]
         public ActionResult Index()
         {
             var usuarios = _usuarioService.GetAll();
@@ -31,7 +31,7 @@ namespace KIS.System.Advanced.MVC.Controllers
             return View(usuariosVM);
         }
 
-        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN)]
         public JsonResult Get(int idUsuario)
         {
             var usuario = _usuarioService.Get(idUsuario);
@@ -40,7 +40,7 @@ namespace KIS.System.Advanced.MVC.Controllers
         }
 
         [HttpPost]
-        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN)]
         public ActionResult Save(UsuarioVM usuarioVM)
         {
             try
@@ -61,7 +61,7 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         // POST: Usuario/Delete/5
         [HttpPost]
-        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN)]
         public ActionResult Delete(int idUsuario)
         {
             try
