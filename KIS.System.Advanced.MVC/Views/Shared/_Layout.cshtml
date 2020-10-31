@@ -1,41 +1,42 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en" class="no-js">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Kis Advanced</title>
+    <meta name="description" content="Sistema Kis Advanced" />
+    <meta name="keywords" content="Sistema Kis Advanced" />
+    <meta name="author" content="Vortech" />
 
-    <title>KIS System Advanced</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
-    <link href="~/Content/layout.css" rel="stylesheet">
-
-    @Scripts.Render("~/bundles/Javascript")
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="~/Content/demo.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/component.css" />
+    <script src="~/Scripts/modernizr-custom.js"></script>
 </head>
-<body class="bg-light">
+
+<body>
     @{
         var Nome = KIS.System.Advanced.MVC.Support.Security.SessionPersister.User != null ? KIS.System.Advanced.MVC.Support.Security.SessionPersister.User.Nome : "";
         var Email = KIS.System.Advanced.MVC.Support.Security.SessionPersister.User != null ? KIS.System.Advanced.MVC.Support.Security.SessionPersister.User.Email : "";
     }
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-white fixed-top shaddowbx">
-        <div class="container">
-            <a href="~/Home/">
-                <img src="~/Content/vortech_logo.png" class="brand_logo" alt="Logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="icon-color collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
+    <div class="container">
+        <header class="bp-header cf">
+            <div class="dummy-logo">
+                <div class="dummy-icon"></div>
+                <a href="~/Home/">
+                    <img src="~/Content/vortech_logo.png" class="brand_logo" alt="Logo">
+                </a>
+            </div>
+            <div class="bp-header__main">
+                <!--<ul class="navbar-nav ml-auto">
                     <li class="nav-item active icon_espace-rig">
                         <svg width="2em" height="5em" viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor">
                             <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                         </svg>
                     </li>
-                    <p style="margin-top: 2rem;">@Nome</p>
+                    <p style="margin-top: 2rem;">-->@*@Nome*@ <!--teste</p>
 
                     <li class="nav-item icon_espace-lef">
                         <a href="~/Login/Deslogar">
@@ -46,40 +47,183 @@
                             </svg>
                         </a>
                     </li>
+                </ul>-->
+                <nav class="bp-nav">
+                    <div class="icon-color collapse navbar-collapse" id="navbarResponsive">
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <button class="action action--open" aria-label="Open Menu"><span class="icon icon--menu"></span></button>
+        <nav id="ml-menu" class="menu">
+            <button class="action action--close" aria-label="Close Menu"><span class="icon icon--cross"></span></button>
+            <div class="menu__wrap">
+                <ul data-menu="main" class="menu__level" tabindex="-1" role="menu" aria-label="Menu">
+                    <div>
+                        <li class="menu__item" role="menuitem"><a data-submenu="submenu-1" aria-owns="submenu-1" href="#">@Html.ActionLink("REALIZAR VENDA", "Index", "Vendas", null, new { @class = "color-white, menu__link" })</a></li>
+                    </div>
+                    <div>
+                        <li class="menu__item" role="menuitem"><a data-submenu="submenu-2" aria-owns="submenu-2" href="#">@Html.ActionLink("PRODUTOS", "Index", "Produto", null, new { @class = "color-white, menu__link" })</a></li>
+                    </div>
+                    <div>
+                        <li class="menu__item" role="menuitem"><a data-submenu="submenu-3" aria-owns="submenu-3" href="#">@Html.ActionLink("HISTÓRICO DE VENDAS", "Index", "HistoricoVenda", null, new { @class = "color-white, menu__link" })</a></li>
+                    </div>
+                    <div>
+                        <li class="menu__item" role="menuitem"><a data-submenu="submenu-4" aria-owns="submenu-4" href="#">@Html.ActionLink("DESPESAS", "Index", "Despesa", null, new { @class = "color-white, menu__link" })</a></li>
+                    </div>
+                    <div>
+                        <li class="menu__item" role="menuitem"><a data-submenu="submenu-4" aria-owns="submenu-5" href="#">@Html.ActionLink("CONTRATOS", "Index", "Contrato", null, new { @class = "color-white, menu__link" })</a></li>
+                    </div>
+                    <div>
+                        <li class="menu__item" role="menuitem"><a data-submenu="submenu-4" aria-owns="submenu-6" href="#">@Html.ActionLink("COMISSÃO", "Index", "Comissao", null, new { @class = "color-white, menu__link" })</a></li>
+                    </div>
+                    <div>
+                        <li class="menu__item" role="menuitem"><a data-submenu="submenu-4" aria-owns="submenu-7" href="#">@Html.ActionLink("CLIENTES", "Index", "Cliente", null, new { @class = "color-white, menu__link" })</a></li>
+                    </div>
+                    <div>
+                        <li class="menu__item" role="menuitem"><a data-submenu="submenu-4" aria-owns="submenu-7" href="#">@Html.ActionLink("VENDEDORES", "Index", "Vendedor", null, new { @class = "color-white, menu__link" })</a></li>
+                    </div>
+                    <div>
+                        @*<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+                        </svg>*@
+                        <li class="menu__item" role="menuitem"><a data-submenu="submenu-4" aria-owns="submenu-7" href="#">@Html.ActionLink("USUÁRIOS", "Index", "Usuario", null, new { @class = "color-white, menu__link" })</a></li>
+                    </div>
                 </ul>
             </div>
+        </nav>
+        <div class="content">
+            <div class="container">
+                @RenderBody()
+            </div>
         </div>
-    </nav>
-
-    <!-- Header -->
-    <header class="bg-primary mb-5">
-    </header>
-
-    <!-- Page Content -->
-    <div class="container">
-        @RenderBody()
+                 
     </div>
+    
+    <script src="~/Scripts/classie.js"></script>
+    <script src="~/Scripts/dummydata.js"></script>
+    <script src="~/Scripts/main.js"></script>
+    <script>
+        (function () {
+            var menuEl = document.getElementById('ml-menu'),
+                mlmenu = new MLMenu(menuEl, {
+                    backCtrl: false, 
+                    onItemClick: loadDummyData 
+                });
 
-    <!-- /.container -->
-    <!-- Footer -->
-    <footer class="rodapebkg rodape">
-        <div class="container">
-            <address class="text-right" style="float: right;">
-                <abbr title="Email"></abbr>
-                <a class="conteudo_dir text-black" href="mailto:vortech@gmail.com"><strong>Suporte: </strong>ovortech@gmail.com</a>
-            </address>
-            <p class="m-0 text-black">Copyright &copy; Vortech 2020 - Todos os direitos reservados.</p>
-        </div>
-        <!-- Footer -->
-        <!-- /.container -->
-    </footer>
+            var openMenuCtrl = document.querySelector('.action--open'),
+                closeMenuCtrl = document.querySelector('.action--close');
+
+            openMenuCtrl.addEventListener('click', openMenu);
+            closeMenuCtrl.addEventListener('click', closeMenu);
+
+            function openMenu() {
+                classie.add(menuEl, 'menu--open');
+                closeMenuCtrl.focus();
+            }
+
+            function closeMenu() {
+                classie.remove(menuEl, 'menu--open');
+                openMenuCtrl.focus();
+            }
 
 
-    <!-- Bootstrap core JavaScript -->
+            var gridWrapper = document.querySelector('.content');
+
+            function loadDummyData(ev, itemName) {
+                ev.preventDefault();
+
+                closeMenu();
+                gridWrapper.innerHTML = '';
+                classie.add(gridWrapper, 'content--loading');
+                setTimeout(function () {
+                    classie.remove(gridWrapper, 'content--loading');
+                    gridWrapper.innerHTML = '<ul class="products">' + dummyData[itemName] + '<ul>';
+                }, 700);
+            }
+        })();
+    </script>
     <script src="~/Scripts/jquery-3.5.1.min.js"></script>
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
-    @*<script src="~/Scripts/popper.js"></script>*@
+    <script src="~/Scripts/popper.js"></script>
+
     <script src="~/Scripts/bootbox.min.js"></script>
     <script src="~/Scripts/bootbox.locales.min.js"></script>
 </body>
+
 </html>
+
+
+
+<!--<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>KIS System Advanced</title>
+
+    <!-- Bootstrap core CSS -->
+<!--<link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/layout.css" rel="stylesheet">
+
+    @Scripts.Render("~/bundles/Javascript")
+</head>
+<body class="bg-light">-->
+@*    @{
+        var Nome = KIS.System.Advanced.MVC.Support.Security.SessionPersister.User != null ? KIS.System.Advanced.MVC.Support.Security.SessionPersister.User.Nome : "";
+        var Email = KIS.System.Advanced.MVC.Support.Security.SessionPersister.User != null ? KIS.System.Advanced.MVC.Support.Security.SessionPersister.User.Email : "";
+    }*@
+<!-- Navigation -->
+<!--<nav class="navbar navbar-expand-lg navbar-dark bg-white fixed-top shaddowbx">
+    <div class="container">
+        <a href="~/Home/">
+            <img src="~/Content/vortech_logo.png" class="brand_logo" alt="Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="icon-color collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active icon_espace-rig">
+                    <svg width="2em" height="5em" viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                    </svg>
+                </li>
+                <p style="margin-top: 2rem;">@Nome</p>
+
+                <li class="nav-item icon_espace-lef">
+                    <a href="~/Login/Deslogar">
+                        <svg width="2em" height="5em" viewBox="0 0 16 16" class="bi bi-power" fill="currentColor">
+
+                            <path fill-rule="evenodd" d="M5.578 4.437a5 5 0 1 0 4.922.044l.5-.866a6 6 0 1 1-5.908-.053l.486.875z" />
+                            <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z" />
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>-->
+<!-- Header -->
+<!--<header class="bg-primary mb-5">
+</header>-->
+<!-- Page Content -->
+
+<!-- /.container -->
+<!-- Footer -->
+<!--<footer class="rodapebkg rodape">
+    <div class="container">
+        <address class="text-right" style="float: right;">
+            <abbr title="Email"></abbr>
+            <a class="conteudo_dir text-black" href="mailto:vortech@gmail.com"><strong>Suporte: </strong>ovortech@gmail.com</a>
+        </address>
+        <p class="m-0 text-black">Copyright &copy; Vortech 2020 - Todos os direitos reservados.</p>
+    </div>-->
+<!-- Footer -->
+<!-- /.container -->
+<!--</footer>-->
+
+

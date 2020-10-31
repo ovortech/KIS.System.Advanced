@@ -1,8 +1,22 @@
 ﻿body {
-    margin-top: 10%;
+    background: linear-gradient(0deg, rgba(66,87,118,1) 0%, rgba(105,92,122,1) 30%, rgba(219,114,128,1) 65%, rgba(254,188,102,1) 100%) no-repeat center fixed;
+    overflow: hidden;
+    overflow-y: scroll;
 }
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1260px;
+    }
+}
+
+table {
+    border: 1px solid #ced4da;
+}
+
 .bkp-cont {
     background-color: white;
+    height: 600px;
 }
 .tb-style {
     color: #767676;

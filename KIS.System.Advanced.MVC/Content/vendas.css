@@ -1,7 +1,19 @@
 ﻿body {
-    margin-top: 8%;
-    margin-bottom: 8%;
+    background: linear-gradient(0deg, rgba(66,87,118,1) 0%, rgba(105,92,122,1) 30%, rgba(219,114,128,1) 65%, rgba(254,188,102,1) 100%) no-repeat center fixed;
+    overflow: hidden;
+    overflow-y: scroll;
 }
+
+.bootstrap-select > select.bs-select-hidden, select.bs-select-hidden, select.selectpicker {
+    display: block !important;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1260px;
+    }
+}
+
 
 .bkp-cont {
     background-color: white;

@@ -1,36 +1,40 @@
-body,
-  padding-top: 56px;
-.conteudo_dir {
-    float: right;
-    }
-.conteudo_esq {
-    float: left;
-    }
-.rowc {
-    margin: 15% 0 15% 0;
+body{
+
 }
-.icon-color {
-    color: black;
+
+* {
+    margin: 0;
+    padding: 0;
 }
-.icon_espace-rig {
-    margin-right: 15px;
+
+html, body {
+    height: 100%;
 }
-.icon_espace-lef {
-    margin-left: 100px;
+
+.geral {
+    min-height: 100%;
+    position: relative;
+    width: 800px;
 }
-.rodape {
-    margin: auto;
-    width: 100%;
+
+.footer {
+    position: absolute;
     bottom: 0;
-    position: fixed;
-    padding-top: 15px;
-    box-shadow: 1px 0 3px rgba(0,0,0,0.15);
+    width: 100%;
 }
-.rodapebkg {
-    background-color: white !important;
+
+.content {
+    overflow: hidden;
 }
-.shaddowbx {
-    position: fixed;
-    box-shadow: 1px 0 3px rgba(0,0,0,0.15);
+
+.aside {
+    width: 200px;
 }
+
+.fleft {
+    float: left;
+}
+
+.fright {
+    float: right;
 }

@@ -45,8 +45,10 @@
                     <br>
                     <table id="lista-Vendedores" class=" tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%">
                         <thead>
-                            <tr>                                
+                            <tr>
                                 <th>Nome Vendedor</th>
+                                <th></th>
+                                <th></th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -55,12 +57,14 @@
                         <tbody>
                             @foreach (var Vendedor in Model)
                             {                                
-                                <tr>                                    
-                                    <td class="tb-style"><input type="hidden" value="@Vendedor.Id" /> @Vendedor.Nome</td>
-                                    <td class="tb-style"></td>
-                                    <td><a data-toggle="modal" data-target="#novo-Vendedor" data-direction="bottom" onclick="javascript: editarVendedor(@Vendedor.Id)" class="btn btn-primary">Editar</a></td>
-                                    <td><a onclick="javascript: excluirVendedor(@Vendedor.Id)" class="btn btn-danger">Excluir</a></td>
-                                </tr>
+                            <tr>
+                                <td class="tb-style" width="80%"><input type="hidden" value="@Vendedor.Id" /> @Vendedor.Nome</td>
+                                <td class="tb-style"></td>
+                                <td class="tb-style"></td>
+                                <td class="tb-style"></td>
+                                <td><a data-toggle="modal" data-target="#novo-Vendedor" data-direction="bottom" onclick="javascript: editarVendedor(@Vendedor.Id)" class="btn btn-primary">Editar</a></td>
+                                <td><a onclick="javascript: excluirVendedor(@Vendedor.Id)" class="btn btn-danger">Excluir</a></td>
+                            </tr>
                             }
                     </table>
                     <div class="clearfix"></div>

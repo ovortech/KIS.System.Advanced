@@ -60,11 +60,11 @@
                             {
                                 var servico = produto.IsServico ? "Sim" : "Não";
                                 <tr>
-                                    <td class="tb-style">@produto.CodProduto<input type="hidden" value="@produto.IdProduto" /></td>
-                                    <td class="tb-style">@produto.NomeProduto</td>
-                                    <td class="tb-style">@servico</td>
-                                    <td class="tb-style">@produto.ValorProduto</td>
-                                    <td class="tb-style"></td>
+                                    <td class="tb-style" width="10%">@produto.CodProduto<input type="hidden" value="@produto.IdProduto" /></td>
+                                    <td class="tb-style" width="60%">@produto.NomeProduto</td>
+                                    <td class="tb-style" width="10%">@servico</td>
+                                    <td class="tb-style" width="10%">@produto.ValorProduto</td>
+                                    <td class="tb-style  width="10%""></td>
                                     <td><a data-toggle="modal" data-target="#novo-produto" data-direction="bottom" onclick="javascript: editarProduto(@produto.IdProduto)" class="btn btn-primary">Editar</a></td>
                                     <td><a onclick="javascript: excluirProduto(@produto.IdProduto)" class="btn btn-danger">Excluir</a></td>
                                 </tr>

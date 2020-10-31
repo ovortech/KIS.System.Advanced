@@ -59,9 +59,9 @@
                             @foreach (var usuario in Model)
                             {
                                 <tr>
-                                    <td class="tb-style">@usuario.Login<input type="hidden" value="@usuario.IdUsuario" /></td>
-                                    <td class="tb-style">@usuario.Nome</td>
-                                    <td class="tb-style">@usuario.Email</td>
+                                    <td class="tb-style" width="10%">@usuario.Login<input type="hidden" value="@usuario.IdUsuario" /></td>
+                                    <td class="tb-style"  width="40%">@usuario.Nome</td>
+                                    <td class="tb-style"  width="40%">@usuario.Email</td>
                                     <td class="tb-style">@usuario.Funcao</td>
                                     <td></td>
                                     <td><a data-toggle="modal" data-target="#novo-usuario" data-direction="bottom" onclick="javascript: editarUsuario(@usuario.IdUsuario)" class="btn btn-primary">Editar</a></td>
