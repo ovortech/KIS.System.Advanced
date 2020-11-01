@@ -43,6 +43,9 @@
     <Compile Include="Entities\PedidoCancelamento .cs" />
     <Compile Include="Entities\TipoCancelamento.cs" />
     <Compile Include="Entities\Usuario.cs" />
+    <Compile Include="Entities\Vendedor.cs" />
+    <Compile Include="Enums\FuncaoEnum.cs" />
+    <Compile Include="Enums\TipoAcessoEnum.cs" />
     <Compile Include="Interfaces\IClienteRepository.cs" />
     <Compile Include="Interfaces\IContratoRepository.cs" />
     <Compile Include="Interfaces\IDespesaRepository.cs" />
@@ -68,6 +71,7 @@
     <Compile Include="Entities\TipoDespesa.cs" />
     <Compile Include="Interfaces\IRepositoryBase.cs" />
     <Compile Include="Interfaces\IUsuarioRepository.cs" />
+    <Compile Include="Interfaces\IVendedorRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +89,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KIS.System.Advanced.Support\KIS.System.Advanced.Support.csproj">
+      <Project>{e8a10879-5b76-4100-ae0c-8ce43a41e2b9}</Project>
+      <Name>KIS.System.Advanced.Support</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

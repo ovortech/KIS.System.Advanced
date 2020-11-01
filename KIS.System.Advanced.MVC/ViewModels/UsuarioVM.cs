@@ -1,6 +1,8 @@
-﻿using System;
+﻿using KIS.System.Advanced.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Web;
 
 namespace KIS.System.Advanced.MVC.ViewModels
@@ -10,20 +12,11 @@ namespace KIS.System.Advanced.MVC.ViewModels
         public int IdUsuario { get; set; }
         public string Login { get; set; }
         public string Senha { get; set; }
-        public TipoAcesso TipoAcessos { get; set; }
+        public TipoAcessoEnum TipoAcessos { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
-        public FuncaoUsuario FuncaoUsuario { get; set; }
+        public FuncaoEnum Funcao { get; set; }
     }
 
-    public enum TipoAcesso
-    {
-        Admin = 1,
-        Vendas = 2
-    }
-    public enum FuncaoUsuario
-    {
-        Gerente = 1,
-        Vendedor = 2
-    }
+
 }

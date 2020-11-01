@@ -1,36 +1,45 @@
-body,
-  padding-top: 56px;
-.conteudo_dir {
-    float: right;
-    }
-.conteudo_esq {
-    float: left;
-    }
-.rowc {
-    margin: 15% 0 15% 0;
+body{
+
 }
-.icon-color {
-    color: #A9A9A9;
+
+.element1 {
+    display: inline-block;
+    margin-bottom: 7px;
 }
-.icon_espace-rig {
-    margin-right: 15px;
+
+.element2 {
+    display: inline-block;
+
 }
-.icon_espace-lef {
-    margin-left: 100px;
+
+html, body {
+    height: 100%;
 }
-.rodape {
-    margin: auto;
-    width: 100%;
+
+.geral {
+    min-height: 100%;
+    position: relative;
+    width: 800px;
+}
+
+.footer {
+    position: absolute;
     bottom: 0;
-    position: fixed;
-    padding-top: 15px;
+    width: 100%;
 }
-.rodapebkg {
-    background-color: #A9A9A9 !important;
+
+.content {
+    overflow: hidden;
 }
-.shaddowbx {
-    position: fixed;
-    box-shadow: 1px 0 3px rgba(0,0,0,0.15);
+
+.aside {
+    width: 200px;
 }
-.
+
+.fleft {
+    float: left;
+}
+
+.fright {
+    float: right;
 }

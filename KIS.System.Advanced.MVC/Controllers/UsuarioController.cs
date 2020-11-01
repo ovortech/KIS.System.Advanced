@@ -3,108 +3,75 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using KIS.System.Advanced.Domain.Entities;
+using KIS.System.Advanced.MVC.Support;
 using KIS.System.Advanced.MVC.Support.Security;
 using KIS.System.Advanced.MVC.ViewModels;
+using KIS.System.Advanced.Services.Interfaces;
 
 namespace KIS.System.Advanced.MVC.Controllers
 {
-    public class UsuarioController : Controller
+    public class UsuarioController : CustomControllerBase
     {
-        //protected UsuarioService _usuarioService;
-        //public UsuarioController()
-        //{
-        //    _usuarioService = new UsuarioService();
-        //}
+        #region PROPRIEDADES / CONSTRUTOR
 
-        // GET: Usuario
-        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
+        private readonly IUsuarioService _usuarioService;
+        public UsuarioController(IUsuarioService usuarioService)
+        {
+            _usuarioService = usuarioService;
+        }
+
+        #endregion
+
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN)]
         public ActionResult Index()
         {
-            var usuarios = new List<UsuarioVM> 
-            {
-                new UsuarioVM { IdUsuario = 1, Email = "teste@user1.com", FuncaoUsuario = FuncaoUsuario.Gerente, Nome = "Everton1", TipoAcessos = TipoAcesso.Admin, Login = "everton1" },
-                new UsuarioVM { IdUsuario = 2, Email = "teste@user2.com", FuncaoUsuario = FuncaoUsuario.Vendedor, Nome = "Everton2", TipoAcessos = TipoAcesso.Vendas, Login = "everton2" }
-            };
-            return View(usuarios);
+            var usuarios = _usuarioService.GetAll();
+            var usuariosVM = AutoMapper.Mapper.Map<List<UsuarioVM>>(usuarios);
+            return View(usuariosVM);
         }
 
-        // GET: Usuario/Details/5
-        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
-        public ActionResult Details(int id)
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN)]
+        public JsonResult Get(int idUsuario)
         {
-            return View();
+            var usuario = _usuarioService.Get(idUsuario);
+            var produtoVM = AutoMapper.Mapper.Map<UsuarioVM>(usuario);
+            return Json(produtoVM, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Usuario/Create
-        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Usuario/Create
         [HttpPost]
-        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
-        public ActionResult Create(FormCollection collection)
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN)]
+        public ActionResult Save(UsuarioVM usuarioVM)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                var usuario = AutoMapper.Mapper.Map<Usuario>(usuarioVM);
+                usuario.SENHA_USUARIO = string.Empty;
+                if (usuario.ID_USUARIO > 0)
+                    _usuarioService.Update(usuario);
+                else
+                    _usuarioService.Save(usuario);
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                throw;
             }
-        }
-
-        // GET: Usuario/Edit/5
-        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
-        public ActionResult Edit(int id)
-        {
-            var usuario = new UsuarioVM { IdUsuario = id, Email = "teste@user1.com", FuncaoUsuario = FuncaoUsuario.Gerente, Nome = "Everton1", TipoAcessos = TipoAcesso.Admin, Login = "everton1" };
-            return PartialView(usuario);
-        }
-
-        // POST: Usuario/Edit/5
-        [HttpPost]
-        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Usuario/Delete/5
-        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
-        public ActionResult Delete(int id)
-        {
-            return View();
         }
 
         // POST: Usuario/Delete/5
         [HttpPost]
-        [CustomAuthorize(Roles = "ADMIN, VENDAS")]
-        public ActionResult Delete(int id, FormCollection collection)
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN)]
+        public ActionResult Delete(int idUsuario)
         {
             try
             {
-                // TODO: Add delete logic here
-
+                _usuarioService.Delete(idUsuario);
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                throw;
             }
         }
     }

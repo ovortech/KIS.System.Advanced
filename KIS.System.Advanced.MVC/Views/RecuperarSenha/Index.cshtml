@@ -31,30 +31,31 @@
                     <h4 class="text-center">Esqueci minha senha</h4>
                     <p class="text-center">Para recuperar sua senha, informe o seu <strong>usuário de acesso</strong>. Você receberá um e-mail de ajuda para cadastrar uma nova senha.</p>
                 </div>
-                    <div class="d-flex justify-content-center">
-                   
-                        <form>
-                            <div class="input-group mb-3">
-                                <div class="input-group-append">
-                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                </div>
-                                <input type="text" id="UserName" name="" class="form-control input_user" value="" placeholder="Informe o seu usuário">
-                                <span asp-validation-for="UserName" class="text-danger"></span>
+                <div class="d-flex justify-content-center">
+
+                    <form>
+                        <div class="input-group mb-3">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <div class="d-flex justify-content-center mt-3 login_container">
-                                <button type="button" name="button" id="logar" class="btn login_btn">Recuperar Senha</button>
-                            </div>
-                        </form>
-                    </div>
+                            <input type="text" id="UserName" name="" class="form-control input_user" value="" placeholder="Informe o seu usuário">
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </div>
+                        <div class="d-flex justify-content-center mt-3 login_container">
+                            <button type="button" name="button" id="recuperar" class="btn login_btn">Recuperar Senha</button>
+                        </div>
+                    </form>
                 </div>
+            </div>
         </div>
     </div>
 </body>
 </html>
 
 <script>
-    $('#logar').click(function () {
-        var usuario = { "UserName": $("#UserName").val(), "Password": $("#pws").val() }
-        callActionPost("Login", "Logar", usuario, "/Home");
+    $('#recuperar').click(function () {
+
+        let data = { userName: $("#UserName").val() };
+        alert("email de recuperação de senha enviado para " + callActionGet("RecuperarSenha", "SendEmail", data));
     });
 </script>

@@ -17,7 +17,8 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44345</IISExpressSSLPort>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
     <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
     <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
@@ -254,26 +255,37 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Acesso\AccessDeniedController.cs" />
+    <Compile Include="Controllers\Acesso\AlterarSenhaController.cs" />
     <Compile Include="Controllers\Acesso\LoginController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\ComissaoController.cs" />
+    <Compile Include="Controllers\ContratoController.cs" />
+    <Compile Include="Controllers\DespesaController.cs" />
+    <Compile Include="Controllers\FinanceiroController.cs" />
+    <Compile Include="Controllers\HistoricoVendaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
-    <Compile Include="Controllers\RecuperarSenhaController.cs" />
+    <Compile Include="Controllers\Acesso\RecuperarSenhaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\VendasController.cs" />
+    <Compile Include="Controllers\VendedorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Support\AutoMapper\AutoMapperHelper.cs" />
+    <Compile Include="Support\CustomControllerBase.cs" />
+    <Compile Include="Support\CustomExtensions.cs" />
     <Compile Include="Support\Security\CustomAuthorizeAttribute.cs" />
     <Compile Include="Support\Security\CustomPrincipal.cs" />
     <Compile Include="Support\Security\SessionPersister.cs" />
+    <Compile Include="ViewModels\ClienteVM.cs" />
+    <Compile Include="ViewModels\ItemPedidoVM.cs" />
     <Compile Include="ViewModels\LoginVM.cs" />
     <Compile Include="ViewModels\ProdutoVM.cs" />
-    <Compile Include="ViewModels\TipoPgVM.cs" />
     <Compile Include="ViewModels\UsuarioVM.cs" />
+    <Compile Include="ViewModels\VendasVM.cs" />
+    <Compile Include="ViewModels\VendedorVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -302,6 +314,15 @@
     <Content Include="Views\Comissao\Index.cshtml" />
     <Content Include="Views\Cliente\Index.cshtml" />
     <Content Include="Views\RecuperarSenha\Index.cshtml" />
+    <Content Include="Views\AlterarSenha\Index.cshtml" />
+    <Compile Include="ViewModels\VendasVM.dependence.cs" />
+    <Content Include="Views\Despesa\Index.cshtml" />
+    <Content Include="Views\Shared\_Layoutlogin.cshtml" />
+    <Content Include="Views\Shared\_LayoutFinanceiro.cshtml" />
+    <Content Include="Views\Vendedor\Index.cshtml" />
+    <Content Include="Views\HistoricoVenda\Index.cshtml" />
+    <Content Include="Views\Financeiro\Index.cshtml" />
+    <Content Include="Views\Contrato\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -326,6 +347,10 @@
     <ProjectReference Include="..\KIS.System.Advanced.Services\KIS.System.Advanced.Services.csproj">
       <Project>{523CBFEC-1448-4EEC-ABB4-8F072109A2F8}</Project>
       <Name>KIS.System.Advanced.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KIS.System.Advanced.Support\KIS.System.Advanced.Support.csproj">
+      <Project>{e8a10879-5b76-4100-ae0c-8ce43a41e2b9}</Project>
+      <Name>KIS.System.Advanced.Support</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

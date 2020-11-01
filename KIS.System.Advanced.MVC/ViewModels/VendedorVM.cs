@@ -5,13 +5,9 @@ using System.Web;
 
 namespace KIS.System.Advanced.MVC.ViewModels
 {
-    public class TipoPgVM
+    public class VendedorVM
     {
         public int Id { get; set; }
-
         public string Nome { get; set; }
     }
 }
-
-
-

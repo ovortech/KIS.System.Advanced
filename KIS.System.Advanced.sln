@@ -18,14 +18,29 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.2 - Data", "4.2 - Data", "{7CCF45B6-D6F2-481A-9756-A3FBA7420896}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KIS.System.Advanced.Domain", "KIS.System.Advanced.Domain\KIS.System.Advanced.Domain.csproj", "{8964067B-C75A-4E23-8E21-B98BFACFB349}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E8A10879-5B76-4100-AE0C-8CE43A41E2B9} = {E8A10879-5B76-4100-AE0C-8CE43A41E2B9}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KIS.System.Advanced.Infra.Data", "KIS.System.Advanced.Infra.Data\KIS.System.Advanced.Infra.Data.csproj", "{B8BF5C6C-65A5-46E0-91EA-ECF0A9CE33A6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E8A10879-5B76-4100-AE0C-8CE43A41E2B9} = {E8A10879-5B76-4100-AE0C-8CE43A41E2B9}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KIS.System.Advanced.MVC", "KIS.System.Advanced.MVC\KIS.System.Advanced.MVC.csproj", "{FA57A156-8357-4B9C-A7F3-9B4047C8A29B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E8A10879-5B76-4100-AE0C-8CE43A41E2B9} = {E8A10879-5B76-4100-AE0C-8CE43A41E2B9}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KIS.System.Advanced.Business", "KIS.System.Advanced.Business\KIS.System.Advanced.Business.csproj", "{E1B53BF4-D5C2-4DFD-9D83-26BEF6202961}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E8A10879-5B76-4100-AE0C-8CE43A41E2B9} = {E8A10879-5B76-4100-AE0C-8CE43A41E2B9}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KIS.System.Advanced.Services", "KIS.System.Advanced.Services\KIS.System.Advanced.Services.csproj", "{523CBFEC-1448-4EEC-ABB4-8F072109A2F8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E8A10879-5B76-4100-AE0C-8CE43A41E2B9} = {E8A10879-5B76-4100-AE0C-8CE43A41E2B9}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "99 - ExtraFiles", "99 - ExtraFiles", "{1733DC4D-E8B3-46DB-A40F-3CE1C3F6000F}"
 EndProject
@@ -34,6 +49,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "98 - Teste", "98 - Teste", "{3DBCCC1C-BB66-4EB6-BD18-D2696B081933}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kist.System.Adavanced.Test", "Kist.System.Adavanced.Test\Kist.System.Adavanced.Test.csproj", "{A69B38DF-621B-46A7-B4C5-7B84ECD3C0D4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E8A10879-5B76-4100-AE0C-8CE43A41E2B9} = {E8A10879-5B76-4100-AE0C-8CE43A41E2B9}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KIS.System.Advanced.Support", "KIS.System.Advanced.Support\KIS.System.Advanced.Support.csproj", "{E8A10879-5B76-4100-AE0C-8CE43A41E2B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +85,10 @@ Global
 		{A69B38DF-621B-46A7-B4C5-7B84ECD3C0D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A69B38DF-621B-46A7-B4C5-7B84ECD3C0D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A69B38DF-621B-46A7-B4C5-7B84ECD3C0D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8A10879-5B76-4100-AE0C-8CE43A41E2B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8A10879-5B76-4100-AE0C-8CE43A41E2B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8A10879-5B76-4100-AE0C-8CE43A41E2B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8A10879-5B76-4100-AE0C-8CE43A41E2B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,6 +103,7 @@ Global
 		{523CBFEC-1448-4EEC-ABB4-8F072109A2F8} = {8C41D942-C108-44FF-981A-1D977A534139}
 		{D69F9E68-6869-4250-B9C8-CED654FBB836} = {1733DC4D-E8B3-46DB-A40F-3CE1C3F6000F}
 		{A69B38DF-621B-46A7-B4C5-7B84ECD3C0D4} = {3DBCCC1C-BB66-4EB6-BD18-D2696B081933}
+		{E8A10879-5B76-4100-AE0C-8CE43A41E2B9} = {CB13F539-EF09-45DF-BC37-34A244C0F462}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7993CA19-CD2E-40AA-AA45-92814DCDA1EC}

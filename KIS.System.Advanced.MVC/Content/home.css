@@ -1,55 +1,14 @@
-﻿.venda {
-    color: #FF4040;
-    background-color: #00c0ef;
+﻿body {
+    background: rgb(66,87,118);
+    background: linear-gradient(0deg, rgba(66,87,118,1) 0%, rgba(105,92,122,1) 30%, rgba(219,114,128,1) 65%, rgba(254,188,102,1) 100%) no-repeat center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
-.bkp-venda {
-    background-color: #129bb9;
-}
-.produto {
-    color: #BDB76B;
-    background-color: #f39c11;
-}
-.bkp-produto {
-    background-color: #bc821e;
-}
-.historico {
-    color: #436EEE;
-    background-color: #00a65a;
-}
-.bkp-historico {
-    background-color: #128951;
-}
-.financeiro {
-    color: #32CD32;
-    background-color: #dd4c39;
-}
-.bkp-financeiro {
-    background-color: #ac4a3a;
-}
-.usuarios {
-    color: #696969;
-    background-color: #9939dd;
-}
-.bkp-usuarios {
-    background-color: #7d3dac;
-}
-.color-white {
-    color: #ffffff;
-    font-weight: 300;
-}
-.box-shadow {
-    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 10px 0 rgba(0, 0, 0, 0.10);
-    -webkit-box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 10px 0 rgba(0, 0, 0, 0.10);
-    -moz-box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2), 0 1px 10px 0 rgba(0, 0, 0, 0.10);
-}
-.icon-style {
-    float: right;
-    margin-top: 25px;
-     color: rgb(59 68 60 / 30%);
-}
-.mb-5 {
-    margin-bottom: 2rem !important;
-}
-.rowc {
-    margin: 15% 0 0% 0;
+h3 {
+    color: white;
+    text-align: center;
+    margin-top: 40%;
+    margin-bottom: 50%;
 }

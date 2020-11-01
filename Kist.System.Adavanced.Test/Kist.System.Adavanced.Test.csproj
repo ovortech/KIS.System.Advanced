@@ -60,6 +60,7 @@
     <Reference Include="System.Data.Entity" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\RecuperarSenhaTest.cs" />
     <Compile Include="Data\ClienteTest.cs" />
     <Compile Include="Data\ComissaoTest.cs" />
     <Compile Include="Data\TipoDespesaTest.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Data\DespesaTest.cs" />
     <Compile Include="Data\TipoPgTest.cs" />
     <Compile Include="Data\UsuarioTest.cs" />
+    <Compile Include="Data\VendedorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +99,10 @@
     <ProjectReference Include="..\KIS.System.Advanced.Services\KIS.System.Advanced.Services.csproj">
       <Project>{523cbfec-1448-4eec-abb4-8f072109a2f8}</Project>
       <Name>KIS.System.Advanced.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KIS.System.Advanced.Support\KIS.System.Advanced.Support.csproj">
+      <Project>{e8a10879-5b76-4100-ae0c-8ce43a41e2b9}</Project>
+      <Name>KIS.System.Advanced.Support</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

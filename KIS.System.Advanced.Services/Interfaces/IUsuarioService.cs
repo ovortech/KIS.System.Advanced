@@ -10,5 +10,10 @@ namespace KIS.System.Advanced.Services.Interfaces
     public interface IUsuarioService
     {
         Usuario Logar(Usuario login);
+        List<Usuario> GetAll();
+        void Save(Usuario usuario);
+        Usuario Get(int idUsuario);
+        void Delete(int idUsuario);
+        void Update(Usuario usuario);
     }
 }

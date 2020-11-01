@@ -19,7 +19,7 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
                              on user.ID_FUNCAO_USUARIO equals funcao.ID_FUNCAO
                           join tipoAcesso in Db.TipoAcessos
                              on user.ID_TIPO_ACESSO_USUARIO equals tipoAcesso.ID_TIPO_ACESSO
-                          where user.LOGIN_USUARIO == usuario.LOGIN_USUARIO && user.SENHA_USUARIO == usuario.SENHA_USUARIO
+                          where user.LOGIN_USUARIO.ToLower() == usuario.LOGIN_USUARIO.ToLower() && user.SENHA_USUARIO == usuario.SENHA_USUARIO
                           select new
                           {
                               ID_USUARIO = user.ID_USUARIO,
@@ -52,5 +52,12 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
 
             return userLogado;
         }
+
+        public Usuario GetByUserName(string userName)
+        {
+            var usuario = Db.Usuarios.Where(x => x.LOGIN_USUARIO.ToLower() == userName.ToLower()).FirstOrDefault();
+            return usuario;
+        }
+
     }
 }

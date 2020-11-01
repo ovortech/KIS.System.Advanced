@@ -21,7 +21,7 @@ namespace KIS.System.Advanced.Services
 
         public void Update(Produto produto)
         {
-            produtoBS.Edit(produto);
+            produtoBS.Update(produto);
         }
 
         public Produto Get(int idProduto)

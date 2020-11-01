@@ -12,7 +12,7 @@ namespace KIS.System.Advanced.Business
 {
     public class UsuarioBS
     {
-        IUsuarioRepository dbUsuario;
+        readonly IUsuarioRepository dbUsuario;
         public UsuarioBS()
         {
             dbUsuario = new UsuarioRepository();
@@ -33,6 +33,73 @@ namespace KIS.System.Advanced.Business
             {
                 throw ex;
             }
+        }
+
+        public List<Usuario> GetAll()
+        {
+            try
+            {
+                return dbUsuario.GetAll().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar usuários: {ex.Message}.");
+            }
+        }
+
+        public void Save(Usuario usuario)
+        {
+            try
+            {
+                dbUsuario.Add(usuario);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao salvar usuário: {ex.Message}.");
+            }
+        }
+
+        public Usuario Get(int idUsuario)
+        {
+            try
+            {
+                return dbUsuario.GetById(idUsuario);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar usuário: {ex.Message}.");
+            }
+        }
+
+        public void Update(Usuario usuario)
+        {
+            try
+            {
+                dbUsuario.Update(usuario);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao atualizar os dados do usuário: {ex.Message}.");
+            }
+        }
+
+        public void Delete(int idUsuario)
+        {
+            try
+            {
+                var usuario = dbUsuario.GetById(idUsuario);
+                dbUsuario.Remove(usuario);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao excluir o usuário: {ex.Message}.");
+            }
+        }
+
+        internal Usuario GetByUserName(string userName)
+        {
+            var usuario = dbUsuario.GetByUserName(userName);
+            return usuario;
         }
     }
 }
