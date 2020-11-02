@@ -44,16 +44,30 @@
                         <option value="3">J Rubens</option>
                         <option value="3">Everton</option>
                     </select>
-                    <div class="form-group row">
+                    <div class="form-group mb-10 row">
+                      
+                        <div class="col-sm-1" style="max-width:13.2%; margin-right: -20px !important";>
+                            <label for="" class="mg-10 form-control-label">Cliente:</label>
+                        </div>
+                        <div class="">
+                            <select class="form-control selectpicker" id="select-country" data-live-search="true">
+                                <option data-tokens="consumidorfinal">Consumidor final</option>
+                                <option data-tokens="Adidas">Adidas</option>
+                                <option data-tokens="Nike">Nike</option>
+                                <option data-tokens="Mizuno">Mizuno</option>
+                            </select>
+                        </div>                 
+                    </div>
+                    <div class="form-group mb-10 row">
 
                         <div class="col-sm-1" style="max-width:13.2%" ;>
                             <label for="" class="mg-10 form-control-label">Produto:</label>
                         </div>
                         <div class="col-sm-6">
                             <select class="form-control selectpicker" id="select-country" data-live-search="true">
-                                <option data-tokens="china">China</option>
-                                <option data-tokens="malayasia">Malayasia</option>
-                                <option data-tokens="singapore">Singapore</option>
+                                <option data-tokens="china">Chave de carro</option>
+                                <option data-tokens="malayasia">Chaveiro</option>
+                                <option data-tokens="singapore">Cópia de chave tetra</option>
                             </select>
                         </div>
                         <div class="col-sm-3">
@@ -61,188 +75,187 @@
                         </div>
                     </div>
                 </div>
-                <br>
-                <div class="tbs">
-                    <table id="lista-produtos" class="col-12 tb-b tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%" style="padding-left:0px;">
-                        <thead>
-                            <tr class="">
-                                <th width="10%">Cod. Produto</th>
-                                <th width="20%">Nome do Produto</th>
-                                <th width="20%">Descrição</th>
-                                <th width="20%">Quantidade</th>
-                                <th width="10%">Valor Unitário</th>
-                                <th width="10%">Desconto Unitário</th>
-                                <th width="10%">Valor</th>
-                                <th>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="tb-style text-center" width="5%">101</td>
-                                <td class="tb-style" width="30%">Chave de carro</td>
-                                <td class="tb-style" width="30%">
-                                    <div class="form-group">
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
-                                    </div>
-                                </td>
-                                <td class="tb-style" width="10%">
-                                    <input class="qtdem" type="button" value="-" id="decrease" onclick="decreaseQty();" />
-                                    <input class="qtde" type="text" name="qty" id="qty" value="1" />
-                                    <input class="qtdema" type="button" value="+" id="increase" onclick="increaseQty();" />
-                                </td>
-                                <td class="tb-style" width="3%"><input class="wd-100 form-control" type="text" placeholder=""></td>
-                                <td class="tb-style" width="3%"><input class="wd-100 form-control" type="text" placeholder=""></td>
-                                <td class="tb-style" width="4%">110,00</td>
-                                <td class="tb-style" width="10%"><button type="button" class="btn-remove">Remover</button></td>
-                            </tr>
-                            <tr>
-                                <td class="tb-style text-center" width="10%">101</td>
-                                <td class="tb-style" width="25%">Chave de carro</td>
-                                <td class="tb-style" width="30%">
-                                    <div class="form-group">
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
-                                    </div>
-                                </td>
-                                <td class="tb-style" width="10%">
-                                    <input class="qtdem" type="button" value="-" id="decrease" onclick="decreaseQty();" />
-                                    <input class="qtde" type="text" name="qty" id="qty" value="1" />
-                                    <input class="qtdema" type="button" value="+" id="increase" onclick="increaseQty();" />
-                                </td>
-                                <td class="tb-style" width="5%"><input class="wd-100 form-control" type="text" placeholder=""></td>
-                                <td class="tb-style" width="5%"><input class="wd-100 form-control" type="text" placeholder=""></td>
-                                <td class="tb-style" width="5%">110,00</td>
-                                <td class="tb-style" width="10%"><button type="button" class="btn-remove">Remover</button></td>
-                            </tr>
+                    <br>
+                    <div class="tbs">
+                        <table id="lista-produtos" class="col-12 tb-b tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%" style="padding-left:0px;">
+                            <thead>
+                                <tr class="">
+                                    <th width="10%">Cod. Produto</th>
+                                    <th width="20%">Nome do Produto</th>
+                                    <th width="20%">Descrição</th>
+                                    <th width="20%">Quantidade</th>
+                                    <th width="10%">Valor Unitário</th>
+                                    <th width="10%">Desconto Unitário</th>
+                                    <th width="10%">Valor</th>
+                                    <th>
+                                    </th>
 
-                            <tr>
-                                <td class="tb-style text-center" width="10%">101</td>
-                                <td class="tb-style" width="25%">Chave de carro</td>
-                                <td class="tb-style" width="30%">
-                                    <div class="form-group">
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
-                                    </div>
-                                </td>
-                                <td class="tb-style" width="10%">
-                                    <input class="qtdem" type="button" value="-" id="decrease" onclick="decreaseQty();" />
-                                    <input class="qtde" type="text" name="qty" id="qty" value="1" />
-                                    <input class="qtdema" type="button" value="+" id="increase" onclick="increaseQty();" />
-                                </td>
-                                <td class="tb-style" width="5%"><input class="wd-100 form-control" type="text" placeholder=""></td>
-                                <td class="tb-style" width="5%"><input class="wd-100 form-control" type="text" placeholder=""></td>
-                                <td class="tb-style" width="5%">110,00</td>
-                                <td class="tb-style" width="10%"><button type="button" class="btn-remove">Remover</button></td>
-                            </tr>
-                    </table>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="tb-style text-center" width="5%">101</td>
+                                    <td class="tb-style" width="30%">Chave de carro</td>
+                                    <td class="tb-style" width="30%">
+                                        <div class="form-group">
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+                                        </div>
+                                    </td>
+                                    <td class="tb-style" width="10%">
+                                        <input class="qtdem" type="button" value="-" id="decrease" onclick="decreaseQty();" />
+                                        <input class="qtde" type="text" name="qty" id="qty" value="1" />
+                                        <input class="qtdema" type="button" value="+" id="increase" onclick="increaseQty();" />
+                                    </td>
+                                    <td class="tb-style" width="3%"><input class="wd-100 form-control" type="text" placeholder=""></td>
+                                    <td class="tb-style" width="3%"><input class="wd-100 form-control" type="text" placeholder=""></td>
+                                    <td class="tb-style" width="4%">110,00</td>
+                                    <td class="tb-style" width="10%"><button type="button" class="btn-remove">Remover</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="tb-style text-center" width="10%">101</td>
+                                    <td class="tb-style" width="25%">Chave de carro</td>
+                                    <td class="tb-style" width="30%">
+                                        <div class="form-group">
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+                                        </div>
+                                    </td>
+                                    <td class="tb-style" width="10%">
+                                        <input class="qtdem" type="button" value="-" id="decrease" onclick="decreaseQty();" />
+                                        <input class="qtde" type="text" name="qty" id="qty" value="1" />
+                                        <input class="qtdema" type="button" value="+" id="increase" onclick="increaseQty();" />
+                                    </td>
+                                    <td class="tb-style" width="5%"><input class="wd-100 form-control" type="text" placeholder=""></td>
+                                    <td class="tb-style" width="5%"><input class="wd-100 form-control" type="text" placeholder=""></td>
+                                    <td class="tb-style" width="5%">110,00</td>
+                                    <td class="tb-style" width="10%"><button type="button" class="btn-remove">Remover</button></td>
+                                </tr>
 
-                </div>
-                <div class="col-12">
-                    <label class="float-right mg-10 mr-10">
-                        TOTAL DA COMPRA
-                        <input class="mr-10 float-right wd-100 mb-10 form-control btn-disable" type="text" placeholder="">
-                </div>
-                <div class="col-12">
-                    <label class="float-right mg-10 mr-10">
-                        Total Desconto: <input class="float-right wd-100 mb-10 form-control btn-disable" type="text" placeholder="">
-                        <label class="float-right mg-10"> % </label>
-                        <input class="mr-10 float-right wd-150 mb-10 form-control btn-disable" type="text" placeholder="">
-                </div>
-                <div>
-                    <label class="float-left mg-10">
-                        </labelclass="float-right>
-                        <select class="form-control selectpicker" id="select-country" data-live-search="true">
-                            <option data-tokens="">Selecione a forma de pagamento</option>
-                            <option data-tokens="dinheiro">Dinheiro</option>
-                            <option data-tokens="cdebito">Cartão de Débito</option>
-                            <option data-tokens="ccredito">Cartão de Crédito</option>
-                            <option data-tokens="deposito">Deposito Bancário</option>
-                        </select>
-                </div>
+                                <tr>
+                                    <td class="tb-style text-center" width="10%">101</td>
+                                    <td class="tb-style" width="25%">Chave de carro</td>
+                                    <td class="tb-style" width="30%">
+                                        <div class="form-group">
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+                                        </div>
+                                    </td>
+                                    <td class="tb-style" width="10%">
+                                        <input class="qtdem" type="button" value="-" id="decrease" onclick="decreaseQty();" />
+                                        <input class="qtde" type="text" name="qty" id="qty" value="1" />
+                                        <input class="qtdema" type="button" value="+" id="increase" onclick="increaseQty();" />
+                                    </td>
+                                    <td class="tb-style" width="5%"><input class="wd-100 form-control" type="text" placeholder=""></td>
+                                    <td class="tb-style" width="5%"><input class="wd-100 form-control" type="text" placeholder=""></td>
+                                    <td class="tb-style" width="5%">110,00</td>
+                                    <td class="tb-style" width="10%"><button type="button" class="btn-remove">Remover</button></td>
+                                </tr>
+                        </table>
 
-                <div class="clearfix"></div>
-                <div class="col-sm-12">
-                    <button type="button" class="mb-10 mr-10 btn-add btn btn-block float-right ">Finalizar Venda</button>
-                    <button type="button" class="mb-10 mr-10 btn-remove float-right">Cancelar</button>
+                    </div>
+                    <div class="col-12">
+                        <label class="float-right mg-10 mr-10">
+                            <strong>TOTAL DA COMPRA</strong>&nbsp;
+                            <input class="mr-10 float-right wd-100 mb-10 form-control btn-disable" type="text" placeholder="">
+</div>
+                    <div class="col-12">
+                        <label class="float-right mg-10 mr-10">
+                            <strong>Total Desconto: &nbsp;</strong><input class="float-right wd-100 mb-10 form-control btn-disable" type="text" placeholder="">
+                            <label class="float-right mg-10"> <strong>%</strong>&nbsp;</label>
+                            <input class="mr-10 float-right wd-150 mb-10 form-control btn-disable" type="text" placeholder="">
+                    </div>
+                    <div>
+                        <label class="float-left mg-10">
+                            </labelclass="float-right>
+                            <select class="form-control selectpicker" id="select-country" data-live-search="true">
+                                <option data-tokens="">Selecione a forma de pagamento</option>
+                                <option data-tokens="dinheiro">Dinheiro</option>
+                                <option data-tokens="cdebito">Cartão de Débito</option>
+                                <option data-tokens="ccredito">Cartão de Crédito</option>
+                                <option data-tokens="deposito">Deposito Bancário</option>
+                            </select>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="col-sm-12">
+                        <button type="button" class="mb-10 mr-10 btn-add btn btn-block float-right" style=" margin-top: 10px; margin-right: 20px;">Finalizar Venda</button>
+                        <button type="button" class="mb-10 mr-10 btn-remove float-right" style=" margin-right: 30px; margin-top: 10px;">Cancelar</button>
+                    </div>
+                    <br>
                 </div>
-                <br>
             </div>
         </div>
     </div>
 </body>
 
-
-@section scripts {
-    <script type="text/javascript">
-        var count = 1;
-        $(document).ready(function () {
-            $('#items').live('pageinit', function (event) {
-                $('#additem').click(function () {
-                    //alert("add clicked");
-                    var request = $.ajax({
-                        url: "http://www.furnguy.com/app-pages/additem.php",
-                        type: "POST",
-                        data: { COUNTER: count },
-                        dataType: "html"
-                    });
-
-                    request.done(function (html) {
-                        //alert("here");
-                        if (html != '') {
-                            $('#salesitems').append(html).trigger('create');
-                        }
-                    });
-
-                    request.fail(function (jqXHR, textStatus) {
-                        alert("Request failed: " + textStatus);
-                    });
-                    count++;
+<script type="text/javascript">
+    var count = 1;
+    $(document).ready(function () {
+        $('#items').live('pageinit', function (event) {
+            $('#additem').click(function () {
+                //alert("add clicked");
+                var request = $.ajax({
+                    url: "http://www.furnguy.com/app-pages/additem.php",
+                    type: "POST",
+                    data: { COUNTER: count },
+                    dataType: "html"
                 });
+
+                request.done(function (html) {
+                    //alert("here");
+                    if (html != '') {
+                        $('#salesitems').append(html).trigger('create');
+                    }
+                });
+
+                request.fail(function (jqXHR, textStatus) {
+                    alert("Request failed: " + textStatus);
+                });
+                count++;
             });
         });
+    });
 
-        function deleteItem() {
-            $('table').click(function () {
-                $(this).parent().remove();
-            });
-        };
 
-        function increaseQty() {
-            var currentVal = parseInt($("#qty").val());
-            if (currentVal != NaN) {
-                $("#qty").val(currentVal + 1);
-            }
-        };
+    function deleteItem() {
+        $('table').click(function () {
+            $(this).parent().remove();
+        });
+    };
+    function increaseQty() {
+        var currentVal = parseInt($("#qty").val());
+        if (currentVal != NaN) {
+            $("#qty").val(currentVal + 1);
+        }
+    };
+    function decreaseQty() {
+        var currentVal = parseInt($("#qty").val());
+        if (currentVal != NaN) {
+            $("#qty").val(currentVal - 1);
+        }
+    };
 
-        function decreaseQty() {
-            var currentVal = parseInt($("#qty").val());
-            if (currentVal != NaN) {
-                $("#qty").val(currentVal - 1);
-            }
-        };
 
-        $(function () {
-            $('.selectpicker').selectpicker();
+    $(function () {
+        $('.selectpicker').selectpicker();
+    });
+
+
+    $(document).ready(function () {
+        $('#dtVerticalScrollExample').DataTable({
+            "scrollY": "200px",
+            "scrollCollapse": true,
+        });
+        $('.dataTables_length').addClass('bs-select');
+    });
+
+    $(document).ready(function () {
+        $(document).on('keyup', '#userDropdown .bs-searchbox input', function (e) {
+            alert($(this).val());
         });
 
-        $(document).ready(function () {
-            $('#dtVerticalScrollExample').DataTable({
-                "scrollY": "200px",
-                "scrollCollapse": true,
-            });
-            $('.dataTables_length').addClass('bs-select');
+        $(document).on('keyup', '#cityDropdown .bs-searchbox input', function (e) {
+            alert($(this).val());
         });
-
-        $(document).ready(function () {
-            $(document).on('keyup', '#userDropdown .bs-searchbox input', function (e) {
-                alert($(this).val());
-            });
-
-            $(document).on('keyup', '#cityDropdown .bs-searchbox input', function (e) {
-                alert($(this).val());
-            });
-        });
-    </script>
-}
-
+    });
+</script>
 
 
