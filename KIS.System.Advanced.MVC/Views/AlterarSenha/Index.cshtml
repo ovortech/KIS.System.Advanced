@@ -30,10 +30,10 @@
                 <div class="" style="margin-top: 75px;margin-bottom: 10px;">
                     <h4 class="text-center">Alterar Senha</h4>
                     <p class="text-center">
-                        Esta é a área em que você altera a senha para acessar o seu perfil <br/>
+                        Esta é a área em que você altera a senha para acessar o seu perfil <br />
                         Obs: Mínimo de 6 caractéres
                     </p>
-                    
+
                 </div>
                 <div class="d-flex justify-content-center">
 
@@ -63,10 +63,12 @@
     </div>
 </body>
 </html>
+@section scripts {
+    <script type="text/javascript">
+        $('#confirmar').click(function () {
+            let data = { token: $("#txtToken").val(), senha1: $("#pws1").val(), senha2: $("#pws2").val() };
+            callActionGet("AlterarSenha", "NovaSenha", data);
+        });
+    </script>
+}
 
-<script>
-    $('#confirmar').click(function () {
-        let data = { token: $("#txtToken").val(), senha1: $("#pws1").val(), senha2: $("#pws2").val() };
-        callActionGet("AlterarSenha", "NovaSenha", data);
-    });
-</script>

@@ -132,14 +132,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\acessonegado.png" />
+    <Content Include="Content\bkg.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\component.css" />
+    <Content Include="Content\demo.css" />
+    <Content Include="Content\home.css" />
+    <Content Include="Content\layout.css" />
     <Content Include="Content\login.css" />
+    <Content Include="Content\produtos.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\usuarios.css" />
+    <Content Include="Content\vendas.css" />
     <Content Include="Content\vortech_logo.png" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootbox.locales.min.js" />
@@ -148,6 +157,8 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\classie.js" />
+    <Content Include="Scripts\dummydata.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -173,9 +184,12 @@
     <Content Include="Scripts\jquery-3.5.1.slim.js" />
     <Content Include="Scripts\jquery-3.5.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.inputmask.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\modernizr-custom.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -317,12 +331,10 @@
     <Content Include="Views\AlterarSenha\Index.cshtml" />
     <Compile Include="ViewModels\VendasVM.dependence.cs" />
     <Content Include="Views\Despesa\Index.cshtml" />
-    <Content Include="Views\Shared\_Layoutlogin.cshtml" />
-    <Content Include="Views\Shared\_LayoutFinanceiro.cshtml" />
     <Content Include="Views\Vendedor\Index.cshtml" />
     <Content Include="Views\HistoricoVenda\Index.cshtml" />
-    <Content Include="Views\Financeiro\Index.cshtml" />
     <Content Include="Views\Contrato\Index.cshtml" />
+    <Content Include="Views\Shared\_Layoutlogin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -332,6 +344,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Fonts\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

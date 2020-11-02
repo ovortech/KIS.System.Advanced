@@ -56,15 +56,15 @@
                         </thead>
                         <tbody>
                             @foreach (var Vendedor in Model)
-                            {                                
-                            <tr>
-                                <td class="tb-style" width="80%"><input type="hidden" value="@Vendedor.Id" /> @Vendedor.Nome</td>
-                                <td class="tb-style"></td>
-                                <td class="tb-style"></td>
-                                <td class="tb-style"></td>
-                                <td><a data-toggle="modal" data-target="#novo-Vendedor" data-direction="bottom" onclick="javascript: editarVendedor(@Vendedor.Id)" class="btn btn-primary">Editar</a></td>
-                                <td><a onclick="javascript: excluirVendedor(@Vendedor.Id)" class="btn btn-danger">Excluir</a></td>
-                            </tr>
+                            {
+                                <tr>
+                                    <td class="tb-style" width="80%"><input type="hidden" value="@Vendedor.Id" /> @Vendedor.Nome</td>
+                                    <td class="tb-style"></td>
+                                    <td class="tb-style"></td>
+                                    <td class="tb-style"></td>
+                                    <td><a data-toggle="modal" data-target="#novo-Vendedor" data-direction="bottom" onclick="javascript: editarVendedor(@Vendedor.Id)" class="btn btn-primary">Editar</a></td>
+                                    <td><a onclick="javascript: excluirVendedor(@Vendedor.Id)" class="btn btn-danger">Excluir</a></td>
+                                </tr>
                             }
                     </table>
                     <div class="clearfix"></div>
@@ -83,12 +83,12 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="form-Vendedor" autocomplete="off" novalidate="novalidate">                        
+                    <form method="POST" id="form-Vendedor" autocomplete="off" novalidate="novalidate">
                         <div class="form-group">
                             <label class="control-label" for="Nome">Nome Vendedor</label>
                             <input type="text" autocomplete="off" class="form-control" id="Nome" name="Nome" placeholder="Digite o nome do Vendedor">
                             <input type="hidden" id="Id">
-                        </div>                       
+                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default float-left" data-dismiss="modal" onclick="javascript: resetaModal()">Fechar</button>
                             <button type="button" id="btnSalvarVendedor" class="btn btn-primary btn-primary" data-dismiss="modal" aria-label="Close">Salvar</button>
@@ -99,52 +99,53 @@
         </div>
     </div>
 </body>
-<script>
 
-    $("#btnSalvarVendedor").click(() => {
-        let Vendedor = {
-            Id: $("#Id").val(),
-            Nome: $("#Nome").val(),
-        };
+@section scripts {
+    <script type="text/javascript">
+        $("#btnSalvarVendedor").click(() => {
+            let Vendedor = {
+                Id: $("#Id").val(),
+                Nome: $("#Nome").val(),
+            };
 
-        callActionPost("Vendedor", "Save", Vendedor, 'Vendedor/Index');
-    });
-
-    $("#inputPesquisa").on("keyup", function () {
-        let value = $(this).val().toLowerCase();
-        $("#lista-Vendedores tr").filter(function () {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            callActionPost("Vendedor", "Save", Vendedor, 'Vendedor/Index');
         });
-    });
 
-    function editarVendedor(Id) {
-        let data = { Id: `${Id}` };
-        let Vendedor = callActionGet("Vendedor", "Get", data);
-        
-        $("#Id").val(Vendedor.Id);
-        $("#Nome").val(Vendedor.Nome);
-
-        ajustaTituloModal("Editar Vendedor");
-    }
-
-    function ajustaTituloModal(texto) {
-        $(".modal-title").text(texto)
-    }
-
-    function excluirVendedor(Id) {
-        bootbox.confirm("Confirma a exclusão do Vendedor?", function (confirmou) {
-            if (confirmou) {
-                let data = { Id: Id };
-                callActionPost("Vendedor", "Delete", data, 'Vendedor/Index');
-            }
+        $("#inputPesquisa").on("keyup", function () {
+            let value = $(this).val().toLowerCase();
+            $("#lista-Vendedores tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
         });
-    }
 
-    function resetaModal() {
-        $("#Id").val('0');
-        $("#Nome").val('');
-    }
+        function editarVendedor(Id) {
+            let data = { Id: `${Id}` };
+            let Vendedor = callActionGet("Vendedor", "Get", data);
 
-</script>
+            $("#Id").val(Vendedor.Id);
+            $("#Nome").val(Vendedor.Nome);
+
+            ajustaTituloModal("Editar Vendedor");
+        }
+
+        function ajustaTituloModal(texto) {
+            $(".modal-title").text(texto)
+        }
+
+        function excluirVendedor(Id) {
+            bootbox.confirm("Confirma a exclusão do Vendedor?", function (confirmou) {
+                if (confirmou) {
+                    let data = { Id: Id };
+                    callActionPost("Vendedor", "Delete", data, 'Vendedor/Index');
+                }
+            });
+        }
+
+        function resetaModal() {
+            $("#Id").val('0');
+            $("#Nome").val('');
+        }
+    </script>
+}
 
 

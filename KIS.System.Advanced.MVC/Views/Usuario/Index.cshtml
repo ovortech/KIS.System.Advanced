@@ -60,8 +60,8 @@
                             {
                                 <tr>
                                     <td class="tb-style" width="10%">@usuario.Login<input type="hidden" value="@usuario.IdUsuario" /></td>
-                                    <td class="tb-style"  width="40%">@usuario.Nome</td>
-                                    <td class="tb-style"  width="40%">@usuario.Email</td>
+                                    <td class="tb-style" width="40%">@usuario.Nome</td>
+                                    <td class="tb-style" width="40%">@usuario.Email</td>
                                     <td class="tb-style">@usuario.Funcao</td>
                                     <td></td>
                                     <td><a data-toggle="modal" data-target="#novo-usuario" data-direction="bottom" onclick="javascript: editarUsuario(@usuario.IdUsuario)" class="btn btn-primary">Editar</a></td>
@@ -103,12 +103,12 @@
                                 </div>
                             </div>
                             @*<div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label" for="senha">Senha</label>
-                                    <input type="password" autocomplete="off" class="form-control" id="senha" name="senha" placeholder="Digite a senha" onkeyup="checkPasswordStrong(this)">
-                                    <span class="help-password" style="color: orange;">Senha Fraca.</span>
-                                </div>
-                            </div>*@
+                                    <div class="form-group">
+                                        <label class="control-label" for="senha">Senha</label>
+                                        <input type="password" autocomplete="off" class="form-control" id="senha" name="senha" placeholder="Digite a senha" onkeyup="checkPasswordStrong(this)">
+                                        <span class="help-password" style="color: orange;">Senha Fraca.</span>
+                                    </div>
+                                </div>*@
                         </div>
                         <div class="form-group">
                             <label for="funcaoUsuario">Função</label>
@@ -135,62 +135,64 @@
         </div>
     </div>
 </body>
-<script>
-    $("#btnSalvarUsuario").click(() => {
-        let usuario = {
-            IdUsuario: $("#idUsuario").val(),
-            login: $("#login").val(),
-            Nome: $("#nomeUsuario").val(),
-            Email: $("#email").val(),
-            Funcao: $("#funcaoUsuario").val(),
-            TipoAcessos: $("#tipoAcesso").val()
-        };
-        callActionPost("Usuario", "Save", usuario, 'Usuario/Index');
-    });
-
-    $("#inputPesquisa").on("keyup", function () {
-        let value = $(this).val().toLowerCase();
-        $("#lista-usuarios tr").filter(function () {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+@section scripts {
+    <script type="text/javascript"> 
+        $("#btnSalvarUsuario").click(() => {
+            let usuario = {
+                IdUsuario: $("#idUsuario").val(),
+                login: $("#login").val(),
+                Nome: $("#nomeUsuario").val(),
+                Email: $("#email").val(),
+                Funcao: $("#funcaoUsuario").val(),
+                TipoAcessos: $("#tipoAcesso").val()
+            };
+            callActionPost("Usuario", "Save", usuario, 'Usuario/Index');
         });
-    });
 
-    function editarUsuario(idUsuario) {
-        let data = { idUsuario: `${idUsuario}` };
-        let usuario = callActionGet("Usuario", "Get", data);
-        debugger;
-        $("#idUsuario").val(usuario.IdUsuario);
-        $("#login").val(usuario.Login);
-        //$("#senha").val(usuario.Senha);
-        $("#nomeUsuario").val(usuario.Nome);
-        $("#email").val(usuario.Email);
-        $("#funcaoUsuario").val(usuario.Funcao);
-        $("#tipoAcesso").val(usuario.TipoAcessos);
-
-        ajustaTituloModal("Editar Usuario");
-    }
-
-    function ajustaTituloModal(texto) {
-        $(".modal-title").text(texto)
-    }
-
-    function excluirUsuario(idUsuario) {
-        bootbox.confirm("Confirma a exclusão do usuario?", function (confirmou) {
-            if (confirmou) {
-                let data = { idUsuario: idUsuario };
-                callActionPost("Usuario", "Delete", data, 'Usuario/Index');
-            }
+        $("#inputPesquisa").on("keyup", function () {
+            let value = $(this).val().toLowerCase();
+            $("#lista-usuarios tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
         });
-    }
 
-    function resetaModal() {
-        $("#idUsuario").val('0');
-        $("#login").val('');
-        //$("#senha").val('');
-        $("#nomeUsuario").val('');
-        $("#email").val('')
-        $("#funcaoUsuario").val('1');
-        $("#tipoAcesso").val('1');
-    }
-</script>
+        function editarUsuario(idUsuario) {
+            let data = { idUsuario: `${idUsuario}` };
+            let usuario = callActionGet("Usuario", "Get", data);
+            debugger;
+            $("#idUsuario").val(usuario.IdUsuario);
+            $("#login").val(usuario.Login);
+            //$("#senha").val(usuario.Senha);
+            $("#nomeUsuario").val(usuario.Nome);
+            $("#email").val(usuario.Email);
+            $("#funcaoUsuario").val(usuario.Funcao);
+            $("#tipoAcesso").val(usuario.TipoAcessos);
+
+            ajustaTituloModal("Editar Usuario");
+        }
+
+        function ajustaTituloModal(texto) {
+            $(".modal-title").text(texto)
+        }
+
+        function excluirUsuario(idUsuario) {
+            bootbox.confirm("Confirma a exclusão do usuario?", function (confirmou) {
+                if (confirmou) {
+                    let data = { idUsuario: idUsuario };
+                    callActionPost("Usuario", "Delete", data, 'Usuario/Index');
+                }
+            });
+        }
+
+        function resetaModal() {
+            $("#idUsuario").val('0');
+            $("#login").val('');
+            //$("#senha").val('');
+            $("#nomeUsuario").val('');
+            $("#email").val('')
+            $("#funcaoUsuario").val('1');
+            $("#tipoAcesso").val('1');
+        }
+    </script>
+}
 

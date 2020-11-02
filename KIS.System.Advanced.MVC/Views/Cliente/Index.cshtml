@@ -53,7 +53,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                      </table>
+                    </table>
                     <div class="clearfix"></div>
                 </div>
             </div>
@@ -86,9 +86,12 @@
         </div>
     </div>
 </body>
-<script>
-
-  
-</script>
+@section scripts {
+    <script type="text/javascript">
+        function ajustaTituloModal(texto) {
+            $(".modal-title").text(texto)
+        }
+    </script>
+}
 
 

@@ -12,12 +12,12 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
     public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : class
     {
         public ProjetoDataContext Db { get; private set; }
-        //public ProjetoDataContext Db = new ProjetoDataContext();
-
+        
         public RepositoryBase()
         {
             Db = new ProjetoDataContext();
         }
+
         public void Add(TEntity obj)
         {
             Db.Set<TEntity>().Add(obj);
