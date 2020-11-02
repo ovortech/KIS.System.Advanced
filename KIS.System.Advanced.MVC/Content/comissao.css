@@ -47,11 +47,12 @@
     border: 1px solid #ced4da !important;
 }
 
-.btn-light{
+.btn-light {
     color: #212529;
     background-color: #fff !important;
     border: 1px solid #ced4da !important;
 }
+
 .tb-style {
     color: #767676;
     font-family: 'Open Sans',sans-serif;
@@ -76,7 +77,7 @@
     margin-bottom: 0rem;
 }
 
-.form-control{
+.form-control {
     display: block;
     height: calc(1.5em + .75rem + 2px);
     padding: .375rem .75rem;
@@ -90,63 +91,37 @@
     border-radius: .25rem;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
-.wd-150{
+
+.wd-150 {
     width: 150px;
 }
-.wd-100{
+
+.wd-100 {
     width: 100px !important;
 }
+
 .wd-60 {
     width: 60% !important;
 }
+
 .mg-10 {
     margin: 5px 10px 0px 0px;
 }
-.mb-10{
+
+.mb-10 {
     margin-bottom: 10px;
 }
-.mr-10{
+
+.mr-10 {
     margin-right: 10px;
 }
-.quebra-l{
+
+.quebra-l {
     word-break: break-all;
 }
 
 
-.qtde {
-    float: left;
-    display: inline;
-    width: 40px;
-    height: 38px;
-    border: 1px solid #ced4da;
-    text-align: center;
-    color: #767676;
-    border-radius: .25rem;
-}
-.qtdem {
-    float: left;
-    display: inline;
-    color: #fff;
-    background: #dc3545;
-    width: 25px;
-    height: 38px;
-    border-color: #dc3545;
-    line-height: 1.5;
-    border-radius: .25rem;
-    border: 1px solid transparent;
-}
-.qtdema {
-    float: left;
-    display: inline;
-    background: #90EE90;
-    border-color: #90EE90;
-    color: #fff;
-    width: 25px;
-    height: 38px;
-    line-height: 1.5;
-    border-radius: .25rem;
-    border: 1px solid transparent;
-}
+
 .btn-remove {
     width: 80px;
     height: 38px;
@@ -169,8 +144,9 @@
     margin-right: 30px;
     margin-top: 10px;
 }
+
 .btn-add {
-    width: 155px;
+    width: 270px;
     height: 38px;
     background-color: #007bff;
     border-color: #dc3545;
@@ -191,6 +167,7 @@
     margin-top: 10px;
     margin-right: 20px;
 }
+
 .tb-b {
     border-radius: .25rem;
 }
@@ -202,6 +179,4 @@
     background-color: rgba(0,0,0,.05);
     text-align: center;
 }
-.btn-disable2{
-    
-}
+
