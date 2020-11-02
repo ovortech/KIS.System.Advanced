@@ -14,6 +14,8 @@ namespace KIS.System.Advanced.Domain.Entities
         public string NOME_PRODUTO { get; set; }
         public Boolean SERVICO_PRODUTO { get; set; }
         public double VALOR_PRODUTO { get; set; }
-        
+        public bool ATIVO { get; set; }
+
+
     }
 }

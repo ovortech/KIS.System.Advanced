@@ -10,6 +10,7 @@ namespace KIS.System.Advanced.Domain.Entities
     {
         public int ID_TIPO_ACESSO { get; set; }
         public string DESC_TIPO_ACESSO { get; set; }
+        public bool ATIVO { get; set; }
 
     }
 }

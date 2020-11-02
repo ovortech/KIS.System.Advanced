@@ -14,5 +14,7 @@ namespace KIS.System.Advanced.Domain.Entities
         public double VALOR_DESPESA { get; set; }
         public DateTime DATA_DESPESA { get; set; }
         public int ID_LOGIN_DESPESA { get; set; }
+        public bool ATIVO { get; set; }
+
     }
 }

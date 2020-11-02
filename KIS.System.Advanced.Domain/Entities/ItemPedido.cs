@@ -17,5 +17,7 @@ namespace KIS.System.Advanced.Domain.Entities
         public int QTD_PEDIDO { get; set; }
         public float VALOR_UN_PEDIDO { get; set; }
         public float DESCONTO_PEDIDO { get; set; }
+        public bool ATIVO { get; set; }
+
     }
 }

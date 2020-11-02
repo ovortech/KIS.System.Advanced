@@ -13,5 +13,7 @@ namespace KIS.System.Advanced.Domain.Entities
         //public Pedido Pedido { get; set; }
         public int ID_TIPO_PG { get; set; }
         public double VALOR_FORM_PG { get; set; }
+        public bool ATIVO { get; set; }
+
     }
 }
