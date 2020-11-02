@@ -1,5 +1,5 @@
 ﻿body {
-    background: linear-gradient(0deg, rgba(66,87,118,1) 0%, rgba(105,92,122,1) 30%, rgba(219,114,128,1) 65%, rgba(254,188,102,1) 100%) no-repeat center fixed;
+    background: #2a2b30;
     overflow: hidden;
     overflow-y: scroll;
 }
@@ -180,3 +180,10 @@
     text-align: center;
 }
 
+input[type=checkbox], input[type=radio] {
+    box-sizing: border-box;
+    padding: 0;
+    min-width: 20px;
+    min-height: 20px;
+    margin-right: 5px;
+}
