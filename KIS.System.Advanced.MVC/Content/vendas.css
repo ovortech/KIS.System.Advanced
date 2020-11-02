@@ -14,6 +14,18 @@
     }
 }
 
+@media (min-width: 1366px) {
+    .container {
+        max-width: 1260px;
+    }
+}
+
+@media (min-width: 1900px) {
+    .container {
+        max-width: 1700px;
+    }
+}
+
 
 .bkp-cont {
     background-color: white;
@@ -21,8 +33,15 @@
     margin-bottom: 15px;
     box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.82);
     border-radius: 15px;
+    height: 850px;
 }
 
+.tbs {
+    border: 1px solid #ced4da;
+    height: 400px;
+    overflow-y: scroll;
+    margin-bottom: 15px;
+}
 
 .border-btn {
     border: 1px solid #ced4da !important;
@@ -169,7 +188,6 @@
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 .tb-b {
-    border: 1px solid #ced4da;
     border-radius: .25rem;
 }
 
