@@ -41,18 +41,44 @@ namespace KIS.System.Advanced.MVC.Controllers
             return Json(produtoVM, JsonRequestBehavior.AllowGet);
         }
 
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        public PartialViewResult AddOrEdit(int id)
+        {
+            if (id == 0)
+                return PartialView(new ProdutoVM());
+            else
+            {
+                var produto = _produtoService.Get(id);
+                var produtoVM = AutoMapper.Mapper.Map<ProdutoVM>(produto);
+                return PartialView(produtoVM);
+            }
+        }
+
+        public PartialViewResult GetForm(ProdutoVM produtoVM)
+        {
+            return PartialView("AddOrEdit", produtoVM);
+        }
+
         [HttpPost]
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
-        public ActionResult Save(ProdutoVM produtoVM)
+        public JsonResult Save(ProdutoVM produtoVM)
         {
             try
             {
-                var produto = AutoMapper.Mapper.Map<Produto>(produtoVM);
-                if (produto.ID_PRODUTO > 0)
-                    _produtoService.Update(produto);
+                if (ModelState.IsValid)
+                {
+
+                    var produto = AutoMapper.Mapper.Map<Produto>(produtoVM);
+                    if (produto.ID_PRODUTO > 0)
+                        _produtoService.Update(produto);
+                    else
+                        _produtoService.Save(produto);
+                    return Json(new { isValid = true });
+                }
                 else
-                    _produtoService.Save(produto);
-                return RedirectToAction("Index");
+                {
+                    return Json(new { isValid = false, model = produtoVM });
+                }
             }
             catch (Exception)
             {

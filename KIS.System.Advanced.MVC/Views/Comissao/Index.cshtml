@@ -80,7 +80,7 @@
                         <option value="2">Marcio</option>
                         <option value="3">J Rubens</option>
                         <option value="3">Everton</option>
-                    </select>                  
+                    </select>
                 </div>
 
 
@@ -99,7 +99,7 @@
                                 <th width="10%">Valor Custo Unitário</th>
                                 <th width="10%">Lucro</th>
                                 <th width="10%">Comissão</th>
-                                <th width="10%">Pago</th>                               
+                                <th width="10%">Pago</th>
                                 </th>
 
                             </tr>
@@ -116,18 +116,19 @@
                                 <td class="tb-style text-center" width="4%">110,00</td>
                                 <td class="tb-style text-center" width="4%"><input class="wd-100 form-control text-center" type="text" placeholder="10%"></td>
                                 <td class="tb-style text-center" width="10%">
-                                    <input type="checkbox" id="myCheck">              
+                                    <input type="checkbox" id="myCheck">
                                 </td>
-                            </tr>                           
+                            </tr>
                     </table>
 
                 </div>
                 <div class="col-12">
                     <label class="float-right mg-10 mr-10">
                         <strong>
-                            Quantidade de vendas selecionadas: &nbsp;</strong>
-    <input class="mr-10 float-right wd-150 mb-10 form-control btn-disable" type="text" placeholder="">
-</div>                 
+                            Quantidade de vendas selecionadas: &nbsp;
+                        </strong>
+                        <input class="mr-10 float-right wd-150 mb-10 form-control btn-disable" type="text" placeholder="">
+                </div>
                 <div class="clearfix"></div>
                 <div class="col-12">
                     <label class="float-right mg-10 mr-10"><strong>Total de comissão a pagar: &nbsp;</strong> <input class="mr-10 float-right wd-150 text-center mb-10 form-control btn-disable" type="text" placeholder=""></label>
@@ -142,91 +143,87 @@
             </div>
         </div>
     </div>
-    </div>
 </body>
+@section scripts {
+    <script type="text/javascript">
+        var count = 1;
+        $(document).ready(function () {
+            $('#items').live('pageinit', function (event) {
+                $('#additem').click(function () {
+                    //alert("add clicked");
+                    var request = $.ajax({
+                        url: "http://www.furnguy.com/app-pages/additem.php",
+                        type: "POST",
+                        data: { COUNTER: count },
+                        dataType: "html"
+                    });
 
+                    request.done(function (html) {
+                        //alert("here");
+                        if (html != '') {
+                            $('#salesitems').append(html).trigger('create');
+                        }
+                    });
 
-
-<script type="text/javascript">
-    var count = 1;
-    $(document).ready(function () {
-        $('#items').live('pageinit', function (event) {
-            $('#additem').click(function () {
-                //alert("add clicked");
-                var request = $.ajax({
-                    url: "http://www.furnguy.com/app-pages/additem.php",
-                    type: "POST",
-                    data: { COUNTER: count },
-                    dataType: "html"
+                    request.fail(function (jqXHR, textStatus) {
+                        alert("Request failed: " + textStatus);
+                    });
+                    count++;
                 });
-
-                request.done(function (html) {
-                    //alert("here");
-                    if (html != '') {
-                        $('#salesitems').append(html).trigger('create');
-                    }
-                });
-
-                request.fail(function (jqXHR, textStatus) {
-                    alert("Request failed: " + textStatus);
-                });
-                count++;
             });
         });
-    });
 
 
-    function deleteItem() {
-        $('table').click(function () {
-            $(this).parent().remove();
+        function deleteItem() {
+            $('table').click(function () {
+                $(this).parent().remove();
+            });
+        };
+        function increaseQty() {
+            var currentVal = parseInt($("#qty").val());
+            if (currentVal != NaN) {
+                $("#qty").val(currentVal + 1);
+            }
+        };
+        function decreaseQty() {
+            var currentVal = parseInt($("#qty").val());
+            if (currentVal != NaN) {
+                $("#qty").val(currentVal - 1);
+            }
+        };
+
+
+        $(function () {
+            $('.selectpicker').selectpicker();
         });
-    };
-    function increaseQty() {
-        var currentVal = parseInt($("#qty").val());
-        if (currentVal != NaN) {
-            $("#qty").val(currentVal + 1);
+
+
+        $(document).ready(function () {
+            $('#dtVerticalScrollExample').DataTable({
+                "scrollY": "200px",
+                "scrollCollapse": true,
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+
+        $(document).ready(function () {
+            $(document).on('keyup', '#userDropdown .bs-searchbox input', function (e) {
+                alert($(this).val());
+            });
+
+            $(document).on('keyup', '#cityDropdown .bs-searchbox input', function (e) {
+                alert($(this).val());
+            });
+        });
+
+
+        function check() {
+            document.getElementById("myCheck").checked = true;
         }
-    };
-    function decreaseQty() {
-        var currentVal = parseInt($("#qty").val());
-        if (currentVal != NaN) {
-            $("#qty").val(currentVal - 1);
+
+        function uncheck() {
+            document.getElementById("myCheck").checked = false;
         }
-    };
 
-
-    $(function () {
-        $('.selectpicker').selectpicker();
-    });
-
-
-    $(document).ready(function () {
-        $('#dtVerticalScrollExample').DataTable({
-            "scrollY": "200px",
-            "scrollCollapse": true,
-        });
-        $('.dataTables_length').addClass('bs-select');
-    });
-
-    $(document).ready(function () {
-        $(document).on('keyup', '#userDropdown .bs-searchbox input', function (e) {
-            alert($(this).val());
-        });
-
-        $(document).on('keyup', '#cityDropdown .bs-searchbox input', function (e) {
-            alert($(this).val());
-        });
-    });
-
-
-    function check() {
-        document.getElementById("myCheck").checked = true;
-    }
-
-    function uncheck() {
-        document.getElementById("myCheck").checked = false;
-    }
-
-</script>
-
-
+    </script>
+}

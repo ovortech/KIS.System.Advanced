@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Entities\Contrato.cs" />
+    <Compile Include="Entities\ExclusaoLogica.cs" />
     <Compile Include="Entities\Pedido.cs" />
     <Compile Include="Entities\TipoPg.cs" />
     <Compile Include="Entities\FormaPg.cs" />

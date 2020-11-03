@@ -48,5 +48,13 @@ namespace Kist.System.Adavanced.Test.Data
             var aa = _pedidoRepository.GetAll().ToList();
             Assert.IsTrue(aa != null);
         }
+
+
+        [TestMethod]
+        public void ExclusaoLogica()
+        {
+            _pedidoRepository.RemoveLogic(2);
+            // Assert.IsTrue(aa != null);
+        }
     }
 }

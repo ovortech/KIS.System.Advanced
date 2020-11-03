@@ -290,6 +290,7 @@
     <Compile Include="Support\AutoMapper\AutoMapperHelper.cs" />
     <Compile Include="Support\CustomControllerBase.cs" />
     <Compile Include="Support\CustomExtensions.cs" />
+    <Compile Include="Support\Helper.cs" />
     <Compile Include="Support\Security\CustomAuthorizeAttribute.cs" />
     <Compile Include="Support\Security\CustomPrincipal.cs" />
     <Compile Include="Support\Security\SessionPersister.cs" />
@@ -322,7 +323,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Produto\Index.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
-    <Content Include="Views\Produto\Edit.cshtml" />
+    <Content Include="Views\Produto\AddOrEdit.cshtml" />
     <Content Include="Views\AccessDenied\Index.cshtml" />
     <Content Include="Views\Vendas\Index.cshtml" />
     <Content Include="Views\Comissao\Index.cshtml" />
@@ -335,6 +336,7 @@
     <Content Include="Views\HistoricoVenda\Index.cshtml" />
     <Content Include="Views\Contrato\Index.cshtml" />
     <Content Include="Views\Shared\_Layoutlogin.cshtml" />
+    <Content Include="Views\Produto\_Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -344,7 +346,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Fonts\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

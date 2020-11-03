@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace KIS.System.Advanced.Domain.Entities
 {
-    public class Funcao
+    public class Funcao : ExclusaoLogica
     {
         [Key]
         public int ID_FUNCAO { get; set; }
         public string DESC_FUNCAO { get; set; }
-        public bool ATIVO { get; set; }
 
     }
 }

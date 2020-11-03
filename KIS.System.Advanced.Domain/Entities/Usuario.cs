@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace KIS.System.Advanced.Domain.Entities
 {
-    public class Usuario
+    public class Usuario : ExclusaoLogica
     {
         public Usuario()
         {
@@ -27,7 +27,6 @@ namespace KIS.System.Advanced.Domain.Entities
         public int ID_FUNCAO_USUARIO { get; set; }
         [NotMapped]
         public virtual Funcao Funcao { get; set; }
-        public bool ATIVO { get; set; }
 
     }
 }
