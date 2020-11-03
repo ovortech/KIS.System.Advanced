@@ -1,0 +1,97 @@
+﻿@model KIS.System.Advanced.MVC.ViewModels.ProdutoVM
+
+<form method="POST" id="form-produto" autocomplete="off">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label class="control-label" for="">Código</label>
+                <input type="hidden" id="idProduto" value="@Model.IdProduto">
+                <input type="text" autocomplete="off" value="@Model.CodProduto" class="form-control" id="codProduto" name="" placeholder="" novalidate="novalidate">
+                @Html.ValidationMessageFor(model => model.CodProduto)
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="nomeProduto">Nome Produto</label>
+        <input type="text" value="@Model.NomeProduto" autocomplete="off" class="form-control" id="nomeProduto" name="nomeProduto" placeholder="Digite o nome do produto">
+        @Html.ValidationMessageFor(model => model.NomeProduto)
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="isServico">É um serviço?</label>
+                <select class="form-control" id="isServico" name="isServico">
+                    <option value="true">Sim</option>
+                    <option value="false">Não</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label" for="valorProduto">Valor Unitário</label>
+                <input type="text" value="@Model.ValorProduto" autocomplete="off" class="form-control" id="valorProduto" name="valorProduto" placeholder="Digite o Valor Unitário" novalidate="novalidate">
+                @Html.ValidationMessageFor(model => model.ValorProduto)
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default float-left" data-dismiss="modal" onclick="javascript: resetaModal()">Fechar</button>
+        <button type="button" id="btnSalvarProduto" class="btn btn-primary btn-primary">Salvar</button>
+    </div>
+</form>
+
+<script type="text/javascript">
+
+
+    $("#btnSalvarProduto").click(() => {
+        let produto = {
+            IdProduto: $("#idProduto").val(),
+            CodProduto: $("#codProduto").val(),
+            NomeProduto: $("#nomeProduto").val(),
+            IsServico: $("#isServico").val(),
+            ValorProduto: $("#valorProduto").val()
+        };
+
+        //callActionPost("Produto", "Save", produto, 'Produto/Index');
+
+        $.ajax({
+            type: "POST",
+            url: "/Produto/Save",
+            data: produto,
+            processData: true,
+            async: false,
+            success: function (data) {
+                if (data.isValid) {
+                    window.location = window.location.origin + '/' + 'Produto/Index';
+                } else {
+
+                    $.ajax({
+                        type: "GET",
+                        processData: true,
+                        async: false,
+                        url: "/Produto/GetForm/",
+                        data: data.model,
+                        success: function (resp) {
+                            $("#conteudoModal").html(resp);
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    })
+                }
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+
+    });
+
+</script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval");
+
+}

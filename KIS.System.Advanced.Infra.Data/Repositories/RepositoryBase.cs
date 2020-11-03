@@ -6,13 +6,15 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Data.Entity.Core;
+using KIS.System.Advanced.Domain.Entities;
 
 namespace KIS.System.Advanced.Infra.Data.Repositories
 {
-    public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : class
+    public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : ExclusaoLogica
     {
+        List<string> NotRemoveLogic = new List<string> { "Pedido", "PedidoCancelamento" };
         public ProjetoDataContext Db { get; private set; }
-        
+
         public RepositoryBase()
         {
             Db = new ProjetoDataContext();
@@ -44,6 +46,16 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
         {
             Db.Set<TEntity>().Remove(obj);
             Db.SaveChanges();
+        }
+
+        public void RemoveLogic(int id)
+        {
+            if (NotRemoveLogic.Contains(typeof(TEntity).Name))
+                return;
+
+            var obj = GetById(id);
+            ((ExclusaoLogica)obj).ATIVO = false;
+            Update(obj);
         }
 
         public void Dispose()

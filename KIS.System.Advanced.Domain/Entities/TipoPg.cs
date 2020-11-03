@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace KIS.System.Advanced.Domain.Entities
 {
-    public class TipoPg
+    public class TipoPg : ExclusaoLogica
     {
         [Key]
         public int ID_TIPO_PG { get; set; }
         public string NOME_PG { get; set; }
-        public bool ATIVO { get; set; }
 
     }
 }

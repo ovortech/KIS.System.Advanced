@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace KIS.System.Advanced.Domain.Entities
 {
-    public class TipoDespesa
+    public class TipoDespesa : ExclusaoLogica
     {
         public int ID_TIPO_DESPESA { get; set; }
         public string NOME_TIPO_DESPESA { get; set; }
-        public bool ATIVO { get; set; }
 
     }
 }

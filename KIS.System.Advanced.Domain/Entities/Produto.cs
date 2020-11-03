@@ -7,15 +7,12 @@ using System.Threading.Tasks;
 
 namespace KIS.System.Advanced.Domain.Entities
 {
-    public class Produto
+    public class Produto : ExclusaoLogica
     {
         public int ID_PRODUTO { get; set; }
         public string CODIGO_PRODUTO { get; set; }
         public string NOME_PRODUTO { get; set; }
         public Boolean SERVICO_PRODUTO { get; set; }
         public double VALOR_PRODUTO { get; set; }
-        public bool ATIVO { get; set; }
-
-
     }
 }

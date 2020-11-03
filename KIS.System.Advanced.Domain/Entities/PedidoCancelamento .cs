@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KIS.System.Advanced.Domain.Entities
 {
-   public class PedidoCancelamento
+   public class PedidoCancelamento : ExclusaoLogica
     {
         public int ID_PEDIDO_CANCELAMENTO { get; set; }
         public int ID_PEDIDO { get; set; }
