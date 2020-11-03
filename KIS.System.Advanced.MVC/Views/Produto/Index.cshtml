@@ -63,8 +63,8 @@
                                     <td class="tb-style" width="15%">@produto.CodProduto<input type="hidden" value="@produto.IdProduto" /></td>
                                     <td class="tb-style" width="60%"><a href="#" onclick="javascript: editarProduto(@produto.IdProduto)">@produto.NomeProduto</a></td>
                                     <td class="tb-style" width="20%">@servico</td>
-                                    <td class="tb-style" width="10%">@produto.ValorProduto</td>
-                                    <td class="tb-style  width=" 10%""></td>
+                                    <td class="tb-style maskMoney" width="10%">@produto.ValorProduto</td>
+                                    <td class="tb-style" width="10%"></td>
                                     <td><a data-toggle="modal" data-target="#novo-produto" data-direction="bottom" onclick="javascript: editarProduto(@produto.IdProduto)" class="btn btn-primary">Editar</a></td>
                                     <td><a onclick="javascript: excluirProduto(@produto.IdProduto)" class="btn btn-danger">Excluir</a></td>
                                 </tr>
@@ -95,7 +95,7 @@
 </body>
 @section scripts {
     <script type="text/javascript">
-
+        moneyMaskByClass('maskMoney');
 
         //$("#btnSalvarProduto").click(() => {
         //    let produto = {
