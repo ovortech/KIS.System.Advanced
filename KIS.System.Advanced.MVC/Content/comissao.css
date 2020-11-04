@@ -2,6 +2,8 @@
     background: #2a2b30;
     overflow: hidden;
     overflow-y: scroll;
+    margin: 0;
+    padding: 0;
 }
 
 .bootstrap-select > select.bs-select-hidden, select.bs-select-hidden, select.selectpicker {
@@ -26,6 +28,12 @@
     }
 }
 
+.content {
+    position: relative;
+     min-height: 0px !important; 
+    margin: 0 0 50px 250px;
+}
+
 
 .bkp-cont {
     background-color: white;
@@ -33,12 +41,12 @@
     margin-bottom: 15px;
     box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.82);
     border-radius: 10px;
-    height: 850px;
+    height: 750px;
 }
 
 .tbs {
     border: 1px solid #ced4da;
-    height: 400px;
+    height: 370px;
     overflow-y: scroll;
     margin-bottom: 15px;
 }

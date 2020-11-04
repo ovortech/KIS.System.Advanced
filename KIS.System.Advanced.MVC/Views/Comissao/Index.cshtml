@@ -16,48 +16,12 @@
 
 <link rel="stylesheet" type="text/css" href="~/Content/jquery.datetimepicker.css" />
 
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-    }
-
-    main {
-        width: 960px;
-        margin: 0 auto;
-    }
-
-    #search {
-        position: fixed;
-        top: 0;
-        z-index: 3;
-        width: 100%;
-        color: #f0f0f0;
-        background-color: #333;
-        opacity: 0.9;
-        -webkit-opacity: 0.9;
-        -moz-opacity: 0.9;
-    }
-
-        #search form {
-            width: 960px;
-            margin: 0 auto;
-            padding: 0.5em;
-        }
-
-            #search form > div,
-            #filters form > div {
-                display: inline;
-            }
-</style>
-
-
 <body>
     <header class="header  clearfix">
         <div class="top-nav clearfix">
             <div class="row">
                 <div class="col-md-6 col-sm-6 col-xs-2">
-                    <a data-toggle="tooltip" data-placement="bottom" title="" href="" data-original-title="Nova Venda">
+                    <a data-toggle="tooltip" data-placement="bottom" title="" href="" data-original-title="Comissão">
                         <i class="icon mdi-navigation-menu"></i>
                     </a>
                 </div>
@@ -83,7 +47,12 @@
                     </select>
                 </div>
 
-
+                <div class="row" id="box_configs">
+                    <label class="float-left mg-10 mb-10 col-2">Ínicio de exibição</label>
+                    <input type="text" class="form-control text-center col-1" id="date_timepicker_start" />
+                    <label class="float-left mg-10 mb-10 col-2">Fim da exibição</label>
+                    <input type="text" class="form-control text-center col-1" id="date_timepicker_end" />
+                </div>
 
                 <br>
                 <div class="tbs">
@@ -145,6 +114,7 @@
     </div>
 </body>
 @section scripts {
+    <script src="~/Scripts/jquery.datetimepicker.full.min.js"></script>
     <script type="text/javascript">
         var count = 1;
         $(document).ready(function () {
@@ -216,7 +186,7 @@
             });
         });
 
-
+        //Script do checkbox
         function check() {
             document.getElementById("myCheck").checked = true;
         }
@@ -224,6 +194,31 @@
         function uncheck() {
             document.getElementById("myCheck").checked = false;
         }
+
+
+        //Script do datetimepicker
+        $.datetimepicker.setLocale('pt-BR');
+
+        jQuery(function () {
+            jQuery('#date_timepicker_start').datetimepicker({
+                format: 'd/m/Y',
+                onShow: function (ct) {
+                    this.setOptions({
+                        maxDate: jQuery('#date_timepicker_end').val() ? jQuery('#date_timepicker_end').val() : false
+                    })
+                },
+                timepicker: false
+            });
+            jQuery('#date_timepicker_end').datetimepicker({
+                format: 'd/m/Y',
+                onShow: function (ct) {
+                    this.setOptions({
+                        minDate: jQuery('#date_timepicker_start').val() ? jQuery('#date_timepicker_start').val() : false
+                    })
+                },
+                timepicker: false
+            });
+        });
 
     </script>
 }

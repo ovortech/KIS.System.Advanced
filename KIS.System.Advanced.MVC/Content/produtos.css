@@ -2,6 +2,8 @@
     background: #2a2b30;
     overflow: hidden;
     overflow-y: scroll;
+    margin: 0;
+    padding: 0;
 }
 
 @media (min-width: 1200px) {
@@ -28,7 +30,7 @@ table {
 
 .bkp-cont {
     background-color: white;
-    height: 850px;
+    height: 750px;
     margin-top: 15px;
     margin-bottom: 15px;
     box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.82);
