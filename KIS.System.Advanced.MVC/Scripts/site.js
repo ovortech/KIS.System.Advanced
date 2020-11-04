@@ -84,10 +84,10 @@ function salvaModel(controller, action, model) {
 function moneyMaskByClass(inputClass) {
     $(`.${inputClass}`).inputmask('decimal', {
         'alias': 'numeric',
-        'groupSeparator': ',',
+        'groupSeparator': '.',
         'autoGroup': true,
         'digits': 2,
-        'radixPoint': ".",
+        'radixPoint': ",",
         'digitsOptional': false,
         'allowMinus': false,
     });
