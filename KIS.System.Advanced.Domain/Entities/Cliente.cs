@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace KIS.System.Advanced.Domain.Entities
 {
-    public class Cliente
+    public class Cliente : ExclusaoLogica
     {
         [Key] // Deverá ser add, para representar a chave no dataBase
         public int ID_CLIENTE { get; set; }
         public string NOME_CLIENTE { get; set; }
-    }
+    }    
 }

@@ -132,14 +132,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\acessonegado.png" />
+    <Content Include="Content\bkg.png" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\component.css" />
+    <Content Include="Content\demo.css" />
+    <Content Include="Content\home.css" />
+    <Content Include="Content\layout.css" />
     <Content Include="Content\login.css" />
+    <Content Include="Content\produtos.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\usuarios.css" />
+    <Content Include="Content\vendas.css" />
     <Content Include="Content\vortech_logo.png" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootbox.locales.min.js" />
@@ -148,6 +157,8 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\classie.js" />
+    <Content Include="Scripts\dummydata.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -173,9 +184,13 @@
     <Content Include="Scripts\jquery-3.5.1.slim.js" />
     <Content Include="Scripts\jquery-3.5.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.inputmask.js" />
+    <Content Include="Scripts\jquery.moneymask.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\modernizr-custom.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -252,6 +267,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\MoneyMaskBundleConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Acesso\AccessDeniedController.cs" />
@@ -276,10 +292,15 @@
     <Compile Include="Support\AutoMapper\AutoMapperHelper.cs" />
     <Compile Include="Support\CustomControllerBase.cs" />
     <Compile Include="Support\CustomExtensions.cs" />
+    <Compile Include="Support\Helper.cs" />
     <Compile Include="Support\Security\CustomAuthorizeAttribute.cs" />
     <Compile Include="Support\Security\CustomPrincipal.cs" />
     <Compile Include="Support\Security\SessionPersister.cs" />
     <Compile Include="ViewModels\ClienteVM.cs" />
+    <Compile Include="ViewModels\ComissaoVM.cs" />
+    <Compile Include="ViewModels\ContratoVM.cs" />
+    <Compile Include="ViewModels\DespesaVM.cs" />
+    <Compile Include="ViewModels\HistoricoVM.cs" />
     <Compile Include="ViewModels\ItemPedidoVM.cs" />
     <Compile Include="ViewModels\LoginVM.cs" />
     <Compile Include="ViewModels\ProdutoVM.cs" />
@@ -308,7 +329,7 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Produto\Index.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
-    <Content Include="Views\Produto\Edit.cshtml" />
+    <Content Include="Views\Produto\AddOrEdit.cshtml" />
     <Content Include="Views\AccessDenied\Index.cshtml" />
     <Content Include="Views\Vendas\Index.cshtml" />
     <Content Include="Views\Comissao\Index.cshtml" />
@@ -317,12 +338,18 @@
     <Content Include="Views\AlterarSenha\Index.cshtml" />
     <Compile Include="ViewModels\VendasVM.dependence.cs" />
     <Content Include="Views\Despesa\Index.cshtml" />
-    <Content Include="Views\Shared\_Layoutlogin.cshtml" />
-    <Content Include="Views\Shared\_LayoutFinanceiro.cshtml" />
     <Content Include="Views\Vendedor\Index.cshtml" />
     <Content Include="Views\HistoricoVenda\Index.cshtml" />
-    <Content Include="Views\Financeiro\Index.cshtml" />
     <Content Include="Views\Contrato\Index.cshtml" />
+    <Content Include="Views\Shared\_Layoutlogin.cshtml" />
+    <Content Include="Views\Vendedor\AddOrEdit.cshtml" />
+    <Content Include="Views\Vendas\AddOrEdit.cshtml" />
+    <Content Include="Views\Usuario\AddOrEdit.cshtml" />
+    <Content Include="Views\HistoricoVenda\AddOrEdit.cshtml" />
+    <Content Include="Views\Cliente\AddOrEdit.cshtml" />
+    <Content Include="Views\Comissao\AddOrEdit.cshtml" />
+    <Content Include="Views\Contrato\AddOrEdit.cshtml" />
+    <Content Include="Views\Despesa\AddOrEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

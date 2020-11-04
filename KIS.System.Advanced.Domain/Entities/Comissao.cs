@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KIS.System.Advanced.Domain.Entities
 {
-    public class Comissao
+    public class Comissao : ExclusaoLogica
     {
         [Key]
         public int ID_ITEM_PEDIDO { get; set; }

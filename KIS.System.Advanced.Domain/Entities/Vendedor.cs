@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace KIS.System.Advanced.Domain.Entities
 {
-    public class Vendedor
+    public class Vendedor : ExclusaoLogica
     {
         public int ID_VENDEDOR { get; set; }
         public string NOME_VENDEDOR { get; set; }
+
     }
 }

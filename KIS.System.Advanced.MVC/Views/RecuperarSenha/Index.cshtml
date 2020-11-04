@@ -51,11 +51,12 @@
     </div>
 </body>
 </html>
+@section scripts {
+    <script type="text/javascript">
+        $('#recuperar').click(function () {
 
-<script>
-    $('#recuperar').click(function () {
-
-        let data = { userName: $("#UserName").val() };
-        alert("email de recuperação de senha enviado para " + callActionGet("RecuperarSenha", "SendEmail", data));
-    });
-</script>
+            let data = { userName: $("#UserName").val() };
+            alert("email de recuperação de senha enviado para " + callActionGet("RecuperarSenha", "SendEmail", data));
+        });
+    </script>
+}

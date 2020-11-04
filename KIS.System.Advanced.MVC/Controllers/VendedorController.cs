@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace KIS.System.Advanced.MVC.Controllers
 {
-    public class VendedorController : CustomControllerBase
+    public class VendedorController : CustomControllerBase<VendedorVM>
     {
         #region PROPRIEDADES / CONTRUTOR
         private static List<VendedorVM> vendedorVMs;
@@ -61,6 +61,13 @@ namespace KIS.System.Advanced.MVC.Controllers
             {
                 throw;
             }
+        }
+
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        public PartialViewResult AddOrEdit(int id)
+        {
+            var result = new VendedorVM();
+            return PartialView(result);
         }
 
         [HttpPost]

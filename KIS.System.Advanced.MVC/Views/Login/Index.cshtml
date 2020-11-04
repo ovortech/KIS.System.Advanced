@@ -63,9 +63,11 @@
 </body>
 </html>
 
-<script>
-    $('#logar').click(function () {
-        var usuario = { "UserName": $("#UserName").val(), "Password": $("#pws").val() }
-        callActionPost("Login", "Logar", usuario, "/Home");
-    });
-</script>
+@section scripts {
+    <script type="text/javascript">
+        $('#logar').click(function () {
+            var usuario = { "UserName": $("#UserName").val(), "Password": $("#pws").val() }
+            callActionPost("Login", "Logar", usuario, "/Home");
+        });
+    </script>
+}

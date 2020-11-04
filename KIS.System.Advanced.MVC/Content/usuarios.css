@@ -1,7 +1,9 @@
 ﻿body {
-    background: linear-gradient(0deg, rgba(66,87,118,1) 0%, rgba(105,92,122,1) 30%, rgba(219,114,128,1) 65%, rgba(254,188,102,1) 100%) no-repeat center fixed;
+    background: #2a2b30;
     overflow: hidden;
     overflow-y: scroll;
+    margin: 0;
+    padding: 0;
 }
 
 @media (min-width: 1200px) {
@@ -10,13 +12,24 @@
     }
 }
 
+@media (min-width: 1366px) {
+    .container {
+        max-width: 1260px;
+    }
+}
+
+@media (min-width: 1900px) {
+    .container {
+        max-width: 1700px;
+    }
+}
 .bkp-cont {
     background-color: white;
-    height: 600px;
+    height: 750px;
     margin-top: 15px;
     margin-bottom: 15px;
     box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.82);
-    border-radius: 15px;
+    border-radius: 10px;
 }
 .tb-style {
     color: #767676;

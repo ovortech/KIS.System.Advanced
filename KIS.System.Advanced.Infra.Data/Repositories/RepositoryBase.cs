@@ -6,18 +6,20 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Data.Entity.Core;
+using KIS.System.Advanced.Domain.Entities;
 
 namespace KIS.System.Advanced.Infra.Data.Repositories
 {
-    public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : class
+    public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : ExclusaoLogica
     {
+        List<string> NotRemoveLogic = new List<string> { "Pedido", "PedidoCancelamento" };
         public ProjetoDataContext Db { get; private set; }
-        //public ProjetoDataContext Db = new ProjetoDataContext();
 
         public RepositoryBase()
         {
             Db = new ProjetoDataContext();
         }
+
         public void Add(TEntity obj)
         {
             Db.Set<TEntity>().Add(obj);
@@ -27,6 +29,20 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
         public IEnumerable<TEntity> GetAll()
         {
             return Db.Set<TEntity>().ToList();
+        }
+
+        public IEnumerable<TEntity> GetAllAtivos()
+        {
+            if (NotRemoveLogic.Contains(typeof(TEntity).Name))
+                return GetAll();
+            return Db.Set<TEntity>().ToList().Where(x => ((ExclusaoLogica)x).ATIVO == true);
+        }
+
+        public IEnumerable<TEntity> GetAllInativos()
+        {
+            if (NotRemoveLogic.Contains(typeof(TEntity).Name))
+                return new List<TEntity>();
+            return Db.Set<TEntity>().ToList().Where(x => ((ExclusaoLogica)x).ATIVO == false);
         }
 
         public TEntity GetById(int id)
@@ -44,6 +60,16 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
         {
             Db.Set<TEntity>().Remove(obj);
             Db.SaveChanges();
+        }
+
+        public void RemoveLogic(int id)
+        {
+            if (NotRemoveLogic.Contains(typeof(TEntity).Name))
+                return;
+
+            var obj = GetById(id);
+            ((ExclusaoLogica)obj).ATIVO = false;
+            Update(obj);
         }
 
         public void Dispose()

@@ -17,9 +17,7 @@
 /KIS.System.Advanced.Services/obj/
 /Kist.System.Adavanced.Test/bin/
 /Kist.System.Adavanced.Test/obj/
-/.vs/KIS.System.Advanced/v16/TestStore/0/testlog.manifest
-/.vs/KIS.System.Advanced/v16/TestStore/0/000.testlog
-/.vs/KIS.System.Advanced/v16/.suo
-/.vs/KIS.System.Advanced/config/applicationhost.config
-/.vs/
+/KIS.System.Advanced.Support/bin/
+/KIS.System.Advanced.Support/obj/
+/.vs
 *.testlog

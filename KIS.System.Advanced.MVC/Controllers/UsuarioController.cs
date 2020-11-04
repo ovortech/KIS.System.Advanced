@@ -11,7 +11,7 @@ using KIS.System.Advanced.Services.Interfaces;
 
 namespace KIS.System.Advanced.MVC.Controllers
 {
-    public class UsuarioController : CustomControllerBase
+    public class UsuarioController : CustomControllerBase<UsuarioVM>
     {
         #region PROPRIEDADES / CONSTRUTOR
 
@@ -57,6 +57,13 @@ namespace KIS.System.Advanced.MVC.Controllers
             {
                 throw;
             }
+        }
+
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        public PartialViewResult AddOrEdit(int id)
+        {
+            var result = new UsuarioVM();
+            return PartialView(result);
         }
 
         // POST: Usuario/Delete/5
