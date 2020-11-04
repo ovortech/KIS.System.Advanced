@@ -43,56 +43,24 @@
 </form>
 
 <script type="text/javascript">
-
+   
     moneyMaskByClass('maskMoney');
-
-    $("#btnSalvarProduto").click(() => {
-        let produto = {
-            IdProduto: $("#idProduto").val(),
-            CodProduto: $("#codProduto").val(),
-            NomeProduto: $("#nomeProduto").val(),
-            IsServico: $("#isServico").val(),
-            ValorProduto: $("#valorProduto").val()
-        };
-
-        //callActionPost("Produto", "Save", produto, 'Produto/Index');
-
-        $.ajax({
-            type: "POST",
-            url: "/Produto/Save",
-            data: produto,
-            processData: true,
-            async: false,
-            success: function (data) {
-                if (data.isValid) {
-                    window.location = window.location.origin + '/' + 'Produto/Index';
-                } else {
-
-                    $.ajax({
-                        type: "GET",
-                        processData: true,
-                        async: false,
-                        url: "/Produto/GetForm/",
-                        data: data.model,
-                        success: function (resp) {
-                            $("#conteudoModal").html(resp);
-                        },
-                        error: function (err) {
-                            console.log(err);
-                        }
-                    })
-                }
-            },
-            error: function (err) {
-                console.log(err);
-            }
+   
+    $(document).ready(function () {
+        $("#btnSalvarProduto").click(() => {
+            let produto = {
+                IdProduto: $("#idProduto").val(),
+                CodProduto: $("#codProduto").val(),
+                NomeProduto: $("#nomeProduto").val(),
+                IsServico: $("#isServico").val(),
+                ValorProduto: $("#valorProduto").val()
+            };
+            salvaModel('Produto', 'Save', produto)
         });
-
     });
 
 </script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 @section scripts {
     @Scripts.Render("~/bundles/jqueryval");
-
 }

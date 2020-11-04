@@ -12,7 +12,7 @@ using System.Web.Mvc;
 
 namespace KIS.System.Advanced.MVC.Controllers
 {
-    public class ProdutoController : CustomControllerBase
+    public class ProdutoController : CustomControllerBase<ProdutoVM>
     {
         #region PROPRIEDADES / CONSTRUTOR
 
@@ -41,24 +41,6 @@ namespace KIS.System.Advanced.MVC.Controllers
             return Json(produtoVM, JsonRequestBehavior.AllowGet);
         }
 
-        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
-        public PartialViewResult AddOrEdit(int id)
-        {
-            if (id == 0)
-                return PartialView(new ProdutoVM());
-            else
-            {
-                var produto = _produtoService.Get(id);
-                var produtoVM = AutoMapper.Mapper.Map<ProdutoVM>(produto);
-                return PartialView(produtoVM);
-            }
-        }
-
-        public PartialViewResult GetForm(ProdutoVM produtoVM)
-        {
-            return PartialView("AddOrEdit", produtoVM);
-        }
-
         [HttpPost]
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         public JsonResult Save(ProdutoVM produtoVM)
@@ -83,6 +65,19 @@ namespace KIS.System.Advanced.MVC.Controllers
             catch (Exception)
             {
                 throw;
+            }
+        }
+
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        public PartialViewResult AddOrEdit(int id)
+        {
+            if (id == 0)
+                return PartialView(new ProdutoVM());
+            else
+            {
+                var produto = _produtoService.Get(id);
+                var produtoVM = AutoMapper.Mapper.Map<ProdutoVM>(produto);
+                return PartialView(produtoVM);
             }
         }
 

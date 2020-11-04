@@ -297,6 +297,10 @@
     <Compile Include="Support\Security\CustomPrincipal.cs" />
     <Compile Include="Support\Security\SessionPersister.cs" />
     <Compile Include="ViewModels\ClienteVM.cs" />
+    <Compile Include="ViewModels\ComissaoVM.cs" />
+    <Compile Include="ViewModels\ContratoVM.cs" />
+    <Compile Include="ViewModels\DespesaVM.cs" />
+    <Compile Include="ViewModels\HistoricoVM.cs" />
     <Compile Include="ViewModels\ItemPedidoVM.cs" />
     <Compile Include="ViewModels\LoginVM.cs" />
     <Compile Include="ViewModels\ProdutoVM.cs" />
@@ -338,7 +342,14 @@
     <Content Include="Views\HistoricoVenda\Index.cshtml" />
     <Content Include="Views\Contrato\Index.cshtml" />
     <Content Include="Views\Shared\_Layoutlogin.cshtml" />
-    <Content Include="Views\Produto\_Create.cshtml" />
+    <Content Include="Views\Vendedor\AddOrEdit.cshtml" />
+    <Content Include="Views\Vendas\AddOrEdit.cshtml" />
+    <Content Include="Views\Usuario\AddOrEdit.cshtml" />
+    <Content Include="Views\HistoricoVenda\AddOrEdit.cshtml" />
+    <Content Include="Views\Cliente\AddOrEdit.cshtml" />
+    <Content Include="Views\Comissao\AddOrEdit.cshtml" />
+    <Content Include="Views\Contrato\AddOrEdit.cshtml" />
+    <Content Include="Views\Despesa\AddOrEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

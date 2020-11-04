@@ -96,38 +96,12 @@
 @section scripts {
     <script type="text/javascript">
         
-
-        //$("#btnSalvarProduto").click(() => {
-        //    let produto = {
-        //        IdProduto: $("#idProduto").val(),
-        //        CodProduto: $("#codProduto").val(),
-        //        NomeProduto: $("#nomeProduto").val(),
-        //        IsServico: $("#isServico").val(),
-        //        ValorProduto: $("#valorProduto").val()
-        //    };
-
-        //    callActionPost("Produto", "Save", produto, 'Produto/Index');
-        //});
-
         $("#inputPesquisa").on("keyup", function () {
             let value = $(this).val().toLowerCase();
             $("#lista-produtos tr").filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
-
-        //function editarProduto(idProduto) {
-        //    let data = { idProduto: `${idProduto}` };
-        //    let produto = callActionGet("Produto", "Get", data);
-
-        //    $("#idProduto").val(produto.IdProduto);
-        //    $("#codProduto").val(produto.CodProduto);
-        //    $("#nomeProduto").val(produto.NomeProduto);
-        //    $("#isServico").val(String(produto.IsServico));
-        //    $("#valorProduto").val(produto.ValorProduto);
-
-        //    ajustaTituloModal("Editar Produto");
-        //}
 
         function addOuEditarProduto(idProduto) {
             $.ajax({
@@ -142,9 +116,7 @@
                     console.log(err);
                 }
             })
-            //$("#conteudoModal").load("/Produto/Edit/" + idProduto);
         }
-
 
         function addProduto(id){
             $(".modal-title").text('Novo Produto');

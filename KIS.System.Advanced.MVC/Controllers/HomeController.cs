@@ -9,7 +9,7 @@ using System.Web.Mvc;
 namespace KIS.System.Advanced.MVC.Controllers
 {
     
-    public class HomeController : CustomControllerBase
+    public class HomeController : CustomControllerBase<String>
     {
         // GET: Home
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
