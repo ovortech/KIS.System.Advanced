@@ -6,3 +6,12 @@ E:\Projetos\KIS\KIS.System.Advanced.Support\obj\Debug\netstandard2.0\KIS.System.
 E:\Projetos\KIS\KIS.System.Advanced.Support\obj\Debug\netstandard2.0\KIS.System.Advanced.Support.csproj.CoreCompileInputs.cache
 E:\Projetos\KIS\KIS.System.Advanced.Support\obj\Debug\netstandard2.0\KIS.System.Advanced.Support.dll
 E:\Projetos\KIS\KIS.System.Advanced.Support\obj\Debug\netstandard2.0\KIS.System.Advanced.Support.pdb
+C:\Users\jose rubens\Source\Repos\KIS.System.Advanced\KIS.System.Advanced.Support\bin\Debug\netstandard2.0\KIS.System.Advanced.Support.deps.json
+C:\Users\jose rubens\Source\Repos\KIS.System.Advanced\KIS.System.Advanced.Support\bin\Debug\netstandard2.0\KIS.System.Advanced.Support.dll
+C:\Users\jose rubens\Source\Repos\KIS.System.Advanced\KIS.System.Advanced.Support\bin\Debug\netstandard2.0\KIS.System.Advanced.Support.pdb
+C:\Users\jose rubens\Source\Repos\KIS.System.Advanced\KIS.System.Advanced.Support\obj\Debug\netstandard2.0\KIS.System.Advanced.Support.csprojAssemblyReference.cache
+C:\Users\jose rubens\Source\Repos\KIS.System.Advanced\KIS.System.Advanced.Support\obj\Debug\netstandard2.0\KIS.System.Advanced.Support.AssemblyInfoInputs.cache
+C:\Users\jose rubens\Source\Repos\KIS.System.Advanced\KIS.System.Advanced.Support\obj\Debug\netstandard2.0\KIS.System.Advanced.Support.AssemblyInfo.cs
+C:\Users\jose rubens\Source\Repos\KIS.System.Advanced\KIS.System.Advanced.Support\obj\Debug\netstandard2.0\KIS.System.Advanced.Support.csproj.CoreCompileInputs.cache
+C:\Users\jose rubens\Source\Repos\KIS.System.Advanced\KIS.System.Advanced.Support\obj\Debug\netstandard2.0\KIS.System.Advanced.Support.dll
+C:\Users\jose rubens\Source\Repos\KIS.System.Advanced\KIS.System.Advanced.Support\obj\Debug\netstandard2.0\KIS.System.Advanced.Support.pdb
