@@ -31,6 +31,20 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
             return Db.Set<TEntity>().ToList();
         }
 
+        public IEnumerable<TEntity> GetAllAtivos()
+        {
+            if (NotRemoveLogic.Contains(typeof(TEntity).Name))
+                return GetAll();
+            return Db.Set<TEntity>().ToList().Where(x => ((ExclusaoLogica)x).ATIVO == true);
+        }
+
+        public IEnumerable<TEntity> GetAllInativos()
+        {
+            if (NotRemoveLogic.Contains(typeof(TEntity).Name))
+                return new List<TEntity>();
+            return Db.Set<TEntity>().ToList().Where(x => ((ExclusaoLogica)x).ATIVO == false);
+        }
+
         public TEntity GetById(int id)
         {
             return Db.Set<TEntity>().Find(id);

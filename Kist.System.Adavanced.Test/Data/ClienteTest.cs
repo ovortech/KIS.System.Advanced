@@ -54,6 +54,20 @@ namespace Kist.System.Adavanced.Test.Data
             Assert.IsTrue(aa != null);
         }
 
+        [TestMethod]
+        public void GetAllAtivos()
+        {
+            var aa = _clienteRepository.GetAllAtivos().ToList();
+            Assert.IsTrue(aa != null);
+        }
+
+        [TestMethod]
+        public void GetAllInativos()
+        {
+            var aa = _clienteRepository.GetAllInativos().ToList();
+            Assert.IsTrue(aa != null);
+        }
+
 
         [TestMethod]
         public void ExclusaoLogica()
