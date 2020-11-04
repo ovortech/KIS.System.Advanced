@@ -57,7 +57,7 @@ function moneyMaskByClass(inputClass) {
     });
 }
 
-
+moneyMaskByClass('maskMoney');
 
 
 
