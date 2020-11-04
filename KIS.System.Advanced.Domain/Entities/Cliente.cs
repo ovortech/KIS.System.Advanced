@@ -12,5 +12,6 @@ namespace KIS.System.Advanced.Domain.Entities
         [Key] // Deverá ser add, para representar a chave no dataBase
         public int ID_CLIENTE { get; set; }
         public string NOME_CLIENTE { get; set; }
+        public Boolean ATIVO { get; set; }
     }    
 }

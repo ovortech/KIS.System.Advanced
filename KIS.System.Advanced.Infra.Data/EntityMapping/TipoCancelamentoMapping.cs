@@ -15,6 +15,7 @@ namespace KIS.System.Advanced.Infra.Data.EntityConfig
             ToTable("TIPO_CANCELAMENTO");
             HasKey(e => e.id_tipo_cancelamento);
             Property(e => e.desc_tipo_cancelamento).HasMaxLength(50).IsRequired();
+            Property(e => e.ATIVO).IsRequired();
         }
     }
 }

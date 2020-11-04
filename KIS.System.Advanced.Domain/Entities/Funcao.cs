@@ -12,6 +12,7 @@ namespace KIS.System.Advanced.Domain.Entities
         [Key]
         public int ID_FUNCAO { get; set; }
         public string DESC_FUNCAO { get; set; }
+        public Boolean ATIVO { get; set; }
 
     }
 }

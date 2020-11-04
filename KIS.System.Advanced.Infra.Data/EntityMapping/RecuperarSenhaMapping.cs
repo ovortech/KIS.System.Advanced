@@ -17,6 +17,7 @@ namespace KIS.System.Advanced.Infra.Data.EntityConfig
             Property(e => e.ID_USUARIO).IsRequired(); // Verificar
             Property(e => e.PRIVATE_TOKEN).HasMaxLength(50).IsRequired();
             Property(e => e.ALTERADO_SENHA).IsRequired(); // Verificar
+            Property(e => e.ATIVO).IsRequired(); // Verificar
         }
     }
 }

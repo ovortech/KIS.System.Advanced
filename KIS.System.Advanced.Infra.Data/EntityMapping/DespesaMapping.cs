@@ -19,6 +19,7 @@ namespace KIS.System.Advanced.Infra.Data.EntityConfig
             Property(e => e.VALOR_DESPESA).IsRequired(); // Verificar
             Property(e => e.DATA_DESPESA).IsRequired(); // Verificar
             Property(e => e.ID_LOGIN_DESPESA).IsRequired(); // Verificar
+            Property(e => e.ATIVO).IsRequired(); // Verificar
         }
     }
 }

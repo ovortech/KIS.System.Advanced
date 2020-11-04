@@ -15,6 +15,7 @@ namespace KIS.System.Advanced.Infra.Data.EntityConfig
         ToTable("VENDEDOR");
         HasKey(e => e.ID_VENDEDOR);
         Property(e => e.NOME_VENDEDOR).HasMaxLength(250).IsRequired();
-    }
+        Property(e => e.ATIVO).IsRequired();
+        }
 }
 }
