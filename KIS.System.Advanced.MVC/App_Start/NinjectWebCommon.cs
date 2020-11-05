@@ -67,7 +67,9 @@ namespace KIS.System.Advanced.MVC.App_Start
             kernel.Bind<IProdutoService>().To<ProdutoService>();
             kernel.Bind<IRecuperarSenhaService>().To<RecuperarSenhaService>();
             kernel.Bind<IVendedorService>().To<VendedorService>();
-            
+            kernel.Bind<IPedidoService>().To<PedidoService>();
+
+
         }
     }
 }

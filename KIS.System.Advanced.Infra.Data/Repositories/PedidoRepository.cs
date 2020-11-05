@@ -14,6 +14,14 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
         {
 
         }
+        public int GetNextOrderNumber()
+        {
+            return Db.Set<Pedido>()
+                            .OrderByDescending(x => x.ID_PEDIDO)
+                            .FirstOrDefault().ID_PEDIDO + 1;
+
+
+        }
     
     }
 }

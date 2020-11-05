@@ -9,6 +9,6 @@ namespace KIS.System.Advanced.Domain.Interfaces
 {
     public interface IPedidoRepository : IRepositoryBase<Pedido>
     {
-
+        int GetNextOrderNumber();
     }
 }

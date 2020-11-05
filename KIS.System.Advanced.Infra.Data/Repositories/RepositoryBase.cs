@@ -76,5 +76,7 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
         {
             Db.Dispose();
         }
+
+
     }
 }
