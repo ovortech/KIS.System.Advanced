@@ -22,6 +22,7 @@ namespace KIS.System.Advanced.Infra.Data.EntityConfig
             Property(e => e.NOME_USUARIO).HasMaxLength(50).IsRequired();
             Property(e => e.EMAIL_USUARIO).HasMaxLength(50).IsRequired();
             Property(e => e.ID_FUNCAO_USUARIO).IsRequired();
+            Property(e => e.ATIVO).IsRequired();
         }
     }
 }

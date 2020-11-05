@@ -1,7 +1,4 @@
-﻿$(document).ready(function () {
-    moneyMaskByClass('maskMoney');
-});
-
+﻿
 function callActionPost(controler, action, parameter, redirect = null) {
     let retorno;
     $.ajax({

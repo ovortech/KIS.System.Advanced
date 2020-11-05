@@ -15,6 +15,7 @@ namespace KIS.System.Advanced.Infra.Data.EntityConfig
             ToTable("TIPO_DESPESA");
             HasKey(e => e.ID_TIPO_DESPESA);
             Property(e => e.NOME_TIPO_DESPESA).HasMaxLength(50).IsRequired();
+            Property(e => e.ATIVO).IsRequired();
         }
     }
 }

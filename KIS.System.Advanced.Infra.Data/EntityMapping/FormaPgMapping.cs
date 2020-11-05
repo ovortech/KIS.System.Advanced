@@ -17,6 +17,7 @@ namespace KIS.System.Advanced.Infra.Data.EntityConfig
             Property(e => e.ID_PEDIDO).IsRequired(); // VERIFICAR TIPO
             Property(e => e.ID_TIPO_PG).IsRequired(); // VERIFICAR TIPO
             Property(e => e.VALOR_FORM_PG).IsRequired(); // VERIFICAR TIPO
+            Property(e => e.ATIVO).IsRequired(); 
         }
     }
 }

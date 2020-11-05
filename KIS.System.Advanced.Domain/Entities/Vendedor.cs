@@ -10,6 +10,7 @@ namespace KIS.System.Advanced.Domain.Entities
     {
         public int ID_VENDEDOR { get; set; }
         public string NOME_VENDEDOR { get; set; }
+        public Boolean ATIVO { get; set; }
 
     }
 }

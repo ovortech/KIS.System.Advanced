@@ -15,6 +15,7 @@ namespace KIS.System.Advanced.Infra.Data.EntityConfig
             Property(e => e.QTD_PEDIDO).IsRequired();
             Property(e => e.VALOR_UN_PEDIDO).IsRequired();
             Property(e => e.DESCONTO_PEDIDO).IsRequired();
+            Property(e => e.ATIVO).IsRequired();
         }
 
     }
