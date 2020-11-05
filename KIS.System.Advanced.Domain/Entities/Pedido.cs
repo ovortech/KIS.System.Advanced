@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,12 @@ namespace KIS.System.Advanced.Domain.Entities
         public int ID_CLIENTE { get; set; }
         public Boolean FATURADO_PEDIDO { get; set; }
         public int ID_VENDEDOR { get; set; }
+
+        [NotMapped]
+        //// <summary>
+        /// Propriedade obsoleta para pedido. sempre retorna null.
+        /// </summary>
+        public override bool ATIVO { get => true; }
 
     }
 }

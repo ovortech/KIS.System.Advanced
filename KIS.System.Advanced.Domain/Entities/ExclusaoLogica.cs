@@ -8,6 +8,6 @@ namespace KIS.System.Advanced.Domain.Entities
 {
     public abstract class ExclusaoLogica
     {
-        public bool ATIVO { get; set; }
+        public virtual bool ATIVO { get; set; }
     }
 }

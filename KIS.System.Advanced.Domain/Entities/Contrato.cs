@@ -12,7 +12,6 @@ namespace KIS.System.Advanced.Domain.Entities
         public int ID_PEDIDO_CONTRATO { get; set; }
         public int ID_CLIENTE_CONTRATO { get; set; }
         public Boolean FATURADO_CONTRATO { get; set; }
-        public Boolean ATIVO { get; set; }
 
     }
 }

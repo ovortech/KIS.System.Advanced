@@ -12,7 +12,6 @@ namespace KIS.System.Advanced.Domain.Entities
         [Key]
         public int ID_TIPO_PG { get; set; }
         public string NOME_PG { get; set; }
-        public Boolean ATIVO { get; set; }
 
     }
 }

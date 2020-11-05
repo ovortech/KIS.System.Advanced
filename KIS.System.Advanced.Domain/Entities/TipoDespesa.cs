@@ -10,7 +10,6 @@ namespace KIS.System.Advanced.Domain.Entities
     {
         public int ID_TIPO_DESPESA { get; set; }
         public string NOME_TIPO_DESPESA { get; set; }
-        public Boolean ATIVO { get; set; }
 
     }
 }

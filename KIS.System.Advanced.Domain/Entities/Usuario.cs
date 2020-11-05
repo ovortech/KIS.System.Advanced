@@ -27,7 +27,6 @@ namespace KIS.System.Advanced.Domain.Entities
         public int ID_FUNCAO_USUARIO { get; set; }
         [NotMapped]
         public virtual Funcao Funcao { get; set; }
-        public Boolean ATIVO { get; set; }
 
     }
 }
