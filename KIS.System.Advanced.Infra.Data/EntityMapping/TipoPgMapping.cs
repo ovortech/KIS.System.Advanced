@@ -15,6 +15,7 @@ namespace KIS.System.Advanced.Infra.Data.EntityConfig
             ToTable("TIPO_PG");
             HasKey(e => e.ID_TIPO_PG);
             Property(e => e.NOME_PG).HasMaxLength(50).IsRequired();
+            Property(e => e.ATIVO).IsRequired();
         }
     }
 }

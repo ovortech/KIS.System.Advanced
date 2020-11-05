@@ -13,6 +13,8 @@ namespace KIS.System.Advanced.Infra.Data.EntityConfig
             Property(e => e.NOME_PRODUTO).HasMaxLength(50).IsRequired();
             Property(e => e.SERVICO_PRODUTO).IsRequired();
             Property(e => e.VALOR_PRODUTO).IsRequired();
+            Property(e => e.ATIVO).IsRequired();
+
         }
 
     }

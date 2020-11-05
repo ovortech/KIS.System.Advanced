@@ -10,6 +10,7 @@ namespace KIS.System.Advanced.Domain.Entities
     {
         public int id_tipo_cancelamento { get; set; }
         public string desc_tipo_cancelamento { get; set; }
+        public Boolean ATIVO { get; set; }
 
     }
 }

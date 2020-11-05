@@ -41,7 +41,7 @@
     <Compile Include="Entities\TipoPg.cs" />
     <Compile Include="Entities\FormaPg.cs" />
     <Compile Include="Entities\Cliente.cs" />
-    <Compile Include="Entities\PedidoCancelamento .cs" />
+    <Compile Include="Entities\PedidoCancelamento.cs" />
     <Compile Include="Entities\TipoCancelamento.cs" />
     <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Entities\Vendedor.cs" />

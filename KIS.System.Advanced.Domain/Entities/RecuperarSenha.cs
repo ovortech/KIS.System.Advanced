@@ -14,6 +14,7 @@ namespace KIS.System.Advanced.Domain.Entities
         public int ID_USUARIO { get; set; }
         public string PRIVATE_TOKEN { get; set; }
         public Boolean ALTERADO_SENHA { get; set; }
+        public Boolean ATIVO { get; set; }
 
     }
 }

@@ -14,6 +14,7 @@ namespace KIS.System.Advanced.Domain.Entities
         public double VALOR_COMPRA_COMISSAO { get; set; }
         public double VALOR_LUCRO_COMISSAO { get; set; }
         public double PERCENTUAL_COMISSAO { get; set; }
+        public Boolean ATIVO { get; set; }
 
     }
 }

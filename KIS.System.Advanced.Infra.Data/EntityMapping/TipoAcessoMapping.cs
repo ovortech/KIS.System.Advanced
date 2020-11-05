@@ -15,6 +15,7 @@ namespace KIS.System.Advanced.Infra.Data.EntityConfig
             ToTable("TIPO_ACESSO");
             HasKey(e => e.ID_TIPO_ACESSO);
             Property(e => e.DESC_TIPO_ACESSO).HasMaxLength(50).IsRequired();
+            Property(e => e.ATIVO).IsRequired();
         }
     }
 }
