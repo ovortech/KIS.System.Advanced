@@ -13,6 +13,7 @@ namespace KIS.System.Advanced.MVC
             // create an object of ScriptBundle and 
             // specify bundle name (as virtual path) as constructor parameter 
             ScriptBundle scriptBndl = new ScriptBundle("~/bundles/Javascript");
+            ScriptBundle scriptBndlLogin = new ScriptBundle("~/bundles/login");
 
 
             //use Include() method to add all the script files with their paths 
@@ -20,7 +21,12 @@ namespace KIS.System.Advanced.MVC
                                 "~/Scripts/modernizr-{version}.min.js",
                                 "~/Scripts/jquery-{version}.js",
                                 "~/Scripts/jquery.validate.min.js",
-                                "~/Scripts/bootstrap.min.js",
+                                "~/Scripts/bootstrap.bundle.min.js",
+                                "~/Scripts/bootbox.locales.min.js",
+                                "~/Scripts/jquery.inputmask.js",
+                                "~/Scripts/classie.js",
+                                "~/Scripts/dummydata.js",
+                                "~/Scripts/main.js",
                                 "~/Scripts/site.js"
                               );
 
