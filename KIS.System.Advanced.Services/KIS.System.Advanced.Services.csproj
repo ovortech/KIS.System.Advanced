@@ -31,9 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ClienteService.cs" />
+    <Compile Include="TipoPagamentoService.cs" />
+    <Compile Include="Interfaces\IClienteService.cs" />
     <Compile Include="Interfaces\IPedidoService.cs" />
     <Compile Include="Interfaces\IProdutoService.cs" />
     <Compile Include="Interfaces\IRecuperarSenhaService.cs" />
+    <Compile Include="Interfaces\ITipoPagamentoService.cs" />
     <Compile Include="Interfaces\IUsuarioService.cs" />
     <Compile Include="Interfaces\IVendedorService.cs" />
     <Compile Include="PedidoService.cs" />

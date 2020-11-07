@@ -71,7 +71,6 @@ namespace KIS.System.Advanced.MVC.Controllers
         }
 
         [HttpPost]
-        //[CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         public ActionResult Delete(int id)
         {
@@ -84,6 +83,14 @@ namespace KIS.System.Advanced.MVC.Controllers
             {
                 throw;
             }
+        }
+
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        public List<VendedorVM> GetAllActive()
+        {
+            var vendedores = _vendedorService.GetAll();
+            var vendedorVM = AutoMapper.Mapper.Map<List<VendedorVM>>(vendedores);
+            return vendedorVM;
         }
     }
 }

@@ -45,6 +45,8 @@ namespace KIS.System.Advanced.MVC.Support
             MappingUsuarioVM(cfg);
             MappingProduto(cfg);
             MappingVendedor(cfg);
+            MappingTipoPagamento(cfg);
+            MappingClientes(cfg);
         }
 
         private static void MappingVendedor(IMapperConfigurationExpression cfg)
@@ -107,5 +109,29 @@ namespace KIS.System.Advanced.MVC.Support
                .ForMember(destinationMember: vm => vm.NomeProduto, memberOptions: map => map.MapFrom(sourceMember: s => s.NOME_PRODUTO))
                .ForMember(destinationMember: vm => vm.ValorProduto, memberOptions: map => map.MapFrom(sourceMember: s => s.VALOR_PRODUTO));
         }
+
+        private static void MappingTipoPagamento(IMapperConfigurationExpression cfg)
+        {
+            cfg.CreateMap<TipoPGVM, TipoPg>()
+                .ForMember(destinationMember: vm => vm.ID_TIPO_PG, memberOptions: map => map.MapFrom(sourceMember: s => s.Id))
+                .ForMember(destinationMember: vm => vm.NOME_PG, memberOptions: map => map.MapFrom(sourceMember: s => s.Nome));
+
+            cfg.CreateMap<TipoPg, TipoPGVM>()
+                .ForMember(destinationMember: vm => vm.Id, memberOptions: map => map.MapFrom(sourceMember: s => s.ID_TIPO_PG))
+                .ForMember(destinationMember: vm => vm.Nome, memberOptions: map => map.MapFrom(sourceMember: s => s.NOME_PG));
+        }
+
+        private static void MappingClientes(IMapperConfigurationExpression cfg)
+        {
+            cfg.CreateMap<ClienteVM, Cliente>()
+                .ForMember(destinationMember: vm => vm.ID_CLIENTE, memberOptions: map => map.MapFrom(sourceMember: s => s.Id))
+                .ForMember(destinationMember: vm => vm.NOME_CLIENTE, memberOptions: map => map.MapFrom(sourceMember: s => s.Nome));
+
+            cfg.CreateMap<Cliente, ClienteVM>()
+                .ForMember(destinationMember: vm => vm.Id, memberOptions: map => map.MapFrom(sourceMember: s => s.ID_CLIENTE))
+                .ForMember(destinationMember: vm => vm.Nome, memberOptions: map => map.MapFrom(sourceMember: s => s.NOME_CLIENTE));
+        }
+
+        //clientes
     }
 }

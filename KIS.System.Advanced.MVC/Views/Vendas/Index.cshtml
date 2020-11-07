@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model IEnumerable<KIS.System.Advanced.MVC.ViewModels.ProdutoVM>
+@model KIS.System.Advanced.MVC.ViewModels.VendasVM
 
 <!-- Bootstrap core CSS -->
 <link href="~/Content/bootstrap.min.css" rel="stylesheet">
@@ -35,30 +35,30 @@
                 <div class="" id="box_configs">
                     <label class="float-left mg-10">Pedido Nº:</label> <input class="wd-100 mb-10 form-control btn-disable" id="orderNumber" type="text" placeholder="" />
                     <label class="float-left mg-10 mb-10">Vendedor:</label>
-                    <select class="mb-10 browser-default custom-select col-3">
-                        <option selected>Selecione</option>
-                        <option value="1">Guilherme</option>
-                        <option value="2">Marcio</option>
-                        <option value="3">J Rubens</option>
-                        <option value="3">Everton</option>
+                    <select id="idVendedor" class="mb-10 browser-default custom-select col-3">
+                        <option selected>Selecione o vendedor</option>
+                        @foreach (var vendedor in Model.Vendedores)
+                        {
+                            <option value="@vendedor.Id">@vendedor.Nome</option>
+                        }
                     </select>
                     <div class="form-group mb-10 row">
-
                         <div class="col-sm-1" style="max-width:13.2%; margin-right: -20px !important" ;>
                             <label for="" class="mg-10 form-control-label">Cliente:</label>
                         </div>
                         <div class="">
                             <select class="form-control" id="select-country" data-live-search="true">
-                                <option data-tokens="consumidorfinal">Consumidor final</option>
-                                <option data-tokens="Adidas">Adidas</option>
-                                <option data-tokens="Nike">Nike</option>
-                                <option data-tokens="Mizuno">Mizuno</option>
+                                <option selected>Selecione o cliente</option>
+                                @foreach (var cliente in Model.Clientes)
+                                {
+                                    <option value="@cliente.Id">@cliente.Nome</option>
+                                }
                             </select>
                         </div>
                     </div>
                     <div class="form-group mb-10 row">
 
-                        <div class="" style="max-width:13.2 ;margin-left: 15px;">
+                        <div class="" style="max-width:13px ;margin-left: 15px;">
                             <label for="" class="mg-10 form-control-label">Produto:</label>
                         </div>
                         <div class="col-sm-6">
@@ -128,10 +128,10 @@
                         <label class="float-right">
                             <select class="form-control" id="select-country" data-live-search="true">
                                 <option data-tokens="">Selecione a forma de pagamento</option>
-                                <option data-tokens="dinheiro">Dinheiro</option>
-                                <option data-tokens="cdebito">Cartão de Débito</option>
-                                <option data-tokens="ccredito">Cartão de Crédito</option>
-                                <option data-tokens="deposito">Deposito Bancário</option>
+                                @foreach (var formaPagamento in Model.TipoPGs)
+                                {
+                                    <option id="@formaPagamento.Id">@formaPagamento.Nome</option>
+                                }
                             </select>
                         </label>
                     </label>

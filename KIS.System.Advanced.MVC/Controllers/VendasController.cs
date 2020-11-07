@@ -15,18 +15,30 @@ namespace KIS.System.Advanced.MVC.Controllers
         #region PROPRIEDADES / CONSTRUTOR
 
         private readonly IPedidoService _pedidoService;
-        public VendasController(IPedidoService pedidoService)
+        private readonly IClienteService _clienteService;
+        private readonly IProdutoService _produtoService;
+        private readonly ITipoPagamentoService _tipoPagamentoService;
+        private readonly IVendedorService _vendedorService;
+        public VendasController(IPedidoService pedidoService, 
+                                IClienteService clienteService, 
+                                IProdutoService produtoService, 
+                                ITipoPagamentoService tipoPagamentoService, 
+                                IVendedorService vendedorService)
         {
             _pedidoService = pedidoService;
+            _clienteService = clienteService;
+            _produtoService = produtoService;
+            _tipoPagamentoService = tipoPagamentoService;
+            _vendedorService = vendedorService;
         }
         
         #endregion
 
-        // GET: Vendas
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         public ActionResult Index()
         {
-            return View();
+            var pedido = CarregarNovoPedido();
+            return View(pedido);
         }
 
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
@@ -42,6 +54,32 @@ namespace KIS.System.Advanced.MVC.Controllers
         {
             return _pedidoService.GetNextOrderNumber();
         }
+
+        public VendasVM CarregarNovoPedido()
+        {
+            var pedido = new VendasVM();
+            pedido.IdPedido = GetNextOrderNumber();
+
+            var clientes = _clienteService.GetAll();
+            var clientesVM = AutoMapper.Mapper.Map<List<ClienteVM>>(clientes);
+            pedido.Clientes = clientesVM;
+
+            var produtos = _produtoService.GetAll();
+            var produtosVM = AutoMapper.Mapper.Map<List<ProdutoVM>>(produtos);
+            pedido.Produtos = produtosVM;
+
+            var tiposPagamento = _tipoPagamentoService.GetAll();
+            var tiposPagamentoVM = AutoMapper.Mapper.Map<List<TipoPGVM>>(tiposPagamento);
+            pedido.TipoPGs = tiposPagamentoVM;
+
+            var vendedores = _vendedorService.GetAll();
+            var vendedoresVM = AutoMapper.Mapper.Map<List<VendedorVM>>(vendedores);
+            pedido.Vendedores = vendedoresVM;
+
+            return pedido;
+
+        }
+
 
     }
 }
