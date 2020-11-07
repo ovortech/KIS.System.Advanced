@@ -29,7 +29,7 @@
     margin-top: 15px;
     margin-bottom: 15px;
     box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.82);
-    border-radius: 10px;
+    border-radius: .3rem;
 }
 .tb-style {
     color: #767676;
@@ -52,3 +52,34 @@
 table {
     border: 1px solid #ced4da;
 }
+
+.btn-finalizar {
+    width: 200px;
+    height: 38px;
+    background-color: #1abc9c;
+    border-color: #1abc9c;
+    color: #fff;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+    .btn-finalizar:hover {
+        color: #fff;
+        background-color: #28e1bd;
+    }
+
+    .btn-finalizar:focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
