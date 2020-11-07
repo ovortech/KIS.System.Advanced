@@ -39,16 +39,23 @@
     width: 850px;
     margin-top: 150px;
 }
-    .bkp-cont {
+.bkp-cont {
     background-color: white;
     margin-top: 15px;
     margin-bottom: 15px;
     box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.82);
-    border-radius: 10px;
+    border-radius: .3rem;
     height: 750px;
 }
 
 .tbs {
+    border: 1px solid #ced4da;
+    height: 370px;
+    overflow-y: scroll;
+    margin-bottom: 15px;
+}
+
+.tbs_modal {
     border: 1px solid #ced4da;
     height: 330px;
     overflow-y: scroll;
@@ -134,11 +141,11 @@
 
 
 
-.btn-remove {
+.btn-buscar {
     width: 80px;
     height: 38px;
-    background-color: #dc3545;
-    border-color: #dc3545;
+    background-color: #1abc9c;    
+    border-color: #1abc9c;
     color: #fff;
     display: inline-block;
     font-weight: 400;
@@ -153,15 +160,23 @@
     line-height: 1.5;
     border-radius: .25rem;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    margin-right: 30px;
-    margin-top: 10px;
+    margin-left: 20px;
+}
+.btn-buscar:hover {
+    color: #fff;
+    background-color: #28e1bd;
 }
 
-.btn-add {
-    width: 270px;
+.btn-buscar:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.btn-finalizar {
+    width: 80px;
     height: 38px;
-    background-color: #007bff;
-    border-color: #dc3545;
+    background-color: #1abc9c;
+    border-color: #1abc9c;
     color: #fff;
     display: inline-block;
     font-weight: 400;
@@ -179,6 +194,44 @@
     margin-top: 10px;
     margin-right: 20px;
 }
+
+    .btn-finalizar:hover {
+        color: #fff;
+        background-color: #28e1bd;
+    }
+
+    .btn-finalizar:focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+
+.btn-add {
+    width: 270px;
+    height: 38px;
+    background-color: #3498db;
+    border-color: #3498db;
+    color: #fff;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+.btn-add:hover {
+    color: #fff;
+    background-color: #007bff;
+}
+
 
 .tb-b {
     border-radius: .25rem;
@@ -198,5 +251,6 @@ input[type=checkbox], input[type=radio] {
     min-width: 36px;
     min-height: 36px;
     margin-top: 4px;
+
 }
-}
+

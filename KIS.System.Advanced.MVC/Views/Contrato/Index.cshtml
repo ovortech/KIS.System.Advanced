@@ -55,6 +55,7 @@
                     <input type="text" class="form-control text-center col-1" id="date_timepicker_start" />
                     <label class="float-left mg-10 mb-10">&nbsp; &nbsp;Fim de exibição:</label>
                     <input type="text" class="form-control text-center col-1" id="date_timepicker_end" />
+                    <button type="button" class="float-left btn-buscar">Buscar</button>
                 </div>
 
                 <br>
@@ -87,7 +88,7 @@
                 <div class="col-12">
                     <label class="float-right mg-10 mr-10">
                         <strong>
-                            Quantidade de pedidos selecionadas: &nbsp;
+                            Quantidade de pedidos selecionados: &nbsp;
                         </strong>
                         <input class="mr-10 float-right wd-150 mb-10 form-control btn-disable" type="text" placeholder="">
                 </div>
@@ -98,8 +99,7 @@
 
                 <div class="clearfix"></div>
                 <div class="col-sm-12">
-                    <button type="button" class="mb-10 mr-10 btn-add btn btn-block float-right" style="width: 235px !important;">Faturar Pedidos Selecionados</button>
-                    <button type="button" class="mb-10 mr-10 btn-remove float-right">Cancelar</button>
+                    <button type="button" class="mb-10 mr-10 btn-finalizar btn btn-block float-right" style="width: 235px !important; margin-top: 5px ;">Faturar Pedidos Selecionados</button>                   
                 </div>
                 <br>
             </div>
@@ -116,7 +116,7 @@
                 </div>
                 <div class="modal-body">
                     <form method="POST" id="form-Vendedor" autocomplete="off" novalidate="novalidate">
-                        <div class="tbs">
+                        <div class="tbs_modal">
                             <table id="lista-produtos" class="col-12 tb-b tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%" style="padding-left:0px;">
                                 <thead>
                                     <tr class="">
@@ -126,7 +126,7 @@
                                         <th width="20%">Quantidade</th>
                                         <th width="10%">Valor Unitário</th>
                                         <th width="10%">Desconto Unitário</th>
-                                        <th width="10%">Valor</th>                                   
+                                        <th width="10%">Valor</th>
 
                                     </tr>
                                 </thead>
