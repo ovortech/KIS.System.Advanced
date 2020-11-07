@@ -33,7 +33,7 @@
             <div class="col-md-12">
                 <div class="" id="box_configs">
                     <div>
-                        <a href="#" class="btn btn-success" data-toggle="modal" data-target="#novo-produto" data-direction="bottom" onclick="javascript: addProduto(0)">Adicionar Novo Produto</a>
+                        <a href="#" class="btn btn-finalizar" data-toggle="modal" data-target="#novo-produto" data-direction="bottom" onclick="javascript: addProduto(0)">Adicionar Novo Produto</a>
                         <nav class="navbar-light bg-light float-right">
                             <form class="form-inline">
                                 <input class="form-control mr-sm-2" id="inputPesquisa" type="search" placeholder="Pesquisar por..." aria-label="Search">
@@ -61,7 +61,7 @@
                                 var servico = produto.IsServico ? "Sim" : "Não";
                                 <tr>
                                     <td class="tb-style" width="15%">@produto.CodProduto<input type="hidden" value="@produto.IdProduto" /></td>
-                                    <td class="tb-style" width="60%">@produto.NomeProduto</td>
+                                    <td class="tb-style" width="30%">@produto.NomeProduto</td>
                                     <td class="tb-style" width="20%">@servico</td>
                                     <td class="tb-style maskMoney" width="10%">@produto.ValorProduto</td>
                                     <td class="tb-style" width="10%"></td>
