@@ -129,27 +129,45 @@
     display: inline;
     color: #fff;
     background: #dc3545;
-    width: 25px;
+    width: 35px;
     height: 38px;
     border-color: #dc3545;
     line-height: 1.5;
     border-radius: .25rem;
     border: 1px solid transparent;
 }
+
+.qtdem:hover {
+    color: #fff;
+    background-color: #bd2130;
+}
+
+.qtdem:focus {
+    color: #fff;
+    box-shadow: 0 0 0 0.2rem rgba(225,83,97,.5);
+}
+
 .qtdema {
     float: left;
     display: inline;
-    background: #90EE90;
-    border-color: #90EE90;
+    background: #3498db;
+    border-color: #3498db;
     color: #fff;
-    width: 25px;
+    width: 35px;
     height: 38px;
     line-height: 1.5;
     border-radius: .25rem;
     border: 1px solid transparent;
 }
+
+.qtdema:hover {
+    color: #fff;
+    background-color: #007bff;
+}
+
+
 .btn-remove {
-    width: 80px;
+    width: 90px;
     height: 38px;
     background-color: #dc3545;
     border-color: #dc3545;
@@ -166,9 +184,50 @@
     font-size: 1rem;
     line-height: 1.5;
     border-radius: .25rem;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-   
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;  
 }
+
+.btn-remove:hover {
+    color: #fff;
+    background-color: #bd2130;
+}
+
+.btn-remove:focus {
+    color: #fff;
+    box-shadow: 0 0 0 0.2rem rgba(225,83,97,.5);
+}
+
+.btn-finalizar {
+    width: 160px;
+    height: 38px;
+    background-color: #1abc9c;
+    border-color: #1abc9c;
+    color: #fff;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+    .btn-finalizar:hover {
+        color: #fff;
+        background-color: #28e1bd;
+    }
+
+    .btn-finalizar:focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+
 .btn-add {
     width: 155px;
     height: 38px;
