@@ -33,7 +33,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="" id="box_configs">
-                    <label class="float-left mg-10">Pedido Nº:</label> <input class="wd-100 mb-10 form-control btn-disable" id="orderNumber" type="text" placeholder="" />
+                    <label class="float-left mg-10">Pedido Nº:</label> <input class="wd-100 mb-10 form-control btn-disable" id="orderNumber" value="@Model.IdPedido" type="text"/>
                     <label class="float-left mg-10 mb-10">Vendedor:</label>
                     <select id="idVendedor" class="mb-10 browser-default custom-select col-3">
                         <option selected>Selecione o vendedor</option>
@@ -47,11 +47,11 @@
                             <label for="" class="mg-10 form-control-label">Cliente:</label>
                         </div>
                         <div class="">
-                            <select class="form-control" id="select-country" data-live-search="true">
+                            <select class="form-control selectpicker" id="cmbClientes" data-live-search="true">
                                 <option selected>Selecione o cliente</option>
                                 @foreach (var cliente in Model.Clientes)
                                 {
-                                    <option value="@cliente.Id">@cliente.Nome</option>
+                                    <option data-tokens="@cliente.Nome" value="@cliente.Id">@cliente.Nome</option>
                                 }
                             </select>
                         </div>
@@ -62,18 +62,22 @@
                             <label for="" class="mg-10 form-control-label">Produto:</label>
                         </div>
                         <div class="col-sm-6">
-                            <select class="form-control selectpicker" id="select-country" data-live-search="true">
-                                <option data-tokens="china" style="margin-left: 10px;">Chave de carro</option>
+                            <select class="form-control selectpicker" id="cmbProdutos" data-live-search="true" data-size="10">
+                                @foreach (var produto in Model.Produtos)
+                                {
+                                    <option data-tokens="@produto.NomeProduto" value="@produto.IdProduto">@produto.NomeProduto</option>
+                                }
+                                @*<option data-tokens="china" style="margin-left: 10px;">Chave de carro</option>*@
                             </select>
                         </div>
                         <div class="col-sm-3">
-                            <button type="button" class="btn-add btn btn-block">Adicionar Produto</button>
+                            <button type="button" id="adicionarProduto" class="btn-add btn btn-block">Adicionar Produto</button>
                         </div>
                     </div>
                 </div>
                 <br>
                 <div class="tbs">
-                    <table id="lista-produtos" class="col-12 tb-b tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%" style="padding-left:0px;">
+                    <table id="listaProdutos" class="col-12 tb-b tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%" style="padding-left:0px;">
                         <thead>
                             <tr class="">
                                 <th width="10%">Cod. Produto</th>
@@ -89,7 +93,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            @*<tr>
                                 <td class="tb-style text-center" width="5%">101</td>
                                 <td class="tb-style" width="30%">Chave de carro</td>
                                 <td class="tb-style" width="30%">
@@ -106,7 +110,7 @@
                                 <td class="tb-style" width="3%"><input class="wd-100 form-control" type="text" placeholder=""></td>
                                 <td class="tb-style" width="4%">110,00</td>
                                 <td class="tb-style" width="10%"><button type="button" class="btn-remove">Remover</button></td>
-                            </tr>
+                            </tr>*@
                     </table>
                 </div>
                 <div class="col-12">
@@ -121,13 +125,12 @@
                         <label class="float-right mg-10"> <strong>%</strong>&nbsp;</label>
                         <input class="mr-10 float-right wd-150 mb-10 form-control btn-disable" type="text" placeholder="">
                     </label>
-
                 </div>
                 <div>
                     <label class="float-left mg-10">
                         <label class="float-right">
-                            <select class="form-control" id="select-country" data-live-search="true">
-                                <option data-tokens="">Selecione a forma de pagamento</option>
+                            <select class="form-control selectpicker" id="select-country">
+                                <option>Selecione a forma de pagamento</option>
                                 @foreach (var formaPagamento in Model.TipoPGs)
                                 {
                                     <option id="@formaPagamento.Id">@formaPagamento.Nome</option>
@@ -151,6 +154,52 @@
 @section scripts {
     <script type="text/javascript">
 
+        $("#adicionarProduto").click(() => {
+            debugger;
+            let idProduto = $("#cmbProdutos").val();
+            let produto = callActionGet('produto', 'Get', { idProduto: idProduto })
+
+            adicionaProdutoNaLista(produto)
+        })
+
+        function adicionaProdutoNaLista(produto) {
+            if (produtoNaLista(produto.IdProduto)) {
+                bootbox.alert("Esse produto já foi adicionado! Se necessário, aumente a quantidade.");
+                return;
+            }
+
+            let tr = `<tr id="produto_${produto.IdProduto}">
+                        <td class="tb-style text-center" width="5%">${produto.CodProduto}</td>
+                        <td class="tb-style" width="30%">${produto.NomeProduto}</td>
+                        <td class="tb-style" width="30%">
+                            <div class="form-group">
+                                <textarea class="form-control" rows="1"></textarea>
+                            </div>
+                        </td>
+                        <td class="tb-style" width="10%">
+                            <input class="qtdem" type="button" value="-" onclick="decrementaQuantidade(${produto.IdProduto});" />
+                            <input class="qtde" type="text" value="1" min="1" max="99"/>
+                            <input class="qtdema" type="button" value="+" onclick="incrementaQuantidade(${produto.IdProduto});" />
+                        </td>
+                        <td class="tb-style" width="3%"><input class="wd-100 form-control" type="text" /></td>
+                        <td class="tb-style" width="3%"><input class="wd-100 form-control" type="text" /></td>
+                        <td class="tb-style" width="4%">${produto.ValorProduto}</td>
+                        <td class="tb-style" width="10%"><button type="button" class="btn-remove" onclick="removeProdutoDaLista(${produto.IdProduto});">Remover</button></td>
+                      </tr>`;
+
+            $("#listaProdutos tbody").append(tr);
+
+        }
+
+        function removeProdutoDaLista(idProduto) {
+            if (produtoNaLista(idProduto)) {
+                $("#listaProdutos tbody").find(`#produto_${idProduto}`).remove();
+            }
+        }
+
+        function produtoNaLista(idProduto) {
+            return $('#listaProdutos').find(`#produto_${idProduto}`).length > 0;
+        }
         //function deleteItem() {
         //    $('#lista-produtos').click(function () {
         //        $(this).parent().remove();
@@ -176,16 +225,8 @@
         //});
 
         $(document).ready(function () {
-            //$(document).on('keyup', '#userDropdown .bs-searchbox input', function (e) {
-            //    alert($(this).val());
-            //});
 
-            //$(document).on('keyup', '#cityDropdown .bs-searchbox input', function (e) {
-            //    alert($(this).val());
-            //});
-            debugger;
-            let orderNumber = callActionGet("Vendas", "GetNextOrderNumber", new Object())
-            $("#orderNumber").val(orderNumber);
+
 
 
         });
