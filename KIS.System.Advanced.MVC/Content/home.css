@@ -1,4 +1,9 @@
 ﻿body {
+    background: #2a2b30;
+    overflow: hidden;
+    overflow-y: scroll;
+    margin: 0;
+    padding: 0;
     background: rgb(66,87,118);
     background: linear-gradient(0deg, rgba(66,87,118,1) 0%, rgba(105,92,122,1) 30%, rgba(219,114,128,1) 65%, rgba(254,188,102,1) 100%) no-repeat center fixed;
     -webkit-background-size: cover;
@@ -6,9 +11,33 @@
     -o-background-size: cover;
     background-size: cover;
 }
+
+
 h3 {
     color: white;
     text-align: center;
-    margin-top: 40%;
-    margin-bottom: 50%;
+    margin-top: 25%;
+    margin-bottom: 28%;
+}
+
+.bootstrap-select > select.bs-select-hidden, select.bs-select-hidden, select.selectpicker {
+    display: block !important;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1260px;
+    }
+}
+
+@media (min-width: 1366px) {
+    .container {
+        max-width: 1260px;
+    }
+}
+
+@media (min-width: 1900px) {
+    .container {
+        max-width: 1700px;
+    }
 }
