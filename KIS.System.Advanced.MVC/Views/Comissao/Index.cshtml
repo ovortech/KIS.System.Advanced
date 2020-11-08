@@ -11,7 +11,7 @@
 <link href="~/Content/bootstrap.min.css" rel="stylesheet">
 
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+@*<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">*@
 <link href="~/Content/comissao.css" rel="stylesheet">
 
 <link rel="stylesheet" type="text/css" href="~/Content/jquery.datetimepicker.css" />
@@ -69,6 +69,7 @@
                                 <th width="10%">Valor Custo Unitário</th>
                                 <th width="10%">Lucro</th>
                                 <th width="10%">Comissão</th>
+                                <th width="10%">APagar</th>
                                 <th width="10%">Pagar</th>
                                 </th>
 
@@ -78,18 +79,19 @@
                             @foreach (var item in Model)
                             {
 
-                                <tr id="linha_@(item.Id)">
+                                <tr id="linha_@(item.Id)" class="linhas">
                                     <td class="tb-style text-center" width="5%">@item.TipoVenda<input type="hidden" class="id" value="@item.Id" /></td>
                                     <td class="tb-style text-center" width="5%">@item.DataVenda</td>
                                     <td class="tb-style text-center" width="20%">@item.NomeProduto</td>
                                     <td class="tb-style text-center" width="20%">@item.Descricao</td>
                                     <td class="tb-style text-center Quantidade" width="5%">@item.Quantidade</td>
-                                    <td class="tb-style text-center ValorVenda" width="3%">@item.ValorVenda</td>
-                                    <td class="tb-style text-center" width="3%"><input class="wd-100 form-control text-center ValorCustoUnitario @item.Id" type="text" onchange="myFunction(@item.Id)" value="@item.ValorCustoUnitario" placeholder=""></td>
-                                    <td class="tb-style text-center" width="4%"><h5 class="ValorLucro">@item.ValorLucro</h5></td>
-                                    <td class="tb-style text-center" width="4%"><input class="wd-100 form-control text-center PercComissao" type="text" value="@item.PercComissao" onchange="myFunction(@item.Id)" placeholder="10%"></td>
+                                    <td class="tb-style text-center maskMoney ValorVenda" width="3%">@item.ValorVenda</td>
+                                    <td class="tb-style text-center" width="3%"><input class="wd-100 form-control text-center maskMoney ValorCustoUnitario @item.Id" type="text" onchange="calculaLucro(@item.Id)" value="@item.ValorCustoUnitario" placeholder=""></td>
+                                    <td class="tb-style text-center ValorLucro" width="4%"><h5><label class="maskMoney">@item.ValorLucro</label></h5></td>
+                                    <td class="tb-style text-center" width="4%"><input class="wd-100 form-control text-center PercComissao" type="text" value="@item.PercComissao" onchange="calculaLucro(@item.Id)" placeholder="10%"></td>
+                                    <td class="tb-style text-center APagar" width="4%"><h5><label class="maskMoney"></label></h5></td>
                                     <td class="tb-style text-center" width="10%">
-                                        <input type="checkbox" id="myCheck" value="@item.Pago">
+                                        @Html.CheckBox("Pago", item.Pago, new { @class = "Pagar", @onchange = "javascript: totalComissaoAPagar()" })
                                     </td>
                                 </tr>
                             }
@@ -101,11 +103,11 @@
                         <strong>
                             Quantidade de vendas selecionadas: &nbsp;
                         </strong>
-                        <input class="mr-10 float-right wd-150 mb-10 form-control btn-disable" type="text" placeholder="">
+                        <input class="mr-10 float-right wd-150 mb-10 form-control btn-disable" id="qtdVendas" type="text" placeholder="">
                 </div>
                 <div class="clearfix"></div>
                 <div class="col-12">
-                    <label class="float-right mg-10 mr-10"><strong>Total de comissão a pagar: &nbsp;</strong> <input class="mr-10 float-right wd-150 text-center mb-10 form-control btn-disable" type="text" placeholder=""></label>
+                    <label class="float-right mg-10 mr-10"><strong>Total de comissão a pagar: &nbsp;</strong> <input id="totalAPagar" class="mr-10 float-right wd-150 text-center mb-10 form-control btn-disable" type="text" placeholder=""></label>
                 </div>
 
                 <div class="clearfix"></div>
@@ -120,112 +122,52 @@
 @section scripts {
     <script src="~/Scripts/jquery.datetimepicker.full.min.js"></script>
     <script type="text/javascript">
-        var count = 1;
 
-        function novo(ValorCustoUnitario, PercComissao) {
-            alert("linha \n: " + ValorCustoUnitario)
-        }
-
-        function myFunction(id) {
+        function calculaLucro(id) {
             let qtd = $(`#linha_${id} td.Quantidade`).html();
             let venda = $(`#linha_${id} td.ValorVenda`).html().replace(',', '.');
             let custo = $(`#linha_${id} td .ValorCustoUnitario`).val().replace(',', '.');
             let pecentual = $(`#linha_${id} td .PercComissao`).val();
-            console.log(`percentual puro: ${pecentual}`)
-            console.log(`percentual pecentual.length: ${pecentual + "".length}`)
+
             if (pecentual.length == 1) {
                 pecentual = "0.0" + pecentual
             } else {
                 pecentual = "0." + pecentual
             }
 
-            console.log(`qtd: ${qtd}\nvenda: ${venda}\ncusto: ${custo}\npecentual: ${pecentual}`)
-            //$(`#linha_${id} td .ValorLucro`).val(custo * ));
+            let lucro = qtd * (venda - custo)
+            $(`#linha_${id} td.ValorLucro h5 label`).html(parseFloat(lucro).toFixed(2));
+            $(`#linha_${id} td.APagar h5 label`).html(parseFloat(lucro * pecentual).toFixed(2));
+            totalComissaoAPagar();
         }
+
         $(document).ready(function () {
+            caculaTodos();
+            totalComissaoAPagar();
 
-
-            const linha = $("#lista-produtos tr[id]");
-            //const linha = $("#lista-produtos tr td input .id");
-
-            for (var i = 0; i < linha.length; i++) {
-                console.log($(linha[i]).attr('id'));
-            }
         });
-        //$(".calculo")
-        //    .blur(function (ev) {
-        //        alert("blur")
-        //    });
 
-        //    $('#items').live('pageinit', function (event) {
-        //        $('#additem').click(function () {
-        //            //alert("add clicked");
-        //            var request = $.ajax({
-        //                url: "http://www.furnguy.com/app-pages/additem.php",
-        //                type: "POST",
-        //                data: { COUNTER: count },
-        //                dataType: "html"
-        //            });
+        function totalComissaoAPagar() {
+            let total = 0;
+            let linhas = $("#lista-produtos tr.linhas");
+            $("#qtdVendas").val(linhas.length);
+            for (var i = 0; i < linhas.length; i++) {
+                let Pagar = $(linhas[i]).find("td input.Pagar").prop("checked")
+                if (Pagar) {
+                    let valor = parseFloat($(linhas[i]).find("td.APagar h5 label").html()).toFixed(2) * 1
+                    total = total + valor;
+                }
+            }
+            $("#totalAPagar").val(total);
+        }
 
-        //            request.done(function (html) {
-        //                //alert("here");
-        //                if (html != '') {
-        //                    $('#salesitems').append(html).trigger('create');
-        //                }
-        //            });
+        function caculaTodos() {
+            const linhas = $("#lista-produtos tr td input.id");
+            for (var i = 0; i < linhas.length; i++) {
+                calculaLucro($(linhas[i]).val());
+            }
+        }
 
-        //            request.fail(function (jqXHR, textStatus) {
-        //                alert("Request failed: " + textStatus);
-        //            });
-        //            count++;
-        //        });
-        //    });
-        //});
-
-
-        //function deleteItem() {
-        //    $('table').click(function () {
-        //        $(this).parent().remove();
-        //    });
-        //};
-        //function increaseQty() {
-        //    var currentVal = parseInt($("#qty").val());
-        //    if (currentVal != NaN) {
-        //        $("#qty").val(currentVal + 1);
-        //    }
-        //};
-        //function decreaseQty() {
-        //    var currentVal = parseInt($("#qty").val());
-        //    if (currentVal != NaN) {
-        //        $("#qty").val(currentVal - 1);
-        //    }
-        //};
-
-
-        //$(function () {
-        //    $('.selectpicker').selectpicker();
-        //});
-
-
-        //$(document).ready(function () {
-        //    $('#dtVerticalScrollExample').DataTable({
-        //        "scrollY": "200px",
-        //        "scrollCollapse": true,
-        //    });
-        //    $('.dataTables_length').addClass('bs-select');
-        //});
-
-        //$(document).ready(function () {
-        //    $(document).on('keyup', '#userDropdown .bs-searchbox input', function (e) {
-        //        alert($(this).val());
-        //    });
-
-        //    $(document).on('keyup', '#cityDropdown .bs-searchbox input', function (e) {
-        //        alert($(this).val());
-        //    });
-        //});
-
-        //Script do checkbox
         function check() {
             document.getElementById("myCheck").checked = true;
         }

@@ -28,7 +28,7 @@ namespace KIS.System.Advanced.MVC.Controllers
                     ValorCustoUnitario = 5.90,
                     ValorLucro = 0,
                     PercComissao = 5,
-                    Pago = false
+                    Pago = true
                 },
                 new ComissaoVM{
                     Id = 2,
@@ -49,12 +49,12 @@ namespace KIS.System.Advanced.MVC.Controllers
                     NomeProduto = "produto 2",
                     DataVenda = DateTime.Now,
                     Descricao = "produto 2 para  2 tipos de produtos  2 produtados produtivamente",
-                    Quantidade = 3,
+                    Quantidade = 267,
                     ValorVenda = 35.00,
                     ValorCustoUnitario = 7.90,
                     ValorLucro = 0,
                     PercComissao = 5,
-                    Pago = false
+                    Pago = true
                 }
             };
             return View(comissaoVM);
