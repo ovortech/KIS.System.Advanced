@@ -33,7 +33,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="" id="box_configs">
-                    <label class="float-left mg-10">Pedido Nº:</label> <input class="wd-100 mb-10 form-control btn-disable" id="orderNumber" type="text" placeholder="" />
+                    <label class="float-left mg-10">Pedido Nº:</label> <input class="wd-100 mb-10 form-control btn-disable" id="orderNumber" value="@Model.IdPedido" type="text" />
                     <label class="float-left mg-10 mb-10">Vendedor:</label>
                     <select id="idVendedor" class="mb-10 browser-default custom-select col-3">
                         <option selected>Selecione o vendedor</option>
@@ -47,11 +47,11 @@
                             <label for="" class="mg-10 form-control-label">Cliente:</label>
                         </div>
                         <div class="">
-                            <select class="form-control" id="select-country" data-live-search="true">
+                            <select class="form-control selectpicker" id="cmbClientes" data-live-search="true">
                                 <option selected>Selecione o cliente</option>
                                 @foreach (var cliente in Model.Clientes)
                                 {
-                                    <option value="@cliente.Id">@cliente.Nome</option>
+                                    <option data-tokens="@cliente.Nome" value="@cliente.Id">@cliente.Nome</option>
                                 }
                             </select>
                         </div>
@@ -62,18 +62,21 @@
                             <label for="" class="mg-10 form-control-label">Produto:</label>
                         </div>
                         <div class="col-sm-6">
-                            <select class="form-control selectpicker" id="select-country" data-live-search="true">
-                                <option data-tokens="china" style="margin-left: 10px;">Chave de carro</option>
+                            <select class="form-control selectpicker" id="cmbProdutos" data-live-search="true" data-size="10">
+                                @foreach (var produto in Model.Produtos)
+                                {
+                                    <option data-tokens="@produto.NomeProduto" value="@produto.IdProduto">@produto.NomeProduto</option>
+                                }
                             </select>
                         </div>
                         <div class="col-sm-3">
-                            <button type="button" class="btn-finalizar btn btn-block">Adicionar Produto</button>
+                            <button type="button" id="adicionarProduto" class="btn-finalizar btn btn-block">Adicionar Produto</button>
                         </div>
                     </div>
                 </div>
                 <br>
                 <div class="tbs">
-                    <table id="lista-produtos" class="col-12 tb-b tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%" style="padding-left:0px;">
+                    <table id="listaProdutos" class="col-12 tb-b tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%" style="padding-left:0px;">
                         <thead>
                             <tr class="">
                                 <th width="10%">Cod. Produto</th>
@@ -89,45 +92,27 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="tb-style text-center" width="5%">101</td>
-                                <td class="tb-style" width="30%">Chave de carro</td>
-                                <td class="tb-style" width="30%">
-                                    <div class="form-group">
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
-                                    </div>
-                                </td>
-                                <td class="tb-style" width="10%">
-                                    <input class="qtdem btn" type="button" value="-" id="decrease" onclick="decreaseQty();" />
-                                    <input class="qtde" type="text" name="qty" id="qty" value="1" />
-                                    <input class="qtdema btn" type="button" value="+" id="increase" onclick="increaseQty();" />
-                                </td>
-                                <td class="tb-style" width="3%"><input class="wd-100 form-control" type="text" placeholder=""></td>
-                                <td class="tb-style" width="3%"><input class="wd-100 form-control" type="text" placeholder=""></td>
-                                <td class="tb-style" width="4%">110,00</td>
-                                <td class="tb-style" width="10%"><button type="button" class="btn btn-remove">Remover</button></td>
-                            </tr>
+                        </tbody>
                     </table>
                 </div>
                 <div class="col-12">
                     <label class="float-right mg-10 mr-10">
                         <strong>TOTAL DA COMPRA</strong>&nbsp;
-                        <input class="mr-10 float-right wd-100 mb-10 form-control btn-disable" type="text" placeholder="">
+                        <input class="mr-10 float-right wd-100 mb-10 form-control btn-disable" type="text" id="valorTotalPedido" value="">
                     </label>
                 </div>
                 <div class="col-12">
                     <label class="float-right mg-10 mr-10">
-                        <strong>Total Desconto: &nbsp;</strong><input class="float-right wd-100 mb-10 form-control btn-disable" type="text" placeholder="">
+                        <strong>Total Desconto: &nbsp;</strong><input class="float-right wd-100 mb-10 form-control btn-disable" type="text" id="percentualTotalDescontos" value="">
                         <label class="float-right mg-10"> <strong>%</strong>&nbsp;</label>
-                        <input class="mr-10 float-right wd-150 mb-10 form-control btn-disable" type="text" placeholder="">
+                        <input class="mr-10 float-right wd-150 mb-10 form-control btn-disable" type="text" id="valorTotalDescontos" value="">
                     </label>
-
                 </div>
                 <div>
                     <label class="float-left mg-10">
                         <label class="float-right">
-                            <select class="form-control" id="select-country" data-live-search="true">
-                                <option data-tokens="">Selecione a forma de pagamento</option>
+                            <select class="form-control selectpicker" id="select-country">
+                                <option>Selecione a forma de pagamento</option>
                                 @foreach (var formaPagamento in Model.TipoPGs)
                                 {
                                     <option id="@formaPagamento.Id">@formaPagamento.Nome</option>
@@ -151,41 +136,120 @@
 @section scripts {
     <script type="text/javascript">
 
-        function deleteItem() {
-        $('#lista-produtos').click(function () {
-        $(this).parent().remove();
-        });
-        };
+        $("#adicionarProduto").click(() => {
+            let idProduto = $("#cmbProdutos").val();
+            let produto = callActionGet('produto', 'Get', { idProduto: idProduto })
 
-        function increaseQty() {
-        var currentVal = parseInt($("#qty").val());
-        if (currentVal != NaN) {
-        $("#qty").val(currentVal + 1);
+            adicionaProdutoNaLista(produto)
+        })
+
+        function adicionaProdutoNaLista(produto) {
+            if (produtoNaLista(produto.IdProduto)) {
+                bootbox.alert("Esse produto já foi adicionado! Se necessário, aumente a quantidade.");
+                return;
+            }
+
+            let tr = `<tr id="produto_${produto.IdProduto}">
+                            <td class="tb-style text-center" width="5%">${produto.CodProduto}</td>
+                            <td class="tb-style" width="30%">${produto.NomeProduto}</td>
+                            <td class="tb-style" width="30%">
+                                <div class="form-group">
+                                    <textarea class="form-control" rows="1"></textarea>
+                                </div>
+                            </td>
+                            <td class="tb-style" width="10%">
+                                <input class="qtdem btn" type="button" value="-" onclick="decrementaQuantidade(${produto.IdProduto});" />
+                                <input id="quantidade_${produto.IdProduto}" class="qtde" type="text" value="1" onchange="calculaValorTotalProdutos(${produto.IdProduto});" disabled/>
+                                <input class="qtdema btn" type="button" value="+" onclick="incrementaQuantidade(${produto.IdProduto});" />
+                            </td>
+                            <td class="tb-style" width="3%"><input id="valor_${produto.IdProduto}" class="wd-100 form-control" type="text" value="${produto.ValorProduto}" onchange="calculaValorTotalProdutos(${produto.IdProduto});"/></td>
+                            <td class="tb-style" width="3%"><input id="desconto_${produto.IdProduto}" class="wd-100 form-control" type="text" value="00,00" onchange="calculaValorTotalProdutos(${produto.IdProduto});"/></td>
+                            <td id="total_${produto.IdProduto}" class="tb-style" width="4%">${produto.ValorProduto}</td>
+                            <td class="tb-style" width="10%"><button type="button" class="btn btn-remove" onclick="removeProdutoDaLista(${produto.IdProduto});">Remover</button></td>
+                        </tr>`;
+
+            $("#listaProdutos tbody").append(tr);
+
         }
-        };
 
-        function decreaseQty() {
-        var currentVal = parseInt($("#qty").val());
-         if (currentVal != NaN) {
-        $("#qty").val(currentVal - 1);
-         }
-        };
+        function atualizaTotalPedido() {
+            debugger;
+            let valorTotalDescontos = 0;
+            let valorTotalPedido = 0;
+            $('#listaProdutos > tbody  > tr').each(function (index, tr) {
+                let idProduto = $(this).attr('id').replace("produto_", "");
+                let quantidadeAtual = quantidadeAtualProdutosNaLista(idProduto);
+                let valorDesconto = valorDescontoUnitario(idProduto);
 
-        //$(function () {
-        //    $('.selectpicker').selectpicker();
-        //});
+                let totalDescontoItemAtual = valorDesconto * quantidadeAtual;
+                valorTotalDescontos += totalDescontoItemAtual;
+
+                let totalProduto = valorTotalProduto(idProduto);
+                valorTotalPedido += totalProduto;
+
+            });
+            console.log(valorTotalDescontos)
+            console.log(valorTotalPedido)
+            $("#valorTotalPedido").val(valorTotalPedido.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+            $("#valorTotalDescontos").val(valorTotalDescontos.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+        }
+
+        function calculaValorTotalProdutos(idProduto) {
+            let quantidadeAtual = quantidadeAtualProdutosNaLista(idProduto);
+            let valorUnitario = valorUnitarioProduto(idProduto);
+            let valorDesconto = valorDescontoUnitario(idProduto);
+            let valorTotal = (valorUnitario - valorDesconto) * quantidadeAtual;
+            $(`#total_${idProduto}`).text(valorTotal.toFixed(2));
+            atualizaTotalPedido();
+        }
+
+        function decrementaQuantidade(idProduto) {
+            if (produtoNaLista(idProduto)) {
+                let quantidadeAtual = quantidadeAtualProdutosNaLista(idProduto);
+                if (quantidadeAtual > 1) {
+                    $(`#quantidade_${idProduto}`).val(--quantidadeAtual);
+                    calculaValorTotalProdutos(idProduto);
+                }
+            }
+        }
+
+        function incrementaQuantidade(idProduto) {
+            if (produtoNaLista(idProduto)) {
+                let quantidadeAtual = quantidadeAtualProdutosNaLista(idProduto);
+                $(`#quantidade_${idProduto}`).val(++quantidadeAtual);
+                calculaValorTotalProdutos(idProduto);
+            }
+        }
+
+        function quantidadeAtualProdutosNaLista(idProduto) {
+            return parseInt($(`#listaProdutos tbody tr`).find(`#quantidade_${idProduto}`).val());
+        }
+
+        function valorUnitarioProduto(idProduto) {
+            return parseFloat($(`#listaProdutos tbody tr`).find(`#valor_${idProduto}`).val());
+        }
+
+        function valorDescontoUnitario(idProduto) {
+            return parseFloat($(`#listaProdutos tbody tr`).find(`#desconto_${idProduto}`).val());
+        }
+
+        function valorTotalProduto(idProduto) {
+            return parseFloat($(`#listaProdutos tbody tr`).find(`#total_${idProduto}`).text());
+        }
+
+        function removeProdutoDaLista(idProduto) {
+            if (produtoNaLista(idProduto)) {
+                $("#listaProdutos tbody").find(`#produto_${idProduto}`).remove();
+            }
+        }
+
+        function produtoNaLista(idProduto) {
+            return $('#listaProdutos').find(`#produto_${idProduto}`).length > 0;
+        }
 
         $(document).ready(function () {
-            //$(document).on('keyup', '#userDropdown .bs-searchbox input', function (e) {
-            //    alert($(this).val());
-            //});
 
-            //$(document).on('keyup', '#cityDropdown .bs-searchbox input', function (e) {
-            //    alert($(this).val());
-            //});
-            debugger;
-            let orderNumber = callActionGet("Vendas", "GetNextOrderNumber", new Object())
-            $("#orderNumber").val(orderNumber);
+
 
 
         });
