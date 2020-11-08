@@ -15,8 +15,8 @@ namespace KIS.System.Advanced.Domain.Entities
         public Produto Produto { get; set; }
         public string OBS_PRODUTO { get; set; }
         public int QTD_PEDIDO { get; set; }
-        public float VALOR_UN_PEDIDO { get; set; }
-        public float DESCONTO_PEDIDO { get; set; }
+        public Double VALOR_UN_PEDIDO { get; set; }
+        public Double DESCONTO_PEDIDO { get; set; }
 
     }
 }

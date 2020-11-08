@@ -16,7 +16,7 @@ namespace KIS.System.Advanced.Infra.Data.EntityConfig
             HasKey(e => e.ID_PEDIDO);
             Property(e => e.ID_USUARIO_PEDIDO).IsRequired();
             Property(e => e.TOTAL_PEDIDO).IsRequired();
-            Property(e => e.OBS_PEDIDO).HasMaxLength(50).IsRequired();
+            Property(e => e.OBS_PEDIDO).HasMaxLength(250);
             Property(e => e.DATA_REG_PEDIDO).IsRequired();
             Property(e => e.ID_CLIENTE).IsRequired();
             Property(e => e.FATURADO_PEDIDO).IsRequired();

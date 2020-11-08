@@ -29,7 +29,7 @@ namespace Kist.System.Adavanced.Test.Data
                 ID_USUARIO_PEDIDO = 2,
                 TOTAL_PEDIDO = 1,
                 OBS_PEDIDO = "nada",
-                DATA_REG_PEDIDO = 1,
+                DATA_REG_PEDIDO = DateTime.Now,
                 ID_CLIENTE = 1,
                 FATURADO_PEDIDO = true,
                 ID_VENDEDOR = 2,
@@ -43,7 +43,7 @@ namespace Kist.System.Adavanced.Test.Data
 
 
         [TestMethod]
-        public void GetAllUser()
+        public void GetAllPedido()
         {
             var aa = _pedidoRepository.GetAll().ToList();
             Assert.IsTrue(aa != null);
