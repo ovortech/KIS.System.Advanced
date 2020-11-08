@@ -11,7 +11,7 @@ namespace KIS.System.Advanced.Domain.Entities
     {
         [Key]
         public int ID_ITEM_PEDIDO { get; set; }
-        public double VALOR_COMPRA_COMISSAO { get; set; }
+        public double VALOR_CUSTO_COMISSAO { get; set; }
         public double VALOR_LUCRO_COMISSAO { get; set; }
         public double PERCENTUAL_COMISSAO { get; set; }
         public Boolean PAGO_COMISSAO { get; set; }

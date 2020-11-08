@@ -1,4 +1,5 @@
-﻿using KIS.System.Advanced.Domain.Entities;
+﻿using KIS.System.Advanced.Domain.Dto;
+using KIS.System.Advanced.Domain.Entities;
 using KIS.System.Advanced.Domain.Interfaces;
 using KIS.System.Advanced.Infra.Data.Repositories;
 using System;
@@ -15,6 +16,12 @@ namespace KIS.System.Advanced.Business
             dbComissao = new ComissaoRepository();
         }
 
+        public List<ComissaoDto> GetDto()
+        {
+            var comissoesDto = dbComissao.GetDto();
+            
+            return comissoesDto;
+        }
 
         public List<Comissao> GetAll()
         {
@@ -37,6 +44,14 @@ namespace KIS.System.Advanced.Business
             catch (Exception ex)
             {
                 throw new Exception($"Erro ao pesquisar Comissao: {ex.Message}.");
+            }
+        }
+
+        public void SaveAll(List<Comissao> comissoes)
+        {
+            foreach (var item in comissoes)
+            {
+                Save(item);
             }
         }
 

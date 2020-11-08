@@ -80,24 +80,24 @@
                             @foreach (var item in Model)
                             {
 
-                                <tr id="linha_@(item.Id)" class="linhas">
-                                    <td class="tb-style text-center" width="5%">@item.TipoVenda<input type="hidden" class="id" value="@item.Id" /></td>
+                                <tr Id="linha_@(item.IdItemPedido)" class="linhas">
+                                    <td class="tb-style text-center" width="5%">@item.TipoVenda<input type="hidden" class="IdItemPedido" value="@item.IdItemPedido" /></td>
                                     <td class="tb-style text-center" width="5%">@item.DataVenda</td>
                                     <td class="tb-style text-center" width="20%">@item.NomeProduto</td>
                                     <td class="tb-style text-center" width="20%">@item.Descricao</td>
                                     <td class="tb-style text-center Quantidade" width="5%">@item.Quantidade</td>
                                     <td class="tb-style text-center maskMoney ValorVenda" width="3%">@item.ValorVenda</td>
-                                    <td class="tb-style text-center" width="3%"><input class="wd-100 form-control text-center maskMoney ValorCustoUnitario @item.Id" type="text" onchange="calculaLucro(@item.Id)" value="@item.ValorCustoUnitario" placeholder=""></td>
+                                    <td class="tb-style text-center" width="3%"><input class="wd-100 form-control text-center maskMoney ValorCustoUnitario @item.IdItemPedido" type="text" onchange="calculaLucro(@item.IdItemPedido)" value="@item.ValorCustoUnitario" placeholder=""></td>
                                     <td class="tb-style text-center ValorLucro" width="4%"><h5><label class="maskMoney">@item.ValorLucro</label></h5></td>
-                                    <td class="tb-style text-center" width="4%"><input class="wd-100 form-control text-center PercComissao" type="text" value="@item.PercComissao" onchange="calculaLucro(@item.Id)" placeholder="10%"></td>
+                                    <td class="tb-style text-center" width="4%"><input class="wd-100 form-control text-center PercComissao" type="text" value="@item.PercComissao" onchange="calculaLucro(@item.IdItemPedido)" placeholder="10%"></td>
                                     <td class="tb-style text-center APagar" width="4%"><h5><label class="maskMoney"></label></h5></td>
                                     <td class="tb-style text-center" width="10%">
                                         @Html.CheckBox("Pago", item.Pago, new { @class = "Pagar", @onchange = "javascript: totalComissaoAPagar()" })
                                     </td>
                                     <td class="tb-style text-center" width="10%">
-                                        @*<img src="https://i.gifer.com/ZKZg.gif" class="loading" width="30" />
-                                <img src="https://media1.tenor.com/images/22919ad969d4fcf8280c47f4c4d6a643/tenor.gif" class="checked" width="30" />
-                                <img src="~/Content/erro.png" class="erro" width="30" />*@
+                                        <img src="https://i.gifer.com/ZKZg.gif" class="loading" width="30" style="display:none" />
+                                        <img src="https://media1.tenor.com/images/22919ad969d4fcf8280c47f4c4d6a643/tenor.gif" class="checked" width="30" style="display:none" />
+                                        <img src="~/Content/erro.png" class="erro" width="30" style="display:none" />
                                     </td>
                                 </tr>
                             }
@@ -142,22 +142,57 @@
     <script src="~/Scripts/jquery.datetimepicker.full.min.js"></script>
     <script type="text/javascript">
 
-        function calculaLucro(id) {
-            let qtd = $(`#linha_${id} td.Quantidade`).html();
-            let venda = $(`#linha_${id} td.ValorVenda`).html().replace(',', '.');
-            let custo = $(`#linha_${id} td .ValorCustoUnitario`).val().replace(',', '.');
-            let pecentual = $(`#linha_${id} td .PercComissao`).val();
 
-            if (pecentual.length == 1) {
-                pecentual = "0.0" + pecentual
+        function saveAsyncLinha(controler, action, parameter, IdItemPedido, redirect = null) {
+            $(`#linha_${IdItemPedido} td img.loading`).show();
+
+            $.ajax({
+                type: "Post",
+                url: "/" + controler + "/" + action,
+                data: parameter,
+                processData: true,
+                async: true,
+                success: function (data) {
+                    $(`#linha_${IdItemPedido} td img.loading`).hide();
+                    window.setTimeout(1000);
+                    $(`#linha_${IdItemPedido} td img.checked`).show();
+                    window.setTimeout(3000);
+                    $(`#linha_${IdItemPedido} td img.checked`).hide();
+
+
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }
+
+        function calculaLucro(IdItemPedido, primeiraVez = false) {
+            let qtd = $(`#linha_${IdItemPedido} td.Quantidade`).html();
+            let venda = $(`#linha_${IdItemPedido} td.ValorVenda`).html().replace(',', '.');
+            let ValorCustoUnitario = $(`#linha_${IdItemPedido} td .ValorCustoUnitario`).val().replace(',', '.');
+            let PercComissao = $(`#linha_${IdItemPedido} td .PercComissao`).val();
+            let Pago = $(`#linha_${IdItemPedido} td input.Pagar`).prop("checked");
+
+            if (PercComissao.length == 1) {
+                PercComissao = "0.0" + PercComissao
             } else {
-                pecentual = "0." + pecentual
+                PercComissao = "0." + PercComissao
             }
 
-            let lucro = qtd * (venda - custo)
-            $(`#linha_${id} td.ValorLucro h5 label`).html(parseFloat(lucro).toFixed(2));
-            $(`#linha_${id} td.APagar h5 label`).html(parseFloat(lucro * pecentual).toFixed(2));
+            let lucro = qtd * (venda - ValorCustoUnitario)
+            $(`#linha_${IdItemPedido} td.ValorLucro h5 label`).html(parseFloat(lucro).toFixed(2));
+            $(`#linha_${IdItemPedido} td.APagar h5 label`).html(parseFloat(lucro * PercComissao).toFixed(2));
             totalComissaoAPagar();
+
+            var comissao = {
+                IdItemPedido: IdItemPedido,
+                ValorCustoUnitario: ValorCustoUnitario,
+                PercComissao: PercComissao,
+                Pago: Pago
+            };
+            if (!primeiraVez)
+                saveAsyncLinha("Comissao", "Save", comissao, IdItemPedido);
         }
 
         $(document).ready(function () {
@@ -181,9 +216,9 @@
         }
 
         function caculaTodos() {
-            const linhas = $("#lista-produtos tr td input.id");
+            const linhas = $("#lista-produtos tr td input.IdItemPedido");
             for (var i = 0; i < linhas.length; i++) {
-                calculaLucro($(linhas[i]).val());
+                calculaLucro($(linhas[i]).val(), true);
             }
         }
 

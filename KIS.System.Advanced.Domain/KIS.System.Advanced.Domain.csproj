@@ -35,6 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Dto\ComissaoDto.cs" />
     <Compile Include="Entities\Contrato.cs" />
     <Compile Include="Entities\ExclusaoLogica.cs" />
     <Compile Include="Entities\Pedido.cs" />

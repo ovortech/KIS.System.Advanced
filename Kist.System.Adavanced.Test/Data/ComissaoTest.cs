@@ -28,7 +28,7 @@ namespace Kist.System.Adavanced.Test.Data
             {
               
                ID_ITEM_PEDIDO = 2,
-               VALOR_COMPRA_COMISSAO = 1,
+               VALOR_CUSTO_COMISSAO = 1,
                VALOR_LUCRO_COMISSAO = 1,
                PERCENTUAL_COMISSAO = 1,
                
@@ -45,6 +45,14 @@ namespace Kist.System.Adavanced.Test.Data
         public void GetAllUser()
         {
             var aa = _comissaoRepository.GetAll().ToList();
+            Assert.IsTrue(aa != null);
+        }
+
+
+        [TestMethod]
+        public void GetAllComissaoDto()
+        {
+            var aa = _comissaoRepository.GetDto().ToList();
             Assert.IsTrue(aa != null);
         }
     }

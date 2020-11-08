@@ -70,7 +70,7 @@ namespace KIS.System.Advanced.MVC.App_Start
             kernel.Bind<IPedidoService>().To<PedidoService>();
             kernel.Bind<IClienteService>().To<ClienteService>();
             kernel.Bind<ITipoPagamentoService>().To<TipoPagamentoService>();
-
+            kernel.Bind<IComissaoService>().To<ComissaoService>();            
         }
     }
 }

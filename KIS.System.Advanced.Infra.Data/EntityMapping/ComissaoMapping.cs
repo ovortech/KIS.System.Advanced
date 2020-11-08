@@ -14,7 +14,7 @@ namespace KIS.System.Advanced.Infra.Data.EntityConfig
         {
             ToTable("COMISSAO");
             Property(e => e.ID_ITEM_PEDIDO).IsRequired();
-            Property(e => e.VALOR_COMPRA_COMISSAO).IsRequired();
+            Property(e => e.VALOR_CUSTO_COMISSAO).IsRequired();
             Property(e => e.VALOR_LUCRO_COMISSAO).IsRequired();
             Property(e => e.PERCENTUAL_COMISSAO).IsRequired();
             Property(e => e.PAGO_COMISSAO).IsRequired();

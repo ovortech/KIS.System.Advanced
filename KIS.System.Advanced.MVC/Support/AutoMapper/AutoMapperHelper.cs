@@ -4,6 +4,7 @@ using System.Web.UI.WebControls;
 using KIS.System.Advanced.Domain.Entities;
 using System;
 using KIS.System.Advanced.Domain.Enums;
+using KIS.System.Advanced.Domain.Dto;
 
 namespace KIS.System.Advanced.MVC.Support
 {
@@ -47,6 +48,22 @@ namespace KIS.System.Advanced.MVC.Support
             MappingVendedor(cfg);
             MappingTipoPagamento(cfg);
             MappingClientes(cfg);
+            MappingComissao(cfg);
+        }
+
+        private static void MappingComissao(IMapperConfigurationExpression cfg)
+        {
+            cfg.CreateMap<ComissaoVM, Comissao>()
+                .ForMember(destinationMember: vm => vm.ID_ITEM_PEDIDO, memberOptions: map => map.MapFrom(sourceMember: s => s.IdItemPedido))
+                .ForMember(destinationMember: vm => vm.VALOR_CUSTO_COMISSAO, memberOptions: map => map.MapFrom(sourceMember: s => s.ValorVenda))
+                .ForMember(destinationMember: vm => vm.VALOR_LUCRO_COMISSAO, memberOptions: map => map.MapFrom(sourceMember: s => s.ValorLucro))
+                .ForMember(destinationMember: vm => vm.PERCENTUAL_COMISSAO, memberOptions: map => map.MapFrom(sourceMember: s => s.PercComissao))
+                .ForMember(destinationMember: vm => vm.PAGO_COMISSAO, memberOptions: map => map.MapFrom(sourceMember: s => s.Pago))
+                .ForMember(destinationMember: vm => vm.ATIVO, memberOptions: map => map.MapFrom(sourceMember: s => s.Ativo))
+                ;
+
+            cfg.CreateMap<ComissaoDto, ComissaoVM>()
+                ;
         }
 
         private static void MappingVendedor(IMapperConfigurationExpression cfg)

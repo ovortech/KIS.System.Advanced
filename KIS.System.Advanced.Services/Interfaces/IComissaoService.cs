@@ -1,4 +1,5 @@
-﻿using KIS.System.Advanced.Domain.Entities;
+﻿using KIS.System.Advanced.Domain.Dto;
+using KIS.System.Advanced.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,9 @@ namespace KIS.System.Advanced.Services.Interfaces
     {
         List<Comissao> GetAll();
         void Save(Comissao comissao);
+        void SaveAll(List<Comissao> comissoes);
         Comissao Get(int idComissao);
+        List<ComissaoDto> GetDto();
         void Update(Comissao comissao);
     }
 }

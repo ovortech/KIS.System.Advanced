@@ -1,4 +1,5 @@
 ﻿using KIS.System.Advanced.Business;
+using KIS.System.Advanced.Domain.Dto;
 using KIS.System.Advanced.Domain.Entities;
 using KIS.System.Advanced.Services.Interfaces;
 using System;
@@ -28,9 +29,19 @@ namespace KIS.System.Advanced.Services
             return _comissaoBS.GetAll();
         }
 
+        public List<ComissaoDto> GetDto()
+        {
+            return _comissaoBS.GetDto();
+        }
+
         public void Save(Comissao comissao)
         {
             _comissaoBS.Save(comissao);
+        }
+
+        public void SaveAll(List<Comissao> comissoes)
+        {
+            _comissaoBS.SaveAll(comissoes);
         }
 
         public void Update(Comissao comissao)
