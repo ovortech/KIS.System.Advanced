@@ -22,7 +22,7 @@ namespace Kist.System.Adavanced.Test.Data
         [TestMethod]
         public void AddUser()
         {
-           
+
             var itemPedidos = _ItemPedidoRepository.GetAll();
             ItemPedido itemPedido = new ItemPedido
             {
@@ -34,7 +34,7 @@ namespace Kist.System.Adavanced.Test.Data
                 DESCONTO_PEDIDO = 1,
             };
 
-        _ItemPedidoRepository.Add(itemPedido);
+            _ItemPedidoRepository.Add(itemPedido);
             var itemPedidosdepois = _ItemPedidoRepository.GetAll();
 
             Assert.IsTrue(itemPedidos.Count() < itemPedidosdepois.Count());
@@ -42,7 +42,7 @@ namespace Kist.System.Adavanced.Test.Data
 
 
         [TestMethod]
-        public void GetAllUser()
+        public void GetAllItemPedido()
         {
             var aa = _ItemPedidoRepository.GetAll().ToList();
             Assert.IsTrue(aa != null);
