@@ -71,6 +71,7 @@
                                 <th width="10%">Comissão</th>
                                 <th width="10%">APagar</th>
                                 <th width="10%">Pagar</th>
+                                <th width="10%"></th>
                                 </th>
 
                             </tr>
@@ -93,9 +94,14 @@
                                     <td class="tb-style text-center" width="10%">
                                         @Html.CheckBox("Pago", item.Pago, new { @class = "Pagar", @onchange = "javascript: totalComissaoAPagar()" })
                                     </td>
+                                    <td class="tb-style text-center" width="10%">
+                                        @*<img src="https://i.gifer.com/ZKZg.gif" class="loading" width="30" />
+                                        <img src="https://media1.tenor.com/images/22919ad969d4fcf8280c47f4c4d6a643/tenor.gif" class="checked" width="30" />
+                                        <img src="~/Content/erro.png" class="erro" width="30" />*@
+                                    </td>
                                 </tr>
                             }
-                    </table>
+</table>
 
                 </div>
                 <div class="col-12">
