@@ -7,7 +7,7 @@
 
 <!-- Bootstrap core CSS -->
 <link href="~/Content/bootstrap.min.css" rel="stylesheet">
-<link href="~/Content/produtos.css" rel="stylesheet">
+<link href="~/Content/vendedor.css" rel="stylesheet">
 
 <body>
     <header class="header fixed-top clearfix">
@@ -33,7 +33,7 @@
             <div class="col-md-12">
                 <div class="" id="box_configs">
                     <div>
-                        <a href="#" class="btn btn-success" data-toggle="modal" data-target="#novo-Vendedor" data-direction="bottom" onclick="javascript: ajustaTituloModal('Novo Vendedor')">Adicionar Novo Vendedor</a>
+                        <a href="#" class="btn btn-finalizar" data-toggle="modal" data-target="#novo-Vendedor" data-direction="bottom" onclick="javascript: ajustaTituloModal('Novo Vendedor')">Adicionar Novo Vendedor</a>
                         <nav class="navbar-light bg-light float-right">
                             <form class="form-inline">
                                 <input class="form-control mr-sm-2" id="inputPesquisa" type="search" placeholder="Pesquisar por..." aria-label="Search">
@@ -90,8 +90,8 @@
                             <input type="hidden" id="Id">
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default float-left" data-dismiss="modal" onclick="javascript: resetaModal()">Fechar</button>
-                            <button type="button" id="btnSalvarVendedor" class="btn btn-primary btn-primary" data-dismiss="modal" aria-label="Close">Salvar</button>
+                            <button type="button" class="btn btn-danger float-left" data-dismiss="modal" onclick="javascript: resetaModal()">Fechar</button>
+                            <button type="button" id="btnSalvarVendedor" class="btn btn-finalizar" data-dismiss="modal" aria-label="Close" style="width:70px;">Salvar</button>
                         </div>
                     </form>
                 </div>

@@ -23,6 +23,7 @@
         max-width: 1700px;
     }
 }
+
 .bkp-cont {
     background-color: white;
     height: 750px;
@@ -31,6 +32,7 @@
     box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.82);
     border-radius: .3rem;
 }
+
 .tb-style {
     color: #767676;
     font-family: 'Open Sans',sans-serif;
@@ -38,12 +40,14 @@
     text-rendering: optimizeLegibility;
     vertical-align: middle !important;
 }
+
 .form-style {
     color: #767676;
     font-size: 14px;
     font-family: 'Open Sans',sans-serif;
     text-rendering: optimizeLegibility;
 }
+
 .pad-top-20 {
     padding-top: 20px;
     color: #767676;
@@ -54,7 +58,7 @@ table {
 }
 
 .btn-finalizar {
-    width: 200px;
+    width: 210px;
     height: 38px;
     background-color: #1abc9c;
     border-color: #1abc9c;

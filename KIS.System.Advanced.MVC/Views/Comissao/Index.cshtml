@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model IEnumerable<KIS.System.Advanced.MVC.ViewModels.ProdutoVM>
+@model IEnumerable<KIS.System.Advanced.MVC.ViewModels.ComissaoVM>
 
 
 <!-- Bootstrap core CSS -->
@@ -37,7 +37,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="" id="box_configs">
-                    <label class="float-left mg-10 mb-10">Vendedor:   </label>
+                    <label class="float-left mg-10 mb-10">Vendedor:</label>
                     <select class="mb-10 browser-default custom-select col-3">
                         <option selected>Selecione</option>
                         <option value="1">Guilherme</option>
@@ -52,6 +52,7 @@
                     <input type="text" class="form-control text-center col-1" id="date_timepicker_start" />
                     <label class="float-left mg-10 mb-10">&nbsp; &nbsp;Fim de exibição:</label>
                     <input type="text" class="form-control text-center col-1" id="date_timepicker_end" />
+                    <button type="button" class="float-left btn-buscar">Buscar</button>
                 </div>
 
                 <br>
@@ -68,26 +69,30 @@
                                 <th width="10%">Valor Custo Unitário</th>
                                 <th width="10%">Lucro</th>
                                 <th width="10%">Comissão</th>
-                                <th width="10%">Pago</th>
+                                <th width="10%">Pagar</th>
                                 </th>
 
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="tb-style text-center" width="5%">Serviço</td>
-                                <td class="tb-style text-center" width="5%">02/11/2020</td>
-                                <td class="tb-style text-center" width="20%">Chave de carro</td>
-                                <td class="tb-style text-center" width="20%">Modelo Ford Ka </td>
-                                <td class="tb-style text-center" width="5%">2</td>
-                                <td class="tb-style text-center" width="3%">220,00</td>
-                                <td class="tb-style text-center" width="3%"><input class="wd-100 form-control text-center" type="text" placeholder=""></td>
-                                <td class="tb-style text-center" width="4%">110,00</td>
-                                <td class="tb-style text-center" width="4%"><input class="wd-100 form-control text-center" type="text" placeholder="10%"></td>
-                                <td class="tb-style text-center" width="10%">
-                                    <input type="checkbox" id="myCheck">
-                                </td>
-                            </tr>
+                            @foreach (var item in Model)
+                            {
+
+                                <tr id="linha_@(item.Id)">
+                                    <td class="tb-style text-center" width="5%">@item.TipoVenda</td>
+                                    <td class="tb-style text-center" width="5%">@item.DataVenda</td>
+                                    <td class="tb-style text-center" width="20%">@item.NomeProduto</td>
+                                    <td class="tb-style text-center" width="20%">@item.Descricao</td>
+                                    <td class="tb-style text-center Quantidade" width="5%">@item.Quantidade</td>
+                                    <td class="tb-style text-center ValorVenda" width="3%">@item.ValorVenda</td>
+                                    <td class="tb-style text-center" width="3%"><input class="wd-100 form-control text-center ValorCustoUnitario @item.Id" type="text" onchange="myFunction(@item.Id)" value="@item.ValorCustoUnitario" placeholder=""></td>
+                                    <td class="tb-style text-center" width="4%"><h5 class="ValorLucro" >@item.ValorLucro</h5></td>
+                                    <td class="tb-style text-center" width="4%"><input class="wd-100 form-control text-center PercComissao" type="text" value="@item.PercComissao" onchange="myFunction(@item.Id)" placeholder="10%"></td>
+                                    <td class="tb-style text-center" width="10%">
+                                        <input type="checkbox" id="myCheck" value="@item.Pago">
+                                    </td>
+                                </tr>
+                            }
                     </table>
 
                 </div>
@@ -105,8 +110,7 @@
 
                 <div class="clearfix"></div>
                 <div class="col-sm-12">
-                    <button type="button" class="mb-10 mr-10 btn-add btn btn-block float-right">Finalizar Comissões Selecionadas</button>
-                    <button type="button" class="mb-10 mr-10 btn-remove float-right">Cancelar</button>
+                    <button type="button" class="mb-10 mr-10 btn-buscar btn btn-block float-right" style="width: 260px; margin-right:20px;">Finalizar Comissões Selecionadas</button>
                 </div>
                 <br>
             </div>
@@ -117,7 +121,34 @@
     <script src="~/Scripts/jquery.datetimepicker.full.min.js"></script>
     <script type="text/javascript">
         var count = 1;
+
+        function novo(ValorCustoUnitario, PercComissao) {
+            alert("linha \n: " + ValorCustoUnitario)
+        }
+
+        function myFunction(id) {
+            let qtd = $(`#linha_${id} td.Quantidade`).html();
+            let venda = $(`#linha_${id} td.ValorVenda`).html().replace(',', '.');
+            let custo = $(`#linha_${id} td .ValorCustoUnitario`).val().replace(',', '.');
+            let pecentual = $(`#linha_${id} td .PercComissao`).val();
+            console.log(`percentual puro: ${pecentual}`)
+            console.log(`percentual pecentual.length: ${pecentual+"".length}`)
+            if (pecentual+" ".length == 1) {
+                pecentual = "0.0" + pecentual
+            } else {
+                pecentual = "0." + pecentual
+            }
+
+            console.log(`qtd: ${qtd}\nvenda: ${venda}\ncusto: ${custo}\npecentual: ${pecentual}`)
+            //$(`#linha_${id} td .ValorLucro`).val(custo * ));
+        }
         $(document).ready(function () {
+
+            //$(".calculo")
+            //    .blur(function (ev) {
+            //        alert("blur")
+            //    });
+
             $('#items').live('pageinit', function (event) {
                 $('#additem').click(function () {
                     //alert("add clicked");
