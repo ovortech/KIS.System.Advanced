@@ -42,6 +42,10 @@
                             <option value="@vendedor.Id">@vendedor.Nome</option>
                         }
                     </select>
+                    <div class="form-group float-right">
+                        <label for="exampleFormControlTextarea1">Observação Pedido</label>
+                        <textarea class="form-control textarea-obs" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
                     <div class="form-group mb-10 row">
                         <div class="col-sm-1" style="max-width:13.2%; margin-right: -20px !important" ;>
                             <label for="" class="mg-10 form-control-label">Cliente:</label>
@@ -95,34 +99,34 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-12">
+                <div class="">
                     <label class="float-right mg-10 mr-10">
                         <strong>TOTAL DA COMPRA</strong>&nbsp;
                         <input class="mr-10 float-right wd-100 mb-10 form-control btn-disable" type="text" id="valorTotalPedido" value="">
                     </label>
-                </div>
-                <div class="col-12">
                     <label class="float-right mg-10 mr-10">
                         <strong>Total Desconto: &nbsp;</strong><input class="float-right wd-100 mb-10 form-control btn-disable" type="text" id="percentualTotalDescontos" value="">
                         <label class="float-right mg-10"> <strong>%</strong>&nbsp;</label>
                         <input class="mr-10 float-right wd-150 mb-10 form-control btn-disable" type="text" id="valorTotalDescontos" value="">
                     </label>
                 </div>
-                <div>
-                    <label class="float-left mg-10">
-                        <label class="float-right">
-                            <select class="form-control selectpicker" id="select-country">
-                                <option>Selecione a forma de pagamento</option>
-                                @foreach (var formaPagamento in Model.TipoPGs)
-                                {
-                                    <option id="@formaPagamento.Id">@formaPagamento.Nome</option>
-                                }
-                            </select>
-                        </label>
-                    </label>
+                <div class="form-group">
+                    <form action="#" method="get">
+                        <div class="col-12" style="display: flex;">
+                            <button style="width: 180px;" class="form-control btn btn-finalizar" type="button" onclick="add_field()">Forma de pagamento</button>  <span id="selects">
+                                <select class="form-control" id="orig_select">
+                                    <option class="form-control">Selecione</option>
+                                    @foreach (var formaPagamento in Model.TipoPGs)
+                                    {
+                                        <option class="form-control" id="@formaPagamento.Id">@formaPagamento.Nome</option>
+                                    }
+                                </select>
 
-                </div>
-
+                            </span><label class="margin-t5"><strong>&nbsp;Valor recebido:&nbsp;</strong></label><input class="form-control text-center wd-80" placeholder="" maxlength="255" type="text"><label class="margin-t5"><strong>&nbsp;Troco:&nbsp;</strong></label><input class="form-control text-center wd-80" placeholder="" maxlength="255" type="text">
+                            <input class="qtdem btn" type="button" value="-" onclick="decrementaQuantidade(1);">
+                        </div>
+                    </form>
+                </div>  
                 <div class="clearfix"></div>
                 <div class="col-sm-12">
                     <button type="button" class="mb-10 mr-10 btn btn-finalizar float-right" style=" margin-top: 10px; margin-right: 20px;">Finalizar Venda</button>
@@ -250,5 +254,18 @@
 
 
         });
+
+        //função selecionar
+        function add_field() {
+            var container = document.getElementById('selects'),
+                input = document.createElement('select');
+
+            input.innerHTML = document.getElementById('orig_select').innerHTML;
+
+            input.setAttribute('type', 'select');
+            input.setAttribute('name', 'pet');
+            container.appendChild(input);
+        };
+
     </script>
 }

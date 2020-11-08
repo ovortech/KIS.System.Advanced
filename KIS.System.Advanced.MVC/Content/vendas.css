@@ -97,8 +97,8 @@
 .wd-100{
     width: 100px !important;
 }
-.wd-60 {
-    width: 60% !important;
+.wd-80 {
+    width: 80px !important;
 }
 .mg-10 {
     margin: 5px 10px 0px 0px;
@@ -109,10 +109,20 @@
 .mr-10{
     margin-right: 10px;
 }
+.mr-5 {
+    margin-right: 5px;
+}
+.margin-t5 {
+    margin-top: 5px;
+}
 .quebra-l{
     word-break: break-all;
 }
 
+.textarea-obs {
+    height: 100px;
+    width: 250px;
+}
 
 .qtde {
     float: left;
