@@ -76,5 +76,29 @@ namespace KIS.System.Advanced.Business
                 throw new Exception($"Erro ao excluir Vendedor: {ex.Message}.");
             }
         }
+
+        public List<Vendedor> GetAllActive()
+        {
+            try
+            {
+                return dbVendedor.GetAllAtivos().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar Vendedores: {ex.Message}.");
+            }
+        }
+
+        public List<Vendedor> GetAllInactive()
+        {
+            try
+            {
+                return dbVendedor.GetAllInativos().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar Vendedores: {ex.Message}.");
+            }
+        }
     }
 }

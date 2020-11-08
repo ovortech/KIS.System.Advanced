@@ -47,6 +47,30 @@ namespace KIS.System.Advanced.Business
             }
         }
 
+        public List<Usuario> GetAllActive()
+        {
+            try
+            {
+                return dbUsuario.GetAllAtivos().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar usuários: {ex.Message}.");
+            }
+        }
+
+        public List<Usuario> GetAllInactive()
+        {
+            try
+            {
+                return dbUsuario.GetAllInativos().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar usuários: {ex.Message}.");
+            }
+        }
+
         public void Save(Usuario usuario)
         {
             try

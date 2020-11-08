@@ -25,7 +25,31 @@ namespace KIS.System.Advanced.Business
             }
             catch (Exception ex)
             {
-                throw new Exception($"Erro ao pesquisar Clientees: {ex.Message}.");
+                throw new Exception($"Erro ao pesquisar Clientes: {ex.Message}.");
+            }
+        }
+
+        public List<Cliente> GetAllActive()
+        {
+            try
+            {
+                return dbCliente.GetAllAtivos().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar Clientes: {ex.Message}.");
+            }
+        }
+
+        public List<Cliente> GetAllInativos()
+        {
+            try
+            {
+                return dbCliente.GetAllInativos().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar Clientes: {ex.Message}.");
             }
         }
 

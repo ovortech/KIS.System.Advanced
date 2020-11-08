@@ -24,7 +24,29 @@ namespace KIS.System.Advanced.Business
             }
             catch (Exception ex)
             {
-                throw new Exception($"Erro ao pesquisar Despesaes: {ex.Message}.");
+                throw new Exception($"Erro ao pesquisar Despesas: {ex.Message}.");
+            }
+        }
+        public List<Despesa> GetAllActive()
+        {
+            try
+            {
+                return dbDespesa.GetAllAtivos().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar Despesas: {ex.Message}.");
+            }
+        }
+        public List<Despesa> GetAllInactive()
+        {
+            try
+            {
+                return dbDespesa.GetAllInativos().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar Despesas: {ex.Message}.");
             }
         }
 

@@ -28,6 +28,28 @@ namespace KIS.System.Advanced.Business
                 throw new Exception($"Erro ao pesquisar TipoAcessoes: {ex.Message}.");
             }
         }
+        public List<TipoAcesso> GetAllActive()
+        {
+            try
+            {
+                return dbTipoAcesso.GetAllAtivos().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar TipoAcessoes: {ex.Message}.");
+            }
+        }
+        public List<TipoAcesso> GetAllInactive()
+        {
+            try
+            {
+                return dbTipoAcesso.GetAllInativos().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar TipoAcessoes: {ex.Message}.");
+            }
+        }
 
         public TipoAcesso Get(int idTipoAcesso)
         {

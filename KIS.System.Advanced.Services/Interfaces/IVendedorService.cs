@@ -10,5 +10,9 @@ namespace KIS.System.Advanced.Services.Interfaces
         Vendedor Get(int idvendedor);
         void Delete(int idvendedor);
         void Update(Vendedor vendedor);
+        List<Vendedor> GetAllActive();
+        List<Vendedor> GetAllInactive();
+
+
     }
 }

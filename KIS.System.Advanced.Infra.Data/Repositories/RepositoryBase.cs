@@ -45,6 +45,16 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
             return Db.Set<TEntity>().ToList().Where(x => ((ExclusaoLogica)x).ATIVO == false);
         }
 
+        public void RemoveLogic(int id)
+        {
+            if (NotRemoveLogic.Contains(typeof(TEntity).Name))
+                return;
+
+            var obj = GetById(id);
+            ((ExclusaoLogica)obj).ATIVO = false;
+            Update(obj);
+        }
+
         public TEntity GetById(int id)
         {
             return Db.Set<TEntity>().Find(id);
@@ -61,17 +71,7 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
             Db.Set<TEntity>().Remove(obj);
             Db.SaveChanges();
         }
-
-        public void RemoveLogic(int id)
-        {
-            if (NotRemoveLogic.Contains(typeof(TEntity).Name))
-                return;
-
-            var obj = GetById(id);
-            ((ExclusaoLogica)obj).ATIVO = false;
-            Update(obj);
-        }
-
+        
         public void Dispose()
         {
             Db.Dispose();

@@ -29,6 +29,29 @@ namespace KIS.System.Advanced.Business
             }
         }
 
+        public List<Funcao> GetAllActive()
+        {
+            try
+            {
+                return dbFuncao.GetAllAtivos().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar Funcaoes: {ex.Message}.");
+            }
+        }
+        public List<Funcao> GetAllInactive()
+        {
+            try
+            {
+                return dbFuncao.GetAllInativos().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar Funcaoes: {ex.Message}.");
+            }
+        }
+
         public Funcao Get(int idFuncao)
         {
             try

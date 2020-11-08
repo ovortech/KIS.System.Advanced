@@ -38,5 +38,15 @@ namespace KIS.System.Advanced.Services
         {
             vendedorBS.Save(vendedor);
         }
+
+        public List<Vendedor> GetAllActive()
+        {
+            return vendedorBS.GetAllActive();
+        }
+
+        public List<Vendedor> GetAllInactive()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

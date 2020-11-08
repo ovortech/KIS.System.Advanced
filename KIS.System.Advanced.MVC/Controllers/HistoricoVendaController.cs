@@ -1,6 +1,7 @@
 ﻿using KIS.System.Advanced.MVC.Support;
 using KIS.System.Advanced.MVC.Support.Security;
 using KIS.System.Advanced.MVC.ViewModels;
+using KIS.System.Advanced.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,24 @@ namespace KIS.System.Advanced.MVC.Controllers
 {
     public class HistoricoVendaController : CustomControllerBase<HistoricoVM>
     {
-        // GET: HistoricoVenda
+        #region PROPRIEDADES / CONSTRUTOR
+
+        private readonly IVendedorService _vendedorService;
+        public HistoricoVendaController(IVendedorService vendedorService)
+        {
+            _vendedorService = vendedorService;
+        }
+
+        #endregion
+
         public ActionResult Index()
         {
-            return View();
+            var model = new HistoricoVM();
+            var vendedores = _vendedorService.GetAllActive();
+            var vendedoresVM = AutoMapper.Mapper.Map<List<VendedorVM>>(vendedores);
+            model.Vendedores = vendedoresVM;
+
+            return View(model);
         }
 
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
