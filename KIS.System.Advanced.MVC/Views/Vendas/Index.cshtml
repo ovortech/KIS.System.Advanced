@@ -33,7 +33,6 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="" id="box_configs">
-                    @*<label class="float-left mg-10">Pedido Nº:</label> <input class="wd-100 mb-10 form-control btn-disable" id="orderNumber" value="@Model.IdPedido" type="text" />*@
                     <label class="float-left mg-10 mb-10">Vendedor:</label>
                     <select id="idVendedor" class="mb-10 browser-default custom-select col-3">
                         <option selected>Selecione o vendedor</option>
@@ -90,9 +89,7 @@
                                 <th width="10%">Valor Unitário</th>
                                 <th width="10%">Desconto Unitário</th>
                                 <th width="10%">Valor</th>
-                                <th>
-                                </th>
-
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -101,19 +98,19 @@
                 </div>
                 <div class="">
                     <label class="float-right mg-10 mr-10">
-                        <strong>TOTAL DA COMPRA</strong>&nbsp;
+                        <strong>Total da Compra: &nbsp;</strong>
                         <input class="mr-10 float-right wd-100 mb-10 form-control btn-disable" type="text" id="valorTotalPedido" value="">
                     </label>
                     <label class="float-right mg-10 mr-10">
-                        <strong>Total Desconto: &nbsp;</strong><input class="float-right wd-100 mb-10 form-control btn-disable" type="text" id="percentualTotalDescontos" value="">
-                        <label class="float-right mg-10"> <strong>%</strong>&nbsp;</label>
+                        <strong>Total do Desconto: &nbsp;</strong>
                         <input class="mr-10 float-right wd-150 mb-10 form-control btn-disable" type="text" id="valorTotalDescontos" value="">
                     </label>
                 </div>
                 <div class="form-group">
                     <form action="#" method="get">
                         <div class="col-12" style="display: flex;">
-                            <button style="width: 180px;" class="form-control btn btn-finalizar" type="button" onclick="add_field()">Forma de pagamento</button>  <span id="selects">
+                            @*<button style="width: 180px;" class="form-control btn btn-finalizar" type="button" onclick="add_field()">Forma de pagamento</button>*@
+                            <span id="selects">
                                 <select class="form-control" id="orig_select">
                                     <option class="form-control">Selecione</option>
                                     @foreach (var formaPagamento in Model.TipoPGs)
@@ -121,12 +118,33 @@
                                         <option class="form-control" id="@formaPagamento.Id">@formaPagamento.Nome</option>
                                     }
                                 </select>
+                            </span>
+                            <label class="margin-t5">
+                                <strong>&nbsp;Valor recebido:&nbsp;</strong>
+                            </label>
+                            <input class="form-control text-center wd-80" maxlength="255" type="text">
+                            <label class="margin-t5">
+                                <strong>&nbsp;Troco:&nbsp;</strong>
+                            </label>
+                            <input class="form-control text-center wd-80" maxlength="255" type="text">
+                            <input class="qtdema btn" type="button" value="+" onclick="adicionaOuRemoveSegundaFormaPagamento();">
 
-                            </span><label class="margin-t5"><strong>&nbsp;Valor recebido:&nbsp;</strong></label><input class="form-control text-center wd-80" placeholder="" maxlength="255" type="text"><label class="margin-t5"><strong>&nbsp;Troco:&nbsp;</strong></label><input class="form-control text-center wd-80" placeholder="" maxlength="255" type="text">
-                            <input class="qtdem btn" type="button" value="-" onclick="decrementaQuantidade(1);">
+                            <span id="selects">
+                                <select class="form-control" id="orig_select">
+                                    <option class="form-control">Selecione</option>
+                                    @foreach (var formaPagamento in Model.TipoPGs)
+                                    {
+                                        <option class="form-control" id="@formaPagamento.Id">@formaPagamento.Nome</option>
+                                    }
+                                </select>
+                            </span>
+                            <label class="margin-t5">
+                                <strong>&nbsp;Valor recebido:&nbsp;</strong>
+                            </label>
+                            <input class="form-control text-center wd-80" maxlength="255" type="text">
                         </div>
                     </form>
-                </div>  
+                </div>
                 <div class="clearfix"></div>
                 <div class="col-sm-12">
                     <button type="button" class="mb-10 mr-10 btn btn-finalizar float-right" style=" margin-top: 10px; margin-right: 20px;">Finalizar Venda</button>
@@ -154,33 +172,36 @@
             }
 
             let tr = `<tr id="${produto.IdProduto}">
-                            <td class="tb-style text-center" width="5%">${produto.CodProduto}</td>
-                            <td class="tb-style" width="30%">${produto.NomeProduto}</td>
-                            <td class="tb-style" width="30%">
-                                <div class="form-group">
-                                    <textarea class="form-control" rows="1"></textarea>
-                                </div>
-                            </td>
-                            <td class="tb-style" width="10%">
-                                <input class="qtdem btn" type="button" value="-" onclick="decrementaQuantidade(${produto.IdProduto});" />
-                                <input id="quantidade_${produto.IdProduto}" class="qtde" type="text" value="1" onchange="calculaValorTotalProdutos(${produto.IdProduto});" disabled/>
-                                <input class="qtdema btn" type="button" value="+" onclick="incrementaQuantidade(${produto.IdProduto});" />
-                            </td>
-                            <td class="tb-style" width="3%"><input id="valor_${produto.IdProduto}" data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'"class="wd-100 form-control" type="text" value="${produto.ValorProduto}" onchange="calculaValorTotalProdutos(${produto.IdProduto});"/></td>
-                            <td class="tb-style" width="3%"><input id="desconto_${produto.IdProduto}" class="wd-100 form-control" type="text" value="00,00" onchange="calculaValorTotalProdutos(${produto.IdProduto});"/></td>
-                            <td id="total_${produto.IdProduto}" class="tb-style" width="4%">${produto.ValorProduto}</td>
-                            <td class="tb-style" width="10%"><button type="button" class="btn btn-remove" onclick="removeProdutoDaLista(${produto.IdProduto});">Remover</button></td>
-                        </tr>`;
+                                        <td class="tb-style text-center" width="5%">${produto.CodProduto}</td>
+                                        <td class="tb-style" width="30%">${produto.NomeProduto}</td>
+                                        <td class="tb-style" width="30%">
+                                            <div class="form-group">
+                                                <textarea class="form-control" rows="1"></textarea>
+                                            </div>
+                                        </td>
+                                        <td class="tb-style" width="10%">
+                                            <input class="qtdem btn" type="button" value="-" onclick="decrementaQuantidade(${produto.IdProduto});" />
+                                            <input id="quantidade_${produto.IdProduto}" class="qtde" type="text" value="1" onchange="calculaValorTotalProdutos(${produto.IdProduto});" disabled/>
+                                            <input class="qtdema btn" type="button" value="+" onclick="incrementaQuantidade(${produto.IdProduto});" />
+                                        </td>
+                                        <td class="tb-style" width="3%"><input id="valor_${produto.IdProduto}" data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'"class="wd-100 form-control" type="text" value="${produto.ValorProduto}" onchange="calculaValorTotalProdutos(${produto.IdProduto});"/></td>
+                                        <td class="tb-style" width="3%"><input id="desconto_${produto.IdProduto}" class="wd-100 form-control" type="text" value="00,00" onchange="calculaValorTotalProdutos(${produto.IdProduto});"/></td>
+                                        <td id="total_${produto.IdProduto}" class="tb-style" width="4%">${produto.ValorProduto}</td>
+                                        <td class="tb-style" width="10%"><button type="button" class="btn btn-remove" onclick="removeProdutoDaLista(${produto.IdProduto});">Remover</button></td>
+                                    </tr>`;
 
             $("#listaProdutos tbody").append(tr);
 
+            if (quantidadeAtualItensNaLista() == 1) {
+                $("#valorTotalPedido").val(produto.ValorProduto.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+                $("#valorTotalDescontos").val((0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+            }
         }
 
         function atualizaTotalPedido() {
-            debugger;
             let valorTotalDescontos = 0;
             let valorTotalPedido = 0;
-            $('#listaProdutos > tbody  > tr').each(function (index, tr) {
+            $('#listaProdutos > tbody  > tr').each(function () {
                 let idProduto = $(this).attr('id');
                 let quantidadeAtual = quantidadeAtualProdutosNaLista(idProduto);
                 let valorDesconto = valorDescontoUnitario(idProduto);
@@ -222,6 +243,10 @@
             }
         }
 
+        function quantidadeAtualItensNaLista() {
+            return $('#listaProdutos tbody tr').length;
+        }
+
         function quantidadeAtualProdutosNaLista(idProduto) {
             return parseInt($(`#listaProdutos tbody tr`).find(`#quantidade_${idProduto}`).val());
         }
@@ -241,6 +266,7 @@
         function removeProdutoDaLista(idProduto) {
             if (produtoNaLista(idProduto)) {
                 $("#listaProdutos tbody").find(`#${idProduto}`).remove();
+                atualizaTotalPedido();
             }
         }
 
@@ -248,24 +274,25 @@
             return $('#listaProdutos').find(`#${idProduto}`).length > 0;
         }
 
+        function adicionaOuRemoveSegundaFormaPagamento() {
+            console.log('olar');
+        }
+
+        //função selecionar
+        //function add_field() {
+        //    var container = document.getElementById('selects'),
+        //        input = document.createElement('select');
+
+        //    input.innerHTML = document.getElementById('orig_select').innerHTML;
+
+        //    input.setAttribute('type', 'select');
+        //    input.setAttribute('name', 'pet');
+        //    container.appendChild(input);
+        //};
+
         $(document).ready(function () {
 
 
-
-
         });
-
-        //função selecionar
-        function add_field() {
-            var container = document.getElementById('selects'),
-                input = document.createElement('select');
-
-            input.innerHTML = document.getElementById('orig_select').innerHTML;
-
-            input.setAttribute('type', 'select');
-            input.setAttribute('name', 'pet');
-            container.appendChild(input);
-        };
-
     </script>
 }
