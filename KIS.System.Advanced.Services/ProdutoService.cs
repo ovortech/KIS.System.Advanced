@@ -39,5 +39,14 @@ namespace KIS.System.Advanced.Services
             produtoBS.Save(produto);
         }
 
+        public List<Produto> GetAllActive()
+        {
+            return produtoBS.GetAllActive();
+        }
+
+        public List<Produto> GetAllInactive()
+        {
+            return produtoBS.GetAllInactive();
+        }
     }
 }

@@ -7,5 +7,9 @@ namespace KIS.System.Advanced.MVC.ViewModels
 {
     public class HistoricoVM
     {
+        public List<VendedorVM> Vendedores { get; set; }
+
+        //public List<PedidoVM> Pedidos { get; set; }
+
     }
 }

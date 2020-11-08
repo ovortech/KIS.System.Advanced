@@ -26,6 +26,29 @@ namespace KIS.System.Advanced.Business
                 throw new Exception($"Erro ao pesquisar produtos: {ex.Message}.");
             }
         }
+        public List<Produto> GetAllActive()
+        {
+            try
+            {
+                return dbProduto.GetAllAtivos().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar produtos: {ex.Message}.");
+            }
+        }
+
+        public List<Produto> GetAllInactive()
+        {
+            try
+            {
+                return dbProduto.GetAllInativos().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar produtos: {ex.Message}.");
+            }
+        }
 
         public Produto Get(int idProduto)
         {

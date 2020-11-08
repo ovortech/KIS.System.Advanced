@@ -10,6 +10,8 @@ namespace KIS.System.Advanced.Services.Interfaces
     public interface ITipoPagamentoService
     {
         List<TipoPg> GetAll();
+        List<TipoPg> GetAllActive();
+        List<TipoPg> GetAllInactive();
         TipoPg Get(int idFormaPagamento);
         void Save(TipoPg tipoPagamento);
         void Delete(int idTipoPagamento);

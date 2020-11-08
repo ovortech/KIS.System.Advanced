@@ -27,7 +27,28 @@ namespace KIS.System.Advanced.Business
                 throw new Exception($"Erro ao pesquisar Contratoes: {ex.Message}.");
             }
         }
-
+        public List<Contrato> GetAllActive()
+        {
+            try
+            {
+                return dbContrato.GetAllAtivos().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar Contratoes: {ex.Message}.");
+            }
+        }
+        public List<Contrato> GetAllInactive()
+        {
+            try
+            {
+                return dbContrato.GetAllInativos().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar Contratoes: {ex.Message}.");
+            }
+        }
         public Contrato Get(int idContrato)
         {
             try

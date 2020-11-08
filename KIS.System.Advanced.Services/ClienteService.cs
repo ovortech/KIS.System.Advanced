@@ -32,6 +32,16 @@ namespace KIS.System.Advanced.Services
             return _clienteBS.GetAll();
         }
 
+        public List<Cliente> GetAllActive()
+        {
+            return _clienteBS.GetAllActive();
+        }
+
+        public List<Cliente> GetAllInactive()
+        {
+            return _clienteBS.GetAllInativos();
+        }
+
         public void Save(Cliente cliente)
         {
             _clienteBS.Save(cliente);

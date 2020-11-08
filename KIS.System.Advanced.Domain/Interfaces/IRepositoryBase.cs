@@ -14,5 +14,9 @@ namespace KIS.System.Advanced.Domain.Interfaces
         void Update(TEntity obj);
         void Remove(TEntity obj);
         void Dispose();
+        IEnumerable<TEntity> GetAllAtivos();
+        IEnumerable<TEntity> GetAllInativos();
+        void RemoveLogic(int id);
+
     }
 }

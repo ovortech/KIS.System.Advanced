@@ -28,6 +28,30 @@ namespace KIS.System.Advanced.Business
             }
         }
 
+        public List<TipoPg> GetAllActive()
+        {
+            try
+            {
+                return dbTipoPg.GetAllAtivos().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar TipoPges: {ex.Message}.");
+            }
+        }
+
+        public List<TipoPg> GetAllInactive()
+        {
+            try
+            {
+                return dbTipoPg.GetAllInativos().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar TipoPges: {ex.Message}.");
+            }
+        }
+
         public TipoPg Get(int idTipoPg)
         {
             try

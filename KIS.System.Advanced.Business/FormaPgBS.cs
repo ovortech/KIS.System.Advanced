@@ -29,6 +29,30 @@ namespace KIS.System.Advanced.Business
             }
         }
 
+        public List<FormaPg> GetAllActive()
+        {
+            try
+            {
+                return dbFormaPg.GetAllAtivos().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar FormaPges: {ex.Message}.");
+            }
+        }
+
+        public List<FormaPg> GetAllInactive()
+        {
+            try
+            {
+                return dbFormaPg.GetAllInativos().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar FormaPges: {ex.Message}.");
+            }
+        }
+
         public FormaPg Get(int idFormaPg)
         {
             try

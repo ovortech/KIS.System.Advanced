@@ -28,6 +28,29 @@ namespace KIS.System.Advanced.Business
             }
         }
 
+        public List<TipoCancelamento> GetAllActive()
+        {
+            try
+            {
+                return dbTipoCancelamento.GetAllInativos().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar TipoCancelamentoes: {ex.Message}.");
+            }
+        }
+        public List<TipoCancelamento> GetAllInactive()
+        {
+            try
+            {
+                return dbTipoCancelamento.GetAllInativos().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar TipoCancelamentoes: {ex.Message}.");
+            }
+        }
+
         public TipoCancelamento Get(int idTipoCancelamento)
         {
             try

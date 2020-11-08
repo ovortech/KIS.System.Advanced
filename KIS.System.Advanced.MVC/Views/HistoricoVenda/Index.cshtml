@@ -4,7 +4,7 @@
 
 }
 
-@model IEnumerable<KIS.System.Advanced.MVC.ViewModels.VendedorVM>
+@model KIS.System.Advanced.MVC.ViewModels.HistoricoVM
 
 <!-- Bootstrap core CSS -->
 <link href="~/Content/bootstrap.min.css" rel="stylesheet">
@@ -41,13 +41,12 @@
             <div class="col-md-12">
                 <div class="" id="box_configs col-md-12">
                     <label class="float-left mg-10 mb-10">Selecione o Vendedor:   </label>
-                    <select class="mb-10 browser-default custom-select col-3">
-                        <option selected>Todos</option>
-                        <option value="1">Marcio</option>
-                        <option value="2">Everton</option>
-                        <option value="3">Paulo</option>
-                        <option value="3">J Rubens</option>
-                        <option value="3">Guilherme</option>
+                    <select id="idVendedor" class="mb-10 browser-default custom-select col-3">
+                        <option selected>Selecione o vendedor</option>
+                        @foreach (var vendedor in Model.Vendedores)
+                        {
+                            <option value="@vendedor.Id">@vendedor.Nome</option>
+                        }
                     </select>
                 </div>
                 <div class="row" id="box_configs">

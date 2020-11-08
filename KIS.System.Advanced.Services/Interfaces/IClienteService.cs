@@ -10,6 +10,8 @@ namespace KIS.System.Advanced.Services.Interfaces
     public interface IClienteService
     {
         List<Cliente> GetAll();
+        List<Cliente> GetAllActive();
+        List<Cliente> GetAllInactive();
         void Save(Cliente cliente);
         Cliente Get(int idCliente);
         void Delete(int idCliente);
