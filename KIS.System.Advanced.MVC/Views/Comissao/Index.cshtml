@@ -78,14 +78,14 @@
                             {
 
                                 <tr id="linha_@(item.Id)">
-                                    <td class="tb-style text-center" width="5%">@item.TipoVenda</td>
+                                    <td class="tb-style text-center" width="5%">@item.TipoVenda<input type="hidden" class="id" value="@item.Id" /></td>
                                     <td class="tb-style text-center" width="5%">@item.DataVenda</td>
                                     <td class="tb-style text-center" width="20%">@item.NomeProduto</td>
                                     <td class="tb-style text-center" width="20%">@item.Descricao</td>
                                     <td class="tb-style text-center Quantidade" width="5%">@item.Quantidade</td>
                                     <td class="tb-style text-center ValorVenda" width="3%">@item.ValorVenda</td>
                                     <td class="tb-style text-center" width="3%"><input class="wd-100 form-control text-center ValorCustoUnitario @item.Id" type="text" onchange="myFunction(@item.Id)" value="@item.ValorCustoUnitario" placeholder=""></td>
-                                    <td class="tb-style text-center" width="4%"><h5 class="ValorLucro" >@item.ValorLucro</h5></td>
+                                    <td class="tb-style text-center" width="4%"><h5 class="ValorLucro">@item.ValorLucro</h5></td>
                                     <td class="tb-style text-center" width="4%"><input class="wd-100 form-control text-center PercComissao" type="text" value="@item.PercComissao" onchange="myFunction(@item.Id)" placeholder="10%"></td>
                                     <td class="tb-style text-center" width="10%">
                                         <input type="checkbox" id="myCheck" value="@item.Pago">
@@ -132,8 +132,8 @@
             let custo = $(`#linha_${id} td .ValorCustoUnitario`).val().replace(',', '.');
             let pecentual = $(`#linha_${id} td .PercComissao`).val();
             console.log(`percentual puro: ${pecentual}`)
-            console.log(`percentual pecentual.length: ${pecentual+"".length}`)
-            if (pecentual+" ".length == 1) {
+            console.log(`percentual pecentual.length: ${pecentual + "".length}`)
+            if (pecentual.length == 1) {
                 pecentual = "0.0" + pecentual
             } else {
                 pecentual = "0." + pecentual
@@ -144,78 +144,86 @@
         }
         $(document).ready(function () {
 
-            //$(".calculo")
-            //    .blur(function (ev) {
-            //        alert("blur")
-            //    });
 
-            $('#items').live('pageinit', function (event) {
-                $('#additem').click(function () {
-                    //alert("add clicked");
-                    var request = $.ajax({
-                        url: "http://www.furnguy.com/app-pages/additem.php",
-                        type: "POST",
-                        data: { COUNTER: count },
-                        dataType: "html"
-                    });
+            const linha = $("#lista-produtos tr[id]");
+            //const linha = $("#lista-produtos tr td input .id");
 
-                    request.done(function (html) {
-                        //alert("here");
-                        if (html != '') {
-                            $('#salesitems').append(html).trigger('create');
-                        }
-                    });
-
-                    request.fail(function (jqXHR, textStatus) {
-                        alert("Request failed: " + textStatus);
-                    });
-                    count++;
-                });
-            });
-        });
-
-
-        function deleteItem() {
-            $('table').click(function () {
-                $(this).parent().remove();
-            });
-        };
-        function increaseQty() {
-            var currentVal = parseInt($("#qty").val());
-            if (currentVal != NaN) {
-                $("#qty").val(currentVal + 1);
+            for (var i = 0; i < linha.length; i++) {
+                console.log($(linha[i]).attr('id'));
             }
-        };
-        function decreaseQty() {
-            var currentVal = parseInt($("#qty").val());
-            if (currentVal != NaN) {
-                $("#qty").val(currentVal - 1);
-            }
-        };
-
-
-        $(function () {
-            $('.selectpicker').selectpicker();
         });
+        //$(".calculo")
+        //    .blur(function (ev) {
+        //        alert("blur")
+        //    });
+
+        //    $('#items').live('pageinit', function (event) {
+        //        $('#additem').click(function () {
+        //            //alert("add clicked");
+        //            var request = $.ajax({
+        //                url: "http://www.furnguy.com/app-pages/additem.php",
+        //                type: "POST",
+        //                data: { COUNTER: count },
+        //                dataType: "html"
+        //            });
+
+        //            request.done(function (html) {
+        //                //alert("here");
+        //                if (html != '') {
+        //                    $('#salesitems').append(html).trigger('create');
+        //                }
+        //            });
+
+        //            request.fail(function (jqXHR, textStatus) {
+        //                alert("Request failed: " + textStatus);
+        //            });
+        //            count++;
+        //        });
+        //    });
+        //});
 
 
-        $(document).ready(function () {
-            $('#dtVerticalScrollExample').DataTable({
-                "scrollY": "200px",
-                "scrollCollapse": true,
-            });
-            $('.dataTables_length').addClass('bs-select');
-        });
+        //function deleteItem() {
+        //    $('table').click(function () {
+        //        $(this).parent().remove();
+        //    });
+        //};
+        //function increaseQty() {
+        //    var currentVal = parseInt($("#qty").val());
+        //    if (currentVal != NaN) {
+        //        $("#qty").val(currentVal + 1);
+        //    }
+        //};
+        //function decreaseQty() {
+        //    var currentVal = parseInt($("#qty").val());
+        //    if (currentVal != NaN) {
+        //        $("#qty").val(currentVal - 1);
+        //    }
+        //};
 
-        $(document).ready(function () {
-            $(document).on('keyup', '#userDropdown .bs-searchbox input', function (e) {
-                alert($(this).val());
-            });
 
-            $(document).on('keyup', '#cityDropdown .bs-searchbox input', function (e) {
-                alert($(this).val());
-            });
-        });
+        //$(function () {
+        //    $('.selectpicker').selectpicker();
+        //});
+
+
+        //$(document).ready(function () {
+        //    $('#dtVerticalScrollExample').DataTable({
+        //        "scrollY": "200px",
+        //        "scrollCollapse": true,
+        //    });
+        //    $('.dataTables_length').addClass('bs-select');
+        //});
+
+        //$(document).ready(function () {
+        //    $(document).on('keyup', '#userDropdown .bs-searchbox input', function (e) {
+        //        alert($(this).val());
+        //    });
+
+        //    $(document).on('keyup', '#cityDropdown .bs-searchbox input', function (e) {
+        //        alert($(this).val());
+        //    });
+        //});
 
         //Script do checkbox
         function check() {
