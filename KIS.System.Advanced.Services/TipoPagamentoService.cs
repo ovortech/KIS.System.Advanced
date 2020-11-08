@@ -33,6 +33,16 @@ namespace KIS.System.Advanced.Services
             return _tipoPagamentoBS.GetAll();
         }
 
+        public List<TipoPg> GetAllActive()
+        {
+            return _tipoPagamentoBS.GetAllActive();
+        }
+
+        public List<TipoPg> GetAllInactive()
+        {
+            return _tipoPagamentoBS.GetAllInactive();
+        }
+
         public void Save(TipoPg tipoPagamento)
         {
             _tipoPagamentoBS.Save(tipoPagamento);

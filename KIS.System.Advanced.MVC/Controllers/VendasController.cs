@@ -34,7 +34,7 @@ namespace KIS.System.Advanced.MVC.Controllers
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         public ActionResult Index()
         {
-            var pedido = CarregarNovoPedido();
+            var pedido = CarregarModel();
             return View(pedido);
         }
 
@@ -45,19 +45,19 @@ namespace KIS.System.Advanced.MVC.Controllers
             return PartialView(result);
         }
         
-        public VendasVM CarregarNovoPedido()
+        public VendasVM CarregarModel()
         {
             var pedido = new VendasVM();
 
-            var clientes = _clienteService.GetAll();
+            var clientes = _clienteService.GetAllActive();
             var clientesVM = AutoMapper.Mapper.Map<List<ClienteVM>>(clientes);
             pedido.Clientes = clientesVM;
 
-            var produtos = _produtoService.GetAll();
+            var produtos = _produtoService.GetAllActive();
             var produtosVM = AutoMapper.Mapper.Map<List<ProdutoVM>>(produtos);
             pedido.Produtos = produtosVM;
 
-            var tiposPagamento = _tipoPagamentoService.GetAll();
+            var tiposPagamento = _tipoPagamentoService.GetAllActive();
             var tiposPagamentoVM = AutoMapper.Mapper.Map<List<TipoPGVM>>(tiposPagamento);
             pedido.TipoPGs = tiposPagamentoVM;
 
@@ -66,9 +66,6 @@ namespace KIS.System.Advanced.MVC.Controllers
             pedido.Vendedores = vendedoresVM;
 
             return pedido;
-
         }
-
-
     }
 }

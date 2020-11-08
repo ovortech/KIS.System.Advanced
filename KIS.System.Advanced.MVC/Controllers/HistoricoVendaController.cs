@@ -24,11 +24,7 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         public ActionResult Index()
         {
-            var model = new HistoricoVM();
-            var vendedores = _vendedorService.GetAllActive();
-            var vendedoresVM = AutoMapper.Mapper.Map<List<VendedorVM>>(vendedores);
-            model.Vendedores = vendedoresVM;
-
+            HistoricoVM model = CarregarModel();
             return View(model);
         }
 
@@ -37,6 +33,15 @@ namespace KIS.System.Advanced.MVC.Controllers
         {
             var result = new UsuarioVM();
             return PartialView(result);
+        }
+
+        private HistoricoVM CarregarModel()
+        {
+            var model = new HistoricoVM();
+            var vendedores = _vendedorService.GetAll();
+            var vendedoresVM = AutoMapper.Mapper.Map<List<VendedorVM>>(vendedores);
+            model.Vendedores = vendedoresVM;
+            return model;
         }
 
     }

@@ -9,5 +9,7 @@ namespace KIS.System.Advanced.MVC.ViewModels
     {
         public List<VendedorVM> Vendedores { get; set; }
 
+        //public List<PedidoVM> Pedidos { get; set; }
+
     }
 }
