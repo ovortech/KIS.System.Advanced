@@ -67,11 +67,10 @@
                                 {
                                     <option data-tokens="@produto.NomeProduto" value="@produto.IdProduto">@produto.NomeProduto</option>
                                 }
-                                @*<option data-tokens="china" style="margin-left: 10px;">Chave de carro</option>*@
                             </select>
                         </div>
                         <div class="col-sm-3">
-                            <button type="button" class="btn-finalizar btn btn-block">Adicionar Produto</button>
+                            <button type="button" id="adicionarProduto" class="btn-finalizar btn btn-block">Adicionar Produto</button>
                         </div>
                     </div>
                 </div>
@@ -93,24 +92,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @*<tr>
-                                <td class="tb-style text-center" width="5%">101</td>
-                                <td class="tb-style" width="30%">Chave de carro</td>
-                                <td class="tb-style" width="30%">
-                                    <div class="form-group">
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
-                                    </div>
-                                </td>
-                                <td class="tb-style" width="10%">
-                                    <input class="qtdem btn" type="button" value="-" id="decrease" onclick="decreaseQty();" />
-                                    <input class="qtde" type="text" name="qty" id="qty" value="1" />
-                                    <input class="qtdema btn" type="button" value="+" id="increase" onclick="increaseQty();" />
-                                </td>
-                                <td class="tb-style" width="3%"><input class="wd-100 form-control" type="text" placeholder=""></td>
-                                <td class="tb-style" width="3%"><input class="wd-100 form-control" type="text" placeholder=""></td>
-                                <td class="tb-style" width="4%">110,00</td>
-                                <td class="tb-style" width="10%"><button type="button" class="btn btn-remove">Remover</button></td>
-                            </tr>
+                        </tbody>
                     </table>
                 </div>
                 <div class="col-12">
@@ -155,7 +137,6 @@
     <script type="text/javascript">
 
         $("#adicionarProduto").click(() => {
-            debugger;
             let idProduto = $("#cmbProdutos").val();
             let produto = callActionGet('produto', 'Get', { idProduto: idProduto })
 
@@ -177,14 +158,14 @@
                             </div>
                         </td>
                         <td class="tb-style" width="10%">
-                            <input class="qtdem" type="button" value="-" onclick="decrementaQuantidade(${produto.IdProduto});" />
+                            <input class="qtdem btn" type="button" value="-" onclick="decrementaQuantidade(${produto.IdProduto});" />
                             <input class="qtde" type="text" value="1" min="1" max="99"/>
-                            <input class="qtdema" type="button" value="+" onclick="incrementaQuantidade(${produto.IdProduto});" />
+                            <input class="qtdema btn" type="button" value="+" onclick="incrementaQuantidade(${produto.IdProduto});" />
                         </td>
                         <td class="tb-style" width="3%"><input class="wd-100 form-control" type="text" /></td>
                         <td class="tb-style" width="3%"><input class="wd-100 form-control" type="text" /></td>
                         <td class="tb-style" width="4%">${produto.ValorProduto}</td>
-                        <td class="tb-style" width="10%"><button type="button" class="btn-remove" onclick="removeProdutoDaLista(${produto.IdProduto});">Remover</button></td>
+                        <td class="tb-style" width="10%"><button type="button" class="btn btn-remove" onclick="removeProdutoDaLista(${produto.IdProduto});">Remover</button></td>
                       </tr>`;
 
             $("#listaProdutos tbody").append(tr);
@@ -200,29 +181,7 @@
         function produtoNaLista(idProduto) {
             return $('#listaProdutos').find(`#produto_${idProduto}`).length > 0;
         }
-        //function deleteItem() {
-        //    $('#lista-produtos').click(function () {
-        //        $(this).parent().remove();
-        //    });
-        //};
 
-        //function increaseQty() {
-        //    var currentVal = parseInt($("#qty").val());
-        //    if (currentVal != NaN) {
-        //        $("#qty").val(currentVal + 1);
-        //    }
-        //};
-
-        //function decreaseQty() {
-        //    var currentVal = parseInt($("#qty").val());
-        //    if (currentVal != NaN) {
-        //        $("#qty").val(currentVal - 1);
-        //    }
-        //};
-
-        //$(function () {
-        //    $('.selectpicker').selectpicker();
-        //});
 
         $(document).ready(function () {
 
