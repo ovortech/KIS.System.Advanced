@@ -32,10 +32,10 @@ namespace KIS.System.Advanced.Services
             return _pedidoBS.GetAll();
         }
 
-        public int GetNextOrderNumber()
-        {
-            return _pedidoBS.GetNextOrderNumber();
-        }
+        //public int GetNextOrderNumber()
+        //{
+        //    return _pedidoBS.GetNextOrderNumber();
+        //}
 
         public void Save(Pedido pedido)
         {

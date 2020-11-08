@@ -41,17 +41,17 @@ namespace KIS.System.Advanced.Business
             }
         }
 
-        public int GetNextOrderNumber()
-        {
-            try
-            {
-                return dbPedido.GetNextOrderNumber();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Erro ao obter o próximo número de Pedido: {ex.Message}.");
-            }
-        }
+        //public int GetNextOrderNumber()
+        //{
+        //    try
+        //    {
+        //        return dbPedido.GetNextOrderNumber();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception($"Erro ao obter o próximo número de Pedido: {ex.Message}.");
+        //    }
+        //}
 
         public void Save(Pedido Pedido)
         {

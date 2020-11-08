@@ -33,7 +33,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="" id="box_configs">
-                    <label class="float-left mg-10">Pedido Nº:</label> <input class="wd-100 mb-10 form-control btn-disable" id="orderNumber" value="@Model.IdPedido" type="text" />
+                    @*<label class="float-left mg-10">Pedido Nº:</label> <input class="wd-100 mb-10 form-control btn-disable" id="orderNumber" value="@Model.IdPedido" type="text" />*@
                     <label class="float-left mg-10 mb-10">Vendedor:</label>
                     <select id="idVendedor" class="mb-10 browser-default custom-select col-3">
                         <option selected>Selecione o vendedor</option>
@@ -149,7 +149,7 @@
                 return;
             }
 
-            let tr = `<tr id="produto_${produto.IdProduto}">
+            let tr = `<tr id="${produto.IdProduto}">
                             <td class="tb-style text-center" width="5%">${produto.CodProduto}</td>
                             <td class="tb-style" width="30%">${produto.NomeProduto}</td>
                             <td class="tb-style" width="30%">
@@ -162,7 +162,7 @@
                                 <input id="quantidade_${produto.IdProduto}" class="qtde" type="text" value="1" onchange="calculaValorTotalProdutos(${produto.IdProduto});" disabled/>
                                 <input class="qtdema btn" type="button" value="+" onclick="incrementaQuantidade(${produto.IdProduto});" />
                             </td>
-                            <td class="tb-style" width="3%"><input id="valor_${produto.IdProduto}" class="wd-100 form-control" type="text" value="${produto.ValorProduto}" onchange="calculaValorTotalProdutos(${produto.IdProduto});"/></td>
+                            <td class="tb-style" width="3%"><input id="valor_${produto.IdProduto}" data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'"class="wd-100 form-control" type="text" value="${produto.ValorProduto}" onchange="calculaValorTotalProdutos(${produto.IdProduto});"/></td>
                             <td class="tb-style" width="3%"><input id="desconto_${produto.IdProduto}" class="wd-100 form-control" type="text" value="00,00" onchange="calculaValorTotalProdutos(${produto.IdProduto});"/></td>
                             <td id="total_${produto.IdProduto}" class="tb-style" width="4%">${produto.ValorProduto}</td>
                             <td class="tb-style" width="10%"><button type="button" class="btn btn-remove" onclick="removeProdutoDaLista(${produto.IdProduto});">Remover</button></td>
@@ -177,7 +177,7 @@
             let valorTotalDescontos = 0;
             let valorTotalPedido = 0;
             $('#listaProdutos > tbody  > tr').each(function (index, tr) {
-                let idProduto = $(this).attr('id').replace("produto_", "");
+                let idProduto = $(this).attr('id');
                 let quantidadeAtual = quantidadeAtualProdutosNaLista(idProduto);
                 let valorDesconto = valorDescontoUnitario(idProduto);
 
@@ -186,10 +186,7 @@
 
                 let totalProduto = valorTotalProduto(idProduto);
                 valorTotalPedido += totalProduto;
-
             });
-            console.log(valorTotalDescontos)
-            console.log(valorTotalPedido)
             $("#valorTotalPedido").val(valorTotalPedido.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
             $("#valorTotalDescontos").val(valorTotalDescontos.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
         }
@@ -239,12 +236,12 @@
 
         function removeProdutoDaLista(idProduto) {
             if (produtoNaLista(idProduto)) {
-                $("#listaProdutos tbody").find(`#produto_${idProduto}`).remove();
+                $("#listaProdutos tbody").find(`#${idProduto}`).remove();
             }
         }
 
         function produtoNaLista(idProduto) {
-            return $('#listaProdutos').find(`#produto_${idProduto}`).length > 0;
+            return $('#listaProdutos').find(`#${idProduto}`).length > 0;
         }
 
         $(document).ready(function () {

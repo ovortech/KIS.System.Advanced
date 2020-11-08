@@ -48,17 +48,10 @@ namespace KIS.System.Advanced.MVC.Controllers
             return PartialView(result);
         }
         
-        [HttpGet]
-        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
-        public int GetNextOrderNumber()
-        {
-            return _pedidoService.GetNextOrderNumber();
-        }
-
         public VendasVM CarregarNovoPedido()
         {
             var pedido = new VendasVM();
-            pedido.IdPedido = GetNextOrderNumber();
+            //pedido.IdPedido = GetNextOrderNumber();
 
             var clientes = _clienteService.GetAll();
             var clientesVM = AutoMapper.Mapper.Map<List<ClienteVM>>(clientes);

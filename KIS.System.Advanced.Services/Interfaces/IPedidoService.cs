@@ -14,7 +14,7 @@ namespace KIS.System.Advanced.Services.Interfaces
         Pedido Get(int idProduto);
         void Delete(int idProduto);
         void Update(Pedido produto);
-        int GetNextOrderNumber();
+        //int GetNextOrderNumber();
 
     }
 }
