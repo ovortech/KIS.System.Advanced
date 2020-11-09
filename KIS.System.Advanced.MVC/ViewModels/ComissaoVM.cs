@@ -8,6 +8,7 @@ namespace KIS.System.Advanced.MVC.ViewModels
 {
     public class ComissaoVM
     {      
+        public int IdComissao { get; set; }
         public int IdItemPedido { get; set; }
         public DateTime DataVenda { get; internal set; }
         public string TipoVenda { get; set; }

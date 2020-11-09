@@ -22,6 +22,10 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
 
         public void Add(TEntity obj)
         {
+            if (NotRemoveLogic.Contains(typeof(TEntity).Name))
+                return;
+            
+            ((ExclusaoLogica)obj).ATIVO = true;
             Db.Set<TEntity>().Add(obj);
             Db.SaveChanges();
         }

@@ -31,7 +31,7 @@ namespace Kist.System.Adavanced.Test.Data
 
                 Cliente cliente = new Cliente
                 {
-                    NOME_CLIENTE = "Everton",
+                    NOME_CLIENTE = "Nike Brasil",
 
                 };
 

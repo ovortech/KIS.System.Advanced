@@ -8,6 +8,7 @@ namespace KIS.System.Advanced.Domain.Dto
 {
     public class ComissaoDto
     {
+        public int IdComissao { get; set; }
         public int IdItemPedido { get; set; }
         public int IdVendedor { get; set; }
         public DateTime DataVenda { get; set; }
