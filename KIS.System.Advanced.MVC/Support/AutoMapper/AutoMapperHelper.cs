@@ -54,8 +54,9 @@ namespace KIS.System.Advanced.MVC.Support
         private static void MappingComissao(IMapperConfigurationExpression cfg)
         {
             cfg.CreateMap<ComissaoVM, Comissao>()
+                .ForMember(destinationMember: vm => vm.ID_COMISSAO, memberOptions: map => map.MapFrom(sourceMember: s => s.IdComissao))
                 .ForMember(destinationMember: vm => vm.ID_ITEM_PEDIDO, memberOptions: map => map.MapFrom(sourceMember: s => s.IdItemPedido))
-                .ForMember(destinationMember: vm => vm.VALOR_CUSTO_COMISSAO, memberOptions: map => map.MapFrom(sourceMember: s => s.ValorVenda))
+                .ForMember(destinationMember: vm => vm.VALOR_CUSTO_COMISSAO, memberOptions: map => map.MapFrom(sourceMember: s => s.ValorCustoUnitario))
                 .ForMember(destinationMember: vm => vm.VALOR_LUCRO_COMISSAO, memberOptions: map => map.MapFrom(sourceMember: s => s.ValorLucro))
                 .ForMember(destinationMember: vm => vm.PERCENTUAL_COMISSAO, memberOptions: map => map.MapFrom(sourceMember: s => s.PercComissao))
                 .ForMember(destinationMember: vm => vm.PAGO_COMISSAO, memberOptions: map => map.MapFrom(sourceMember: s => s.Pago))

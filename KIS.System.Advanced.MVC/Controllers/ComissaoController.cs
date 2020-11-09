@@ -37,9 +37,9 @@ namespace KIS.System.Advanced.MVC.Controllers
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         [HttpPost]
         public JsonResult Save(ComissaoVM comissaoVM)
-        {
-            Thread.Sleep(3000);
-
+        {            
+            var comissao = AutoMapper.Mapper.Map<KIS.System.Advanced.Domain.Entities.Comissao>(comissaoVM);
+            _comissaoService.Save(comissao);
             return Json(new { IsValide = false });
         }
 

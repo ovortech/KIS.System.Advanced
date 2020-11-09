@@ -59,7 +59,7 @@ namespace KIS.System.Advanced.Business
         {
             try
             {
-                dbComissao.Add(Comissao);
+                dbComissao.Merge(Comissao);
             }
             catch (Exception ex)
             {

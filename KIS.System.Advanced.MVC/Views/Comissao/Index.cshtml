@@ -71,7 +71,7 @@
                                 <th width="10%">Comissão</th>
                                 <th width="10%">APagar</th>
                                 <th width="10%">Pagar</th>
-                                <th width="10%"></th>
+                                <th width="15%"></th>
                                 </th>
 
                             </tr>
@@ -81,13 +81,13 @@
                             {
 
                                 <tr Id="linha_@(item.IdItemPedido)" class="linhas">
-                                    <td class="tb-style text-center" width="5%">@item.TipoVenda<input type="hidden" class="IdItemPedido" value="@item.IdItemPedido" /></td>
-                                    <td class="tb-style text-center" width="5%">@item.DataVenda</td>
+                                    <td class="tb-style text-center TipoVenda" width="5%">@item.TipoVenda</td>
+                                    <td class="tb-style text-center" width="5%">@item.DataVenda<input type="hidden" class="IdItemPedido" value="@item.IdItemPedido" /><input type="hidden" class="IdComissao" value="@item.IdComissao" /></td>
                                     <td class="tb-style text-center" width="20%">@item.NomeProduto</td>
                                     <td class="tb-style text-center" width="20%">@item.Descricao</td>
                                     <td class="tb-style text-center Quantidade" width="5%">@item.Quantidade</td>
                                     <td class="tb-style text-center maskMoney ValorVenda" width="3%">@item.ValorVenda</td>
-                                    <td class="tb-style text-center" width="3%"><input class="wd-100 form-control text-center maskMoney ValorCustoUnitario @item.IdItemPedido" type="text" onchange="calculaLucro(@item.IdItemPedido)" value="@item.ValorCustoUnitario" placeholder=""></td>
+                                    <td class="tb-style text-center" width="3%"><input class="wd-100 form-control text-center maskMoney ValorCustoUnitario" type="text" onchange="calculaLucro(@item.IdItemPedido)" value="@item.ValorCustoUnitario" placeholder=""></td>
                                     <td class="tb-style text-center ValorLucro" width="4%"><h5><label class="maskMoney">@item.ValorLucro</label></h5></td>
                                     <td class="tb-style text-center" width="4%"><input class="wd-100 form-control text-center PercComissao" type="text" value="@item.PercComissao" onchange="calculaLucro(@item.IdItemPedido)" placeholder="10%"></td>
                                     <td class="tb-style text-center APagar" width="4%"><h5><label class="maskMoney"></label></h5></td>
@@ -95,9 +95,11 @@
                                         @Html.CheckBox("Pago", item.Pago, new { @class = "Pagar", @onchange = "javascript: totalComissaoAPagar()" })
                                     </td>
                                     <td class="tb-style text-center" width="10%">
-                                        <img src="https://i.gifer.com/ZKZg.gif" class="loading" width="30" style="display:none" />
-                                        <img src="https://media1.tenor.com/images/22919ad969d4fcf8280c47f4c4d6a643/tenor.gif" class="checked" width="30" style="display:none" />
-                                        <img src="~/Content/erro.png" class="erro" width="30" style="display:none" />
+                                        <div width="29" style="float:right; width:20px">
+                                            <img src="https://i.gifer.com/ZKZg.gif" class="loading" width="25" style="display:none; margin:0px" />
+                                            <img src="https://media1.tenor.com/images/22919ad969d4fcf8280c47f4c4d6a643/tenor.gif" class="checked" width="25" style="display:none; margin:0px" />
+                                            <img src="~/Content/erro.png" class="erro" width="25" style="display:none; margin:0px" />
+                                        </div>
                                     </td>
                                 </tr>
                             }
@@ -120,13 +122,13 @@
                 <div class="" style="margin-top: -20px; ">
                     <div class="row" id="box_configs" style=" margin-bottom: 7px;">
                         <label class="float-left mg-10 mb-10" style="margin-left: 15px;"><strong>% para Produto:</strong> </label>
-                        <input type="text" class="form-control text-center col-1" />
-                        <button type="button" class="float-left btn-buscar">Aplicar</button>
+                        <input id="setPercProduto" type="text" class="form-control text-center col-1" />
+                        <button type="button" class="float-left btn-buscar" onclick="javascript: setPercProduto()">Aplicar</button>
                     </div>
                     <div class="row" id="box_configs">
                         <label class="float-left mg-10 mb-10" style="margin-left: 15px;"><strong>% para Serviço:</strong> </label>
-                        <input type="text" class="form-control text-center col-1" />
-                        <button type="button" class="float-left btn-buscar">Aplicar</button>
+                        <input id="setPercService" type="text" class="form-control text-center col-1" />
+                        <button type="button" class="float-left btn-buscar" onclick="javascript: setPercService()">Aplicar</button>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -142,118 +144,175 @@
     <script src="~/Scripts/jquery.datetimepicker.full.min.js"></script>
     <script type="text/javascript">
 
+        const linhas = $("#lista-produtos tr.linhas");
 
-        function saveAsyncLinha(controler, action, parameter, IdItemPedido, redirect = null) {
-            $(`#linha_${IdItemPedido} td img.loading`).show();
-
-            $.ajax({
-                type: "Post",
-                url: "/" + controler + "/" + action,
-                data: parameter,
-                processData: true,
-                async: true,
-                success: function (data) {
-                    $(`#linha_${IdItemPedido} td img.loading`).hide();
-                    window.setTimeout(1000);
-                    $(`#linha_${IdItemPedido} td img.checked`).show();
-                    window.setTimeout(3000);
-                    $(`#linha_${IdItemPedido} td img.checked`).hide();
-
-
-                },
-                error: function (err) {
-                    console.log(err);
-                }
-            });
-        }
-
-        function calculaLucro(IdItemPedido, primeiraVez = false) {
-            let qtd = $(`#linha_${IdItemPedido} td.Quantidade`).html();
-            let venda = $(`#linha_${IdItemPedido} td.ValorVenda`).html().replace(',', '.');
-            let ValorCustoUnitario = $(`#linha_${IdItemPedido} td .ValorCustoUnitario`).val().replace(',', '.');
-            let PercComissao = $(`#linha_${IdItemPedido} td .PercComissao`).val();
-            let Pago = $(`#linha_${IdItemPedido} td input.Pagar`).prop("checked");
-
-            if (PercComissao.length == 1) {
-                PercComissao = "0.0" + PercComissao
-            } else {
-                PercComissao = "0." + PercComissao
-            }
-
-            let lucro = qtd * (venda - ValorCustoUnitario)
-            $(`#linha_${IdItemPedido} td.ValorLucro h5 label`).html(parseFloat(lucro).toFixed(2));
-            $(`#linha_${IdItemPedido} td.APagar h5 label`).html(parseFloat(lucro * PercComissao).toFixed(2));
-            totalComissaoAPagar();
-
-            var comissao = {
-                IdItemPedido: IdItemPedido,
-                ValorCustoUnitario: ValorCustoUnitario,
-                PercComissao: PercComissao,
-                Pago: Pago
-            };
-            if (!primeiraVez)
-                saveAsyncLinha("Comissao", "Save", comissao, IdItemPedido);
-        }
-
-        $(document).ready(function () {
-            caculaTodos();
-            totalComissaoAPagar();
-
+        const sleep = time => new Promise(resolve => {
+            setTimeout(resolve, time);
         });
 
-        function totalComissaoAPagar() {
-            let total = 0;
-            let linhas = $("#lista-produtos tr.linhas");
-            $("#qtdVendas").val(linhas.length);
-            for (var i = 0; i < linhas.length; i++) {
-                let Pagar = $(linhas[i]).find("td input.Pagar").prop("checked")
-                if (Pagar) {
-                    let valor = parseFloat($(linhas[i]).find("td.APagar h5 label").html()).toFixed(2) * 1
-                    total = total + valor;
+        function setPercProduto() {
+            if ($("#setPercProduto").val().replace(/\D/g, '') != "") {
+                for (var i = 0; i < linhas.length; i++) {
+                    let tipoVenda = $(linhas[i]).find("td.TipoVenda").html()
+
+                    if (tipoVenda == "Produto") {
+                        $(linhas[i]).find("td input.PercComissao").val($("#setPercProduto").val());
+                    }
                 }
             }
-            $("#totalAPagar").val(total);
         }
 
-        function caculaTodos() {
-            const linhas = $("#lista-produtos tr td input.IdItemPedido");
-            for (var i = 0; i < linhas.length; i++) {
-                calculaLucro($(linhas[i]).val(), true);
+        function setPercService() {
+            if ($("#setPercService").val().replace(/\D/g, '') != "") {
+                for (var i = 0; i < linhas.length; i++) {
+                    let tipoVenda = $(linhas[i]).find("td.TipoVenda").html()
+
+                    if (tipoVenda == "Serviço") {
+                        console.log(tipoVenda)
+                        console.log($("#setPercService").val())
+                        $(linhas[i]).find("td input.PercComissao").val($("#setPercService").val());
+                    }
+                }
             }
-        }
+            }
 
-        function check() {
-            document.getElementById("myCheck").checked = true;
-        }
+            function saveAsyncLinha(controler, action, parameter, IdItemPedido, redirect = null) {
+                showLoading(true, IdItemPedido);
+                $.ajax({
+                    type: "Post",
+                    url: "/" + controler + "/" + action,
+                    data: parameter,
+                    processData: true,
+                    async: true,
+                    success: function (data) {
 
-        function uncheck() {
-            document.getElementById("myCheck").checked = false;
-        }
+                        showLoading(false, IdItemPedido);
+                        showChecked(true, IdItemPedido);
+                        showChecked(false, IdItemPedido, 2000);
+                    },
+                    error: function (err) {
+                        showChecked(true, IdItemPedido);
+                        showChecked(false, IdItemPedido, 2000);
+                        console.log(err);
+                    }
+                });
+            }
 
+            function showChecked(show, IdItemPedido, interval = 0) {
+                if (show) {
+                    setTimeout(() => { $(`#linha_${IdItemPedido} td img.checked`).show() }, interval);
+                } else {
+                    setTimeout(() => { $(`#linha_${IdItemPedido} td img.checked`).hide() }, interval);
+                }
+            }
 
-        //Script do datetimepicker
-        $.datetimepicker.setLocale('pt-BR');
+            function showLoading(show, IdItemPedido, interval = 0) {
+                if (show) {
+                    setTimeout(() => { $(`#linha_${IdItemPedido} td img.loading`).show() }, interval);
+                } else {
+                    setTimeout(() => { $(`#linha_${IdItemPedido} td img.loading`).hide() }, interval);
+                }
+            }
 
-        jQuery(function () {
-            jQuery('#date_timepicker_start').datetimepicker({
-                format: 'd/m/Y',
-                onShow: function (ct) {
-                    this.setOptions({
-                        maxDate: jQuery('#date_timepicker_end').val() ? jQuery('#date_timepicker_end').val() : false
-                    })
-                },
-                timepicker: false
+            function showErro(show, IdItemPedido, interval = 0) {
+                if (show) {
+                    setTimeout(() => { $(`#linha_${IdItemPedido} td img.erro`).show() }, interval);
+                } else {
+                    setTimeout(() => { $(`#linha_${IdItemPedido} td img.erro`).hide() }, interval);
+                }
+            }
+
+            function calculaLucro(IdItemPedido, primeiraVez = false) {
+                let qtd = $(`#linha_${IdItemPedido} td.Quantidade`).html();
+                let venda = $(`#linha_${IdItemPedido} td.ValorVenda`).html().replace(',', '.');
+                let ValorCustoUnitario = $(`#linha_${IdItemPedido} td .ValorCustoUnitario`).val().replace(',', '.');
+                let PercComissao = $(`#linha_${IdItemPedido} td .PercComissao`).val();
+                let Pago = $(`#linha_${IdItemPedido} td input.Pagar`).prop("checked");
+                let IdComissao = $(`#linha_${IdItemPedido} td input.IdComissao`).val();
+
+                if (PercComissao.length == 1) {
+                    PercComissao = "0.0" + PercComissao
+                } else {
+                    PercComissao = "0." + PercComissao
+                }
+
+                let ValorLucro = qtd * (venda - ValorCustoUnitario)
+                $(`#linha_${IdItemPedido} td.ValorLucro h5 label`).html(parseFloat(ValorLucro).toFixed(2));
+                $(`#linha_${IdItemPedido} td.APagar h5 label`).html(parseFloat(ValorLucro * PercComissao).toFixed(2));
+                totalComissaoAPagar();
+
+                var comissao = {
+                    IdComissao: IdComissao,
+                    IdItemPedido: IdItemPedido,
+                    ValorCustoUnitario: ValorCustoUnitario,
+                    PercComissao: parseFloat($(`#linha_${IdItemPedido} td .PercComissao`).val()).toFixed(2) * 1,
+                    ValorLucro: ValorLucro,
+                    Pago: Pago
+                };
+                if (!primeiraVez)
+                    saveAsyncLinha("Comissao", "Save", comissao, IdItemPedido);
+            }
+
+            $(document).ready(function () {
+                caculaTodos();
+                totalComissaoAPagar();
             });
-            jQuery('#date_timepicker_end').datetimepicker({
-                format: 'd/m/Y',
-                onShow: function (ct) {
-                    this.setOptions({
-                        minDate: jQuery('#date_timepicker_start').val() ? jQuery('#date_timepicker_start').val() : false
-                    })
-                },
-                timepicker: false
+
+            function totalComissaoAPagar() {
+                let total = 0;
+                let qtd = 0
+
+                for (var i = 0; i < linhas.length; i++) {
+                    let Pagar = $(linhas[i]).find("td input.Pagar").prop("checked")
+                    if (Pagar) {
+                        let valor = parseFloat($(linhas[i]).find("td.APagar h5 label").html()).toFixed(2) * 1
+                        total = total + valor;
+                        qtd++;
+                    }
+                }
+                $("#qtdVendas").val(qtd);
+                $("#totalAPagar").val(total);
+            }
+
+            function caculaTodos() {
+                const linhasIds = $(linhas).find("td input.IdItemPedido");
+                for (var i = 0; i < linhasIds.length; i++) {
+                    calculaLucro($(linhasIds[i]).val(), true);
+                }
+            }
+
+            function check() {
+                document.getElementById("myCheck").checked = true;
+            }
+
+            function uncheck() {
+                document.getElementById("myCheck").checked = false;
+            }
+
+
+            //Script do datetimepicker
+            $.datetimepicker.setLocale('pt-BR');
+
+            jQuery(function () {
+                jQuery('#date_timepicker_start').datetimepicker({
+                    format: 'd/m/Y',
+                    onShow: function (ct) {
+                        this.setOptions({
+                            maxDate: jQuery('#date_timepicker_end').val() ? jQuery('#date_timepicker_end').val() : false
+                        })
+                    },
+                    timepicker: false
+                });
+                jQuery('#date_timepicker_end').datetimepicker({
+                    format: 'd/m/Y',
+                    onShow: function (ct) {
+                        this.setOptions({
+                            minDate: jQuery('#date_timepicker_start').val() ? jQuery('#date_timepicker_start').val() : false
+                        })
+                    },
+                    timepicker: false
+                });
             });
-        });
 
     </script>
 }

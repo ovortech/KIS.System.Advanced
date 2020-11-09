@@ -22,22 +22,27 @@ namespace Kist.System.Adavanced.Test.Data
         [TestMethod]
         public void AddUser()
         {
-           
-            var comissaos = _comissaoRepository.GetAll();
-              Comissao comissao = new Comissao
+            try
             {
-              
-               ID_ITEM_PEDIDO = 2,
-               VALOR_CUSTO_COMISSAO = 1,
-               VALOR_LUCRO_COMISSAO = 1,
-               PERCENTUAL_COMISSAO = 1,
-               
-            };
+                var comissaos = _comissaoRepository.GetAll();
+                Comissao comissao = new Comissao
+                {
+                    ID_ITEM_PEDIDO = 5,
+                    VALOR_CUSTO_COMISSAO = 5,
+                    VALOR_LUCRO_COMISSAO = 55,
+                    PERCENTUAL_COMISSAO = 0,
+                    PAGO_COMISSAO = false
+                };
 
-        _comissaoRepository.Add(comissao);
-            var comissaosdepois = _comissaoRepository.GetAll();
+                _comissaoRepository.Add(comissao);
+                var comissaosdepois = _comissaoRepository.GetAll();
 
-            Assert.IsTrue(comissaos.Count() < comissaosdepois.Count());
+                Assert.IsTrue(comissaos.Count() < comissaosdepois.Count());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
 

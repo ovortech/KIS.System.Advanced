@@ -13,6 +13,14 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
 
         }
 
+        public void Merge(Comissao comissao)
+        {           
+            if (comissao.ID_COMISSAO == 0)
+                Add(comissao);
+            else
+                Update(comissao);
+        }
+
         public List<ComissaoDto> GetDto()
         {
             var comissoesDto = new List<ComissaoDto>();
@@ -32,6 +40,7 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
             {
                 comissoesDto.Add(new ComissaoDto
                 {
+                    IdComissao = (item.comissao ?? new Comissao()).ID_COMISSAO,
                     IdItemPedido = item.itemPedido.ID_ITEM_PEDIDO,
                     DataVenda = item.pedido.DATA_REG_PEDIDO,
                     TipoVenda = item.produto.SERVICO_PRODUTO ? "Serviço" : "Produto",
@@ -39,7 +48,7 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
                     Descricao = item.itemPedido.OBS_PRODUTO,
                     Quantidade = item.itemPedido.QTD_PEDIDO,
                     ValorVenda = item.itemPedido.VALOR_UN_PEDIDO,
-                    ValorCustoUnitario = (item.comissao ?? new Comissao()).VALOR_LUCRO_COMISSAO,
+                    ValorCustoUnitario = (item.comissao ?? new Comissao()).VALOR_CUSTO_COMISSAO,
                     //ValorLucro = item.ValorLucro,
                     PercComissao = (item.comissao ?? new Comissao()).PERCENTUAL_COMISSAO,
                     Pago = (item.comissao ?? new Comissao()).PAGO_COMISSAO,
