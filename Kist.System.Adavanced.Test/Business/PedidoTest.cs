@@ -20,12 +20,6 @@ namespace Kist.System.Adavanced.Test.Business
             _pedidoBS = new PedidoBS();
         }
 
-        [TestMethod]
-        public void GetNextOrder()
-        {
-            var result = _pedidoBS.GetNextOrderNumber();
-            Assert.IsTrue(result != null);
-        }
 
         [TestMethod]
         public void GetAll()

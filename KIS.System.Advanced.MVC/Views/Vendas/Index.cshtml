@@ -166,11 +166,6 @@
         })
 
         function adicionaProdutoNaLista(produto) {
-            if (produtoNaLista(produto.IdProduto)) {
-                bootbox.alert("Esse produto já foi adicionado! Se necessário, aumente a quantidade.");
-                return;
-            }
-
             let tr = `<tr id="${produto.IdProduto}">
                                         <td class="tb-style text-center" width="5%">${produto.CodProduto}</td>
                                         <td class="tb-style" width="30%">${produto.NomeProduto}</td>
@@ -196,6 +191,8 @@
                 $("#valorTotalPedido").val(produto.ValorProduto.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
                 $("#valorTotalDescontos").val((0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
             }
+            atualizaTotalPedido();
+
         }
 
         function atualizaTotalPedido() {
