@@ -51,7 +51,7 @@
                         </div>
                         <div class="">
                             <select class="form-control selectpicker" id="cmbClientes" data-live-search="true">
-                                <option selected>Selecione o cliente</option>
+                                <option selected value="0">Selecione o cliente</option>
                                 @foreach (var cliente in Model.Clientes)
                                 {
                                     <option data-tokens="@cliente.Nome" value="@cliente.Id">@cliente.Nome</option>
@@ -99,49 +99,47 @@
                 <div class="">
                     <label class="float-right mg-10 mr-10">
                         <strong>Total da Compra: &nbsp;</strong>
-                        <input class="mr-10 float-right wd-100 mb-10 form-control btn-disable" type="text" id="valorTotalPedido" value="">
+                        <input class="mr-10 float-right wd-100 mb-10 form-control btn-disable" type="text" id="valorTotalPedido" value="R$ 0,00">
                     </label>
                     <label class="float-right mg-10 mr-10">
                         <strong>Total do Desconto: &nbsp;</strong>
-                        <input class="mr-10 float-right wd-150 mb-10 form-control btn-disable" type="text" id="valorTotalDescontos" value="">
+                        <input class="mr-10 float-right wd-150 mb-10 form-control btn-disable" type="text" id="valorTotalDescontos" value="R$ 0,00">
                     </label>
                 </div>
                 <div class="form-group">
                     <form action="#" method="get">
                         <div class="col-12" style="display: flex;">
-                            @*<button style="width: 180px;" class="form-control btn btn-finalizar" type="button" onclick="add_field()">Forma de pagamento</button>*@
-                            <span id="selects">
-                                <select class="form-control" id="orig_select">
-                                    <option class="form-control">Selecione</option>
+                            <span>
+                                <select class="form-control" id="formaPagamento1">
                                     @foreach (var formaPagamento in Model.TipoPGs)
                                     {
-                                        <option class="form-control" id="@formaPagamento.Id">@formaPagamento.Nome</option>
+                                        <option class="form-control" value="@formaPagamento.Id">@formaPagamento.Nome</option>
                                     }
                                 </select>
                             </span>
                             <label class="margin-t5">
                                 <strong>&nbsp;Valor recebido:&nbsp;</strong>
                             </label>
-                            <input class="form-control text-center wd-80" maxlength="255" type="text">
+                            <input class="form-control text-center wd-80" id="valorRecebidoFormaPagamento1" maxlength="30" type="text" >
                             <label class="margin-t5">
                                 <strong>&nbsp;Troco:&nbsp;</strong>
                             </label>
-                            <input class="form-control text-center wd-80" maxlength="255" type="text">
-                            <input class="qtdema btn" type="button" value="+" onclick="adicionaOuRemoveSegundaFormaPagamento();">
-
-                            <span id="selects">
-                                <select class="form-control" id="orig_select">
-                                    <option class="form-control">Selecione</option>
+                            <input class="form-control text-center wd-80" id="trocoFormaPagamento1" maxlength="30" type="text" >
+                            <input class="qtdema btn" type="button" value="+" onclick="adicionaOuRemoveSegundaFormaPagamento();" style="margin-left:10px">
+                        </div>
+                        <div class="col-12" style="display: flex; margin-top:10px" >
+                            <span>
+                                <select class="form-control" id="formaPagamento2" disabled>
                                     @foreach (var formaPagamento in Model.TipoPGs)
                                     {
-                                        <option class="form-control" id="@formaPagamento.Id">@formaPagamento.Nome</option>
+                                        <option class="form-control" value="@formaPagamento.Id">@formaPagamento.Nome</option>
                                     }
                                 </select>
                             </span>
                             <label class="margin-t5">
                                 <strong>&nbsp;Valor recebido:&nbsp;</strong>
                             </label>
-                            <input class="form-control text-center wd-80" maxlength="255" type="text">
+                            <input class="form-control text-center wd-80" id="valorRecebidoFormaPagamento2" maxlength="30" disabled>
                         </div>
                     </form>
                 </div>
@@ -158,85 +156,92 @@
 @section scripts {
     <script type="text/javascript">
 
+        var contadorId = 0;
+
         $("#adicionarProduto").click(() => {
             let idProduto = $("#cmbProdutos").val();
             let produto = callActionGet('produto', 'Get', { idProduto: idProduto })
-
             adicionaProdutoNaLista(produto)
         })
 
+        $("#formaPagamento1").change(() => {
+            debugger;
+            if ((valorTotalPedido() <= 0)) {
+                bootbox.alert("O valor da venda deve ser maior que R$ 0,00.");
+                $("#formaPagamento1 select").val(`0`)
+                return;
+            }
+            habilitaCampoValorRecebidoFormaPagamento();
+        })
+
         function adicionaProdutoNaLista(produto) {
-            let tr = `<tr id="${produto.IdProduto}">
-                                        <td class="tb-style text-center" width="5%">${produto.CodProduto}</td>
-                                        <td class="tb-style" width="30%">${produto.NomeProduto}</td>
-                                        <td class="tb-style" width="30%">
-                                            <div class="form-group">
-                                                <textarea class="form-control" rows="1"></textarea>
-                                            </div>
-                                        </td>
-                                        <td class="tb-style" width="10%">
-                                            <input class="qtdem btn" type="button" value="-" onclick="decrementaQuantidade(${produto.IdProduto});" />
-                                            <input id="quantidade_${produto.IdProduto}" class="qtde" type="text" value="1" onchange="calculaValorTotalProdutos(${produto.IdProduto});" disabled/>
-                                            <input class="qtdema btn" type="button" value="+" onclick="incrementaQuantidade(${produto.IdProduto});" />
-                                        </td>
-                                        <td class="tb-style" width="3%"><input id="valor_${produto.IdProduto}" data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'"class="wd-100 form-control" type="text" value="${produto.ValorProduto}" onchange="calculaValorTotalProdutos(${produto.IdProduto});"/></td>
-                                        <td class="tb-style" width="3%"><input id="desconto_${produto.IdProduto}" class="wd-100 form-control" type="text" value="00,00" onchange="calculaValorTotalProdutos(${produto.IdProduto});"/></td>
-                                        <td id="total_${produto.IdProduto}" class="tb-style" width="4%">${produto.ValorProduto}</td>
-                                        <td class="tb-style" width="10%"><button type="button" class="btn btn-remove" onclick="removeProdutoDaLista(${produto.IdProduto});">Remover</button></td>
-                                    </tr>`;
+            let tr = `<tr id="${contadorId}">
+                                            <td class="tb-style text-center" width="5%">${produto.CodProduto}</td>
+                                            <td class="tb-style" width="30%">${produto.NomeProduto}</td>
+                                            <td class="tb-style" width="30%">
+                                                <div class="form-group">
+                                                    <textarea class="form-control" rows="1"></textarea>
+                                                </div>
+                                            </td>
+                                            <td class="tb-style" width="10%">
+                                                <input class="qtdem btn" type="button" value="-" onclick="decrementaQuantidade(${contadorId});" />
+                                                <input id="quantidade_${contadorId}" class="qtde" type="text" value="1" onchange="calculaValorTotalProdutos(${contadorId});" disabled/>
+                                                <input class="qtdema btn" type="button" value="+" onclick="incrementaQuantidade(${contadorId});" />
+                                            </td>
+                                            <td class="tb-style" width="3%"><input id="valor_${contadorId}" data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'"class="wd-100 form-control" type="text" value="${produto.ValorProduto}" onchange="calculaValorTotalProdutos(${contadorId});"/></td>
+                                            <td class="tb-style" width="3%"><input id="desconto_${contadorId}" class="wd-100 form-control" type="text" value="00,00" onchange="calculaValorTotalProdutos(${contadorId});"/></td>
+                                            <td id="total_${contadorId}" class="tb-style" width="4%">${produto.ValorProduto}</td>
+                                            <td class="tb-style" width="10%"><button type="button" class="btn btn-remove" onclick="removeProdutoDaLista(${contadorId});">Remover</button></td>
+                                        </tr>`;
 
             $("#listaProdutos tbody").append(tr);
 
-            if (quantidadeAtualItensNaLista() == 1) {
-                $("#valorTotalPedido").val(produto.ValorProduto.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
-                $("#valorTotalDescontos").val((0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
-            }
             atualizaTotalPedido();
-
+            contadorId++;
         }
 
         function atualizaTotalPedido() {
             let valorTotalDescontos = 0;
             let valorTotalPedido = 0;
             $('#listaProdutos > tbody  > tr').each(function () {
-                let idProduto = $(this).attr('id');
-                let quantidadeAtual = quantidadeAtualProdutosNaLista(idProduto);
-                let valorDesconto = valorDescontoUnitario(idProduto);
+                let contador = $(this).attr('id');
+                let quantidadeAtual = quantidadeAtualProdutosNaLista(contador);
+                let valorDesconto = valorDescontoUnitario(contador);
 
                 let totalDescontoItemAtual = valorDesconto * quantidadeAtual;
                 valorTotalDescontos += totalDescontoItemAtual;
 
-                let totalProduto = valorTotalProduto(idProduto);
+                let totalProduto = valorTotalProduto(contador);
                 valorTotalPedido += totalProduto;
             });
             $("#valorTotalPedido").val(valorTotalPedido.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
             $("#valorTotalDescontos").val(valorTotalDescontos.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
         }
 
-        function calculaValorTotalProdutos(idProduto) {
-            let quantidadeAtual = quantidadeAtualProdutosNaLista(idProduto);
-            let valorUnitario = valorUnitarioProduto(idProduto);
-            let valorDesconto = valorDescontoUnitario(idProduto);
+        function calculaValorTotalProdutos(contador) {
+            let quantidadeAtual = quantidadeAtualProdutosNaLista(contador);
+            let valorUnitario = valorUnitarioProduto(contador);
+            let valorDesconto = valorDescontoUnitario(contador);
             let valorTotal = (valorUnitario - valorDesconto) * quantidadeAtual;
-            $(`#total_${idProduto}`).text(valorTotal.toFixed(2));
+            $(`#total_${contador}`).text(valorTotal.toFixed(2));
             atualizaTotalPedido();
         }
 
-        function decrementaQuantidade(idProduto) {
-            if (produtoNaLista(idProduto)) {
-                let quantidadeAtual = quantidadeAtualProdutosNaLista(idProduto);
+        function decrementaQuantidade(contador) {
+            if (produtoNaLista(contador)) {
+                let quantidadeAtual = quantidadeAtualProdutosNaLista(contador);
                 if (quantidadeAtual > 1) {
-                    $(`#quantidade_${idProduto}`).val(--quantidadeAtual);
-                    calculaValorTotalProdutos(idProduto);
+                    $(`#quantidade_${contador}`).val(--quantidadeAtual);
+                    calculaValorTotalProdutos(contador);
                 }
             }
         }
 
-        function incrementaQuantidade(idProduto) {
-            if (produtoNaLista(idProduto)) {
-                let quantidadeAtual = quantidadeAtualProdutosNaLista(idProduto);
-                $(`#quantidade_${idProduto}`).val(++quantidadeAtual);
-                calculaValorTotalProdutos(idProduto);
+        function incrementaQuantidade(contador) {
+            if (produtoNaLista(contador)) {
+                let quantidadeAtual = quantidadeAtualProdutosNaLista(contador);
+                $(`#quantidade_${contador}`).val(++quantidadeAtual);
+                calculaValorTotalProdutos(contador);
             }
         }
 
@@ -244,52 +249,51 @@
             return $('#listaProdutos tbody tr').length;
         }
 
-        function quantidadeAtualProdutosNaLista(idProduto) {
-            return parseInt($(`#listaProdutos tbody tr`).find(`#quantidade_${idProduto}`).val());
+        function quantidadeAtualProdutosNaLista(contador) {
+            return parseInt($(`#listaProdutos tbody tr`).find(`#quantidade_${contador}`).val());
         }
 
-        function valorUnitarioProduto(idProduto) {
-            return parseFloat($(`#listaProdutos tbody tr`).find(`#valor_${idProduto}`).val());
+        function valorUnitarioProduto(contador) {
+            return parseFloat($(`#listaProdutos tbody tr`).find(`#valor_${contador}`).val());
         }
 
-        function valorDescontoUnitario(idProduto) {
-            return parseFloat($(`#listaProdutos tbody tr`).find(`#desconto_${idProduto}`).val());
+        function valorDescontoUnitario(contador) {
+            return parseFloat($(`#listaProdutos tbody tr`).find(`#desconto_${contador}`).val());
         }
 
-        function valorTotalProduto(idProduto) {
-            return parseFloat($(`#listaProdutos tbody tr`).find(`#total_${idProduto}`).text());
+        function valorTotalProduto(contador) {
+            return parseFloat($(`#listaProdutos tbody tr`).find(`#total_${contador}`).text());
         }
 
-        function removeProdutoDaLista(idProduto) {
-            if (produtoNaLista(idProduto)) {
-                $("#listaProdutos tbody").find(`#${idProduto}`).remove();
+        function removeProdutoDaLista(contador) {
+            if (produtoNaLista(contador)) {
+                $("#listaProdutos tbody").find(`#${contador}`).remove();
                 atualizaTotalPedido();
             }
         }
 
-        function produtoNaLista(idProduto) {
-            return $('#listaProdutos').find(`#${idProduto}`).length > 0;
+        function produtoNaLista(contador) {
+            return $('#listaProdutos').find(`#${contador}`).length > 0;
+        }
+
+        function valorTotalPedido() {
+            return parseFloat($("#valorTotalPedido").val().replace('R$', '').trim().replace(',', '.'));
+        }
+
+        function habilitaCampoValorRecebidoFormaPagamento() {
+            $("#valorRecebidoFormaPagamento1").removeAttr('disabled');
         }
 
         function adicionaOuRemoveSegundaFormaPagamento() {
             console.log('olar');
         }
 
-        //função selecionar
-        //function add_field() {
-        //    var container = document.getElementById('selects'),
-        //        input = document.createElement('select');
+        //function campoComValorZerado(idCampo) {
+        //    return ($(`#${idCampo}`).val() == 0) ||  
+        //        ($(`#${idCampo}`).val() == `R$ 0,00`) ||
+        //        ($(`#${idCampo}`).val() == NaN) ||
+        //        ($(`#${idCampo}`).val() == undefined)
+        //}
 
-        //    input.innerHTML = document.getElementById('orig_select').innerHTML;
-
-        //    input.setAttribute('type', 'select');
-        //    input.setAttribute('name', 'pet');
-        //    container.appendChild(input);
-        //};
-
-        $(document).ready(function () {
-
-
-        });
     </script>
 }
