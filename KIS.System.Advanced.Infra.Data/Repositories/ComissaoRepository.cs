@@ -1,6 +1,7 @@
 ﻿using KIS.System.Advanced.Domain.Dto;
 using KIS.System.Advanced.Domain.Entities;
 using KIS.System.Advanced.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,14 +22,16 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
                 Update(comissao);
         }
 
-        public List<ComissaoDto> GetDto()
+        public List<ComissaoDto> GetDto(int idVendedor, DateTime dataInicio, DateTime dataFim)
         {
+            dataFim = dataFim.AddDays(1).AddSeconds(-1);
             var comissoesDto = new List<ComissaoDto>();
             var result = from pedido in Db.Pedidos
                          join itemPedido in Db.ItemPedidos on pedido.ID_PEDIDO equals itemPedido.ID_PEDIDO
                          join produto in Db.Produtos on itemPedido.ID_PRODUTO equals produto.ID_PRODUTO
                          join comissao in Db.Comissaos on itemPedido.ID_ITEM_PEDIDO equals comissao.ID_ITEM_PEDIDO into gjComissao
                          from subComissao in gjComissao.DefaultIfEmpty()
+                         where pedido.ID_VENDEDOR == idVendedor && pedido.DATA_REG_PEDIDO >= dataInicio && pedido.DATA_REG_PEDIDO <= dataFim
                          select new
                          {
                              pedido = pedido,

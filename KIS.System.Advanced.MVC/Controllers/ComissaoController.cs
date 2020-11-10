@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Threading;
+using System.Data;
 
 namespace KIS.System.Advanced.MVC.Controllers
 {
@@ -16,28 +17,50 @@ namespace KIS.System.Advanced.MVC.Controllers
         #region PROPRIEDADES / CONSTRUTOR
 
         private readonly IComissaoService _comissaoService;
-
-        public ComissaoController(IComissaoService comissaoService)
+        private readonly IVendedorService _vendedorService;
+        private static List<VendedorVM> vendedores { get; set; }
+        public ComissaoController(IComissaoService comissaoService, IVendedorService vendedorService)
         {
             _comissaoService = comissaoService;
+            _vendedorService = vendedorService;
         }
 
         #endregion
         // GET: Comissao
-        [CustomAuthorize(IsPermission = Support.AcessRole.ADMIN | AcessRole.VENDAS)]
-        public ActionResult Index()
-        {
-            List<ComissaoVM> comissaoVM = new List<ComissaoVM>();
-            comissaoVM = AutoMapper.Mapper.Map<List<ComissaoVM>>(_comissaoService.GetDto());
+        //[CustomAuthorize(IsPermission = Support.AcessRole.ADMIN | AcessRole.VENDAS)]
+        //public ActionResult Index()
+        //{
 
-            return View(comissaoVM);
+        //    return View(new List<ComissaoVM>());
+        //}
+
+        [CustomAuthorize(IsPermission = Support.AcessRole.ADMIN | AcessRole.VENDAS)]
+        [HttpGet]
+        public ActionResult Index(List<ComissaoVM> comissoes)
+        {
+            ViewBag.hoje = DateTime.Now.Date;
+            ViewBag.Vendedores = vendedores = AutoMapper.Mapper.Map<List<VendedorVM>>(_vendedorService.GetAllActive());
+            return View(comissoes ?? new List<ComissaoVM>());
+        }
+
+
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        [HttpPost]
+        public PartialViewResult FiltraComissao(int idVendedor, DateTime dataInicio, DateTime dataFim)
+        {
+            List<ComissaoVM> comissoes = new List<ComissaoVM>();
+            if (idVendedor != 0)
+            {
+                comissoes = AutoMapper.Mapper.Map<List<ComissaoVM>>(_comissaoService.GetDto(idVendedor, dataInicio, dataFim));
+            }
+            return PartialView(comissoes);
         }
 
 
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         [HttpPost]
         public JsonResult Save(ComissaoVM comissaoVM)
-        {            
+        {
             var comissao = AutoMapper.Mapper.Map<KIS.System.Advanced.Domain.Entities.Comissao>(comissaoVM);
             _comissaoService.Save(comissao);
             return Json(new { IsValide = false });

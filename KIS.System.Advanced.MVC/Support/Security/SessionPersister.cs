@@ -8,8 +8,8 @@ namespace KIS.System.Advanced.MVC.Support.Security
 {
     public static class SessionPersister
     {
-        private static string UserSession = "user";       
-            
+        private static string UserSession = "user";
+
         public static CustomPrincipal User
         {
             get

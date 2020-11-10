@@ -29,9 +29,9 @@ namespace KIS.System.Advanced.Services
             return _comissaoBS.GetAll();
         }
 
-        public List<ComissaoDto> GetDto()
+        public List<ComissaoDto> GetDto(int idVendedor, DateTime dataInicio, DateTime dataFim)
         {
-            return _comissaoBS.GetDto();
+            return _comissaoBS.GetDto(idVendedor, dataInicio, dataFim);
         }
 
         public void Save(Comissao comissao)

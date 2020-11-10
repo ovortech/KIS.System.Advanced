@@ -22,6 +22,7 @@
     @{
         var Nome = KIS.System.Advanced.MVC.Support.Security.SessionPersister.User != null ? KIS.System.Advanced.MVC.Support.Security.SessionPersister.User.Nome : "";
         var Email = KIS.System.Advanced.MVC.Support.Security.SessionPersister.User != null ? KIS.System.Advanced.MVC.Support.Security.SessionPersister.User.Email : "";
+        var fimSessao = KIS.System.Advanced.MVC.Support.Security.SessionPersister.User != null ? KIS.System.Advanced.MVC.Support.Security.SessionPersister.User.FimDaSessao.ToString() : "";
     }
     <div class="container">
         <header class="bp-header cf">
@@ -53,6 +54,9 @@
                                 <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z" />
                             </svg>
                         </a>
+                    </li>
+                    <li class="nav-item" style="color:white; float:right">
+                        <p style="margin-top: 2rem; margin-right: 130px;">A Sessão finaliza as: <b> @fimSessao</b></p>
                     </li>
                 </ul>
 

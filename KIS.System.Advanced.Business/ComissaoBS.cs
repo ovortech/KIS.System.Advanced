@@ -16,10 +16,10 @@ namespace KIS.System.Advanced.Business
             dbComissao = new ComissaoRepository();
         }
 
-        public List<ComissaoDto> GetDto()
+        public List<ComissaoDto> GetDto(int idVendedor, DateTime dataInicio, DateTime dataFim)
         {
-            var comissoesDto = dbComissao.GetDto();
-            
+            var comissoesDto = dbComissao.GetDto(idVendedor, dataInicio, dataFim);
+
             return comissoesDto;
         }
 

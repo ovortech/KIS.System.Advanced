@@ -14,7 +14,7 @@ namespace KIS.System.Advanced.Services.Interfaces
         void Save(Comissao comissao);
         void SaveAll(List<Comissao> comissoes);
         Comissao Get(int idComissao);
-        List<ComissaoDto> GetDto();
+        List<ComissaoDto> GetDto(int idVendedor, DateTime dataInicio, DateTime dataFim);
         void Update(Comissao comissao);
     }
 }

@@ -57,7 +57,7 @@ namespace Kist.System.Adavanced.Test.Data
         [TestMethod]
         public void GetAllComissaoDto()
         {
-            var aa = _comissaoRepository.GetDto().ToList();
+            var aa = _comissaoRepository.GetDto(2, DateTime.Now.AddDays(-5), DateTime.Now).ToList();
             Assert.IsTrue(aa != null);
         }
     }

@@ -367,9 +367,10 @@
     <Content Include="Views\Usuario\AddOrEdit.cshtml" />
     <Content Include="Views\HistoricoVenda\AddOrEdit.cshtml" />
     <Content Include="Views\Cliente\AddOrEdit.cshtml" />
-    <Content Include="Views\Comissao\AddOrEdit.cshtml" />
+    <Content Include="Views\Comissao\FiltraComissao.cshtml" />
     <Content Include="Views\Contrato\AddOrEdit.cshtml" />
     <Content Include="Views\Despesa\AddOrEdit.cshtml" />
+    <Compile Include="ViewModels\ComissaoVM.dependence.cs" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

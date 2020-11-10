@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KIS.System.Advanced.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,5 +22,6 @@ namespace KIS.System.Advanced.Domain.Dto
         public double? PercComissao { get; set; }
         public bool? Pago { get; set; }
         public bool? Ativo { get; set; }
+        public Vendedor Vendedor { get; set; }
     }
 }
