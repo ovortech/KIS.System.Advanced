@@ -29,7 +29,7 @@
         <div class="theme-lockup">
             <h3 class="pad-top-20 text-center">Nova Venda</h3>
         </div>
-        <br>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="" id="box_configs">
@@ -46,11 +46,11 @@
                         <textarea class="form-control textarea-obs" id="obsevacaoPedido" rows="3"></textarea>
                     </div>
                     <div class="form-group mb-10 row">
-                        <div class="col-sm-1" style="max-width:13.2%; margin-right: -20px !important" ;>
+                        <div class="">
                             <label for="" class="mg-10 form-control-label">Cliente:</label>
                         </div>
-                        <div class="">
-                            <select class="form-control selectpicker" id="IdCliente" data-live-search="true">
+                        <div class="" style="margin-left: 19px;">
+                             <select class="form-control selectpicker" id="IdCliente" data-live-search="true">
                                 <option selected value="0">Selecione o cliente</option>
                                 @foreach (var cliente in Model.Clientes)
                                 {
@@ -61,10 +61,10 @@
                     </div>
                     <div class="form-group mb-10 row">
 
-                        <div class="" style="margin-left: 15px;">
+                        <div class="" style="margin-left: 0px;">
                             <label for="" class="mg-10 form-control-label">Produto:</label>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-6" style=" margin-left: -4px; ">
                             <select class="form-control selectpicker" id="cmbProdutos" data-live-search="true" data-size="10">
                                 @foreach (var produto in Model.Produtos)
                                 {
