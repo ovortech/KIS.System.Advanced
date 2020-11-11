@@ -28,7 +28,7 @@ namespace KIS.System.Advanced.MVC.Support.Security
             Email = usuario.EMAIL_USUARIO;
             IdUsuario = usuario.ID_USUARIO;
             UserRole = usuario.TipoAcessos.DESC_TIPO_ACESSO.ToUpper();
-            FimDaSessao = DateTime.Now.AddDays(HttpContext.Current.Session.Timeout);
+            FimDaSessao = DateTime.Now.AddMinutes(HttpContext.Current.Session.Timeout);
         }
 
         public String UserRole { get; protected set; }
