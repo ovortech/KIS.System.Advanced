@@ -34,8 +34,8 @@ namespace KIS.System.Advanced.MVC.Controllers
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         public ActionResult Index()
         {
-            var pedido = CarregarModel();
-            return View(pedido);
+            var venda = LoadModel();
+            return View(venda);
         }
 
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
@@ -44,8 +44,15 @@ namespace KIS.System.Advanced.MVC.Controllers
             var result = new VendasVM();
             return PartialView(result);
         }
-        
-        public VendasVM CarregarModel()
+
+        [HttpPost]
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        public void SaveNewOrder(VendasVM venda)
+        {
+
+        }
+
+        public VendasVM LoadModel()
         {
             var pedido = new VendasVM();
 
@@ -67,5 +74,7 @@ namespace KIS.System.Advanced.MVC.Controllers
 
             return pedido;
         }
+
+        
     }
 }

@@ -35,7 +35,7 @@
                 <div class="" id="box_configs">
                     <label class="float-left mg-10 mb-10">Vendedor:</label>
                     <select id="idVendedor" class="mb-10 browser-default custom-select col-3">
-                        <option selected>Selecione o vendedor</option>
+                        <option selected value="0">Selecione o vendedor</option>
                         @foreach (var vendedor in Model.Vendedores)
                         {
                             <option value="@vendedor.Id">@vendedor.Nome</option>
@@ -43,14 +43,14 @@
                     </select>
                     <div class="form-group float-right">
                         <label for="exampleFormControlTextarea1">Observação Pedido</label>
-                        <textarea class="form-control textarea-obs" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <textarea class="form-control textarea-obs" id="obsevacaoPedido" rows="3"></textarea>
                     </div>
                     <div class="form-group mb-10 row">
                         <div class="col-sm-1" style="max-width:13.2%; margin-right: -20px !important" ;>
                             <label for="" class="mg-10 form-control-label">Cliente:</label>
                         </div>
                         <div class="">
-                            <select class="form-control selectpicker" id="cmbClientes" data-live-search="true">
+                            <select class="form-control selectpicker" id="IdCliente" data-live-search="true">
                                 <option selected value="0">Selecione o cliente</option>
                                 @foreach (var cliente in Model.Clientes)
                                 {
@@ -120,14 +120,13 @@
                             <label class="margin-t5">
                                 <strong>&nbsp;Valor recebido:&nbsp;</strong>
                             </label>
-                            <input class="form-control text-center wd-80" id="valorRecebidoFormaPagamento1" maxlength="30" type="text" >
+                            <input class="form-control text-center wd-80" id="valorRecebidoFormaPagamento1" maxlength="30" type="text">
                             <label class="margin-t5">
                                 <strong>&nbsp;Troco:&nbsp;</strong>
                             </label>
-                            <input class="form-control text-center wd-80" id="trocoFormaPagamento1" maxlength="30" type="text" >
-                            <input class="qtdema btn" type="button" value="+" onclick="adicionaOuRemoveSegundaFormaPagamento();" style="margin-left:10px">
+                            <input class="form-control text-center wd-80" id="trocoFormaPagamento1" maxlength="30" type="text" value="R$ 0,00" disabled>
                         </div>
-                        <div class="col-12" style="display: flex; margin-top:10px" >
+                        <div class="col-12" style="display: flex; margin-top:10px">
                             <span>
                                 <select class="form-control" id="formaPagamento2" disabled>
                                     @foreach (var formaPagamento in Model.TipoPGs)
@@ -136,16 +135,16 @@
                                     }
                                 </select>
                             </span>
-                            <label class="margin-t5">
+                            <label class="margin-t5" id="trocoOuSaldo">
                                 <strong>&nbsp;Valor recebido:&nbsp;</strong>
                             </label>
-                            <input class="form-control text-center wd-80" id="valorRecebidoFormaPagamento2" maxlength="30" disabled>
+                            <input class="form-control text-center wd-80" id="valorRecebidoFormaPagamento2" maxlength="30" value="R$ 0,00" disabled>
                         </div>
                     </form>
                 </div>
                 <div class="clearfix"></div>
                 <div class="col-sm-12">
-                    <button type="button" class="mb-10 mr-10 btn btn-finalizar float-right" style=" margin-top: 10px; margin-right: 20px;">Finalizar Venda</button>
+                    <button type="button" class="mb-10 mr-10 btn btn-finalizar float-right" style=" margin-top: 10px; margin-right: 20px;" id="finalizarVenda">Finalizar Venda</button>
                     <button type="button" class="mb-10 mr-10 btn btn-remove float-right" style=" margin-right: 15px; margin-top: 10px;">Cancelar</button>
                 </div>
                 <br>
@@ -164,39 +163,102 @@
             adicionaProdutoNaLista(produto)
         })
 
-        $("#formaPagamento1").change(() => {
-            debugger;
-            if ((valorTotalPedido() <= 0)) {
-                bootbox.alert("O valor da venda deve ser maior que R$ 0,00.");
-                $("#formaPagamento1 select").val(`0`)
-                return;
-            }
-            habilitaCampoValorRecebidoFormaPagamento();
+        $("#valorRecebidoFormaPagamento1").change(() => {
+            adicionaOuRemoveSegundaFormaPagamentoAtualizandoTroco();
         })
+
+        $("#valorRecebidoFormaPagamento2").change(() => {
+            adicionaOuRemoveSegundaFormaPagamentoAtualizandoTroco();
+        })
+
+        $("#finalizarVenda").click(() => {
+            if (validaCamposParaFinalizar())
+                finalizaVenda();
+        })
+
+        function validaCamposParaFinalizar() {
+            if (valorTotalPedido() <= 0) {
+                bootbox.alert(`O valor da venda deve ser maior que R$ 0,00.`);
+                return false;
+            }
+            if ($(`#idVendedor`).val() == `0`) {
+                bootbox.alert(`Selecione o vendedor para finalizar a venda.`);
+                return false;
+            }
+            if ($(`#IdCliente`).val() == `0`) {
+                bootbox.alert(`Selecione o cliente para finalizar a venda.`);
+                return false;
+            }
+            if (quantidadeAtualItensNaLista() <= 0) {
+                bootbox.alert(`Adicione produtos na lista para finalizar a venda.`);
+                return false;
+            }
+            return true;
+        }
+
+        function finalizaVenda() {
+            let pedido = {};
+            pedido.IdVendedor = $(`#idVendedor`).val();
+            pedido.Observacao = $(`#obsevacaoPedido`).text();
+            pedido.IdCliente = $(`#IdCliente`).val();
+
+            pedido.FormaPGs = [];
+
+            let FormaPGVM = {};
+            FormaPGVM.TipoPGVM = {};
+            FormaPGVM.TipoPGVM.Id = $(`#formaPagamento1`).val();
+            FormaPGVM.TipoPGVM.Valor = $(`#valorRecebidoFormaPagamento1`).val();
+            pedido.FormaPGs.push(FormaPGVM)
+
+            if (!valorRecebidoA() === valorTotalPedido()) {
+                FormaPGVM = {};
+                FormaPGVM.TipoPGVM = {};
+                FormaPGVM.TipoPGVM.Id = $(`#formaPagamento2`).val();
+                FormaPGVM.TipoPGVM.Valor = $(`#valorRecebidoFormaPagamento2`).val();
+                pedido.FormaPGs.push(FormaPGVM)
+            }
+
+            pedido.ItemPedidosVM = [];
+
+
+            $('#listaProdutos > tbody  > tr').each(function () {
+                let contadorId = $(this).attr('id');
+            });
+
+        //            public int IdProduto { get; set; }
+        //public string Observacao { get; set; }
+        //public int Quantidade { get; set; }
+        //public double ValorUnitario { get; set; }
+        //public double Desconto { get; set; }
+
+
+
+        }
 
         function adicionaProdutoNaLista(produto) {
             let tr = `<tr id="${contadorId}">
-                                            <td class="tb-style text-center" width="5%">${produto.CodProduto}</td>
-                                            <td class="tb-style" width="30%">${produto.NomeProduto}</td>
-                                            <td class="tb-style" width="30%">
-                                                <div class="form-group">
-                                                    <textarea class="form-control" rows="1"></textarea>
-                                                </div>
-                                            </td>
-                                            <td class="tb-style" width="10%">
-                                                <input class="qtdem btn" type="button" value="-" onclick="decrementaQuantidade(${contadorId});" />
-                                                <input id="quantidade_${contadorId}" class="qtde" type="text" value="1" onchange="calculaValorTotalProdutos(${contadorId});" disabled/>
-                                                <input class="qtdema btn" type="button" value="+" onclick="incrementaQuantidade(${contadorId});" />
-                                            </td>
-                                            <td class="tb-style" width="3%"><input id="valor_${contadorId}" data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'"class="wd-100 form-control" type="text" value="${produto.ValorProduto}" onchange="calculaValorTotalProdutos(${contadorId});"/></td>
-                                            <td class="tb-style" width="3%"><input id="desconto_${contadorId}" class="wd-100 form-control" type="text" value="00,00" onchange="calculaValorTotalProdutos(${contadorId});"/></td>
-                                            <td id="total_${contadorId}" class="tb-style" width="4%">${produto.ValorProduto}</td>
-                                            <td class="tb-style" width="10%"><button type="button" class="btn btn-remove" onclick="removeProdutoDaLista(${contadorId});">Remover</button></td>
-                                        </tr>`;
+                        <td class="tb-style text-center" width="5%" id="${produto.IdProduto}">${produto.CodProduto}</td>
+                        <td class="tb-style" width="30%">${produto.NomeProduto}</td>
+                        <td class="tb-style" width="30%">
+                            <div class="form-group">
+                                <textarea class="form-control" rows="1"></textarea>
+                            </div>
+                        </td>
+                        <td class="tb-style" width="10%">
+                            <input class="qtdem btn" type="button" value="-" onclick="decrementaQuantidade(${contadorId});" />
+                            <input id="quantidade_${contadorId}" class="qtde" type="text" value="1" onchange="calculaValorTotalProdutos(${contadorId});" disabled/>
+                            <input class="qtdema btn" type="button" value="+" onclick="incrementaQuantidade(${contadorId});" />
+                        </td>
+                        <td class="tb-style" width="3%"><input id="valor_${contadorId}" data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'"class="wd-100 form-control" type="text" value="${produto.ValorProduto}" onchange="calculaValorTotalProdutos(${contadorId});"/></td>
+                        <td class="tb-style" width="3%"><input id="desconto_${contadorId}" class="wd-100 form-control" type="text" value="00,00" onchange="calculaValorTotalProdutos(${contadorId});"/></td>
+                        <td id="total_${contadorId}" class="tb-style" width="4%">${produto.ValorProduto}</td>
+                        <td class="tb-style" width="10%"><button type="button" class="btn btn-remove" onclick="removeProdutoDaLista(${contadorId});">Remover</button></td>
+                    </tr>`;
 
             $("#listaProdutos tbody").append(tr);
 
             atualizaTotalPedido();
+            adicionaOuRemoveSegundaFormaPagamentoAtualizandoTroco();
             contadorId++;
         }
 
@@ -216,6 +278,8 @@
             });
             $("#valorTotalPedido").val(valorTotalPedido.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
             $("#valorTotalDescontos").val(valorTotalDescontos.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+
+            $("#valorRecebidoFormaPagamento1").val(valorTotalPedido.toFixed(2));
         }
 
         function calculaValorTotalProdutos(contador) {
@@ -225,6 +289,7 @@
             let valorTotal = (valorUnitario - valorDesconto) * quantidadeAtual;
             $(`#total_${contador}`).text(valorTotal.toFixed(2));
             atualizaTotalPedido();
+            adicionaOuRemoveSegundaFormaPagamentoAtualizandoTroco();
         }
 
         function decrementaQuantidade(contador) {
@@ -269,6 +334,7 @@
             if (produtoNaLista(contador)) {
                 $("#listaProdutos tbody").find(`#${contador}`).remove();
                 atualizaTotalPedido();
+                adicionaOuRemoveSegundaFormaPagamentoAtualizandoTroco();
             }
         }
 
@@ -280,20 +346,64 @@
             return parseFloat($("#valorTotalPedido").val().replace('R$', '').trim().replace(',', '.'));
         }
 
-        function habilitaCampoValorRecebidoFormaPagamento() {
-            $("#valorRecebidoFormaPagamento1").removeAttr('disabled');
+        function calculaTroco() {
+            return (valorRecebidoA() + valorRecebidoB()) - valorTotalPedido();
         }
 
-        function adicionaOuRemoveSegundaFormaPagamento() {
-            console.log('olar');
-        }
-
-        //function campoComValorZerado(idCampo) {
-        //    return ($(`#${idCampo}`).val() == 0) ||  
-        //        ($(`#${idCampo}`).val() == `R$ 0,00`) ||
-        //        ($(`#${idCampo}`).val() == NaN) ||
-        //        ($(`#${idCampo}`).val() == undefined)
+        //function atualizaValorCampoTroco() {
+        //    let troco = calculaTroco();
+        //    if (troco < 0)
+        //        $("#trocoFormaPagamento1").val(troco.toFixed(2).replace('-', ''));
+        //    else
+        //        $("#trocoFormaPagamento1").val(troco.toFixed(2))
         //}
 
+        function valorRecebidoA() {
+            return $("#valorRecebidoFormaPagamento1").val() == '' || NaN || undefined ? 0 : parseFloat($("#valorRecebidoFormaPagamento1").val())
+        }
+
+        function valorRecebidoB() {
+            return $("#valorRecebidoFormaPagamento2").val() == '' || NaN || undefined ? 0 : parseFloat($("#valorRecebidoFormaPagamento2").val())
+        }
+
+        function valorTroco() {
+            return $("#valorRecebidoFormaPagamento2").val() == '' || NaN || undefined ? 0 : parseFloat($("#trocoFormaPagamento1").val())
+        }
+
+        function desabilitaSegundoPagamento() {
+            $("#formaPagamento2").prop("disabled", true);
+            $("#valorRecebidoFormaPagamento2").prop("disabled", true);
+            $("#valorRecebidoFormaPagamento2").val((0).toFixed(2));
+        }
+
+        function adicionaOuRemoveSegundaFormaPagamentoAtualizandoTroco() {
+
+            if (valorRecebidoA() === valorTotalPedido()) {
+                $("#trocoFormaPagamento1").val((0).toFixed(2))
+                desabilitaSegundoPagamento();
+                return;
+            }
+            else if ((valorRecebidoA() + valorRecebidoB()) === valorTotalPedido()) {
+                $("#trocoFormaPagamento1").val((0).toFixed(2))
+                return;
+            }
+
+            let troco = calculaTroco();
+            if (troco > 0) {
+                $("#formaPagamento2").prop("disabled", false);
+                $("#valorRecebidoFormaPagamento2").prop("disabled", false);
+                $("#trocoFormaPagamento1").val(troco.toFixed(2));
+
+            }
+            else if (troco === 0) {
+                desabilitaSegundoPagamento();
+            }
+            else if (troco < 0) {
+                $("#formaPagamento2").prop("disabled", false);
+                $("#valorRecebidoFormaPagamento2").prop("disabled", false);
+                $("#valorRecebidoFormaPagamento2").val((valorTotalPedido() - valorRecebidoA()).toFixed(2));
+            }
+            //atualizaValorCampoTroco();
+        }
     </script>
 }
