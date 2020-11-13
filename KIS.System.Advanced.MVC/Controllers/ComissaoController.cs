@@ -61,9 +61,17 @@ namespace KIS.System.Advanced.MVC.Controllers
         [HttpPost]
         public JsonResult Save(ComissaoVM comissaoVM)
         {
-            var comissao = AutoMapper.Mapper.Map<KIS.System.Advanced.Domain.Entities.Comissao>(comissaoVM);
-            _comissaoService.Save(comissao);
-            return Json(new { IsValide = false });
+            try
+            {
+                var comissao = AutoMapper.Mapper.Map<KIS.System.Advanced.Domain.Entities.Comissao>(comissaoVM);
+                comissao.DATA_PAGAMENTO_COMISSAO = comissao.DATA_PAGAMENTO_COMISSAO == DateTime.MinValue ? null : comissao.DATA_PAGAMENTO_COMISSAO;
+                _comissaoService.Save(comissao);
+                return Json(new { IsValide = true });
+            }
+            catch (Exception)
+            {
+                return Json(new { IsValide = false });
+            }
         }
 
     }

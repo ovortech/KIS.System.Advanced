@@ -15,8 +15,11 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
         }
 
         public void Merge(Comissao comissao)
-        {           
-            if (comissao.ID_COMISSAO == 0)
+        {
+            if (comissao.PAGO_COMISSAO)
+                comissao.DATA_PAGAMENTO_COMISSAO = DateTime.Now;
+
+            if (comissao.ID_COMISSAO == 0)              
                 Add(comissao);
             else
                 Update(comissao);
@@ -55,7 +58,8 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
                     //ValorLucro = item.ValorLucro,
                     PercComissao = (item.comissao ?? new Comissao()).PERCENTUAL_COMISSAO,
                     Pago = (item.comissao ?? new Comissao()).PAGO_COMISSAO,
-                    Ativo = (item.comissao ?? new Comissao()).ATIVO
+                    Ativo = (item.comissao ?? new Comissao()).ATIVO,
+                    DataPg = (item.comissao ?? new Comissao()).DATA_PAGAMENTO_COMISSAO
                 });
             }
             return comissoesDto;

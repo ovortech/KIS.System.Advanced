@@ -88,7 +88,7 @@
                 </div>
                 <div class="clearfix"></div>
                 <div class="col-sm-12">
-                    <button type="button" class="mb-10 mr-10 btn-buscar btn btn-block float-right" style="width: 260px; margin-right:20px;" onclick="javascript: SalvaTodos()">Finalizar Comissões Selecionadas</button>
+                    <button type="button" class="mb-10 mr-10 btn-buscar btn btn-block float-right" style="width: 260px; margin-right:20px;" id="btnConfirmarPagamento" onclick="javascript: SalvaTodos()">Finalizar Comissões Selecionadas</button>
                 </div>
                 <br>
             </div>
@@ -129,8 +129,8 @@
             $("#date_timepicker_end").val("@ViewBag.hoje");
 
             filtraComissao();
-            caculaTodos();
-            totalComissaoAPagar();
+            //caculaTodos();
+            //totalComissaoAPagar();
         })
 
 
@@ -152,6 +152,7 @@
                     $("#conteudoModal").html(data);
                     linhas = $("#lista-produtos tr.linhas");
                     caculaTodos();
+                    desabilitaItensPagos();
                     totalComissaoAPagar();
                     $("#loading").hide();
                 },
@@ -175,13 +176,13 @@
         //    }
         //})
 
-        function check() {
-            document.getElementById("myCheck").checked = true;
-        }
+        //function check() {
+        //    document.getElementById("myCheck").checked = true;
+        //}
 
-        function uncheck() {
-            document.getElementById("myCheck").checked = false;
-        }
+        //function uncheck() {
+        //    document.getElementById("myCheck").checked = false;
+        //}
 
 
 
@@ -202,6 +203,7 @@
                         $(linhas[i]).find("td input.PercComissao").val($("#setPercProduto").val());
                     }
                 }
+                SalvaTodos();
             }
         }
 
@@ -216,6 +218,7 @@
                         $(linhas[i]).find("td input.PercComissao").val($("#setPercService").val());
                     }
                 }
+                SalvaTodos();
             }
         }
 
@@ -228,14 +231,21 @@
                 processData: true,
                 async: saveAsync,
                 success: function (data) {
-
-                    showLoading(false, IdItemPedido);
-                    showChecked(true, IdItemPedido);
-                    showChecked(false, IdItemPedido, 2000);
+                    if (data.IsValide) {
+                        showLoading(false, IdItemPedido);
+                        showChecked(true, IdItemPedido);
+                        showChecked(false, IdItemPedido, 2000);
+                    } else {
+                        showLoading(false, IdItemPedido);
+                        showErro(true, IdItemPedido);
+                        showErro(false, IdItemPedido, 10000);
+                        console.log(err);
+                    }
                 },
                 error: function (err) {
-                    showChecked(true, IdItemPedido);
-                    showChecked(false, IdItemPedido, 2000);
+                        showLoading(false, IdItemPedido);
+                    showErro(true, IdItemPedido);
+                    showErro(false, IdItemPedido, 10000);
                     console.log(err);
                 }
             });
@@ -262,6 +272,20 @@
                 setTimeout(() => { $(`#linha_${IdItemPedido} td img.erro`).show() }, interval);
             } else {
                 setTimeout(() => { $(`#linha_${IdItemPedido} td img.erro`).hide() }, interval);
+            }
+        }
+
+        function desabilitaItensPagos() {
+
+            for (var i = 0; i < linhas.length; i++) {
+                let isPago = $(linhas[i]).find("td input.DataPg").val() != "";
+                if (isPago) {
+                    $(linhas[i]).find("td input[type=checkbox]").attr('disabled', true)
+                    let inputDisable = $(linhas[i]).find("td input[type=text]")
+                    for (var j = 0; j < inputDisable.length; j++) {
+                        $(inputDisable[j]).attr('disabled', true)
+                    }
+                }
             }
         }
 
@@ -302,7 +326,8 @@
 
             for (var i = 0; i < linhas.length; i++) {
                 let Pagar = $(linhas[i]).find("td input.Pagar").prop("checked")
-                if (Pagar) {
+                let isPago = $(linhas[i]).find("td input.DataPg").val() != "";
+                if (Pagar && !isPago) {
                     let valor = parseFloat($(linhas[i]).find("td.APagar h5 label").html()).toFixed(2) * 1
                     total = total + valor;
                     qtd++;
@@ -320,9 +345,13 @@
         }
 
         function SalvaTodos() {
-            const linhasIds = $(linhas).find("td input.IdItemPedido");
-            for (var i = 0; i < linhasIds.length; i++) {
-                calculaLucro($(linhasIds[i]).val(), false, false);
+            console.log($(this).attr("id"))
+            for (var i = 0; i < linhas.length; i++) {
+                let isPago = $(linhas[i]).find("td input.DataPg").val() != "";
+                if (!isPago) {
+                    let id = $(linhas[i]).find("td input.IdItemPedido").val();
+                    calculaLucro(id, false, false);
+                }             
             }
         }
 

@@ -58,6 +58,7 @@
     <Compile Include="Repositories\DespesaRepository.cs" />
     <Compile Include="Repositories\FormaPgRepository.cs" />
     <Compile Include="Repositories\FuncaoRepository.cs" />
+    <Compile Include="Repositories\HistoricoVendaRepository.cs" />
     <Compile Include="Repositories\PedidoCancelamentoRepository.cs" />
     <Compile Include="Repositories\PedidoRepository.cs" />
     <Compile Include="Repositories\ItemPedidoRepository.cs" />
