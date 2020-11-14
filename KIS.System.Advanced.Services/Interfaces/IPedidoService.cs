@@ -10,12 +10,11 @@ namespace KIS.System.Advanced.Services.Interfaces
     public interface IPedidoService
     {
         List<Pedido> GetAll();
-        void Save(Pedido produto);
-        Pedido Get(int idProduto);
-        void Delete(int idProduto);
-        void Update(Pedido produto);
+        void Save(Pedido pedido);
+        Pedido Get(int idPedido);
+        void Delete(int idPedido);
+        void Update(Pedido pedido);
         void SaveNewOrder(Pedido pedido, List<ItemPedido> itensPedido, List<FormaPg> formasPagamento);
-        //int GetNextOrderNumber();
 
     }
 }

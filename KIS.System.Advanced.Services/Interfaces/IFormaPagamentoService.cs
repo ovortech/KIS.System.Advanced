@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KIS.System.Advanced.Domain.Interfaces
+namespace KIS.System.Advanced.Services.Interfaces
 {
-    public interface IItemPedidoRepository : IRepositoryBase<ItemPedido>
+    public interface IFormaPagamentoService
     {
-        List<ItemPedido> GetAllByOrderId(int orderId);
+        List<FormaPg> GetAllByOrderId(int orderId);
     }
 }

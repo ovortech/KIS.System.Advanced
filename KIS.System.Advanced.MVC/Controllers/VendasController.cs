@@ -20,26 +20,40 @@ namespace KIS.System.Advanced.MVC.Controllers
         private readonly ITipoPagamentoService _tipoPagamentoService;
         private readonly IVendedorService _vendedorService;
         private readonly IPedidoService _pedidoService;
+        private readonly IItemPedidoService _itemPedidoService;
+        private readonly IFormaPagamentoService _formaPagamentoService;
+
         public VendasController(IClienteService clienteService, 
                                 IProdutoService produtoService, 
                                 ITipoPagamentoService tipoPagamentoService, 
                                 IVendedorService vendedorService,
-                                IPedidoService pedidoService)
+                                IPedidoService pedidoService,
+                                IItemPedidoService itemPedidoService,
+                                IFormaPagamentoService formaPagamentoService)
         {
             _clienteService = clienteService;
             _produtoService = produtoService;
             _tipoPagamentoService = tipoPagamentoService;
             _vendedorService = vendedorService;
             _pedidoService = pedidoService;
+            _itemPedidoService = itemPedidoService;
+            _formaPagamentoService = formaPagamentoService;
         }
         
         #endregion
 
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
-        public ActionResult Index()
+        public ActionResult Index(int id = 0)
         {
-            var venda = LoadModel();
-            return View(venda);
+            var pedido = new VendasVM();
+
+            if (id != 0)
+            {
+                pedido = CarregaPedidoCompleto(id);
+                return View(pedido);
+            }
+            pedido = CarregaDependenciasPedido();
+            return View(pedido);
         }
 
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
@@ -68,7 +82,7 @@ namespace KIS.System.Advanced.MVC.Controllers
             }
         }
 
-        private VendasVM LoadModel()
+        private VendasVM CarregaDependenciasPedido()
         {
             var pedido = new VendasVM();
 
@@ -91,6 +105,23 @@ namespace KIS.System.Advanced.MVC.Controllers
             return pedido;
         }
 
-        
+        private VendasVM CarregaPedidoCompleto(int idPedido)
+        {
+            var pedido = CarregaDependenciasPedido();
+
+            var pedidoSalvo = _pedidoService.Get(idPedido);
+            pedido.IdPedido = pedidoSalvo.ID_PEDIDO;
+            pedido.IdVendedor = pedidoSalvo.ID_VENDEDOR;
+            pedido.Observacao = pedidoSalvo.OBS_PEDIDO;
+            pedido.IdCliente = pedidoSalvo.ID_CLIENTE;
+
+            var itensPedidoSalvos = _itemPedidoService.GetAllByOrderId(idPedido);
+            pedido.ItemPedidosVM = AutoMapper.Mapper.Map<List<ItemPedidoVM>>(itensPedidoSalvos);
+
+            var formasPagamento = _formaPagamentoService.GetAllByOrderId(idPedido);
+            pedido.FormaPGs = AutoMapper.Mapper.Map<List<FormaPGVM>>(formasPagamento);
+
+            return pedido;
+        }
     }
 }

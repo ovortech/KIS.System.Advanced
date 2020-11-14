@@ -33,7 +33,11 @@
   <ItemGroup>
     <Compile Include="ClienteService.cs" />
     <Compile Include="ComissaoService.cs" />
+    <Compile Include="FormaPagamentoService.cs" />
     <Compile Include="Interfaces\IComissaoService.cs" />
+    <Compile Include="Interfaces\IFormaPagamentoService.cs" />
+    <Compile Include="Interfaces\IItemPedidoService.cs" />
+    <Compile Include="ItemPedidoService.cs" />
     <Compile Include="TipoPagamentoService.cs" />
     <Compile Include="Interfaces\IClienteService.cs" />
     <Compile Include="Interfaces\IPedidoService.cs" />

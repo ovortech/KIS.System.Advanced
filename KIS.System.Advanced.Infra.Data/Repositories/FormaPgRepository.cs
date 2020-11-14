@@ -14,6 +14,10 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
         {
 
         }
-      
+
+        public List<FormaPg> GetAllByOrderId(int orderId)
+        {
+            return Db.FormaPgs.Where(x => x.ID_PEDIDO == orderId).ToList();
+        }
     }
 }

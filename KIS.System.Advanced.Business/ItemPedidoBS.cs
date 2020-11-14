@@ -29,6 +29,11 @@ namespace KIS.System.Advanced.Business
             }
         }
 
+        public List<ItemPedido> GetAllByOrderId(int orderId)
+        {
+            return dbItemPedido.GetAllByOrderId(orderId);
+        }
+
         public ItemPedido Get(int idItemPedido)
         {
             try

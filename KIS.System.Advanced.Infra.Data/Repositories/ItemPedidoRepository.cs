@@ -14,6 +14,10 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
         {
 
         }
-    
+
+        public List<ItemPedido> GetAllByOrderId(int orderId)
+        {
+            return Db.ItemPedidos.Where(x => x.ID_PEDIDO == orderId).ToList();
+        }
     }
 }

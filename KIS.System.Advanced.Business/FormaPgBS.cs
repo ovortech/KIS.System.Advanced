@@ -29,6 +29,19 @@ namespace KIS.System.Advanced.Business
             }
         }
 
+        public List<FormaPg> GetAllByOrderId(int orderId)
+        {
+            try
+            {
+                return dbFormaPg.GetAllByOrderId(orderId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar as formas de pagamento: {ex.Message}.");
+                throw;
+            }
+        }
+
         public List<FormaPg> GetAllActive()
         {
             try
