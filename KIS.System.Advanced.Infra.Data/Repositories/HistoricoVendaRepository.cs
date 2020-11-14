@@ -8,10 +8,12 @@ using System.Linq;
 
 namespace KIS.System.Advanced.Infra.Data.Repositories
 {
-    public class HistoricoVendaRepository : RepositoryBase<ItemPedido>, IItemPedidoRepository
+    public class HistoricoVendaRepository
     {
-        public HistoricoVendaRepository(ProjetoDataContext db = null) : base(db)
+        public ProjetoDataContext Db { get; private set; }
+        public HistoricoVendaRepository(ProjetoDataContext db = null)
         {
+            Db = new ProjetoDataContext();
         }
 
         public List<HistoricoVendaDto> GetHistoricoVendaDtos(int idVendedor, DateTime dataInicio, DateTime dataFim)
