@@ -1,0 +1,52 @@
+﻿@model IEnumerable<KIS.System.Advanced.MVC.ViewModels.DetailPedidoVM>
+
+<div class="modal fade bottom" id="detalhe-Pedido" tabindex="-1" role="dialog" aria-labelledby="desativar" aria-hidden="true" novalidate="novalidate" style="display: none;">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Detalhes do Pedido </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" onclick="javascript: resetaModal()">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" id="form-Vendedor" autocomplete="off" novalidate="novalidate">
+                    <div class="tbs_modal">
+                        <table id="lista-produtos" class="col-12 tb-b tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%" style="padding-left:0px;">
+                            <thead>
+                                <tr class="">
+                                    <th width="10%">Cod. Produto</th>
+                                    @*<th width="10%">Vendedor</th>*@
+                                    <th width="20%">Nome do Produto</th>
+                                    <th width="20%">Descrição</th>
+                                    <th width="10%">Quantidade</th>
+                                    <th width="10%">Valor Unitário</th>
+                                    <th width="10%">Desconto Unitário</th>
+                                    <th width="10%">Valor</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td class="tb-style text-center" width="5%">@item.IdProduto</td>
+                                        @*<td class="tb-style" width="10%">Paulo De Muro</td>*@
+                                        <td class="tb-style" width="30%">@item.NomeProduto</td>
+                                        <td class="tb-style" width="30%">@item.Descricao</td>
+                                        <td class="tb-style" width="10%">@item.Quantidade</td>
+                                        <td class="tb-style" width="3%">@item.ValorUnitario</td>
+                                        <td class="tb-style" width="3%">@item.DescontoUnitario</td>
+                                        <td class="tb-style" width="4%">@item.Total</td>
+                                    </tr>
+                                }
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btnSalvarVendedor" class="btn btn-primary btn-danger" data-dismiss="modal" aria-label="Close">Fechar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

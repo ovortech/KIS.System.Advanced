@@ -10,34 +10,55 @@ using System.Web.Mvc;
 
 namespace KIS.System.Advanced.MVC.Controllers
 {
-    public class HistoricoVendaController : CustomControllerBase<HistoricoVM>
+    public class HistoricoVendaController : CustomControllerBase<HistoricoVendaVM>
     {
         #region PROPRIEDADES / CONSTRUTOR
 
         private readonly IVendedorService _vendedorService;
-        public HistoricoVendaController(IVendedorService vendedorService)
+        private readonly IHistoricoVendaService _historicoVendaService;
+        public HistoricoVendaController(IVendedorService vendedorService, IHistoricoVendaService historicoVendaService)
         {
             _vendedorService = vendedorService;
+            _historicoVendaService = historicoVendaService;
         }
 
         #endregion
 
         public ActionResult Index()
         {
-            HistoricoVM model = CarregarModel();
+            HistoricoVendaVM model = CarregarModel();
             return View(model);
         }
 
+
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
-        public PartialViewResult AddOrEdit(int id)
+        [HttpPost]
+        public PartialViewResult Grid(int idVendedor, DateTime dataInicio, DateTime dataFim)
         {
-            var result = new UsuarioVM();
-            return PartialView(result);
+            List<GridHistoricoVendaVM> grid = new List<GridHistoricoVendaVM>();
+            if (idVendedor != 0)
+            {
+                grid = AutoMapper.Mapper.Map<List<GridHistoricoVendaVM>>(_historicoVendaService.HistoricoVendaDto(idVendedor, dataInicio, dataFim));
+            }
+            return PartialView(grid);
         }
 
-        private HistoricoVM CarregarModel()
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        [HttpPost]
+        public PartialViewResult Detalhes(int IdPedido)
         {
-            var model = new HistoricoVM();
+            List<ItemPedidoVM> ItensPedido = new List<ItemPedidoVM>();
+            if (IdPedido != 0)
+            {
+                ItensPedido = AutoMapper.Mapper.Map<List<ItemPedidoVM>>(_historicoVendaService.HistoricoVendaDetalheDto(IdPedido));
+            }
+            return PartialView(ItensPedido);
+        }
+
+
+        private HistoricoVendaVM CarregarModel()
+        {
+            var model = new HistoricoVendaVM();
             var vendedores = _vendedorService.GetAll();
             var vendedoresVM = AutoMapper.Mapper.Map<List<VendedorVM>>(vendedores);
             model.Vendedores = vendedoresVM;

@@ -33,7 +33,9 @@
   <ItemGroup>
     <Compile Include="ClienteService.cs" />
     <Compile Include="ComissaoService.cs" />
+    <Compile Include="Interfaces\HistoricoVendaService.cs" />
     <Compile Include="Interfaces\IComissaoService.cs" />
+    <Compile Include="Interfaces\IHistoricoVendaService.cs" />
     <Compile Include="TipoPagamentoService.cs" />
     <Compile Include="Interfaces\IClienteService.cs" />
     <Compile Include="Interfaces\IPedidoService.cs" />
