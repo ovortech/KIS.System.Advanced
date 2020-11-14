@@ -11,5 +11,6 @@ namespace KIS.System.Advanced.Services.Interfaces
     {
         List<HistoricoVendaDto> HistoricoVendaDto(int idVendedor, DateTime dataInicio, DateTime dataFim);
         List<ItemPedidoDto> HistoricoVendaDetalheDto(int IdPedido);
+        bool CacelaPedido(int IdPedido);
     }
 }

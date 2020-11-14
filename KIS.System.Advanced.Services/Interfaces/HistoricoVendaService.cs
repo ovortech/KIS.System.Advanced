@@ -16,6 +16,11 @@ namespace KIS.System.Advanced.Services.Interfaces
             _historicoVendaBS = new HistoricoVendaBS();
         }
 
+        public bool CacelaPedido(int IdPedido)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<ItemPedidoDto> HistoricoVendaDetalheDto(int IdPedido)
         {
             return _historicoVendaBS.GetHistoricoVendaItensPedidoDto(IdPedido);

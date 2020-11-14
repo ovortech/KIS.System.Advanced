@@ -30,5 +30,10 @@ namespace KIS.System.Advanced.Business
             return itemsPedido;
         }
 
+        public bool CancelarPedido(int IdPedido)
+        {
+            return true;
+        }
+
     }
 }

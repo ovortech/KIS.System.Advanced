@@ -55,6 +55,14 @@ namespace KIS.System.Advanced.MVC.Controllers
             return PartialView(ItensPedido);
         }
 
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        [HttpPost]
+        public ActionResult Cencelar(int IdPedido)
+        {
+
+            return View();
+        }
+
 
         private HistoricoVendaVM CarregarModel()
         {

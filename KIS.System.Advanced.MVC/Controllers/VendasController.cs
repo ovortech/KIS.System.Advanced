@@ -20,9 +20,9 @@ namespace KIS.System.Advanced.MVC.Controllers
         private readonly ITipoPagamentoService _tipoPagamentoService;
         private readonly IVendedorService _vendedorService;
         private readonly IPedidoService _pedidoService;
-        public VendasController(IClienteService clienteService, 
-                                IProdutoService produtoService, 
-                                ITipoPagamentoService tipoPagamentoService, 
+        public VendasController(IClienteService clienteService,
+                                IProdutoService produtoService,
+                                ITipoPagamentoService tipoPagamentoService,
                                 IVendedorService vendedorService,
                                 IPedidoService pedidoService)
         {
@@ -32,7 +32,7 @@ namespace KIS.System.Advanced.MVC.Controllers
             _vendedorService = vendedorService;
             _pedidoService = pedidoService;
         }
-        
+
         #endregion
 
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
@@ -40,6 +40,13 @@ namespace KIS.System.Advanced.MVC.Controllers
         {
             var venda = LoadModel();
             return View(venda);
+        }
+
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        public ActionResult Edit(int id)
+        {
+            var venda = LoadModel();
+            return View("Index", venda);
         }
 
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
@@ -91,6 +98,6 @@ namespace KIS.System.Advanced.MVC.Controllers
             return pedido;
         }
 
-        
+
     }
 }

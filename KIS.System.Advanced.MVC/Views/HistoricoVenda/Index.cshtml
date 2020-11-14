@@ -92,8 +92,11 @@
             showGrid();
         });
 
+
+
+
         function showGrid() {
-            
+
             let filtro = {
                 idVendedor: $("#idVendedor").val(),
                 dataInicio: $("#date_timepicker_start").val(),
@@ -116,9 +119,25 @@
 
         }
 
+        function cancelarPedido(idPedido) {
+            bootbox.confirm(`Deseja realmente CANCELAR o Pedido ${idPedido}?`, function (confirmou) {
+                if (confirmou) {
+                    let IdPedido = { IdPedido: idPedido }
+                    callActionPost("HistoricoVenda", "Cencelar", IdPedido)
+                }
+            });
+        }
+
+        function editarVenda(idPedido) {
+            bootbox.confirm(`Deseja realmente EDITAR o Pedido ${idPedido}?`, function (confirmou) {
+                if (confirmou) {
+                    window.location.href = "/Vendas/index/" + id
+                }
+            });
+        }
 
         function showDetalhe(idPedido) {
-            let IdPedido = { IdPedido: idPedido}
+            let IdPedido = { IdPedido: idPedido }
             $.ajax({
                 type: "Post",
                 url: '/HistoricoVenda/Detalhes',
