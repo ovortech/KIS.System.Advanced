@@ -15,9 +15,9 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
         List<string> NotRemoveLogic = new List<string> { "Pedido", "PedidoCancelamento" };
         public ProjetoDataContext Db { get; private set; }
 
-        public RepositoryBase()
+        public RepositoryBase(ProjetoDataContext db = null)
         {
-            Db = new ProjetoDataContext();
+            Db = db ?? new ProjetoDataContext();
         }
 
         public void Add(TEntity obj)
