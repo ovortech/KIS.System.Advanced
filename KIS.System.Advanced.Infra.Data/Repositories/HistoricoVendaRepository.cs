@@ -1,21 +1,17 @@
 ﻿using KIS.System.Advanced.Domain.Dto;
 using KIS.System.Advanced.Domain.Entities;
+using KIS.System.Advanced.Domain.Interfaces;
 using KIS.System.Advanced.Infra.Data.Contexto;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KIS.System.Advanced.Infra.Data.Repositories
 {
-    public class HistoricoVendaRepository
+    public class HistoricoVendaRepository : RepositoryBase<ItemPedido>, IItemPedidoRepository
     {
-        public ProjetoDataContext Db { get; private set; }
-        public HistoricoVendaRepository()
+        public HistoricoVendaRepository(ProjetoDataContext db = null) : base(db)
         {
-            Db = new ProjetoDataContext();
         }
 
         public List<HistoricoVendaDto> GetHistoricoVendaDtos(int idVendedor, DateTime dataInicio, DateTime dataFim)
