@@ -60,6 +60,7 @@
     <Reference Include="System.Data.Entity" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\HistoricoVendaTest.cs" />
     <Compile Include="Business\PedidoTest.cs" />
     <Compile Include="Business\RecuperarSenhaTest.cs" />
     <Compile Include="Data\ClienteTest.cs" />

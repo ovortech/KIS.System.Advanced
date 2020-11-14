@@ -36,6 +36,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Dto\ComissaoDto.cs" />
+    <Compile Include="Dto\HistoricoVendaDto.cs" />
+    <Compile Include="Dto\ItemPedidoDto.cs" />
     <Compile Include="Entities\Contrato.cs" />
     <Compile Include="Entities\ExclusaoLogica.cs" />
     <Compile Include="Entities\Pedido.cs" />

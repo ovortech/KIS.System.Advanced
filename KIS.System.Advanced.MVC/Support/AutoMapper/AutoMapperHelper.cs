@@ -61,6 +61,7 @@ namespace KIS.System.Advanced.MVC.Support
                 .ForMember(destinationMember: vm => vm.PERCENTUAL_COMISSAO, memberOptions: map => map.MapFrom(sourceMember: s => s.PercComissao))
                 .ForMember(destinationMember: vm => vm.PAGO_COMISSAO, memberOptions: map => map.MapFrom(sourceMember: s => s.Pago))
                 .ForMember(destinationMember: vm => vm.ATIVO, memberOptions: map => map.MapFrom(sourceMember: s => s.Ativo))
+                .ForMember(destinationMember: vm => vm.DATA_PAGAMENTO_COMISSAO, memberOptions: map => map.MapFrom(sourceMember: s => s.DataVenda))
                 ;
 
             cfg.CreateMap<ComissaoDto, ComissaoVM>()

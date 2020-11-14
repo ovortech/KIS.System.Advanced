@@ -37,6 +37,7 @@
     <Compile Include="DespesaBS.cs" />
     <Compile Include="FormaPgBS.cs" />
     <Compile Include="FuncaoBS.cs" />
+    <Compile Include="HistoricoVendaBS.cs" />
     <Compile Include="ItemPedidoBS.cs" />
     <Compile Include="PedidoBS.cs" />
     <Compile Include="PedidoCancelamentoBS.cs" />

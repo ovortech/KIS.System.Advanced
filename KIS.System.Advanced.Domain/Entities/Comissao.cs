@@ -17,6 +17,7 @@ namespace KIS.System.Advanced.Domain.Entities
         public double VALOR_LUCRO_COMISSAO { get; set; }
         public double PERCENTUAL_COMISSAO { get; set; }
         public Boolean PAGO_COMISSAO { get; set; }
+        public DateTime? DATA_PAGAMENTO_COMISSAO { get; set; }
 
         [NotMapped]
         //// <summary>

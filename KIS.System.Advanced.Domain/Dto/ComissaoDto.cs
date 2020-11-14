@@ -23,5 +23,6 @@ namespace KIS.System.Advanced.Domain.Dto
         public bool? Pago { get; set; }
         public bool? Ativo { get; set; }
         public Vendedor Vendedor { get; set; }
+        public DateTime? DataPg { get; set; }
     }
 }

@@ -23,5 +23,6 @@ namespace KIS.System.Advanced.MVC.ViewModels
         public double PercComissao { get; set; }
         public bool Pago { get; set; }
         public bool Ativo { get; set; }
+        public DateTime? DataPg { get; set; }
     }
 }
