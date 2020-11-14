@@ -32,11 +32,6 @@ namespace KIS.System.Advanced.Services
             return _pedidoBS.GetAll();
         }
 
-        //public int GetNextOrderNumber()
-        //{
-        //    return _pedidoBS.GetNextOrderNumber();
-        //}
-
         public void Save(Pedido pedido)
         {
             _pedidoBS.Save(pedido);
@@ -47,6 +42,11 @@ namespace KIS.System.Advanced.Services
         {
             _pedidoBS.Update(produto);
 
+        }
+
+        public void SaveNewOrder(Pedido pedido, List<ItemPedido> itensPedido, List<FormaPg> formasPagamento)
+        {
+            _pedidoBS.SaveNewOrder(pedido, itensPedido, formasPagamento);
         }
     }
 }

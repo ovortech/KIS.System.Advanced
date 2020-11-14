@@ -49,6 +49,9 @@ namespace KIS.System.Advanced.MVC.Support
             MappingTipoPagamento(cfg);
             MappingClientes(cfg);
             MappingComissao(cfg);
+            MappingVendas(cfg);
+            MappingItemPedido(cfg);
+            MappingFormasPagamento(cfg);
         }
 
         private static void MappingComissao(IMapperConfigurationExpression cfg)
@@ -66,6 +69,50 @@ namespace KIS.System.Advanced.MVC.Support
 
             cfg.CreateMap<ComissaoDto, ComissaoVM>()
                 ;
+        }
+
+        private static void MappingVendas(IMapperConfigurationExpression cfg)
+        {
+            cfg.CreateMap<VendasVM, Pedido>()
+               .ForMember(destinationMember: vm => vm.ID_PEDIDO, memberOptions: map => map.MapFrom(sourceMember: s => s.IdPedido))
+               .ForMember(destinationMember: vm => vm.ID_CLIENTE, memberOptions: map => map.MapFrom(sourceMember: s => s.IdCliente))
+               .ForMember(destinationMember: vm => vm.ID_VENDEDOR, memberOptions: map => map.MapFrom(sourceMember: s => s.IdVendedor))
+               .ForMember(destinationMember: vm => vm.OBS_PEDIDO, memberOptions: map => map.MapFrom(sourceMember: s => s.Observacao));
+
+            cfg.CreateMap<Pedido, VendasVM>()
+                .ForMember(destinationMember: vm => vm.IdPedido, memberOptions: map => map.MapFrom(sourceMember: s => s.ID_PEDIDO))
+               .ForMember(destinationMember: vm => vm.IdCliente, memberOptions: map => map.MapFrom(sourceMember: s => s.ID_CLIENTE))
+               .ForMember(destinationMember: vm => vm.IdVendedor, memberOptions: map => map.MapFrom(sourceMember: s => s.ID_VENDEDOR))
+               .ForMember(destinationMember: vm => vm.Observacao, memberOptions: map => map.MapFrom(sourceMember: s => s.OBS_PEDIDO));
+        }
+
+        private static void MappingItemPedido(IMapperConfigurationExpression cfg)
+        {
+            cfg.CreateMap<ItemPedidoVM, ItemPedido>()
+               .ForMember(destinationMember: vm => vm.VALOR_UN_PEDIDO, memberOptions: map => map.MapFrom(sourceMember: s => s.ValorUnitario))
+               .ForMember(destinationMember: vm => vm.ID_PRODUTO, memberOptions: map => map.MapFrom(sourceMember: s => s.IdProduto))
+               .ForMember(destinationMember: vm => vm.OBS_PRODUTO, memberOptions: map => map.MapFrom(sourceMember: s => s.Observacao))
+               .ForMember(destinationMember: vm => vm.DESCONTO_PEDIDO, memberOptions: map => map.MapFrom(sourceMember: s => s.Desconto))
+               .ForMember(destinationMember: vm => vm.QTD_PEDIDO, memberOptions: map => map.MapFrom(sourceMember: s => s.Quantidade));
+
+            cfg.CreateMap<ItemPedido, ItemPedidoVM>()
+               .ForMember(destinationMember: vm => vm.ValorUnitario, memberOptions: map => map.MapFrom(sourceMember: s => s.VALOR_UN_PEDIDO))
+               .ForMember(destinationMember: vm => vm.IdProduto, memberOptions: map => map.MapFrom(sourceMember: s => s.ID_PRODUTO))
+               .ForMember(destinationMember: vm => vm.Observacao, memberOptions: map => map.MapFrom(sourceMember: s => s.OBS_PRODUTO))
+               .ForMember(destinationMember: vm => vm.Desconto, memberOptions: map => map.MapFrom(sourceMember: s => s.DESCONTO_PEDIDO))
+               .ForMember(destinationMember: vm => vm.Quantidade, memberOptions: map => map.MapFrom(sourceMember: s => s.QTD_PEDIDO));
+        }
+
+        private static void MappingFormasPagamento(IMapperConfigurationExpression cfg)
+        {
+            cfg.CreateMap<FormaPGVM, FormaPg>()
+               .ForMember(destinationMember: vm => vm.VALOR_FORM_PG, memberOptions: map => map.MapFrom(sourceMember: s => s.ValorPG))
+               .ForPath(destinationMember: vm => vm.ID_TIPO_PG, memberOptions: map => map.MapFrom(sourceMember: s => s.TipoPGVM.Id));
+
+
+            cfg.CreateMap<FormaPg, FormaPGVM>()
+               .ForMember(destinationMember: vm => vm.ValorPG, memberOptions: map => map.MapFrom(sourceMember: s => s.VALOR_FORM_PG))
+               .ForPath(destinationMember: vm => vm.TipoPGVM.Id, memberOptions: map => map.MapFrom(sourceMember: s => s.ID_TIPO_PG));
         }
 
         private static void MappingVendedor(IMapperConfigurationExpression cfg)

@@ -12,7 +12,7 @@ namespace KIS.System.Advanced.Infra.Data.EntityConfig
     {
         public FormaPgMapping()
         {
-            ToTable("FORM_PG");
+            ToTable("FORMA_PG");
             HasKey(e => e.ID_FORM_PG);
             Property(e => e.ID_PEDIDO).IsRequired(); // VERIFICAR TIPO
             Property(e => e.ID_TIPO_PG).IsRequired(); // VERIFICAR TIPO

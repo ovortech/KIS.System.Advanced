@@ -93,6 +93,32 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @{ if (Model.ItemPedidosVM != null && Model.ItemPedidosVM.Count > 0)
+                                {
+                                    foreach (var item in Model.ItemPedidosVM)
+                                    {
+                                        ViewBag.contadorId = 0;
+                                        <tr id="@ViewBag.contadorId">
+                                            <td class="tb-style text-center" width="5%">@item.CodProduto<input id="produto_@ViewBag.contadorId" value="@item.IdProduto" type="hidden"></td>
+                                            <td class="tb-style" width="30%">@item.NomeProduto</td>
+                                            <td class="tb-style" width="30%">
+                                                <div class="form-group">
+                                                    <textarea id="descricao_@ViewBag.contadorId" class="form-control" rows="1"></textarea>
+                                                </div>
+                                            </td>
+                                            <td class="tb-style" width="10%">
+                                                <input class="qtdem btn" type="button" value="-" onclick="decrementaQuantidade(${contadorId});" />
+                                                <input id="quantidade_@ViewBag.contadorId" class="qtde" type="text" value="1" onchange="calculaValorTotalProdutos(${contadorId});" disabled />
+                                                <input class="qtdema btn" type="button" value="+" onclick="incrementaQuantidade(${contadorId});" />
+                                            </td>
+                                            <td class="tb-style" width="3%"><input id="valor_@ViewBag.contadorId" data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'" class="wd-100 form-control" type="text" value="@item.ValorUnitario" onchange="calculaValorTotalProdutos(@ViewBag.contadorId);" /></td>
+                                            <td class="tb-style" width="3%"><input id="desconto_@ViewBag.contadorId" class="wd-100 form-control" type="text" value="00,00" onchange="calculaValorTotalProdutos(${contadorId});" /></td>
+                                            <td id="total_@ViewBag.contadorId" class="tb-style" width="4%">@item.ValorUnitario</td>
+                                            <td class="tb-style" width="10%"><button type="button" class="btn btn-remove" onclick="removeProdutoDaLista(@ViewBag.contadorId);">Remover</button></td>
+                                        </tr>
+                                    }
+                                }
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -172,8 +198,26 @@
         })
 
         $("#finalizarVenda").click(() => {
-            if (validaCamposParaFinalizar())
-                finalizaVenda();
+            if (validaCamposParaFinalizar()) {
+                var dialog = bootbox.dialog({
+                    title: 'Aguarde',
+                    message: '<p><i class="fa fa-spin fa-spinner"></i> Salvando Pedido...</p>'
+                });
+
+                try {
+                    finalizaVenda();
+                    dialog.init(function () {
+                        dialog.find('.bootbox-body').html('Pedido salvo com sucesso!');
+                    });
+                    setTimeout(function () {
+                        window.location = window.location.origin + '/Home/Index';
+                    }, 3000)
+                } catch (err) {
+                    dialog.init(function () {
+                        dialog.find('.bootbox-body').html(`Erro ao salvar pedido: ${err}`);
+                    });
+                }
+            }
         })
 
         function validaCamposParaFinalizar() {
@@ -199,7 +243,7 @@
         function finalizaVenda() {
             let pedido = {};
             pedido.IdVendedor = $(`#idVendedor`).val();
-            pedido.Observacao = $(`#obsevacaoPedido`).text();
+            pedido.Observacao = $(`#obsevacaoPedido`).val();
             pedido.IdCliente = $(`#IdCliente`).val();
 
             pedido.FormaPGs = [];
@@ -207,50 +251,57 @@
             let FormaPGVM = {};
             FormaPGVM.TipoPGVM = {};
             FormaPGVM.TipoPGVM.Id = $(`#formaPagamento1`).val();
-            FormaPGVM.TipoPGVM.Valor = $(`#valorRecebidoFormaPagamento1`).val();
+            FormaPGVM.TipoPGVM.Nome = $(`#formaPagamento1 :selected`).text();
+            FormaPGVM.ValorPG = $(`#valorRecebidoFormaPagamento1`).val();
             pedido.FormaPGs.push(FormaPGVM)
 
-            if (!valorRecebidoA() === valorTotalPedido()) {
-                FormaPGVM = {};
+            if (valorRecebidoA() !== valorTotalPedido()) {
+                let FormaPGVM = {};
                 FormaPGVM.TipoPGVM = {};
                 FormaPGVM.TipoPGVM.Id = $(`#formaPagamento2`).val();
-                FormaPGVM.TipoPGVM.Valor = $(`#valorRecebidoFormaPagamento2`).val();
+                FormaPGVM.TipoPGVM.Nome = $(`#formaPagamento2 :selected`).text();
+                FormaPGVM.ValorPG = $(`#valorRecebidoFormaPagamento2`).val();
                 pedido.FormaPGs.push(FormaPGVM)
             }
 
             pedido.ItemPedidosVM = [];
 
-
             $('#listaProdutos > tbody > tr').each(function () {
                 let ItemPedidosVM = {};
-                let tr = $(this)[0];
 
+                let idContador = $(this).attr('id');
+                ItemPedidosVM.IdProduto = idProdutoNaLista(idContador);
+                ItemPedidosVM.Observacao = descricaoProdutoNaLista(idContador);
+                ItemPedidosVM.Quantidade = quantidadeAtualProdutosNaLista(idContador);
+                ItemPedidosVM.ValorUnitario = valorUnitarioProdutoNaLista(idContador);
+                ItemPedidosVM.Desconto = valorDescontoUnitarioNaLista(idContador);
 
+                pedido.ItemPedidosVM.push(ItemPedidosVM);
             });
-            callActionPost('vendas', 'SaveNewOrder', { venda: pedido });
 
+            callActionPost('vendas', 'SaveNewOrder', { venda: pedido });
 
         }
 
         function adicionaProdutoNaLista(produto) {
             let tr = `<tr id="${contadorId}">
-                                    <td class="tb-style text-center" width="5%" id="${produto.IdProduto}">${produto.CodProduto}</td>
-                                    <td class="tb-style" width="30%">${produto.NomeProduto}</td>
-                                    <td class="tb-style" width="30%">
-                                        <div class="form-group">
-                                            <textarea class="form-control" rows="1"></textarea>
-                                        </div>
-                                    </td>
-                                    <td class="tb-style" width="10%">
-                                        <input class="qtdem btn" type="button" value="-" onclick="decrementaQuantidade(${contadorId});" />
-                                        <input id="quantidade_${contadorId}" class="qtde" type="text" value="1" onchange="calculaValorTotalProdutos(${contadorId});" disabled/>
-                                        <input class="qtdema btn" type="button" value="+" onclick="incrementaQuantidade(${contadorId});" />
-                                    </td>
-                                    <td class="tb-style" width="3%"><input id="valor_${contadorId}" data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'"class="wd-100 form-control" type="text" value="${produto.ValorProduto}" onchange="calculaValorTotalProdutos(${contadorId});"/></td>
-                                    <td class="tb-style" width="3%"><input id="desconto_${contadorId}" class="wd-100 form-control" type="text" value="00,00" onchange="calculaValorTotalProdutos(${contadorId});"/></td>
-                                    <td id="total_${contadorId}" class="tb-style" width="4%">${produto.ValorProduto}</td>
-                                    <td class="tb-style" width="10%"><button type="button" class="btn btn-remove" onclick="removeProdutoDaLista(${contadorId});">Remover</button></td>
-                                </tr>`;
+                                                <td class="tb-style text-center" width="5%">${produto.CodProduto}<input id="produto_${contadorId}" value="${produto.IdProduto}" type="hidden"></td>
+                                                <td class="tb-style" width="30%">${produto.NomeProduto}</td>
+                                                <td class="tb-style" width="30%">
+                                                    <div class="form-group">
+                                                        <textarea id="descricao_${contadorId}"class="form-control" rows="1"></textarea>
+                                                    </div>
+                                                </td>
+                                                <td class="tb-style" width="10%">
+                                                    <input class="qtdem btn" type="button" value="-" onclick="decrementaQuantidade(${contadorId});" />
+                                                    <input id="quantidade_${contadorId}" class="qtde" type="text" value="1" onchange="calculaValorTotalProdutos(${contadorId});" disabled/>
+                                                    <input class="qtdema btn" type="button" value="+" onclick="incrementaQuantidade(${contadorId});" />
+                                                </td>
+                                                <td class="tb-style" width="3%"><input id="valor_${contadorId}" data-inputmask="'alias': 'numeric', 'groupSeparator': ',', 'digits': 2, 'digitsOptional': false, 'prefix': 'R$ ', 'placeholder': '0'"class="wd-100 form-control" type="text" value="${produto.ValorProduto}" onchange="calculaValorTotalProdutos(${contadorId});"/></td>
+                                                <td class="tb-style" width="3%"><input id="desconto_${contadorId}" class="wd-100 form-control" type="text" value="00,00" onchange="calculaValorTotalProdutos(${contadorId});"/></td>
+                                                <td id="total_${contadorId}" class="tb-style" width="4%">${produto.ValorProduto}</td>
+                                                <td class="tb-style" width="10%"><button type="button" class="btn btn-remove" onclick="removeProdutoDaLista(${contadorId});">Remover</button></td>
+                                            </tr>`;
 
             $("#listaProdutos tbody").append(tr);
 
@@ -265,7 +316,7 @@
             $('#listaProdutos > tbody  > tr').each(function () {
                 let contador = $(this).attr('id');
                 let quantidadeAtual = quantidadeAtualProdutosNaLista(contador);
-                let valorDesconto = valorDescontoUnitario(contador);
+                let valorDesconto = valorDescontoUnitarioNaLista(contador);
 
                 let totalDescontoItemAtual = valorDesconto * quantidadeAtual;
                 valorTotalDescontos += totalDescontoItemAtual;
@@ -281,8 +332,8 @@
 
         function calculaValorTotalProdutos(contador) {
             let quantidadeAtual = quantidadeAtualProdutosNaLista(contador);
-            let valorUnitario = valorUnitarioProduto(contador);
-            let valorDesconto = valorDescontoUnitario(contador);
+            let valorUnitario = valorUnitarioProdutoNaLista(contador);
+            let valorDesconto = valorDescontoUnitarioNaLista(contador);
             let valorTotal = (valorUnitario - valorDesconto) * quantidadeAtual;
             $(`#total_${contador}`).text(valorTotal.toFixed(2));
             atualizaTotalPedido();
@@ -311,15 +362,23 @@
             return $('#listaProdutos tbody tr').length;
         }
 
+        function idProdutoNaLista(contador) {
+            return parseInt($(`#listaProdutos tbody tr`).find(`#produto_${contador}`).val());
+        }
+
         function quantidadeAtualProdutosNaLista(contador) {
             return parseInt($(`#listaProdutos tbody tr`).find(`#quantidade_${contador}`).val());
         }
 
-        function valorUnitarioProduto(contador) {
+        function valorUnitarioProdutoNaLista(contador) {
             return parseFloat($(`#listaProdutos tbody tr`).find(`#valor_${contador}`).val());
         }
 
-        function valorDescontoUnitario(contador) {
+        function descricaoProdutoNaLista(contador) {
+            return $(`#listaProdutos tbody tr`).find(`#descricao_${contador}`).val();
+        }
+
+        function valorDescontoUnitarioNaLista(contador) {
             return parseFloat($(`#listaProdutos tbody tr`).find(`#desconto_${contador}`).val());
         }
 
@@ -372,7 +431,7 @@
         }
 
         function alternaSelecaoSegundaFormaPagamento(habilita) {
-            if(habilita)
+            if (habilita)
                 $("#formaPagamento2").prop('disabled', false);
             else
                 $("#formaPagamento2").prop('disabled', true);
