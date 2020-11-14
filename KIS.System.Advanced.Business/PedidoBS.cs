@@ -53,6 +53,33 @@ namespace KIS.System.Advanced.Business
             }
         }
 
+        public void SaveNewOrder(Pedido pedido, List<ItemPedido> itensPedido, List<FormaPg> formasPagamento)
+        {
+            try
+            {
+                #region Trata dados pedido
+
+                pedido.DATA_REG_PEDIDO = DateTime.Now;
+                pedido.FATURADO_PEDIDO = true; //TODO: verificar questão dos contratos para faturamento
+                
+
+
+                foreach (var item in itensPedido)
+                {
+                    pedido.TOTAL_PEDIDO += item.QTD_PEDIDO * (item.VALOR_UN_PEDIDO - item.DESCONTO_PEDIDO);
+                }
+
+                #endregion
+
+                dbPedido.SaveNewOrder(pedido, itensPedido, formasPagamento);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao salvar Pedido: {ex.Message}.");
+            }
+        }
+
         public void Update(Pedido Pedido)
         {
             try

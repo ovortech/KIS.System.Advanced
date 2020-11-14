@@ -14,6 +14,7 @@ namespace KIS.System.Advanced.Services.Interfaces
         Pedido Get(int idProduto);
         void Delete(int idProduto);
         void Update(Pedido produto);
+        void SaveNewOrder(Pedido pedido, List<ItemPedido> itensPedido, List<FormaPg> formasPagamento);
         //int GetNextOrderNumber();
 
     }

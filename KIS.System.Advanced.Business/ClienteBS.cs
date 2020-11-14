@@ -101,6 +101,7 @@ namespace KIS.System.Advanced.Business
                 throw new Exception($"Erro ao excluir Cliente: {ex.Message}.");
             }
         } 
+
         #endregion
     }
 }
