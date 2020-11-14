@@ -4,7 +4,7 @@
 
 }
 
-@model KIS.System.Advanced.MVC.ViewModels.HistoricoVM
+@model KIS.System.Advanced.MVC.ViewModels.HistoricoVendaVM
 
 <!-- Bootstrap core CSS -->
 <link href="~/Content/bootstrap.min.css" rel="stylesheet">
@@ -42,7 +42,7 @@
                 <div class="" id="box_configs col-md-12">
                     <label class="float-left mg-10 mb-10">Selecione o Vendedor:   </label>
                     <select id="idVendedor" class="mb-10 browser-default custom-select col-3">
-                        <option selected>Selecione o vendedor</option>
+                        <option selected value="0">Selecione o vendedor</option>
                         @foreach (var vendedor in Model.Vendedores)
                         {
                             <option value="@vendedor.Id">@vendedor.Nome</option>
@@ -51,49 +51,21 @@
                 </div>
                 <div class="row" id="box_configs">
                     <label class="float-left mg-10 mb-10" style="margin-left: 15px;">Ínicio de exibição:</label>
-                    <input type="text" class="form-control text-center col-1" id="date_timepicker_start" />
+                    <input type="text" class="form-control text-center col-1" id="date_timepicker_start" value="@Model.DataInicio" />
                     <label class="float-left mg-10 mb-10">&nbsp; &nbsp;Fim de exibição:</label>
-                    <input type="text" class="form-control text-center col-1" id="date_timepicker_end" />
-                    <button type="button" class="float-left btn-buscar">Buscar</button>
+                    <input type="text" class="form-control text-center col-1" id="date_timepicker_end" value="@Model.DataFim" />
+                    <button type="button" class="float-left btn-buscar" onclick="javascript: showGrid()">Buscar</button>
                 </div>
 
                 <br>
-                <div class="tbs">
-                    <table id="lista-produtos" class="col-12 tb-b tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%" style="padding-left:0px;">
-                        <thead>
-                            <tr class="text-center">
-                                <th width="10%">Nº Pedido</th>
-                                <th width="10%">Vendedor</th>
-                                <th width="30%">Observação</th>
-                                <th width="10%">Data da Venda</th>
-                                <th width="10%">Total do Pedido</th>
-                                <th width="10%">Pedido Pago?</th>
-                                <th width="3%"></th>
-                                <th width="3%"></th>
-                                <th width="3%"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="tb-style text-center" width="5%">05</td>
-                                <td class="tb-style text-center" dwidth="5%">Paulo De Muro</td>
-                                <td class="tb-style text-center" width="20%">Não tínhamos o item no estoque, tive que correr para ir comprar</td>
-                                <td class="tb-style text-center" width="10%">02/11/2020</td>
-                                <td class="tb-style text-center" width="10%">220,00</td>
-                                <td class="tb-style text-center" width="10%">Não</td>
-                                <td class="tb-style text-center" width="3%"><button type="button" style="width: 90px; !important" class="mb-10 btn-add btn " data-toggle="modal" data-target="#novo-Vendedor" data-direction="bottom" onclick="javascript: ajustaTituloModal('Detalhes do Pedido')">Detalhes</button></td>
-                                <td class="tb-style text-center" width="3%"><a onclick="" class="btn btn-secondary" style="width: 90px;">Editar</a></td>
-                                <td class="tb-style text-center" width="3%"><a onclick="" class="btn btn-danger" style="width: 90px;">Cancelar</a></td>
-                            </tr>
-                    </table>
+                <div id="conteudoGrid"></div>
 
-                </div>
-                <div class="clearfix"></div        
+                <div class="clearfix"></div>
                 <br>
             </div>
         </div>
     </div>
-    <div class="modal fade bottom" id="novo-Vendedor" tabindex="-1" role="dialog" aria-labelledby="desativar" aria-hidden="true" novalidate="novalidate" style="display: none;">
+    <div class="modal fade bottom" id="detalhe-Pedido" tabindex="-1" role="dialog" aria-labelledby="desativar" aria-hidden="true" novalidate="novalidate" style="display: none;">
         <div class="modal-dialog ">
             <div class="modal-content">
                 <div class="modal-header">
@@ -102,128 +74,165 @@
                         <span aria-hidden="true" onclick="javascript: resetaModal()">×</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form method="POST" id="form-Vendedor" autocomplete="off" novalidate="novalidate">
-                        <div class="tbs_modal">
-                            <table id="lista-produtos" class="col-12 tb-b tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%" style="padding-left:0px;">
-                                <thead>
-                                    <tr class="">
-                                        <th width="10%">Cod. Produto</th>
-                                        <th width="10%">Vendedor</th>
-                                        <th width="20%">Nome do Produto</th>
-                                        <th width="20%">Descrição</th>
-                                        <th width="10%">Quantidade</th>
-                                        <th width="10%">Valor Unitário</th>
-                                        <th width="10%">Desconto Unitário</th>
-                                        <th width="10%">Valor</th>
+                <div id="conteudoModal"></div>
 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="tb-style text-center" width="5%">101</td>
-                                        <td class="tb-style" width="10%">Paulo De Muro</td>
-                                        <td class="tb-style" width="30%">Chave de carro</td>
-                                        <td class="tb-style" width="30%">Chave Ford Ka</td>
-                                        <td class="tb-style" width="10%">2</td>
-                                        <td class="tb-style" width="3%">55,00</td>
-                                        <td class="tb-style" width="3%">0,00</td>
-                                        <td class="tb-style" width="4%">110,00</td>
-                                    </tr>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" id="btnSalvarVendedor" class="btn btn-primary btn-danger" data-dismiss="modal" aria-label="Close">Fechar</button>
-                        </div>
-                    </form>
-                </div>
             </div>
         </div>
     </div>
+
+
 </body>
 
 @section scripts {
     <script src="~/Scripts/jquery.datetimepicker.full.min.js"></script>
     <script type="text/javascript">
-        var count = 1;
+
+
         $(document).ready(function () {
-            $('#items').live('pageinit', function (event) {
-                $('#additem').click(function () {
-                    //alert("add clicked");
-                    var request = $.ajax({
-                        url: "http://www.furnguy.com/app-pages/additem.php",
-                        type: "POST",
-                        data: { COUNTER: count },
-                        dataType: "html"
-                    });
-
-                    request.done(function (html) {
-                        //alert("here");
-                        if (html != '') {
-                            $('#salesitems').append(html).trigger('create');
-                        }
-                    });
-
-                    request.fail(function (jqXHR, textStatus) {
-                        alert("Request failed: " + textStatus);
-                    });
-                    count++;
-                });
-            });
+            showGrid();
         });
 
 
-        function deleteItem() {
-            $('table').click(function () {
-                $(this).parent().remove();
-            });
-        };
-        function increaseQty() {
-            var currentVal = parseInt($("#qty").val());
-            if (currentVal != NaN) {
-                $("#qty").val(currentVal + 1);
-            }
-        };
-        function decreaseQty() {
-            var currentVal = parseInt($("#qty").val());
-            if (currentVal != NaN) {
-                $("#qty").val(currentVal - 1);
-            }
-        };
 
+
+        function showGrid() {
+
+            let filtro = {
+                idVendedor: $("#idVendedor").val(),
+                dataInicio: $("#date_timepicker_start").val(),
+                dataFim: $("#date_timepicker_end").val()
+            }
+            $.ajax({
+                type: "Post",
+                url: '/HistoricoVenda/Grid',
+                data: filtro,
+                processData: true,
+                async: false,
+                success: function (data) {
+
+                    $("#conteudoGrid").html(data);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+
+        }
+
+        function cancelarPedido(idPedido) {
+            bootbox.confirm(`Deseja realmente CANCELAR o Pedido ${idPedido}?`, function (confirmou) {
+                if (confirmou) {
+                    let IdPedido = { IdPedido: idPedido }
+                    callActionPost("HistoricoVenda", "Cencelar", IdPedido)
+                }
+            });
+        }
+
+        function editarVenda(idPedido) {
+            bootbox.confirm(`Deseja realmente EDITAR o Pedido ${idPedido}?`, function (confirmou) {
+                if (confirmou) {
+                    window.location.href = "/Vendas/index/" + id
+                }
+            });
+        }
+
+        function showDetalhe(idPedido) {
+            let IdPedido = { IdPedido: idPedido }
+            $.ajax({
+                type: "Post",
+                url: '/HistoricoVenda/Detalhes',
+                data: IdPedido,
+                processData: true,
+                async: false,
+                success: function (data) {
+
+                    $("#conteudoModal").html(data);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+            //ajustaTituloModal('Detalhes do Pedido')
+        }
+
+        //var count = 1;
+        //$(document).ready(function () {
+        //    $('#items').live('pageinit', function (event) {
+        //        $('#additem').click(function () {
+        //            //alert("add clicked");
+        //            var request = $.ajax({
+        //                url: "http://www.furnguy.com/app-pages/additem.php",
+        //                type: "POST",
+        //                data: { COUNTER: count },
+        //                dataType: "html"
+        //            });
+
+        //            request.done(function (html) {
+        //                //alert("here");
+        //                if (html != '') {
+        //                    $('#salesitems').append(html).trigger('create');
+        //                }
+        //            });
+
+        //            request.fail(function (jqXHR, textStatus) {
+        //                alert("Request failed: " + textStatus);
+        //            });
+        //            count++;
+        //        });
+        //    });
+        //});
+
+
+        //function deleteItem() {
+        //    $('table').click(function () {
+        //        $(this).parent().remove();
+        //    });
+        //};
+        //function increaseQty() {
+        //    var currentVal = parseInt($("#qty").val());
+        //    if (currentVal != NaN) {
+        //        $("#qty").val(currentVal + 1);
+        //    }
+        //};
+        //function decreaseQty() {
+        //    var currentVal = parseInt($("#qty").val());
+        //    if (currentVal != NaN) {
+        //        $("#qty").val(currentVal - 1);
+        //    }
+        //};
+
+        //Script do checkbox
+        //function check() {
+        //    document.getElementById("myCheck").checked = true;
+        //}
+
+        //function uncheck() {
+        //    document.getElementById("myCheck").checked = false;
+        //}
 
         $(function () {
             $('.selectpicker').selectpicker();
         });
 
 
-        $(document).ready(function () {
-            $('#dtVerticalScrollExample').DataTable({
-                "scrollY": "200px",
-                "scrollCollapse": true,
-            });
-            $('.dataTables_length').addClass('bs-select');
-        });
+        //$(document).ready(function () {
+        //    $('#dtVerticalScrollExample').DataTable({
+        //        "scrollY": "200px",
+        //        "scrollCollapse": true,
+        //    });
+        //    $('.dataTables_length').addClass('bs-select');
+        //});
 
-        $(document).ready(function () {
-            $(document).on('keyup', '#userDropdown .bs-searchbox input', function (e) {
-                alert($(this).val());
-            });
+        //$(document).ready(function () {
+        //    $(document).on('keyup', '#userDropdown .bs-searchbox input', function (e) {
+        //        alert($(this).val());
+        //    });
 
-            $(document).on('keyup', '#cityDropdown .bs-searchbox input', function (e) {
-                alert($(this).val());
-            });
-        });
+        //    $(document).on('keyup', '#cityDropdown .bs-searchbox input', function (e) {
+        //        alert($(this).val());
+        //    });
 
-        //Script do checkbox
-        function check() {
-            document.getElementById("myCheck").checked = true;
-        }
-
-        function uncheck() {
-            document.getElementById("myCheck").checked = false;
-        }
-
+        //});
 
         //Script do datetimepicker
         $.datetimepicker.setLocale('pt-BR');

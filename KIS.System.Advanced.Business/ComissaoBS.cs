@@ -18,9 +18,17 @@ namespace KIS.System.Advanced.Business
 
         public List<ComissaoDto> GetDto(int idVendedor, DateTime dataInicio, DateTime dataFim)
         {
-            var comissoesDto = dbComissao.GetDto(idVendedor, dataInicio, dataFim);
+            try
+            {
+                var comissoesDto = dbComissao.GetDto(idVendedor, dataInicio, dataFim);
 
-            return comissoesDto;
+                return comissoesDto;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         public List<Comissao> GetAll()

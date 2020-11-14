@@ -39,7 +39,7 @@ namespace KIS.System.Advanced.MVC.Controllers
             _itemPedidoService = itemPedidoService;
             _formaPagamentoService = formaPagamentoService;
         }
-        
+
         #endregion
 
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]

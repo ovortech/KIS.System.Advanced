@@ -19,8 +19,20 @@ namespace KIS.System.Advanced.Business
         public List<HistoricoVendaDto> GetHistoricoVendaDtos(int idVendedor, DateTime dataInicio, DateTime dataFim)
         {
             List<HistoricoVendaDto> historicoVendaDtos = new List<HistoricoVendaDto>();
-            historicoVendaRepository.GetHistoricoVendaDtos(idVendedor, dataInicio, dataFim);
+            historicoVendaDtos = historicoVendaRepository.GetHistoricoVendaDtos(idVendedor, dataInicio, dataFim);
             return historicoVendaDtos;
+        }
+
+        public List<ItemPedidoDto> GetHistoricoVendaItensPedidoDto(int IdPedido)
+        {
+            List<ItemPedidoDto> itemsPedido = new List<ItemPedidoDto>();
+            itemsPedido = historicoVendaRepository.GetHistoricoVendaItensPedidoDto(IdPedido);
+            return itemsPedido;
+        }
+
+        public bool CancelarPedido(int IdPedido)
+        {
+            return true;
         }
 
     }

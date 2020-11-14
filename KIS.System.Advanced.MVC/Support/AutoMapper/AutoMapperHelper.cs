@@ -52,6 +52,12 @@ namespace KIS.System.Advanced.MVC.Support
             MappingVendas(cfg);
             MappingItemPedido(cfg);
             MappingFormasPagamento(cfg);
+            MappingHistoricoVenda(cfg);
+        }
+
+        private static void MappingHistoricoVenda(IMapperConfigurationExpression cfg)
+        {
+            cfg.CreateMap<HistoricoVendaDto, GridHistoricoVendaVM>();
         }
 
         private static void MappingComissao(IMapperConfigurationExpression cfg)
