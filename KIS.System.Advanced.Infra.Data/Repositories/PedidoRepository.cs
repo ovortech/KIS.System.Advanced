@@ -28,28 +28,26 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
             {
                 try
                 {
-                    //salva o pedido
                     var pedidoSalvo = Db.Set<Pedido>().Add(pedido);
                     Db.SaveChanges();
 
-                    //pega o id e salva os ites, forma pagamento, etc
+                    var itemPedidoRepository = new ItemPedidoRepository(Db);
                     foreach (var item in itensPedido)
+                    {
                         item.ID_PEDIDO = pedidoSalvo.ID_PEDIDO;
+                        itemPedidoRepository.Add(item);
+                    }
 
+                    var formaPagamentoRepository = new FormaPgRepository(Db);
                     foreach (var item in formasPagamento)
+                    {
                         item.ID_PEDIDO = pedidoSalvo.ID_PEDIDO;
-
-                    //var itemPedidoRepository = new ItemPedidoRepository(Db);
-
-                    Db.Set<ItemPedido>().AddRange(itensPedido);
-                    Db.SaveChanges();
-
-                    Db.Set<FormaPg>().AddRange(formasPagamento);
-                    Db.SaveChanges();
+                        formaPagamentoRepository.Add(item);
+                    }
 
                     trans.Commit();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     trans.Rollback();
                     throw;
