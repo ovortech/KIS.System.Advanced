@@ -331,6 +331,7 @@
         }
 
         function calculaValorTotalProdutos(contador) {
+            trataInputsDigitaveis();
             let quantidadeAtual = quantidadeAtualProdutosNaLista(contador);
             let valorUnitario = valorUnitarioProdutoNaLista(contador);
             let valorDesconto = valorDescontoUnitarioNaLista(contador);
@@ -338,6 +339,17 @@
             $(`#total_${contador}`).text(valorTotal.toFixed(2));
             atualizaTotalPedido();
             atualizaPagamento();
+        }
+
+        function trataInputsDigitaveis() {
+            $('#listaProdutos > tbody  > tr').each(function () {
+                debugger;
+                $(this).find(`:input`).each(function () {
+                    if ($(this).val() == '' || $(this).val() == undefined || $(this).val() == NaN) {
+                        $(this).val((0).toFixed(2))
+                    }
+                })
+            });
         }
 
         function decrementaQuantidade(contador) {

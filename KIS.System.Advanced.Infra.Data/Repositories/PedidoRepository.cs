@@ -39,6 +39,8 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
                     foreach (var item in formasPagamento)
                         item.ID_PEDIDO = pedidoSalvo.ID_PEDIDO;
 
+                    //var itemPedidoRepository = new ItemPedidoRepository(Db);
+
                     Db.Set<ItemPedido>().AddRange(itensPedido);
                     Db.SaveChanges();
 
