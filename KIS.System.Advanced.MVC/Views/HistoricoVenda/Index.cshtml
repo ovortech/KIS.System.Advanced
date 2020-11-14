@@ -51,9 +51,9 @@
                 </div>
                 <div class="row" id="box_configs">
                     <label class="float-left mg-10 mb-10" style="margin-left: 15px;">Ínicio de exibição:</label>
-                    <input type="text" class="form-control text-center col-1" id="date_timepicker_start" value="@Model.DataInicio"/>
+                    <input type="text" class="form-control text-center col-1" id="date_timepicker_start" value="@Model.DataInicio" />
                     <label class="float-left mg-10 mb-10">&nbsp; &nbsp;Fim de exibição:</label>
-                    <input type="text" class="form-control text-center col-1" id="date_timepicker_end" value="@Model.DataFim"/>
+                    <input type="text" class="form-control text-center col-1" id="date_timepicker_end" value="@Model.DataFim" />
                     <button type="button" class="float-left btn-buscar" onclick="javascript: showGrid()">Buscar</button>
                 </div>
 
@@ -65,6 +65,21 @@
             </div>
         </div>
     </div>
+    <div class="modal fade bottom" id="detalhe-Pedido" tabindex="-1" role="dialog" aria-labelledby="desativar" aria-hidden="true" novalidate="novalidate" style="display: none;">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Detalhes do Pedido </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" onclick="javascript: resetaModal()">×</span>
+                    </button>
+                </div>
+                <div id="conteudoModal"></div>
+
+            </div>
+        </div>
+    </div>
+
 
 </body>
 
@@ -102,12 +117,12 @@
         }
 
 
-        function showDetalhe(itensPedido) {
-            
+        function showDetalhe(idPedido) {
+            let IdPedido = { IdPedido: idPedido}
             $.ajax({
                 type: "Post",
                 url: '/HistoricoVenda/Detalhes',
-                data: itensPedido,
+                data: IdPedido,
                 processData: true,
                 async: false,
                 success: function (data) {
@@ -118,7 +133,7 @@
                     console.log(err);
                 }
             });
-            ajustaTituloModal('Detalhes do Pedido')
+            //ajustaTituloModal('Detalhes do Pedido')
         }
 
         //var count = 1;

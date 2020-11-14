@@ -47,10 +47,10 @@ namespace KIS.System.Advanced.MVC.Controllers
         [HttpPost]
         public PartialViewResult Detalhes(int IdPedido)
         {
-            List<ItemPedidoVM> ItensPedido = new List<ItemPedidoVM>();
+            List<DetailPedidoVM> ItensPedido = new List<DetailPedidoVM>();
             if (IdPedido != 0)
             {
-                ItensPedido = AutoMapper.Mapper.Map<List<ItemPedidoVM>>(_historicoVendaService.HistoricoVendaDetalheDto(IdPedido));
+                ItensPedido = AutoMapper.Mapper.Map<List<DetailPedidoVM>>(_historicoVendaService.HistoricoVendaDetalheDto(IdPedido));
             }
             return PartialView(ItensPedido);
         }
