@@ -33,12 +33,15 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         [HttpPost]
-        public PartialViewResult Grid(int idVendedor, DateTime dataInicio, DateTime dataFim)
+        public PartialViewResult Grid(int idVendedor, String dataInicio, String dataFim)
         {
+
+            DateTime dtInicio = dataInicio.ParseDateTimeBrToUs();
+            DateTime dtFim = dataFim.ParseDateTimeBrToUs();
             List<GridHistoricoVendaVM> grid = new List<GridHistoricoVendaVM>();
             if (idVendedor != 0)
             {
-                grid = AutoMapper.Mapper.Map<List<GridHistoricoVendaVM>>(_historicoVendaService.HistoricoVendaDto(idVendedor, dataInicio, dataFim));
+                grid = AutoMapper.Mapper.Map<List<GridHistoricoVendaVM>>(_historicoVendaService.HistoricoVendaDto(idVendedor, dtInicio, dtFim));
             }
             return PartialView(grid);
         }

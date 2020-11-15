@@ -5,7 +5,7 @@
 }
 
 @model KIS.System.Advanced.MVC.ViewModels.HistoricoVendaVM
-
+@using KIS.System.Advanced.MVC.Support
 <!-- Bootstrap core CSS -->
 <link href="~/Content/bootstrap.min.css" rel="stylesheet">
 <link href="~/Content/produtos.css" rel="stylesheet">
@@ -51,9 +51,9 @@
                 </div>
                 <div class="row" id="box_configs">
                     <label class="float-left mg-10 mb-10" style="margin-left: 15px;">Ínicio de exibição:</label>
-                    <input type="text" class="form-control text-center col-1" id="date_timepicker_start" value="@Model.DataInicio" />
+                    <input type="text" class="form-control text-center col-1" id="date_timepicker_start" value="@Model.DataInicio.ParseDateTimeToBr()" />
                     <label class="float-left mg-10 mb-10">&nbsp; &nbsp;Fim de exibição:</label>
-                    <input type="text" class="form-control text-center col-1" id="date_timepicker_end" value="@Model.DataFim" />
+                    <input type="text" class="form-control text-center col-1" id="date_timepicker_end" value="@Model.DataFim.ParseDateTimeToBr()" />
                     <button type="button" class="float-left btn-buscar" onclick="javascript: showGrid()">Buscar</button>
                 </div>
 
