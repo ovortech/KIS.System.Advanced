@@ -44,9 +44,9 @@ namespace KIS.System.Advanced.Services
 
         }
 
-        public void SaveNewOrder(Pedido pedido, List<ItemPedido> itensPedido, List<FormaPg> formasPagamento)
+        public void SaveNewOrder(Pedido pedido, List<ItemPedido> itensPedido, List<FormaPg> formasPagamento, bool cancelar = false)
         {
-            _pedidoBS.SaveNewOrder(pedido, itensPedido, formasPagamento);
+            _pedidoBS.SaveNewOrder(pedido, itensPedido, formasPagamento, cancelar);
         }
     }
 }

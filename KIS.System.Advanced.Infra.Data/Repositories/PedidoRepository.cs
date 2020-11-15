@@ -22,12 +22,26 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
                             .FirstOrDefault().ID_PEDIDO + 1;
         }
 
-        public void SaveNewOrder(Pedido pedido, List<ItemPedido> itensPedido, List<FormaPg> formasPagamento)
+        public void SaveNewOrder(Pedido pedido, List<ItemPedido> itensPedido, List<FormaPg> formasPagamento, bool cancelar = false)
         {
             using (var trans = Db.Database.BeginTransaction())
             {
                 try
                 {
+                    var pedidoCanceladoRepository = new PedidoCancelamentoRepository(Db);
+                    if (cancelar)
+                    {
+                        pedidoCanceladoRepository.Add(new PedidoCancelamento
+                        {
+                            ID_PEDIDO = pedido.ID_PEDIDO,
+                            ID_TIPO_CANCELAMENTO = 1,
+                            DESC_PEDIDO_CANCELAMENTO = $"Alteração do pedido {pedido.ID_PEDIDO}",
+                            DATA_CANCELAMENTO = DateTime.Now
+                        });
+                    }
+
+                    pedido.ID_PEDIDO = 0;
+
                     var pedidoSalvo = Db.Set<Pedido>().Add(pedido);
                     Db.SaveChanges();
 

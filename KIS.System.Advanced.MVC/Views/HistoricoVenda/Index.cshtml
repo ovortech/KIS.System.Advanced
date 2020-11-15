@@ -131,7 +131,7 @@
         function editarVenda(idPedido) {
             bootbox.confirm(`Deseja realmente EDITAR o Pedido ${idPedido}?`, function (confirmou) {
                 if (confirmou) {
-                    window.location.href = "/Vendas/index/" + id
+                    window.location.href = "/Vendas/index/" + idPedido
                 }
             });
         }

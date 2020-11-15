@@ -53,7 +53,7 @@ namespace KIS.System.Advanced.Business
             }
         }
 
-        public void SaveNewOrder(Pedido pedido, List<ItemPedido> itensPedido, List<FormaPg> formasPagamento)
+        public void SaveNewOrder(Pedido pedido, List<ItemPedido> itensPedido, List<FormaPg> formasPagamento, bool cancelar = false)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace KIS.System.Advanced.Business
 
                 pedido.DATA_REG_PEDIDO = DateTime.Now;
                 pedido.FATURADO_PEDIDO = true; //TODO: verificar questão dos contratos para faturamento
-                
+
 
 
                 foreach (var item in itensPedido)
@@ -71,7 +71,7 @@ namespace KIS.System.Advanced.Business
 
                 #endregion
 
-                dbPedido.SaveNewOrder(pedido, itensPedido, formasPagamento);
+                dbPedido.SaveNewOrder(pedido, itensPedido, formasPagamento, cancelar);
 
             }
             catch (Exception ex)
