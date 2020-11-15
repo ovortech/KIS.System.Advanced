@@ -29,7 +29,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label class="control-label" for="valorProduto">Valor Unitário</label>
-                <input type="text" value="@Model.ValorProduto" autocomplete="off" class="form-control maskMoney col-5 text-center" id="valorProduto" name="valorProduto" placeholder="Digite o Valor Unitário" novalidate="novalidate">
+                <input type="text" value="@Model.ValorProduto" autocomplete="off" class="form-control col-5 text-center" id="valorProduto" name="valorProduto" placeholder="Digite o Valor Unitário" novalidate="novalidate">
                 @Html.ValidationMessageFor(model => model.ValorProduto)
             </div>
         </div>
@@ -41,8 +41,6 @@
 </form>
 
 <script type="text/javascript">
-   
-    moneyMaskByClass('maskMoney');
    
     $(document).ready(function () {
         $("#btnSalvarProduto").click(() => {

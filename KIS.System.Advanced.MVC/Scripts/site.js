@@ -78,14 +78,16 @@ function salvaModel(controller, action, model) {
     });
 }
 
-function moneyMaskByClass(inputClass) {
-    $(`.${inputClass}`).inputmask('decimal', {
-        'alias': 'numeric',
-        'groupSeparator': '.',
-        'autoGroup': true,
-        'digits': 2,
-        'radixPoint': ",",
-        'digitsOptional': false,
-        'allowMinus': false,
-    });
+function imprimeFormatadoSemSimbolo(valor) {
+    return (valor).toLocaleString(`pt-BR`, { style: 'currency', currency: 'BRL' }).replace(/R\$\s/, '')
+}
+
+function imprimeFormatadoComSimbolo(valor) {
+    return (valor).toLocaleString(`pt-BR`, { style: 'currency', currency: 'BRL' })
+}
+
+function recarregaMascaras() {
+    $(`.inputNumerico`).maskMoney({ thousands: '.', decimal: ',', allowZero: true, });
+    $(`.inputNumerico`).focus();
+    $(`.inputNumerico`).blur();
 }
