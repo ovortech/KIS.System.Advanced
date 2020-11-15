@@ -4,10 +4,8 @@
     <div class="row">
         <div class="col-md-3">
             <div class="form-group">
-                <label class="control-label text-center" for="">Código</label>
+                <label class="control-label text-center" for=""></label>
                 <input type="hidden" id="idProduto" value="@Model.IdProduto">
-                <input type="text" autocomplete="off" value="@Model.CodProduto" class="form-control" id="codProduto" name="" placeholder="" novalidate="novalidate">
-                @Html.ValidationMessageFor(model => model.CodProduto)
             </div>
         </div>
     </div>
@@ -50,7 +48,6 @@
         $("#btnSalvarProduto").click(() => {
             let produto = {
                 IdProduto: $("#idProduto").val(),
-                CodProduto: $("#codProduto").val(),
                 NomeProduto: $("#nomeProduto").val(),
                 IsServico: $("#isServico").val(),
                 ValorProduto: $("#valorProduto").val()

@@ -46,7 +46,7 @@
                     <table id="lista-produtos" class=" tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%">
                         <thead>
                             <tr>
-                                <th>Código</th>
+                                <th></th>
                                 <th>Nome Produto</th>
                                 <th>É um Serviço?</th>
                                 <th>Valor Unitário</th>
@@ -60,7 +60,7 @@
                             {
                                 var servico = produto.IsServico ? "Sim" : "Não";
                                 <tr>
-                                    <td class="tb-style" width="10%">@produto.CodProduto<input type="hidden" value="@produto.IdProduto" /></td>
+                                    <td class="tb-style" width="10%"><input type="hidden" value="@produto.IdProduto" /></td>
                                     <td class="tb-style" width="25%">@produto.NomeProduto</td>
                                     <td class="tb-style" width="10%">@servico</td>
                                     <td class="tb-style maskMoney" width="10%">@produto.ValorProduto</td>
@@ -139,7 +139,6 @@
 
         function resetaModal() {
             $("#idProduto").val('0');
-            $("#codProduto").val('');
             $("#nomeProduto").val('');
             $("#isServico").val('true');
             $("#valorProduto").val('')

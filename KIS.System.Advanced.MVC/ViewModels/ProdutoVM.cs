@@ -11,9 +11,6 @@ namespace KIS.System.Advanced.MVC.ViewModels
     {
         public int IdProduto { get; set; }
         [Required]
-        [Display(Name = "Código do Produto")]
-        public string CodProduto { get; set; }
-        [Required]
         [Display(Name ="Nome do Produto")]
         public string NomeProduto { get; set; }
         public Boolean IsServico { get; set; }

@@ -169,14 +169,12 @@ namespace KIS.System.Advanced.MVC.Support
         {
             cfg.CreateMap<ProdutoVM, Produto>()
                .ForMember(destinationMember: vm => vm.ID_PRODUTO, memberOptions: map => map.MapFrom(sourceMember: s => s.IdProduto))
-               .ForMember(destinationMember: vm => vm.CODIGO_PRODUTO, memberOptions: map => map.MapFrom(sourceMember: s => s.CodProduto))
                .ForMember(destinationMember: vm => vm.SERVICO_PRODUTO, memberOptions: map => map.MapFrom(sourceMember: s => s.IsServico))
                .ForMember(destinationMember: vm => vm.NOME_PRODUTO, memberOptions: map => map.MapFrom(sourceMember: s => s.NomeProduto))
                .ForMember(destinationMember: vm => vm.VALOR_PRODUTO, memberOptions: map => map.MapFrom(sourceMember: s => s.ValorProduto));
 
             cfg.CreateMap<Produto, ProdutoVM>()
                .ForMember(destinationMember: vm => vm.IdProduto, memberOptions: map => map.MapFrom(sourceMember: s => s.ID_PRODUTO))
-               .ForMember(destinationMember: vm => vm.CodProduto, memberOptions: map => map.MapFrom(sourceMember: s => s.CODIGO_PRODUTO))
                .ForMember(destinationMember: vm => vm.IsServico, memberOptions: map => map.MapFrom(sourceMember: s => s.SERVICO_PRODUTO))
                .ForMember(destinationMember: vm => vm.NomeProduto, memberOptions: map => map.MapFrom(sourceMember: s => s.NOME_PRODUTO))
                .ForMember(destinationMember: vm => vm.ValorProduto, memberOptions: map => map.MapFrom(sourceMember: s => s.VALOR_PRODUTO));
