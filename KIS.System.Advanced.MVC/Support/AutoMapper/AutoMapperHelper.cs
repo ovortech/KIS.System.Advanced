@@ -96,6 +96,7 @@ namespace KIS.System.Advanced.MVC.Support
         {
             cfg.CreateMap<ItemPedidoVM, ItemPedido>()
                .ForMember(destinationMember: vm => vm.VALOR_UN_PEDIDO, memberOptions: map => map.MapFrom(sourceMember: s => s.ValorUnitario))
+               //.ForPath(destinationMember: vm => vm.Produto.NOME_PRODUTO, memberOptions: map => map.MapFrom(sourceMember: s => s.NomeProduto))
                .ForMember(destinationMember: vm => vm.ID_PRODUTO, memberOptions: map => map.MapFrom(sourceMember: s => s.IdProduto))
                .ForMember(destinationMember: vm => vm.OBS_PRODUTO, memberOptions: map => map.MapFrom(sourceMember: s => s.Observacao))
                .ForMember(destinationMember: vm => vm.DESCONTO_PEDIDO, memberOptions: map => map.MapFrom(sourceMember: s => s.Desconto))
@@ -103,6 +104,7 @@ namespace KIS.System.Advanced.MVC.Support
 
             cfg.CreateMap<ItemPedido, ItemPedidoVM>()
                .ForMember(destinationMember: vm => vm.ValorUnitario, memberOptions: map => map.MapFrom(sourceMember: s => s.VALOR_UN_PEDIDO))
+               .ForPath(destinationMember: vm => vm.NomeProduto, memberOptions: map => map.MapFrom(sourceMember: s => s.Produto.NOME_PRODUTO))
                .ForMember(destinationMember: vm => vm.IdProduto, memberOptions: map => map.MapFrom(sourceMember: s => s.ID_PRODUTO))
                .ForMember(destinationMember: vm => vm.Observacao, memberOptions: map => map.MapFrom(sourceMember: s => s.OBS_PRODUTO))
                .ForMember(destinationMember: vm => vm.Desconto, memberOptions: map => map.MapFrom(sourceMember: s => s.DESCONTO_PEDIDO))

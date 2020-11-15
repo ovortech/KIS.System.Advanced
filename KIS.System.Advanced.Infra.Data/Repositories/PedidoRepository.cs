@@ -28,9 +28,9 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
             {
                 try
                 {
-                    var pedidoCanceladoRepository = new PedidoCancelamentoRepository(Db);
                     if (cancelar)
                     {
+                        var pedidoCanceladoRepository = new PedidoCancelamentoRepository(Db);
                         pedidoCanceladoRepository.Add(new PedidoCancelamento
                         {
                             ID_PEDIDO = pedido.ID_PEDIDO,
@@ -40,7 +40,7 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
                         });
                     }
 
-                    pedido.ID_PEDIDO = 0;
+                    //pedido.ID_PEDIDO = 0;
 
                     pedido.FATURADO_PEDIDO = pedido.ID_CLIENTE == 1 ? true : false;
                     var pedidoSalvo = Add(pedido);
@@ -73,10 +73,10 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
 
                     trans.Commit();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     trans.Rollback();
-                    throw;
+                    throw ex;
                 }
             }
         }

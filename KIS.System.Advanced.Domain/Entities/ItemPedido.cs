@@ -10,7 +10,6 @@ namespace KIS.System.Advanced.Domain.Entities
     {
         public int ID_ITEM_PEDIDO { get; set; }
         public int ID_PEDIDO { get; set; }
-        //public Pedido Pedido { get; set; }
         public int ID_PRODUTO { get; set; }
         public Produto Produto { get; set; }
         public string OBS_PRODUTO { get; set; }

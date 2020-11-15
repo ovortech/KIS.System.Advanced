@@ -60,14 +60,9 @@ namespace KIS.System.Advanced.Business
                 #region Trata dados pedido
 
                 pedido.DATA_REG_PEDIDO = DateTime.Now;
-                pedido.FATURADO_PEDIDO = true; //TODO: verificar questão dos contratos para faturamento
-
-
 
                 foreach (var item in itensPedido)
-                {
                     pedido.TOTAL_PEDIDO += item.QTD_PEDIDO * (item.VALOR_UN_PEDIDO - item.DESCONTO_PEDIDO);
-                }
 
                 #endregion
 

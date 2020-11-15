@@ -118,6 +118,9 @@ namespace KIS.System.Advanced.MVC.Controllers
             var itensPedidoSalvos = _itemPedidoService.GetAllByOrderId(idPedido);
             pedido.ItemPedidosVM = AutoMapper.Mapper.Map<List<ItemPedidoVM>>(itensPedidoSalvos);
 
+            foreach (var item in pedido.ItemPedidosVM)
+                item.NomeProduto = _produtoService.Get(item.IdProduto).NOME_PRODUTO;
+
             var formasPagamento = _formaPagamentoService.GetAllByOrderId(idPedido);
             pedido.FormaPGs = AutoMapper.Mapper.Map<List<FormaPGVM>>(formasPagamento);
 

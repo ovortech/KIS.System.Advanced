@@ -115,7 +115,7 @@
                                     {
                                         <tr id="@ViewBag.contadorId">
                                             <td><input id="produto_@ViewBag.contadorId" value="@item.IdProduto" type="hidden"></td>
-                                            <td class="tb-style" width="30%">@item.NomeProduto</td>
+                                            <td class="tb-style" width="30%" id="nome_@ViewBag.contadorId">@item.NomeProduto</td>
                                             <td class="tb-style" width="30%">
                                                 <div class="form-group">
                                                     <textarea id="descricao_@ViewBag.contadorId" class="form-control" rows="1">@item.Observacao</textarea>
@@ -216,13 +216,12 @@
     <script type="text/javascript">
 
         var contadorId = 0;
-
-        if (quantidadeAtualItensNaLista() > 1) {
+        debugger;
+        if (quantidadeAtualItensNaLista() > 0) {
             atualizaTotalPedido();
             atualizaPagamento();
             contadorId = @ViewBag.contadorId;
         }
-        debugger;
 
         $("#adicionarProduto").click(() => {
             let idProduto = $("#cmbProdutos").val();
@@ -312,6 +311,7 @@
                 ItemPedidosVM.Quantidade = quantidadeAtualProdutosNaLista(idContador);
                 ItemPedidosVM.ValorUnitario = valorUnitarioProdutoNaLista(idContador);
                 ItemPedidosVM.Desconto = valorDescontoUnitarioNaLista(idContador);
+                ItemPedidosVM.NomeProduto = nomeProdutoNaLista(idContador);
 
                 pedido.ItemPedidosVM.push(ItemPedidosVM);
             });
@@ -323,7 +323,7 @@
         function adicionaProdutoNaLista(produto) {
             let tr = `<tr id="${contadorId}">
                             <td><input id="produto_${contadorId}" value="${produto.IdProduto}" type="hidden"></td>
-                            <td class="tb-style" width="30%">${produto.NomeProduto}</td>
+                            <td class="tb-style" width="30%" id="nome_${contadorId}">${produto.NomeProduto}</td>
                             <td class="tb-style" width="30%">
                                 <div class="form-group">
                                     <textarea id="descricao_${contadorId}"class="form-control" rows="1"></textarea>
@@ -433,6 +433,10 @@
 
         function valorTotalProduto(contador) {
             return parseFloat($(`#listaProdutos tbody tr`).find(`#total_${contador}`).text());
+        }
+
+        function nomeProdutoNaLista(contador) {
+            return $(`#listaProdutos tbody tr`).find(`#nome_${contador}`).text();
         }
 
         function removeProdutoDaLista(contador) {
