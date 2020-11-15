@@ -1,0 +1,36 @@
+﻿@model KIS.System.Advanced.MVC.ViewModels.PedidoCancelamentoVM
+
+<div class="modal-header">
+    <h4 class="modal-title">Cancelar Pedido @Model.IdPedido</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true" onclick="javascript: resetaModal()">×</span>
+    </button>
+</div>
+<input type="hidden" id="idPedido" value="@Model.IdPedido" />
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="" id="box_configs col-md-12">
+                <label class="float-left mg-10 mb-10">Tipo de Cancelamento:   </label>
+                <select id="idTipoCancelamento" class="mb-10 browser-default custom-select col-3">
+                    <option selected value="0">Selecione o Tipo de Cancelamento</option>
+                    @foreach (var tipoCancel in Model.TipoCancelamentosVM)
+                    {
+                        <option value="@tipoCancel.IdTipoCancelamento">@tipoCancel.NomeTipoCancelamento</option>
+                    }
+                </select>
+            </div>
+            <div class="row" id="box_configs">
+                <label class="float-left mg-10 mb-10" style="margin-left: 15px;">Observação:</label>
+                <textarea class="form-control textarea-obs" id="obsevacaoCancelamento" value="@Model.Decricao" rows="3"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-danger float-left" data-dismiss="modal" onclick="javascript: resetaModal()">Fechar</button>
+                <button type="button" id="btnCancelaPedido" class="btn btn-finalizar btn-primary" data-dismiss="modal" style=" width: 70px;" onclick="javascript: cancelarPedido(@Model.IdPedido)">Salvar</button>
+            </div>
+            <br>
+            <div class="clearfix"></div>
+            <br>
+        </div>
+    </div>
+</div>

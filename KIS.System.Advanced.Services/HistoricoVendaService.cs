@@ -1,5 +1,6 @@
 ﻿using KIS.System.Advanced.Business;
 using KIS.System.Advanced.Domain.Dto;
+using KIS.System.Advanced.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,14 @@ namespace KIS.System.Advanced.Services.Interfaces
             _historicoVendaBS = new HistoricoVendaBS();
         }
 
-        public bool CacelaPedido(int IdPedido)
+        public bool CancelaPedido(PedidoCancelamento pedidoCancelamento)
         {
-            throw new NotImplementedException();
+            return _historicoVendaBS.CancelarPedido(pedidoCancelamento);
+        }
+
+        public List<TipoCancelamento> GetAllTipoCancelamento()
+        {
+            return _historicoVendaBS.GetAllTipoCancelamento();
         }
 
         public List<ItemPedidoDto> HistoricoVendaDetalheDto(int IdPedido)

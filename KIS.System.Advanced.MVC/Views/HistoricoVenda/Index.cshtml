@@ -65,6 +65,7 @@
             </div>
         </div>
     </div>
+    @* MODAL DETALHE PEDIDO *@
     <div class="modal fade bottom" id="detalhe-Pedido" tabindex="-1" role="dialog" aria-labelledby="desativar" aria-hidden="true" novalidate="novalidate" style="display: none;">
         <div class="modal-dialog ">
             <div class="modal-content">
@@ -74,13 +75,21 @@
                         <span aria-hidden="true" onclick="javascript: resetaModal()">×</span>
                     </button>
                 </div>
-                <div id="conteudoModal"></div>
+                <div id="conteudoModalDetalhes"></div>
 
             </div>
         </div>
     </div>
+    @* MODAL CANCELAR PEDIDO *@
+    <div class="modal fade bottom" id="cancela-Pedido" tabindex="-1" role="dialog" aria-labelledby="desativar" aria-hidden="true" novalidate="novalidate" style="display: none;">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                
+                <div id="conteudoModalCancelar"></div>
 
-
+            </div>
+        </div>
+    </div>
 </body>
 
 @section scripts {
@@ -120,7 +129,16 @@
 
         });
 
+        function modalCancelarPedido(idPedido) {
+            if (cancelado)
+                return;
 
+            let IdPedido = { IdPedido: idPedido }
+            let result = callActionPost("HistoricoVenda", "Cancelar", IdPedido);
+            if (result) {
+                $("#conteudoModalCancelar").html(result);
+            }
+        }
 
 
         function showGrid() {
@@ -150,13 +168,20 @@
         function cancelarPedido(idPedido) {
             bootbox.confirm(`Deseja realmente CANCELAR o Pedido ${idPedido}?`, function (confirmou) {
                 if (confirmou) {
-                    let IdPedido = { IdPedido: idPedido }
-                    callActionPost("HistoricoVenda", "Cencelar", IdPedido)
+                    let cancelaPedido = {
+                        IdPedido: idPedido,
+                        IdTipoCancelamento: $("#idTipoCancelamento").val(),
+                        ObsevacaoCancelamento: $("#obsevacaoCancelamento").val()
+                    }
+                    callActionPost("HistoricoVenda", "CancelaPedido", cancelaPedido)
+                    showGrid()
                 }
             });
         }
 
-        function editarVenda(idPedido) {
+        function editarVenda(idPedido, cancelado) {
+            if (cancelado)
+                return;
             bootbox.confirm(`Deseja realmente EDITAR o Pedido ${idPedido}?`, function (confirmou) {
                 if (confirmou) {
                     window.location.href = "/Vendas/index/" + idPedido
@@ -174,7 +199,7 @@
                 async: false,
                 success: function (data) {
 
-                    $("#conteudoModal").html(data);
+                    $("#conteudoModalDetalhes").html(data);
                 },
                 error: function (err) {
                     console.log(err);
@@ -259,7 +284,7 @@
         //});
 
         //Script do datetimepicker
-       
+
 
         //modal
         type = "text/javascript" >

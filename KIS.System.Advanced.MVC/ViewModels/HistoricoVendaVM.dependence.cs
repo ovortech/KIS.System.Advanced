@@ -20,6 +20,7 @@ namespace KIS.System.Advanced.MVC.ViewModels
         public DateTime DataVenda { get; set; }
         public double TotalPedido { get; set; }
         public Boolean Faturado { get; set; }
+        public bool Cancelado { get; set; }
         public List<DetailPedidoVM> ItemsPedido { get; set; }
     }
 

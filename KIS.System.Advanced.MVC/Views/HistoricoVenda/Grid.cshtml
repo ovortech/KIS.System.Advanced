@@ -26,11 +26,11 @@
                     <td class="tb-style text-center" width="10%">@item.TotalPedido</td>
                     <td class="tb-style text-center" width="10%">@item.Faturado</td>
                     <td class="tb-style text-center" width="3%"><button type="button" style="width: 90px; !important" class="mb-10 btn-add btn " data-toggle="modal" data-target="#detalhe-Pedido" data-direction="bottom" onclick="javascript: showDetalhe(@item.IdPedido)">Detalhes</button></td>
-                    <td class="tb-style text-center" width="3%"><a onclick="javascript: editarVenda(@item.IdPedido)" class="btn btn-secondary" style="width: 90px;">Editar</a></td>
-                    <td class="tb-style text-center" width="3%"><a onclick="javascript: cancelarPedido(@item.IdPedido)" class="btn btn-danger" style="width: 90px;">Cancelar</a></td>
+                    <td class="tb-style text-center" width="3%"><a onclick="javascript: editarVenda(@item.IdPedido, @item.Cancelado)" class="btn btn-secondary" style="width: 90px;" >Editar</a></td>
+                    <td class="tb-style text-center" width="3%"><a onclick="javascript: modalCancelarPedido(@item.IdPedido, @item.Cancelado)" class="btn btn-danger" data-toggle="modal" data-target="#cancela-Pedido" style="width: 90px;">Cancelar</a></td>
                 </tr>
             }
-</table>
+    </table>
 
 </div>
 @*modal de detalhes*@

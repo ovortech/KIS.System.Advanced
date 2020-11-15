@@ -22,8 +22,10 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
             var historicoVendaDtos = new List<HistoricoVendaDto>();
             historicoVendaDtos = (from pedido in Db.Pedidos
                                   join vendedor in Db.Vendedores on pedido.ID_VENDEDOR equals vendedor.ID_VENDEDOR
-                                  //join itemPedido in Db.ItemPedidos on pedido.ID_PEDIDO equals itemPedido.ID_PEDIDO
-                                  //join produto in Db.Produtos on itemPedido.ID_PRODUTO equals produto.ID_PRODUTO
+                                  join cancelado in Db.PedidoCancelamentos on pedido.ID_PEDIDO equals cancelado.ID_PEDIDO into gjCancelado
+                                  from subCancelado in gjCancelado.DefaultIfEmpty()
+                                      //join itemPedido in Db.ItemPedidos on pedido.ID_PEDIDO equals itemPedido.ID_PEDIDO
+                                      //join produto in Db.Produtos on itemPedido.ID_PRODUTO equals produto.ID_PRODUTO
                                   where pedido.ID_VENDEDOR == idVendedor && pedido.DATA_REG_PEDIDO >= dataInicio && pedido.DATA_REG_PEDIDO <= dataFim
                                   select new HistoricoVendaDto
                                   {
@@ -36,6 +38,7 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
                                       TotalPedido = pedido.TOTAL_PEDIDO,
                                       //ID_CLIENTE = pedido.ID_CLIENTE,
                                       Faturado = pedido.FATURADO_PEDIDO,
+                                      Cancelado = subCancelado != null
                                   }).Distinct().ToList();
 
             var idPedidos = historicoVendaDtos.Select(x => x.IdPedido).ToList();

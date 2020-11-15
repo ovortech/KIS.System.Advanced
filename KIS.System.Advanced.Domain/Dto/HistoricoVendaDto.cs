@@ -15,6 +15,7 @@ namespace KIS.System.Advanced.Domain.Dto
         public DateTime DataVenda { get; set; }
         public double TotalPedido { get; set; }
         public Boolean Faturado { get; set; }
+        public bool Cancelado { get; set; }
         public List<ItemPedidoDto> ItemsPedido { get; set; }
     }
 }
