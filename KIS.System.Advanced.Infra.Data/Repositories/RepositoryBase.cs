@@ -22,10 +22,9 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
 
         public TEntity Add(TEntity obj)
         {
-            if (NotRemoveLogic.Contains(typeof(TEntity).Name))
-                return null;
-            
-            ((ExclusaoLogica)obj).ATIVO = true;
+            if (!NotRemoveLogic.Contains(typeof(TEntity).Name))
+                ((ExclusaoLogica)obj).ATIVO = true;
+
             var result = Db.Set<TEntity>().Add(obj);
             Db.SaveChanges();
             return result;

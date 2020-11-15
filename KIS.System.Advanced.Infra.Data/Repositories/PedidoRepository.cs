@@ -41,23 +41,9 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
                     }
 
                     pedido.ID_PEDIDO = 0;
-                    if (pedido.ID_CLIENTE == 1)
-                    {
-                        pedido.FATURADO_PEDIDO = true;
-                    }
-                    else
-                    {
-                        ContratoRepository contratoRepository = new ContratoRepository(Db);
-                        contratoRepository.Add(new Contrato
-                        {
-                            ID_CLIENTE_CONTRATO = pedido.ID_CLIENTE,
-                            ID_PEDIDO_CONTRATO = pedido.ID_PEDIDO,
-                            FATURADO_CONTRATO = false,
-                            ATIVO = true
-                        });
-                    }
 
-                    var pedidoSalvo = Add(pedido);                    
+                    pedido.FATURADO_PEDIDO = pedido.ID_CLIENTE == 1 ? true : false;
+                    var pedidoSalvo = Add(pedido);
 
                     var itemPedidoRepository = new ItemPedidoRepository(Db);
                     foreach (var item in itensPedido)
@@ -71,6 +57,18 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
                     {
                         item.ID_PEDIDO = pedidoSalvo.ID_PEDIDO;
                         formaPagamentoRepository.Add(item);
+                    }
+
+                    if (pedido.ID_CLIENTE != 1)
+                    {
+                        ContratoRepository contratoRepository = new ContratoRepository(Db);
+                        contratoRepository.Add(new Contrato
+                        {
+                            ID_CLIENTE_CONTRATO = pedido.ID_CLIENTE,
+                            ID_PEDIDO_CONTRATO = pedido.ID_PEDIDO,
+                            FATURADO_CONTRATO = false,
+                            ATIVO = true
+                        });
                     }
 
                     trans.Commit();
