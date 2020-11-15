@@ -76,8 +76,9 @@ namespace KIS.System.Advanced.MVC.Controllers
 
                 if(venda.IdPedido > 0)
                     _pedidoService.SaveNewOrder(pedido, itensPedido, formasPagamento, cancelar: true);
+                else
+                    _pedidoService.SaveNewOrder(pedido, itensPedido, formasPagamento);
 
-                _pedidoService.SaveNewOrder(pedido, itensPedido, formasPagamento);
             }
             catch (Exception ex)
             {
