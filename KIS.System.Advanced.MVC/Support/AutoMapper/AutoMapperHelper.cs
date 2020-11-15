@@ -53,6 +53,28 @@ namespace KIS.System.Advanced.MVC.Support
             MappingItemPedido(cfg);
             MappingFormasPagamento(cfg);
             MappingHistoricoVenda(cfg);
+            MappingTipoCancelamento(cfg);
+            MappingPedidoCancelamento(cfg);
+        }
+
+        private static void MappingPedidoCancelamento(IMapperConfigurationExpression cfg)
+        {
+            cfg.CreateMap<PedidoCancelamento, PedidoCancelamentoVM>()
+                .ForMember(destinationMember: vm => vm.IdPedido, memberOptions: map => map.MapFrom(sourceMember: s => s.ID_PEDIDO))
+                .ForMember(destinationMember: vm => vm.IdTipoCancelamento, memberOptions: map => map.MapFrom(sourceMember: s => s.ID_TIPO_CANCELAMENTO))
+                .ForMember(destinationMember: vm => vm.Decricao, memberOptions: map => map.MapFrom(sourceMember: s => s.DESC_PEDIDO_CANCELAMENTO));
+
+            cfg.CreateMap<PedidoCancelamentoVM, PedidoCancelamento>()
+                .ForMember(destinationMember: vm => vm.ID_PEDIDO, memberOptions: map => map.MapFrom(sourceMember: s => s.IdPedido))
+                .ForMember(destinationMember: vm => vm.ID_TIPO_CANCELAMENTO, memberOptions: map => map.MapFrom(sourceMember: s => s.IdTipoCancelamento))
+                .ForMember(destinationMember: vm => vm.DESC_PEDIDO_CANCELAMENTO, memberOptions: map => map.MapFrom(sourceMember: s => s.Decricao));
+        }
+
+        private static void MappingTipoCancelamento(IMapperConfigurationExpression cfg)
+        {
+            cfg.CreateMap<TipoCancelamento, TipoCancelamentoVM>()
+                .ForMember(destinationMember: vm => vm.IdTipoCancelamento, memberOptions: map => map.MapFrom(sourceMember: s => s.id_tipo_cancelamento))
+                .ForMember(destinationMember: vm => vm.NomeTipoCancelamento, memberOptions: map => map.MapFrom(sourceMember: s => s.desc_tipo_cancelamento));
         }
 
         private static void MappingHistoricoVenda(IMapperConfigurationExpression cfg)

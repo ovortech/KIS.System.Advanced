@@ -324,7 +324,9 @@
     <Compile Include="ViewModels\HistoricoVendaVM.dependence.cs" />
     <Compile Include="ViewModels\ItemPedidoVM.cs" />
     <Compile Include="ViewModels\LoginVM.cs" />
+    <Compile Include="ViewModels\PedidoCancelamento.cs" />
     <Compile Include="ViewModels\ProdutoVM.cs" />
+    <Compile Include="ViewModels\TipoCancelamentoVM.cs" />
     <Compile Include="ViewModels\UsuarioVM.cs" />
     <Compile Include="ViewModels\VendasVM.cs" />
     <Compile Include="ViewModels\VendedorVM.cs" />
@@ -373,6 +375,7 @@
     <Content Include="Views\Despesa\AddOrEdit.cshtml" />
     <Compile Include="ViewModels\ComissaoVM.dependence.cs" />
     <Content Include="Views\HistoricoVenda\Detalhes.cshtml" />
+    <Content Include="Views\HistoricoVenda\Cancelar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

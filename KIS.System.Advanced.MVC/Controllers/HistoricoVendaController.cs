@@ -1,4 +1,5 @@
-﻿using KIS.System.Advanced.MVC.Support;
+﻿using KIS.System.Advanced.Domain.Entities;
+using KIS.System.Advanced.MVC.Support;
 using KIS.System.Advanced.MVC.Support.Security;
 using KIS.System.Advanced.MVC.ViewModels;
 using KIS.System.Advanced.Services.Interfaces;
@@ -60,9 +61,27 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         [HttpPost]
-        public ActionResult Cencelar(int IdPedido)
+        public PartialViewResult Cancelar(int IdPedido)
         {
+            PedidoCancelamentoVM pedidoCancelamento = new PedidoCancelamentoVM();
+            pedidoCancelamento.IdPedido = IdPedido;
+            pedidoCancelamento.TipoCancelamentosVM = AutoMapper.Mapper.Map<List<TipoCancelamentoVM>>(_historicoVendaService.GetAllTipoCancelamento());
+            return PartialView(pedidoCancelamento);
+        }
 
+
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        [HttpPost]
+        public ActionResult CancelaPedido(int IdPedido, int IdTipoCancelamento, String ObsevacaoCancelamento)
+        {
+            var pedidocancelamento = new PedidoCancelamento
+            {
+                ID_PEDIDO = IdPedido,
+                ID_TIPO_CANCELAMENTO = IdTipoCancelamento,
+                DESC_PEDIDO_CANCELAMENTO = ObsevacaoCancelamento,                
+                DATA_CANCELAMENTO = DateTime.Now,
+            };
+            _historicoVendaService.CancelaPedido(pedidocancelamento);
             return View();
         }
 

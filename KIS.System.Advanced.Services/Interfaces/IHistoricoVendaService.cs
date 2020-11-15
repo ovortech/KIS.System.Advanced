@@ -1,4 +1,5 @@
 ﻿using KIS.System.Advanced.Domain.Dto;
+using KIS.System.Advanced.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace KIS.System.Advanced.Services.Interfaces
     {
         List<HistoricoVendaDto> HistoricoVendaDto(int idVendedor, DateTime dataInicio, DateTime dataFim);
         List<ItemPedidoDto> HistoricoVendaDetalheDto(int IdPedido);
-        bool CacelaPedido(int IdPedido);
+        bool CancelaPedido(PedidoCancelamento pedidoCancelamento);
+        List<TipoCancelamento> GetAllTipoCancelamento();
     }
 }

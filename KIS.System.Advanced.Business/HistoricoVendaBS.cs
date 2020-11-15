@@ -1,4 +1,5 @@
 ﻿using KIS.System.Advanced.Domain.Dto;
+using KIS.System.Advanced.Domain.Entities;
 using KIS.System.Advanced.Infra.Data.Repositories;
 using System;
 using System.Collections.Generic;
@@ -29,10 +30,25 @@ namespace KIS.System.Advanced.Business
             itemsPedido = historicoVendaRepository.GetHistoricoVendaItensPedidoDto(IdPedido);
             return itemsPedido;
         }
-
-        public bool CancelarPedido(int IdPedido)
+        public List<TipoCancelamento> GetAllTipoCancelamento()
         {
-            return true;
+            List<TipoCancelamento> TipoCancelamentos = new List<TipoCancelamento>();
+            TipoCancelamentos = new TipoCancelamentoRepository().GetAllAtivos().ToList();
+            return TipoCancelamentos;
+        }
+        public bool CancelarPedido(PedidoCancelamento pedidoCancelamento)
+        {
+            try
+            {
+                PedidoCancelamentoBS pedidoCancelamentoBS = new PedidoCancelamentoBS();
+                pedidoCancelamentoBS.Save(pedidoCancelamento);
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
     }
