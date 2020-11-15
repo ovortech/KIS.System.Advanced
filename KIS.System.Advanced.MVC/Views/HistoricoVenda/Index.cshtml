@@ -90,6 +90,34 @@
 
         $(document).ready(function () {
             showGrid();
+
+            $.datetimepicker.setLocale('pt-BR');
+
+            jQuery(function () {
+                jQuery('#date_timepicker_start').datetimepicker({
+                    format: 'd/m/Y',
+                    onShow: function (ct) {
+                        this.setOptions({
+                            maxDate: jQuery('#date_timepicker_end').val() ? jQuery('#date_timepicker_end').val() : false
+                        })
+                    },
+                    timepicker: false
+                });
+                jQuery('#date_timepicker_end').datetimepicker({
+                    format: 'd/m/Y',
+                    onShow: function (ct) {
+                        this.setOptions({
+                            minDate: jQuery('#date_timepicker_start').val() ? jQuery('#date_timepicker_start').val() : false
+                        })
+                    },
+                    timepicker: false
+                });
+            });
+
+            $(function () {
+                $('.selectpicker').selectpicker();
+            });
+
         });
 
 
@@ -210,10 +238,6 @@
         //    document.getElementById("myCheck").checked = false;
         //}
 
-        $(function () {
-            $('.selectpicker').selectpicker();
-        });
-
 
         //$(document).ready(function () {
         //    $('#dtVerticalScrollExample').DataTable({
@@ -235,28 +259,7 @@
         //});
 
         //Script do datetimepicker
-        $.datetimepicker.setLocale('pt-BR');
-
-        jQuery(function () {
-            jQuery('#date_timepicker_start').datetimepicker({
-                format: 'd/m/Y',
-                onShow: function (ct) {
-                    this.setOptions({
-                        maxDate: jQuery('#date_timepicker_end').val() ? jQuery('#date_timepicker_end').val() : false
-                    })
-                },
-                timepicker: false
-            });
-            jQuery('#date_timepicker_end').datetimepicker({
-                format: 'd/m/Y',
-                onShow: function (ct) {
-                    this.setOptions({
-                        minDate: jQuery('#date_timepicker_start').val() ? jQuery('#date_timepicker_start').val() : false
-                    })
-                },
-                timepicker: false
-            });
-        });
+       
 
         //modal
         type = "text/javascript" >
