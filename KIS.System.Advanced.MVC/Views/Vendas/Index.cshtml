@@ -380,10 +380,15 @@
 
         function trataInputsDigitaveis() {
             $('#listaProdutos > tbody  > tr').each(function () {
-                debugger;
                 $(this).find(`:input`).each(function () {
-                    if ($(this).val() == '' || $(this).val() == undefined || $(this).val() == NaN) {
-                        $(this).val((0).toFixed(2))
+                    debugger;
+                    if ($(this).val() == '' || $(this).val() == undefined || $(this).val() == NaN)
+                    {
+                        if ($(this).attr('id').indexOf('descricao') === 0) {
+
+                        } else {
+                            $(this).val((0).toFixed(2))
+                        }
                     }
                 })
             });
