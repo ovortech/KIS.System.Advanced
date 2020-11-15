@@ -40,7 +40,7 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
                         });
                     }
 
-                    //pedido.ID_PEDIDO = 0;
+                    pedido.ID_PEDIDO = 0;
 
                     pedido.FATURADO_PEDIDO = pedido.ID_CLIENTE == 1 ? true : false;
                     var pedidoSalvo = Add(pedido);

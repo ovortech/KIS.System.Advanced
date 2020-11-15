@@ -107,7 +107,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @{ 
+                            @{
                                 ViewBag.contadorId = 0;
                                 if (Model.ItemPedidosVM != null && Model.ItemPedidosVM.Count > 0)
                                 {
@@ -216,7 +216,6 @@
     <script type="text/javascript">
 
         var contadorId = 0;
-        debugger;
         if (quantidadeAtualItensNaLista() > 0) {
             atualizaTotalPedido();
             atualizaPagamento();
@@ -235,24 +234,8 @@
 
         $("#finalizarVenda").click(() => {
             if (validaCamposParaFinalizar()) {
-                var dialog = bootbox.dialog({
-                    title: 'Aguarde',
-                    message: '<p><i class="fa fa-spin fa-spinner"></i> Salvando Pedido...</p>'
-                });
-
-                try {
-                    finalizaVenda();
-                    dialog.init(function () {
-                        dialog.find('.bootbox-body').html('Pedido salvo com sucesso!');
-                    });
-                    setTimeout(function () {
-                        window.location = window.location.origin + '/Home/Index';
-                    }, 3000)
-                } catch (err) {
-                    dialog.init(function () {
-                        dialog.find('.bootbox-body').html(`Erro ao salvar pedido: ${err}`);
-                    });
-                }
+                let pedido = carregaPedido();
+                finalizaVenda(pedido);
             }
         })
 
@@ -276,7 +259,7 @@
             return true;
         }
 
-        function finalizaVenda() {
+        function carregaPedido() {
             let pedido = {};
             pedido.IdVendedor = $(`#idVendedor`).val();
             pedido.Observacao = $(`#obsevacaoPedido`).val();
@@ -315,9 +298,37 @@
 
                 pedido.ItemPedidosVM.push(ItemPedidosVM);
             });
+            return pedido;
+        }
 
-            callActionPost('vendas', 'SaveNewOrder', { venda: pedido });
-
+        function finalizaVenda(pedido) {
+            let retorno;
+            $.ajax({
+                type: "POST",
+                url: "/vendas/SaveNewOrder",
+                data: { venda: pedido },
+                processData: true,
+                async: false,
+                success: function (data) {
+                    bootbox.alert({
+                        message: `Pedido salvo com sucesso!`,
+                        callback: function () {
+                            setTimeout(function () {
+                                window.location = window.location.origin + '/Home/Index';
+                            }, 1000);
+                            
+                        }
+                    })
+                    retorno = true;
+                },
+                error: function (err) {
+                    debugger;
+                    bootbox.alert(`Erro ao salvar pedido. <br/>Verifique os dados e tente novamente.`);
+                    console.log(err);
+                    retorno = false;
+                }
+            });
+            return retorno;
         }
 
         function adicionaProdutoNaLista(produto) {
@@ -381,7 +392,6 @@
         function trataInputsDigitaveis() {
             $('#listaProdutos > tbody  > tr').each(function () {
                 $(this).find(`:input`).each(function () {
-                    debugger;
                     if ($(this).val() == '' || $(this).val() == undefined || $(this).val() == NaN)
                     {
                         if ($(this).attr('id').indexOf('descricao') === 0) {

@@ -74,6 +74,9 @@ namespace KIS.System.Advanced.MVC.Controllers
                 var itensPedido = AutoMapper.Mapper.Map<List<ItemPedido>>(venda.ItemPedidosVM);
                 var formasPagamento = AutoMapper.Mapper.Map<List<FormaPg>>(venda.FormaPGs);
 
+                if(venda.IdPedido > 0)
+                    _pedidoService.SaveNewOrder(pedido, itensPedido, formasPagamento, cancelar: true);
+
                 _pedidoService.SaveNewOrder(pedido, itensPedido, formasPagamento);
             }
             catch (Exception ex)
