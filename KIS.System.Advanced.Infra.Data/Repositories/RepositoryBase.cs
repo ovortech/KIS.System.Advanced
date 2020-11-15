@@ -20,14 +20,15 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
             Db = db ?? new ProjetoDataContext();
         }
 
-        public void Add(TEntity obj)
+        public TEntity Add(TEntity obj)
         {
             if (NotRemoveLogic.Contains(typeof(TEntity).Name))
-                return;
+                return null;
             
             ((ExclusaoLogica)obj).ATIVO = true;
-            Db.Set<TEntity>().Add(obj);
+            var result = Db.Set<TEntity>().Add(obj);
             Db.SaveChanges();
+            return result;
         }
 
         public IEnumerable<TEntity> GetAll()

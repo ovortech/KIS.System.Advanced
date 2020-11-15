@@ -34,7 +34,7 @@
     <Compile Include="ClienteService.cs" />
     <Compile Include="ComissaoService.cs" />
     <Compile Include="FormaPagamentoService.cs" />
-    <Compile Include="Interfaces\HistoricoVendaService.cs" />
+    <Compile Include="HistoricoVendaService.cs" />
     <Compile Include="Interfaces\IComissaoService.cs" />
     <Compile Include="Interfaces\IFormaPagamentoService.cs" />
     <Compile Include="Interfaces\IItemPedidoService.cs" />
