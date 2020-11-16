@@ -53,7 +53,7 @@ namespace KIS.System.Advanced.Business
             }
         }
 
-        public void SaveNewOrder(Pedido pedido, List<ItemPedido> itensPedido, List<FormaPg> formasPagamento, bool cancelar = false)
+        public int SaveNewOrder(Pedido pedido, List<ItemPedido> itensPedido, List<FormaPg> formasPagamento, bool cancelar = false)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace KIS.System.Advanced.Business
 
                 #endregion
 
-                dbPedido.SaveNewOrder(pedido, itensPedido, formasPagamento, cancelar);
+                return dbPedido.SaveNewOrder(pedido, itensPedido, formasPagamento, cancelar);
 
             }
             catch (Exception ex)

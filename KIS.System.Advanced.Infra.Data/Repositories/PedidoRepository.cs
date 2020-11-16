@@ -22,7 +22,7 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
                             .FirstOrDefault().ID_PEDIDO + 1;
         }
 
-        public void SaveNewOrder(Pedido pedido, List<ItemPedido> itensPedido, List<FormaPg> formasPagamento, bool cancelar = false)
+        public int SaveNewOrder(Pedido pedido, List<ItemPedido> itensPedido, List<FormaPg> formasPagamento, bool cancelar = false)
         {
             using (var trans = Db.Database.BeginTransaction())
             {
@@ -72,6 +72,7 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
                     }
 
                     trans.Commit();
+                    return pedido.ID_PEDIDO;
                 }
                 catch (Exception ex)
                 {

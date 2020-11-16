@@ -65,7 +65,7 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         [HttpPost]
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
-        public void SaveNewOrder(VendasVM venda)
+        public int SaveNewOrder(VendasVM venda)
         {
             try
             {
@@ -75,9 +75,9 @@ namespace KIS.System.Advanced.MVC.Controllers
                 var formasPagamento = AutoMapper.Mapper.Map<List<FormaPg>>(venda.FormaPGs);
 
                 if(venda.IdPedido > 0)
-                    _pedidoService.SaveNewOrder(pedido, itensPedido, formasPagamento, cancelar: true);
+                    return _pedidoService.SaveNewOrder(pedido, itensPedido, formasPagamento, cancelar: true);
                 else
-                    _pedidoService.SaveNewOrder(pedido, itensPedido, formasPagamento);
+                    return _pedidoService.SaveNewOrder(pedido, itensPedido, formasPagamento);
 
             }
             catch (Exception ex)

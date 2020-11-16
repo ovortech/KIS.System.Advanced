@@ -324,9 +324,9 @@
                 data: { venda: pedido },
                 processData: true,
                 async: false,
-                success: function (data) {
+                success: function (resp) {
                     bootbox.alert({
-                        message: `Pedido salvo com sucesso!`,
+                        message: `Pedido N° ${resp} salvo com sucesso!`,
                         callback: function () {
                             setTimeout(function () {
                                 window.location = window.location.origin + '/Home/Index';
@@ -337,7 +337,6 @@
                     retorno = true;
                 },
                 error: function (err) {
-                    debugger;
                     bootbox.alert(`Erro ao salvar pedido. <br/>Verifique os dados e tente novamente.`);
                     console.log(err);
                     retorno = false;
@@ -400,6 +399,14 @@
             let quantidadeAtual = quantidadeAtualProdutosNaLista(contador);
             let valorUnitario = valorUnitarioProdutoNaLista(contador);
             let valorDesconto = valorDescontoUnitarioNaLista(contador);
+
+            if (valorDesconto > valorUnitario) {
+                resetaValorDescontoProduto(contador);
+                atualizaTotalPedido();
+                atualizaPagamento();
+                return;
+            }
+
             let valorTotal = (valorUnitario - valorDesconto) * quantidadeAtual;
 
             $(`#total_${contador}`).text(imprimeFormatadoSemSimbolo(valorTotal));
@@ -417,6 +424,11 @@
                     }
                 })
             });
+        }
+
+        function resetaValorDescontoProduto(contador) {
+            $(`#desconto_${contador}`).val(imprimeFormatadoSemSimbolo(0));
+            bootbox.alert(`O valor do desconto não pode ser maior que o valor unitário.`);
         }
 
         function decrementaQuantidade(contador) {
