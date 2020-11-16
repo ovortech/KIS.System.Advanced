@@ -90,8 +90,7 @@ namespace KIS.System.Advanced.Business
         {
             try
             {
-                var produto = dbProduto.GetById(idProduto);
-                dbProduto.RemoveLogic(produto.ID_PRODUTO);
+                dbProduto.RemoveLogic(idProduto);
             }
             catch (Exception ex)
             {

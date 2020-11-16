@@ -11,6 +11,7 @@ namespace KIS.System.Advanced.Services.Interfaces
     {
         Usuario Logar(Usuario login);
         List<Usuario> GetAll();
+        List<Usuario> GetAllActive();
         void Save(Usuario usuario);
         Usuario Get(int idUsuario);
         void Delete(int idUsuario);

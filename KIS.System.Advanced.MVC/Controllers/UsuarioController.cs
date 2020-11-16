@@ -26,7 +26,7 @@ namespace KIS.System.Advanced.MVC.Controllers
         [CustomAuthorize(IsPermission = AcessRole.ADMIN)]
         public ActionResult Index()
         {
-            var usuarios = _usuarioService.GetAll();
+            var usuarios = _usuarioService.GetAllActive();
             var usuariosVM = AutoMapper.Mapper.Map<List<UsuarioVM>>(usuarios);
             return View(usuariosVM);
         }
