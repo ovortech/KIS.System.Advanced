@@ -181,6 +181,7 @@
                                 <select class="form-control" id="formaPagamento2" disabled>
                                     @foreach (var formaPagamento in Model.TipoPGs)
                                     {
+                                        //TODO: Refatorar essa parte
                                         if (Model.FormaPGs != null && Model.FormaPGs.Count > 1 && formaPagamento.Id == Model.FormaPGs[1].TipoPGVM.Id)
                                         {
                                             if (formaPagamento.Nome.ToLower().Contains("dinheiro"))
@@ -191,6 +192,10 @@
                                         }
                                         else
                                         {
+                                            if (formaPagamento.Nome.ToLower().Contains("dinheiro"))
+                                            {
+                                                continue;
+                                            }
                                             <option class="form-control" value="@formaPagamento.Id">@formaPagamento.Nome</option>
                                         }
                                     }
@@ -214,7 +219,6 @@
     </div>
 </body>
 @section scripts {
-    <script type="text/javascript" src="~/Scripts/jquery.maskMoney.min.js"></script>
     <script type="text/javascript">
 
         $(document).ready(function () {

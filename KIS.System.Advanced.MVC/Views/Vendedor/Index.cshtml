@@ -113,7 +113,7 @@
 
         $("#inputPesquisa").on("keyup", function () {
             let value = $(this).val().toLowerCase();
-            $("#lista-Vendedores tr").filter(function () {
+            $("#lista-Vendedores tbody tr").filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
