@@ -28,7 +28,7 @@ namespace KIS.System.Advanced.MVC.Controllers
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         public ActionResult Index()
         {
-            var produtos = _produtoService.GetAll();
+            var produtos = _produtoService.GetAllActive();
             var produtosVM = AutoMapper.Mapper.Map<List<ProdutoVM>>(produtos);
             return View(produtosVM);
         }

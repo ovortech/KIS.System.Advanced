@@ -68,8 +68,7 @@ namespace KIS.System.Advanced.Business
         {
             try
             {
-                var Vendedor = dbVendedor.GetById(idVendedor);
-                dbVendedor.Remove(Vendedor);
+                dbVendedor.RemoveLogic(idVendedor);
             }
             catch (Exception ex)
             {

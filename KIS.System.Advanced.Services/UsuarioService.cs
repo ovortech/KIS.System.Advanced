@@ -32,6 +32,11 @@ namespace KIS.System.Advanced.Services
             return usuarioBS.GetAll();
         }
 
+        public List<Usuario> GetAllActive()
+        {
+            return usuarioBS.GetAllActive();
+        }
+
         public Usuario Logar(Usuario login)
         {
             return usuarioBS.Logar(login);

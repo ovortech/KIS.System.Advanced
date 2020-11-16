@@ -111,8 +111,7 @@ namespace KIS.System.Advanced.Business
         {
             try
             {
-                var usuario = dbUsuario.GetById(idUsuario);
-                dbUsuario.Remove(usuario);
+                dbUsuario.RemoveLogic(idUsuario);
             }
             catch (Exception ex)
             {

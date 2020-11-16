@@ -93,8 +93,7 @@ namespace KIS.System.Advanced.Business
         {
             try
             {
-                var Cliente = dbCliente.GetById(idCliente);
-                dbCliente.Remove(Cliente);
+                dbCliente.RemoveLogic(idCliente);
             }
             catch (Exception ex)
             {
