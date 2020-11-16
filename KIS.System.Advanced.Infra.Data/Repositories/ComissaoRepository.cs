@@ -20,7 +20,7 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
             if (comissao.PAGO_COMISSAO)
                 comissao.DATA_PAGAMENTO_COMISSAO = DateTime.Now;
 
-            if (comissao.ID_COMISSAO == 0)              
+            if (comissao.ID_COMISSAO == 0)
                 Add(comissao);
             else
                 Update(comissao);
@@ -35,7 +35,12 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
                          join produto in Db.Produtos on itemPedido.ID_PRODUTO equals produto.ID_PRODUTO
                          join comissao in Db.Comissaos on itemPedido.ID_ITEM_PEDIDO equals comissao.ID_ITEM_PEDIDO into gjComissao
                          from subComissao in gjComissao.DefaultIfEmpty()
-                         where pedido.ID_VENDEDOR == idVendedor && pedido.DATA_REG_PEDIDO >= dataInicio && pedido.DATA_REG_PEDIDO <= dataFim
+                         join cancelado in Db.PedidoCancelamentos on itemPedido.ID_PEDIDO equals cancelado.ID_PEDIDO into gjCancelado
+                         from subCancelado in gjCancelado.DefaultIfEmpty()
+                         where pedido.ID_VENDEDOR == idVendedor &&
+                                (pedido.DATA_REG_PEDIDO >= dataInicio && pedido.DATA_REG_PEDIDO <= dataFim) &&
+                                pedido.FATURADO_PEDIDO == true &&
+                                subCancelado == null
                          select new
                          {
                              pedido = pedido,
