@@ -8,7 +8,7 @@
 @using KIS.System.Advanced.MVC.Support
 <!-- Bootstrap core CSS -->
 <link href="~/Content/bootstrap.min.css" rel="stylesheet">
-<link href="~/Content/produtos.css" rel="stylesheet">
+<link href="~/Content/historicovendas.css" rel="stylesheet">
 
 <!-- Bootstrap core CSS -->
 <link href="~/Content/bootstrap.min.css" rel="stylesheet">
@@ -39,7 +39,7 @@
         <br>
         <div class="row">
             <div class="col-md-12">
-                <div class="" id="box_configs col-md-12">
+                <div class="" id="box_configs col-md-12">                    
                     <label class="float-left mg-10 mb-10">Selecione o Vendedor:   </label>
                     <select id="idVendedor" class="mb-10 browser-default custom-select col-3">
                         <option selected value="0">Selecione o vendedor</option>
@@ -84,7 +84,7 @@
     <div class="modal fade bottom" id="cancela-Pedido" tabindex="-1" role="dialog" aria-labelledby="desativar" aria-hidden="true" novalidate="novalidate" style="display: none;">
         <div class="modal-dialog ">
             <div class="modal-content">
-                
+
                 <div id="conteudoModalCancelar"></div>
 
             </div>
@@ -95,6 +95,29 @@
 @section scripts {
     <script src="~/Scripts/jquery.datetimepicker.full.min.js"></script>
     <script type="text/javascript">
+
+        $(document).ready(() => {
+            formataCancelado();
+        })
+
+        function formataCancelado() {
+            var linhas = $("#lista-Vendas tr.linhas");
+            for (var i = 0; i < linhas.length; i++) {
+                debugger;
+                var isCancel = $($("#lista-Vendas tr.linhas .cancelado")[i]).val()
+                if (isCancel) {
+                    $($("#lista-Vendas tr.linhas")[i]).attr("style", "background-color: #FFB6C1")
+                }
+            }
+        }
+
+
+        $("#inputPesquisa").on("keyup", function () {
+            let value = $(this).val().toLowerCase();
+            $("#lista-Vendas tr.linhas").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
 
 
         $(document).ready(function () {
@@ -130,8 +153,6 @@
         });
 
         function modalCancelarPedido(idPedido) {
-            if (cancelado)
-                return;
 
             let IdPedido = { IdPedido: idPedido }
             let result = callActionPost("HistoricoVenda", "Cancelar", IdPedido);
@@ -157,6 +178,7 @@
                 success: function (data) {
 
                     $("#conteudoGrid").html(data);
+                    formataCancelado();
                 },
                 error: function (err) {
                     console.log(err);
@@ -179,9 +201,8 @@
             });
         }
 
-        function editarVenda(idPedido, cancelado) {
-            if (cancelado)
-                return;
+        function editarVenda(idPedido) {
+
             bootbox.confirm(`Deseja realmente EDITAR o Pedido ${idPedido}?`, function (confirmou) {
                 if (confirmou) {
                     window.location.href = "/Vendas/index/" + idPedido
@@ -293,6 +314,56 @@
             }
     </script>
 }
+<style>
+    /**tooltip**/
+    /* Tooltip container */
+    .tooltip {
+        position: relative;
+        display: inline-block;
+        opacity: 100 !important;
+        text-decoration: none !important;
+        border-bottom:none;
+    }
 
+        /* Tooltip text */
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            padding: 5px 0;
+            border-radius: 6px;
+            /* Position the tooltip text */
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            /* Fade in tooltip */
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+            /* Tooltip arrow */
+            .tooltip .tooltiptext::after {
+                content: "";
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                margin-left: -5px;
+                border-width: 5px;
+                border-style: solid;
+                border-color: #555 transparent transparent transparent;
+            }
+
+        /* Show the tooltip text when you mouse over the tooltip container */
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+    /**fim tooltip**/
+
+</style>
 
 

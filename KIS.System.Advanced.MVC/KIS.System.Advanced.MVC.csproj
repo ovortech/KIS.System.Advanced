@@ -148,7 +148,10 @@
     <Content Include="Content\contrato.css" />
     <Content Include="Content\demo.css" />
     <Content Include="Content\erro.png" />
+    <Content Include="Content\historicovendas.css" />
     <Content Include="Content\home.css" />
+    <Content Include="Content\info.jpg" />
+    <Content Include="Content\info_pq.png" />
     <Content Include="Content\jquery.datetimepicker.css" />
     <Content Include="Content\layout.css" />
     <Content Include="Content\loading.gif" />

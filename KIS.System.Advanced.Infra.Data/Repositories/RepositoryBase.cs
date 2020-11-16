@@ -12,7 +12,7 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
 {
     public class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : ExclusaoLogica
     {
-        List<string> NotRemoveLogic = new List<string> { "Pedido", "PedidoCancelamento" };
+        List<string> NotRemoveLogic = new List<string> { "Comissao", "Pedido", "PedidoCancelamento" };
         public ProjetoDataContext Db { get; private set; }
 
         public RepositoryBase(ProjetoDataContext db = null)

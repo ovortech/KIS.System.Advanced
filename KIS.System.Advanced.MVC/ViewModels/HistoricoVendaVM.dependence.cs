@@ -21,6 +21,7 @@ namespace KIS.System.Advanced.MVC.ViewModels
         public double TotalPedido { get; set; }
         public Boolean Faturado { get; set; }
         public bool Cancelado { get; set; }
+        public String DescricaoCancelamento { get; set; }
         public List<DetailPedidoVM> ItemsPedido { get; set; }
     }
 

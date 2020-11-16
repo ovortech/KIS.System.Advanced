@@ -1,12 +1,21 @@
 ﻿@model IEnumerable<KIS.System.Advanced.MVC.ViewModels.GridHistoricoVendaVM>
 
+
+
+    <form class="form-inline">
+        <input class="form-control mr-sm-2" id="inputPesquisa" type="search" placeholder="Pesquisar por..." aria-label="Search">
+        @*<button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>*@
+    </form>
+
+
 <div class="tbs">
-    <table id="lista-produtos" class="col-12 tb-b tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%" style="padding-left:0px;">
+    <table id="lista-Vendas" class="col-12 tb-b tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%" style="padding-left:0px;">
         <thead>
             <tr class="text-center">
-                <th width="10%">Nº Pedido</th>
+                <th width="6%">Nº Pedido</th>
                 <th width="10%">Vendedor</th>
                 <th width="30%">Observação</th>
+                <th width="10%">Status</th>
                 <th width="10%">Data da Venda</th>
                 <th width="10%">Total do Pedido</th>
                 <th width="10%">Pedido Pago?</th>
@@ -18,16 +27,26 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
+                var Faturado = item.Faturado ? "Sim" : "Não";
+                var Cancelado = item.Cancelado ? "Cancelado" : "Ativo";
+                var DescCancelamento = string.IsNullOrEmpty(item.DescricaoCancelamento) ? "Ativo" : item.DescricaoCancelamento;
+                <tr class="linhas">
                     <td class="tb-style text-center" width="5%">@item.IdPedido</td>
                     <td class="tb-style text-center" dwidth="5%">@item.NomeVendedor</td>
                     <td class="tb-style text-center" width="20%">@item.Observacao</td>
+                    <td class="tb-style text-center" dwidth="5%">
+                        <input type="hidden" value="@item.Cancelado" class="cancelado" />
+                        <div class="tooltip">
+                            @Cancelado <img src="~/Content/info_pq.png" width="15px" />
+                            <span class="tooltiptext">@DescCancelamento</span>
+                        </div>
+                    </td>
                     <td class="tb-style text-center" width="10%">@item.DataVenda</td>
                     <td class="tb-style text-center" width="10%">@item.TotalPedido</td>
-                    <td class="tb-style text-center" width="10%">@item.Faturado</td>
+                    <td class="tb-style text-center" width="10%">@Faturado</td>
                     <td class="tb-style text-center" width="3%"><button type="button" style="width: 90px; !important" class="mb-10 btn-add btn " data-toggle="modal" data-target="#detalhe-Pedido" data-direction="bottom" onclick="javascript: showDetalhe(@item.IdPedido)">Detalhes</button></td>
-                    <td class="tb-style text-center" width="3%"><a onclick="javascript: editarVenda(@item.IdPedido, @item.Cancelado)" class="btn btn-secondary" style="width: 90px;" >Editar</a></td>
-                    <td class="tb-style text-center" width="3%"><a onclick="javascript: modalCancelarPedido(@item.IdPedido, @item.Cancelado)" class="btn btn-danger" data-toggle="modal" data-target="#cancela-Pedido" style="width: 90px;">Cancelar</a></td>
+                    <td class="tb-style text-center" width="3%"><a onclick="javascript: editarVenda(@item.IdPedido)" class="btn btn-secondary" style="width: 90px;">Editar</a></td>
+                    <td class="tb-style text-center" width="3%"><a onclick="javascript: modalCancelarPedido(@item.IdPedido)" class="btn btn-danger" data-toggle="modal" data-target="#cancela-Pedido" style="width: 90px;">Cancelar</a></td>
                 </tr>
             }
     </table>

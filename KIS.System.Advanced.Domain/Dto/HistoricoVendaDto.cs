@@ -16,6 +16,7 @@ namespace KIS.System.Advanced.Domain.Dto
         public double TotalPedido { get; set; }
         public Boolean Faturado { get; set; }
         public bool Cancelado { get; set; }
+        public String DescricaoCancelamento { get; set; }
         public List<ItemPedidoDto> ItemsPedido { get; set; }
     }
 }

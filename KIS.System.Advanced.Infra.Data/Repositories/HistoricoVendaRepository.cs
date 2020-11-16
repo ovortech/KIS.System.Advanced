@@ -38,7 +38,8 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
                                       TotalPedido = pedido.TOTAL_PEDIDO,
                                       //ID_CLIENTE = pedido.ID_CLIENTE,
                                       Faturado = pedido.FATURADO_PEDIDO,
-                                      Cancelado = subCancelado != null
+                                      Cancelado = subCancelado != null,
+                                      DescricaoCancelamento = subCancelado != null ? subCancelado.DESC_PEDIDO_CANCELAMENTO : "Ativo"
                                   }).Distinct().ToList();
 
             var idPedidos = historicoVendaDtos.Select(x => x.IdPedido).ToList();
