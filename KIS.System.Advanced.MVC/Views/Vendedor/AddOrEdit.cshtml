@@ -1,1 +1,31 @@
-﻿
+﻿@model KIS.System.Advanced.MVC.ViewModels.VendedorVM
+
+<form method="POST" id="form-vendedor" autocomplete="off">
+    <input type="hidden" id="idVendedor" value="@Model.Id">
+    <div class="form-group">
+        <label class="control-label" for="nomeVendedor">Nome Vendedor</label>
+        <input type="text" value="@Model.Nome" autocomplete="off" class="form-control col-12" id="nomeVendedor" name="nomeVendedor" placeholder="Digite o nome do vendedor">
+        @Html.ValidationMessageFor(model => model.Nome)
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-danger float-left" data-dismiss="modal" onclick="javascript: resetaModal()">Fechar</button>
+        <button type="button" id="btnSalvarVendedor" class="btn btn-finalizar btn-primary" style=" width: 70px;">Salvar</button>
+    </div>
+</form>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#btnSalvarVendedor").click(() => {
+            let vendedor = {
+                Id: $("#idVendedor").val(),
+                Nome: $("#nomeVendedor").val(),
+            };
+            salvaModel('Vendedor', 'Save', vendedor)
+        });
+    });
+
+</script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval");
+}

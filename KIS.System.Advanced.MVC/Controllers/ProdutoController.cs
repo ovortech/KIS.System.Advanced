@@ -81,7 +81,6 @@ namespace KIS.System.Advanced.MVC.Controllers
             }
         }
 
-        // POST: Produto/Delete/5
         [HttpPost]
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         public ActionResult Delete(int idProduto)

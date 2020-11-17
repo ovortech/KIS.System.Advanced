@@ -33,7 +33,7 @@
             <div class="col-md-12">
                 <div class="" id="box_configs">
                     <div>
-                        <a href="#" class="btn btn-finalizar" data-toggle="modal" data-target="#novo-Vendedor" data-direction="bottom" onclick="javascript: ajustaTituloModal('Novo Vendedor')">Adicionar Novo Vendedor</a>
+                        <a href="#" class="btn btn-finalizar" data-toggle="modal" data-target="#novo-vendedor" data-direction="bottom" onclick="javascript: addVendedor(0)">Adicionar Novo Vendedor</a>
                         <nav class="navbar-light bg-light float-right">
                             <form class="form-inline">
                                 <input class="form-control mr-sm-2" id="inputPesquisa" type="search" placeholder="Pesquisar por..." aria-label="Search">
@@ -43,12 +43,10 @@
                     </div>
 
                     <br>
-                    <table id="lista-Vendedores" class=" tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%">
+                    <table id="lista-vendedores" class=" tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%">
                         <thead>
                             <tr>
-                                <th>Nome Vendedor</th>
-                                <th></th>
-                                <th></th>
+                                <th width="80%">Nome Vendedor</th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -60,9 +58,7 @@
                                 <tr>
                                     <td class="tb-style" width="80%"><input type="hidden" value="@Vendedor.Id" /> @Vendedor.Nome</td>
                                     <td class="tb-style"></td>
-                                    <td class="tb-style"></td>
-                                    <td class="tb-style"></td>
-                                    <td><a data-toggle="modal" data-target="#novo-Vendedor" data-direction="bottom" onclick="javascript: editarVendedor(@Vendedor.Id)" class="btn btn-primary">Editar</a></td>
+                                    <td><a data-toggle="modal" data-target="#novo-vendedor" data-direction="bottom" onclick="javascript: editarVendedor(@Vendedor.Id)" class="btn btn-primary">Editar</a></td>
                                     <td><a onclick="javascript: excluirVendedor(@Vendedor.Id)" class="btn btn-danger">Excluir</a></td>
                                 </tr>
                             }
@@ -72,8 +68,7 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade bottom" id="novo-Vendedor" tabindex="-1" role="dialog" aria-labelledby="desativar" aria-hidden="true" novalidate="novalidate" style="display: none;">
+    <div class="modal fade bottom" id="novo-vendedor" tabindex="-1" role="dialog" aria-labelledby="desativar" aria-hidden="true" novalidate="novalidate" style="display: none;">
         <div class="modal-dialog ">
             <div class="modal-content">
                 <div class="modal-header">
@@ -83,17 +78,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="form-Vendedor" autocomplete="off" novalidate="novalidate">
-                        <div class="form-group">
-                            <label class="control-label" for="Nome">Nome Vendedor</label>
-                            <input type="text" autocomplete="off" class="form-control" id="Nome" name="Nome" placeholder="Digite o nome do Vendedor">
-                            <input type="hidden" id="Id">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger float-left" data-dismiss="modal" onclick="javascript: resetaModal()">Fechar</button>
-                            <button type="button" id="btnSalvarVendedor" class="btn btn-finalizar" data-dismiss="modal" aria-label="Close" style="width:70px;">Salvar</button>
-                        </div>
-                    </form>
+                    <div id="conteudoModal"></div>
                 </div>
             </div>
         </div>
@@ -101,51 +86,58 @@
 </body>
 
 @section scripts {
-    <script type="text/javascript">
-        $("#btnSalvarVendedor").click(() => {
-            let Vendedor = {
-                Id: $("#Id").val(),
-                Nome: $("#Nome").val(),
-            };
+<script type="text/javascript">
 
-            callActionPost("Vendedor", "Save", Vendedor, 'Vendedor/Index');
+    function ajustaTituloModal(texto) {
+        $(".modal-title").text(texto)
+    }
+
+    $("#inputPesquisa").on("keyup", function () {
+        let value = $(this).val().toLowerCase();
+        $("#lista-vendedores tbody tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
+    });
 
-        $("#inputPesquisa").on("keyup", function () {
-            let value = $(this).val().toLowerCase();
-            $("#lista-Vendedores tbody tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
+    function addOuEditarVendedor(idVendedor) {
+        $.ajax({
+            type: "GET",
+            processData: true,
+            async: false,
+            url: "/Vendedor/AddOrEdit/" + idVendedor,
+            success: function (resp) {
+                $("#conteudoModal").html(resp);
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+    }
+
+    function addVendedor(id) {
+        $(".modal-title").text('Novo Vendedor');
+        addOuEditarVendedor(id);
+    }
+
+    function editarVendedor(id) {
+        $(".modal-title").text('Editar Vendedor');
+        addOuEditarVendedor(id);
+    }
+
+    function excluirVendedor(idVendedor) {
+        bootbox.confirm("Confirma a exclusão do vendedor?", function (confirmou) {
+            if (confirmou) {
+                let data = { id: idVendedor };
+                callActionPost("Vendedor", "Delete", data, 'Vendedor/Index');
+            }
         });
+    }
 
-        function editarVendedor(Id) {
-            let data = { Id: `${Id}` };
-            let Vendedor = callActionGet("Vendedor", "Get", data);
-
-            $("#Id").val(Vendedor.Id);
-            $("#Nome").val(Vendedor.Nome);
-
-            ajustaTituloModal("Editar Vendedor");
-        }
-
-        function ajustaTituloModal(texto) {
-            $(".modal-title").text(texto)
-        }
-
-        function excluirVendedor(Id) {
-            bootbox.confirm("Confirma a exclusão do Vendedor?", function (confirmou) {
-                if (confirmou) {
-                    let data = { Id: Id };
-                    callActionPost("Vendedor", "Delete", data, 'Vendedor/Index');
-                }
-            });
-        }
-
-        function resetaModal() {
-            $("#Id").val('0');
-            $("#Nome").val('');
-        }
-    </script>
+    function resetaModal() {
+        $("#idVendedor").val('0');
+        $("#nomeVendedor").val('');
+    }
+</script>
 }
 
 

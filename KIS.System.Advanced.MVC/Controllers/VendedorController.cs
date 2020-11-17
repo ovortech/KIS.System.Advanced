@@ -14,6 +14,7 @@ namespace KIS.System.Advanced.MVC.Controllers
     public class VendedorController : CustomControllerBase<VendedorVM>
     {
         #region PROPRIEDADES / CONTRUTOR
+
         private static List<VendedorVM> vendedorVMs;
         private IVendedorService _vendedorService;
         public static List<VendedorVM> vendedores
@@ -27,7 +28,7 @@ namespace KIS.System.Advanced.MVC.Controllers
         }
 
         #endregion
-        // GET: Vendedor                
+
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         public ActionResult Index()
         {
@@ -46,16 +47,25 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         [HttpPost]
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
-        public ActionResult Save(VendedorVM vendedorVM)
+        public JsonResult Save(VendedorVM vendedorVM)
         {
             try
             {
-                var vendedor = AutoMapper.Mapper.Map<Vendedor>(vendedorVM);
-                if (vendedor.ID_VENDEDOR > 0)
-                    _vendedorService.Update(vendedor);
+                if (ModelState.IsValid)
+                {
+                    var vendedor = AutoMapper.Mapper.Map<Vendedor>(vendedorVM);
+                    vendedor.ATIVO = true;
+
+                    if (vendedor.ID_VENDEDOR > 0)
+                        _vendedorService.Update(vendedor);
+                    else
+                        _vendedorService.Save(vendedor);
+                    return Json(new { isValid = true });
+                }
                 else
-                    _vendedorService.Save(vendedor);
-                return RedirectToAction("Index");
+                {
+                    return Json(new { isValid = false, model = vendedorVM });
+                }
             }
             catch (Exception)
             {
@@ -66,8 +76,14 @@ namespace KIS.System.Advanced.MVC.Controllers
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         public PartialViewResult AddOrEdit(int id)
         {
-            var result = new VendedorVM();
-            return PartialView(result);
+            if (id == 0)
+                return PartialView(new VendedorVM());
+            else
+            {
+                var vendedor = _vendedorService.Get(id);
+                var vendedorVM = AutoMapper.Mapper.Map<VendedorVM>(vendedor);
+                return PartialView(vendedorVM);
+            }
         }
 
         [HttpPost]

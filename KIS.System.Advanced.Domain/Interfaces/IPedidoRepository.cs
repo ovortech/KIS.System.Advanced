@@ -10,6 +10,6 @@ namespace KIS.System.Advanced.Domain.Interfaces
     public interface IPedidoRepository : IRepositoryBase<Pedido>
     {
         int GetNextOrderNumber();
-        void SaveNewOrder(Pedido pedido, List<ItemPedido> itensPedido, List<FormaPg> formasPagamento, bool cancelar = false);
+        int SaveNewOrder(Pedido pedido, List<ItemPedido> itensPedido, List<FormaPg> formasPagamento, bool cancelar = false);
     }
 }
