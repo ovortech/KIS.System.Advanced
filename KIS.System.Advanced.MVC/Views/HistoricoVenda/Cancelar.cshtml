@@ -12,8 +12,8 @@
         <div class="col-md-12">
             <div class="" id="box_configs col-md-12">
                 <label class="float-left mg-10 mb-10">Tipo de Cancelamento:   </label>
-                <select id="idTipoCancelamento" class="mb-10 browser-default custom-select col-3">
-                    <option selected value="0">Selecione o Tipo de Cancelamento</option>
+                <select id="idTipoCancelamento" class="mb-10 browser-default custom-select col-5">
+                    <option selected value="0">Selecione o tipo</option>
                     @foreach (var tipoCancel in Model.TipoCancelamentosVM)
                     {
                         <option value="@tipoCancel.IdTipoCancelamento">@tipoCancel.NomeTipoCancelamento</option>
@@ -26,7 +26,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary btn-danger float-left" data-dismiss="modal" onclick="javascript: resetaModal()">Fechar</button>
-                <button type="button" id="btnCancelaPedido" class="btn btn-finalizar btn-primary" data-dismiss="modal" style=" width: 70px;" onclick="javascript: cancelarPedido(@Model.IdPedido)">Salvar</button>
+                <button type="button" id="btnCancelaPedido" class="btn btn-finalizar btn-primary" data-dismiss="modal" style=" width: 70px; margin-top: 2px !important;" onclick="javascript: cancelarPedido(@Model.IdPedido)">Salvar</button>
             </div>
             <br>
             <div class="clearfix"></div>
