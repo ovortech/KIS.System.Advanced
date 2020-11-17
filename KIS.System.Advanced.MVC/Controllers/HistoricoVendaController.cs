@@ -25,12 +25,12 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         #endregion
 
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         public ActionResult Index()
         {
             HistoricoVendaVM model = CarregarModel();
             return View(model);
         }
-
 
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         [HttpPost]
@@ -57,7 +57,7 @@ namespace KIS.System.Advanced.MVC.Controllers
             return PartialView(ItensPedido);
         }
 
-        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN)]
         [HttpPost]
         public PartialViewResult Cancelar(int IdPedido)
         {
@@ -68,7 +68,7 @@ namespace KIS.System.Advanced.MVC.Controllers
         }
 
 
-        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN)]
         [HttpPost]
         public ActionResult CancelaPedido(int IdPedido, int IdTipoCancelamento, String ObsevacaoCancelamento)
         {

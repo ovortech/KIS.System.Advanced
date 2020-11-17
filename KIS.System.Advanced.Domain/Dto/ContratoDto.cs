@@ -16,7 +16,7 @@ namespace KIS.System.Advanced.Domain.Dto
         public String Observacao { get; set; }
         public DateTime DataVenda { get; set; }
         public Double TotalPedido { get; set; }
-        public bool Faturado { get; set; }
+        public Boolean Faturado { get; set; }
         public DateTime? DataFaturamento { get; set; }
     }
 }

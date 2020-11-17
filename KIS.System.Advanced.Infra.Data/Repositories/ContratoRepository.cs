@@ -30,16 +30,16 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
                          subCancelado == null
                          select new ContratoDto
                          {
-                               IdContrato = contrato.ID_CONTRATO,
-                               IdPedido = contrato.ID_PEDIDO_CONTRATO,
-                                IdVendedor = pedido.ID_VENDEDOR,
-                                NomeVendedor = vendedor.NOME_VENDEDOR,
-                                NomeCliente = cliente.NOME_CLIENTE,
-                                Observacao = pedido.OBS_PEDIDO,
-                                DataVenda = pedido.DATA_REG_PEDIDO,
-                                TotalPedido = pedido.TOTAL_PEDIDO,
-                                Faturado = pedido.FATURADO_PEDIDO,
-                                DataFaturamento = contrato.DATA_FATURAMENTO
+                             IdContrato = contrato.ID_CONTRATO,
+                             IdPedido = contrato.ID_PEDIDO_CONTRATO,
+                             IdVendedor = pedido.ID_VENDEDOR,
+                             NomeVendedor = vendedor.NOME_VENDEDOR,
+                             NomeCliente = cliente.NOME_CLIENTE,
+                             Observacao = pedido.OBS_PEDIDO,
+                             DataVenda = pedido.DATA_REG_PEDIDO,
+                             TotalPedido = pedido.TOTAL_PEDIDO,
+                             Faturado = contrato.FATURADO_CONTRATO,
+                             DataFaturamento = contrato.DATA_FATURAMENTO
                          };
             contratoDtos = result.ToList();
             return contratoDtos;

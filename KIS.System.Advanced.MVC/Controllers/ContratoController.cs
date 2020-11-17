@@ -26,16 +26,16 @@ namespace KIS.System.Advanced.MVC.Controllers
         #endregion
 
         // GET: Contrato
-        [CustomAuthorize(IsPermission = Support.AcessRole.ADMIN | AcessRole.VENDAS)]
+        [CustomAuthorize(IsPermission = Support.AcessRole.ADMIN)]
         public ActionResult Index()
         {
             ContratoVM model = CarregarModel();
-            
+
             return View(model);
         }
 
 
-        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN)]
         [HttpPost]
         public PartialViewResult Detalhes(int IdPedido)
         {
@@ -47,7 +47,7 @@ namespace KIS.System.Advanced.MVC.Controllers
             return PartialView(ItensPedido);
         }
 
-        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN)]
         [HttpPost]
         public PartialViewResult Grid(int idCliente, String dataInicio, String dataFim)
         {
@@ -55,8 +55,8 @@ namespace KIS.System.Advanced.MVC.Controllers
             DateTime dtFim = dataFim.ParseDateTimeBrToUs();
             List<GridContratoVM> grid = new List<GridContratoVM>();
 
-            if(idCliente != 0)
-            grid = AutoMapper.Mapper.Map<List<GridContratoVM>>(_contratoService.GetContratoDto(idCliente, dtInicio, dtFim));
+            if (idCliente != 0)
+                grid = AutoMapper.Mapper.Map<List<GridContratoVM>>(_contratoService.GetContratoDto(idCliente, dtInicio, dtFim));
 
             return PartialView(grid);
         }
@@ -64,7 +64,7 @@ namespace KIS.System.Advanced.MVC.Controllers
         private ContratoVM CarregarModel()
         {
             var model = new ContratoVM();
-            var clientes = _clienteService.GetAllActive();            
+            var clientes = _clienteService.GetAllActive();
             var clienteVMs = AutoMapper.Mapper.Map<List<ClienteVM>>(clientes);
             model.Clientes = clienteVMs;
             return model;

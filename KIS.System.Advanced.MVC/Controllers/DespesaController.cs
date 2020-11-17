@@ -18,7 +18,7 @@ namespace KIS.System.Advanced.MVC.Controllers
         }
 
 
-        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN)]
         public PartialViewResult AddOrEdit(int id)
         {
             var result = new DespesaVM();
