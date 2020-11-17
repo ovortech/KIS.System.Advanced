@@ -10,7 +10,7 @@ namespace KIS.System.Advanced.Services.Interfaces
 {
     public interface IHistoricoVendaService
     {
-        List<HistoricoVendaDto> HistoricoVendaDto(int idVendedor, DateTime dataInicio, DateTime dataFim);
+        List<HistoricoVendaDto> HistoricoVendaDto(int? idVendedor, DateTime dataInicio, DateTime dataFim);
         List<ItemPedidoDto> HistoricoVendaDetalheDto(int IdPedido);
         bool CancelaPedido(PedidoCancelamento pedidoCancelamento);
         List<TipoCancelamento> GetAllTipoCancelamento();

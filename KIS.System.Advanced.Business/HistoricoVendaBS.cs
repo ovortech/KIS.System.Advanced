@@ -17,7 +17,7 @@ namespace KIS.System.Advanced.Business
             historicoVendaRepository = new HistoricoVendaRepository();
         }
 
-        public List<HistoricoVendaDto> GetHistoricoVendaDtos(int idVendedor, DateTime dataInicio, DateTime dataFim)
+        public List<HistoricoVendaDto> GetHistoricoVendaDtos(int? idVendedor, DateTime dataInicio, DateTime dataFim)
         {
             List<HistoricoVendaDto> historicoVendaDtos = new List<HistoricoVendaDto>();
             historicoVendaDtos = historicoVendaRepository.GetHistoricoVendaDtos(idVendedor, dataInicio, dataFim);

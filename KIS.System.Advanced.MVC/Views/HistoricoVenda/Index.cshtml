@@ -39,7 +39,7 @@
         <br>
         <div class="row">
             <div class="col-md-12">
-                <div class="" id="box_configs col-md-12">                    
+                <div class="" id="box_configs col-md-12">
                     <label class="float-left mg-10 mb-10">Selecione o Vendedor:   </label>
                     <select id="idVendedor" class="mb-10 browser-default custom-select col-3">
                         <option selected value="0">Selecione o vendedor</option>
@@ -103,7 +103,6 @@
         function formataCancelado() {
             var linhas = $("#lista-Vendas tr.linhas");
             for (var i = 0; i < linhas.length; i++) {
-                debugger;
                 var isCancel = $($("#lista-Vendas tr.linhas .cancelado")[i]).val()
                 if (isCancel) {
                     $($("#lista-Vendas tr.linhas")[i]).attr("style", "background-color: #FFB6C1")
@@ -169,21 +168,27 @@
                 dataInicio: $("#date_timepicker_start").val(),
                 dataFim: $("#date_timepicker_end").val()
             }
-            $.ajax({
-                type: "Post",
-                url: '/HistoricoVenda/Grid',
-                data: filtro,
-                processData: true,
-                async: false,
-                success: function (data) {
+            if (filtro.dataInicio != "" && filtro.dataFim != "") {
 
-                    $("#conteudoGrid").html(data);
-                    formataCancelado();
-                },
-                error: function (err) {
-                    console.log(err);
-                }
-            });
+                $.ajax({
+                    type: "Post",
+                    url: '/HistoricoVenda/Grid',
+                    data: filtro,
+                    processData: true,
+                    async: false,
+                    success: function (data) {
+                        $("#conteudoGrid").html(data);
+                        formataCancelado();
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                        console.log(XMLHttpRequest);
+                    }
+                });
+            }
+            else {
+                bootbox.alert("Os campos de Data são obrigatórios");
+            }
 
         }
 
@@ -322,7 +327,7 @@
         display: inline-block;
         opacity: 100 !important;
         text-decoration: none !important;
-        border-bottom:none;
+        border-bottom: none;
     }
 
         /* Tooltip text */

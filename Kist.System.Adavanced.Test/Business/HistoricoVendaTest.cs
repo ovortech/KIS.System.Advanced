@@ -22,9 +22,9 @@ namespace Kist.System.Adavanced.Test.Business
         public void GetHistoricoVendaDtos()
         {
 
-            _historicoVendaBS.GetHistoricoVendaDtos(1, DateTime.Now.AddDays(-10), DateTime.Now);
+            var histvenda = _historicoVendaBS.GetHistoricoVendaDtos(null, DateTime.Now.AddDays(-10), DateTime.Now);
 
-            Assert.IsTrue(true);
+            Assert.IsTrue(histvenda.Count > 0);
         }
     }
 }

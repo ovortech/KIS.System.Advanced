@@ -36,14 +36,12 @@ namespace KIS.System.Advanced.MVC.Controllers
         [HttpPost]
         public PartialViewResult Grid(int idVendedor, String dataInicio, String dataFim)
         {
-
             DateTime dtInicio = dataInicio.ParseDateTimeBrToUs();
             DateTime dtFim = dataFim.ParseDateTimeBrToUs();
             List<GridHistoricoVendaVM> grid = new List<GridHistoricoVendaVM>();
-            if (idVendedor != 0)
-            {
-                grid = AutoMapper.Mapper.Map<List<GridHistoricoVendaVM>>(_historicoVendaService.HistoricoVendaDto(idVendedor, dtInicio, dtFim));
-            }
+
+            grid = AutoMapper.Mapper.Map<List<GridHistoricoVendaVM>>(_historicoVendaService.HistoricoVendaDto((idVendedor == 0 ? (int?)null : idVendedor), dtInicio, dtFim));
+
             return PartialView(grid);
         }
 
@@ -78,7 +76,7 @@ namespace KIS.System.Advanced.MVC.Controllers
             {
                 ID_PEDIDO = IdPedido,
                 ID_TIPO_CANCELAMENTO = IdTipoCancelamento,
-                DESC_PEDIDO_CANCELAMENTO = ObsevacaoCancelamento,                
+                DESC_PEDIDO_CANCELAMENTO = ObsevacaoCancelamento,
                 DATA_CANCELAMENTO = DateTime.Now,
             };
             _historicoVendaService.CancelaPedido(pedidocancelamento);

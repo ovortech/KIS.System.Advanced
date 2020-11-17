@@ -32,7 +32,7 @@ namespace KIS.System.Advanced.Services.Interfaces
             return _historicoVendaBS.GetHistoricoVendaItensPedidoDto(IdPedido);
         }
 
-        public List<HistoricoVendaDto> HistoricoVendaDto(int idVendedor, DateTime dataInicio, DateTime dataFim)
+        public List<HistoricoVendaDto> HistoricoVendaDto(int? idVendedor, DateTime dataInicio, DateTime dataFim)
         {
             return _historicoVendaBS.GetHistoricoVendaDtos(idVendedor, dataInicio, dataFim);
         }

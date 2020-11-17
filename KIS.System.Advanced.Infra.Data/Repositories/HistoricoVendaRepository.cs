@@ -16,27 +16,23 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
             Db = new ProjetoDataContext();
         }
 
-        public List<HistoricoVendaDto> GetHistoricoVendaDtos(int idVendedor, DateTime dataInicio, DateTime dataFim)
+        public List<HistoricoVendaDto> GetHistoricoVendaDtos(int? idVendedor, DateTime dataInicio, DateTime dataFim)
         {
             dataFim = dataFim.AddDays(1).AddSeconds(-1);
             var historicoVendaDtos = new List<HistoricoVendaDto>();
             historicoVendaDtos = (from pedido in Db.Pedidos
                                   join vendedor in Db.Vendedores on pedido.ID_VENDEDOR equals vendedor.ID_VENDEDOR
                                   join cancelado in Db.PedidoCancelamentos on pedido.ID_PEDIDO equals cancelado.ID_PEDIDO into gjCancelado
-                                  from subCancelado in gjCancelado.DefaultIfEmpty()
-                                      //join itemPedido in Db.ItemPedidos on pedido.ID_PEDIDO equals itemPedido.ID_PEDIDO
-                                      //join produto in Db.Produtos on itemPedido.ID_PRODUTO equals produto.ID_PRODUTO
-                                  where pedido.ID_VENDEDOR == idVendedor && pedido.DATA_REG_PEDIDO >= dataInicio && pedido.DATA_REG_PEDIDO <= dataFim
+                                  from subCancelado in gjCancelado.DefaultIfEmpty()                                      
+                                  where (idVendedor == null || pedido.ID_VENDEDOR == idVendedor) && pedido.DATA_REG_PEDIDO >= dataInicio && pedido.DATA_REG_PEDIDO <= dataFim
                                   select new HistoricoVendaDto
                                   {
                                       IdPedido = pedido.ID_PEDIDO,
                                       IdVendedor = pedido.ID_VENDEDOR,
                                       NomeVendedor = vendedor.NOME_VENDEDOR,
-                                      //ID_USUARIO_PEDIDO = pedido.ID_USUARIO_PEDIDO,
                                       Observacao = pedido.OBS_PEDIDO,
                                       DataVenda = pedido.DATA_REG_PEDIDO,
                                       TotalPedido = pedido.TOTAL_PEDIDO,
-                                      //ID_CLIENTE = pedido.ID_CLIENTE,
                                       Faturado = pedido.FATURADO_PEDIDO,
                                       Cancelado = subCancelado != null,
                                       DescricaoCancelamento = subCancelado != null ? subCancelado.DESC_PEDIDO_CANCELAMENTO : "Ativo"
