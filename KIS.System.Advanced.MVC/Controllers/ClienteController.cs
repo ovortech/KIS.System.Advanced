@@ -24,20 +24,6 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         #endregion
 
-        //[CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
-        //public ActionResult Index()
-        //{         
-        //    return View();
-        //}
-
-
-        //[CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
-        //public PartialViewResult AddOrEdit(int id)
-        //{
-        //    var result = new ClienteVM();
-        //    return PartialView(result);
-        //}
-
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         public ActionResult Index()
         {
