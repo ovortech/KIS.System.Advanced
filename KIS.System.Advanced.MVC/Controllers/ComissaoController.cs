@@ -27,7 +27,7 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         #endregion
         // GET: Comissao
-        //[CustomAuthorize(IsPermission = Support.AcessRole.ADMIN | AcessRole.VENDAS)]
+        //[CustomAuthorize(IsPermission = Support.AcessRole.ADMIN)]
         //public ActionResult Index()
         //{
 
@@ -57,7 +57,7 @@ namespace KIS.System.Advanced.MVC.Controllers
         }
 
 
-        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN)]
         [HttpPost]
         public JsonResult Save(ComissaoVM comissaoVM)
         {

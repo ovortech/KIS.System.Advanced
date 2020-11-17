@@ -9,7 +9,7 @@
 
 
 <div class="tbs">
-    <table id="lista-Vendas" class="col-12 tb-b tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%" style="padding-left:0px;">
+    <table id="lista-contrato" class="col-12 tb-b tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%" style="padding-left:0px;">
         <thead>
             <tr class="text-center">
                 <th width="6%">Nº Pedido</th>
@@ -26,14 +26,14 @@
             @foreach (var item in Model)
             {
                 var Faturado = item.Faturado ? "Sim" : "Não";
-                <tr class="linhas">
-                    <td class="tb-style text-center" width="5%">@item.IdPedido</td>
+                <tr Id="linha_@(item.IdPedido)" class="linhas">
+                    <td class="tb-style text-center pedido" width="5%">@item.IdPedido</td>
                     <td class="tb-style text-center" dwidth="5%">@item.NomeVendedor</td>
                     <td class="tb-style text-center" dwidth="5%">@item.NomeCliente</td>
                     <td class="tb-style text-center" width="20%">@item.Observacao</td>
                     <td class="tb-style text-center" width="10%">@item.DataVenda</td>
-                    <td class="tb-style text-center" width="10%">@item.TotalPedido</td>
-                    <td class="tb-style text-center" width="10%"><input type="checkbox" id="@item.Faturado"></td>
+                    <td class="tb-style text-center totalPedido" width="10%">@item.TotalPedido</td>
+                    <td class="tb-style text-center" width="10%"><input type="checkbox" id="@item.Faturado"> <input type="hidden" class="DataPg" value="@item.DataFaturamento" /></td>
                     @*<td class="tb-style text-center" width="3%"><button type="button" style=" width: 160px; !important" class="mb-10 mr-10 btn-add btn btn-block float-right" data-toggle="modal" data-target="#novo-Vendedor" data-direction="bottom" onclick="javascript: ajustaTituloModal('Detalhe do Pedido')">Detalhe do Pedido</button></td>*@
                     <td class="tb-style text-center" width="3%"><button type="button" style="width: 160px; !important" class="mb-10 btn-add btn " data-toggle="modal" data-target="#detalhe-Pedido" data-direction="bottom" onclick="javascript: showDetalhe(@item.IdPedido)">Detalhe</button></td>                    
                 </tr>

@@ -44,5 +44,13 @@ namespace Kist.System.Adavanced.Test.Data
             var aa = _contratoRepository.GetAll().ToList();
             Assert.IsTrue(aa != null);
         }
+
+
+        [TestMethod]
+        public void GetContratoDto()
+        {
+            var aa = _contratoRepository.GetContratoDto(4, DateTime.Now.AddDays(-20), DateTime.Now);
+            Assert.IsTrue(aa != null);
+        }
     }
 }

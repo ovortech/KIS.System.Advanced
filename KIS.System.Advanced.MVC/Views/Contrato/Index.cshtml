@@ -57,9 +57,9 @@
                     <input type="text" class="form-control text-center col-1" id="date_timepicker_end" value="@Model.DataFim.ParseDateTimeToBr()" />
                     <button type="button" class="float-left btn-buscar" onclick="javascript: showGrid()">Buscar</button>
                 </div>
+                <br>
                 <div id="conteudoGrid"></div>
 
-                <br>
                 <div class="col-12">
                     <label class="float-right mg-10 mr-10">
                         <strong>
@@ -80,51 +80,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade bottom" id="novo-Vendedor" tabindex="-1" role="dialog" aria-labelledby="desativar" aria-hidden="true" novalidate="novalidate" style="display: none;">
-        <div class="modal-dialog ">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Detalhes do Pedido </h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true" onclick="javascript: resetaModal()">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" id="form-Vendedor" autocomplete="off" novalidate="novalidate">
-                        <div class="tbs_modal">
-                            <table id="lista-produtos" class="col-12 tb-b tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%" style="padding-left:0px;">
-                                <thead>
-                                    <tr class="">
-                                        <th width="10%">Cod. Produto</th>
-                                        <th width="20%">Nome do Produto</th>
-                                        <th width="20%">Descrição</th>
-                                        <th width="20%">Quantidade</th>
-                                        <th width="10%">Valor Unitário</th>
-                                        <th width="10%">Desconto Unitário</th>
-                                        <th width="10%">Valor</th>
 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="tb-style text-center" width="5%">101</td>
-                                        <td class="tb-style" width="30%">Chave de carro</td>
-                                        <td class="tb-style" width="30%">Chave Ford Ka</td>
-                                        <td class="tb-style" width="10%">2</td>
-                                        <td class="tb-style" width="3%">55,00</td>
-                                        <td class="tb-style" width="3%">0,00</td>
-                                        <td class="tb-style" width="4%">110,00</td>
-                                    </tr>
-                            </table>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" id="btnSalvarVendedor" class="btn btn-primary btn-danger" data-dismiss="modal" aria-label="Close">Fechar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
     @* MODAL DETALHE PEDIDO *@
     <div class="modal fade bottom" id="detalhe-Pedido" tabindex="-1" role="dialog" aria-labelledby="desativar" aria-hidden="true" novalidate="novalidate" style="display: none;">
         <div class="modal-dialog ">
@@ -145,6 +101,8 @@
 @section scripts {
     <script src="~/Scripts/jquery.datetimepicker.full.min.js"></script>
     <script type="text/javascript">
+        let linhas = "";
+
         $(document).ready(function () {
             showGrid();
 
@@ -174,9 +132,27 @@
             $(function () {
                 $('.selectpicker').selectpicker();
             });
-
+            caculaTodos();
         });
 
+        function caculaTodos() {            
+            let total = 0;
+            for (var i = 0; i < linhas.length; i++) {
+               
+            }
+        }
+
+        function idPedidoLinha(linha) {
+            return $(linha).find("td.pedido").html();
+        }
+
+        function totalPedidoLinha(idPedido) {
+            return $(`tr#linha_${idPedido} td.pedido`).html()
+        }
+
+        function temDataFaturamento(idPedido) {
+            return $(`tr#linha_${idPedido} td input.DataPg`).val() != ""
+        }
 
         function showGrid() {
 
@@ -185,6 +161,7 @@
                 dataInicio: $("#date_timepicker_start").val(),
                 dataFim: $("#date_timepicker_end").val()
             }
+
             if (filtro.dataInicio != "" && filtro.dataFim != "") {
 
                 $.ajax({
@@ -195,6 +172,7 @@
                     async: false,
                     success: function (data) {
                         $("#conteudoGrid").html(data);
+                        linhas = "#lista-contrato tr.linhas";
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
 

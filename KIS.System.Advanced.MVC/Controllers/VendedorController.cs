@@ -29,7 +29,7 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         #endregion
 
-        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN)]
         public ActionResult Index()
         {
             var vendedores = _vendedorService.GetAllActive();
@@ -37,7 +37,7 @@ namespace KIS.System.Advanced.MVC.Controllers
             return View(vendedoresVM);
         }
 
-        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN)]
         public JsonResult Get(int id)
         {
             var vendedor = _vendedorService.Get(id);
@@ -46,7 +46,7 @@ namespace KIS.System.Advanced.MVC.Controllers
         }
 
         [HttpPost]
-        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN)]
         public JsonResult Save(VendedorVM vendedorVM)
         {
             try
@@ -73,7 +73,7 @@ namespace KIS.System.Advanced.MVC.Controllers
             }
         }
 
-        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN)]
         public PartialViewResult AddOrEdit(int id)
         {
             if (id == 0)
@@ -87,7 +87,7 @@ namespace KIS.System.Advanced.MVC.Controllers
         }
 
         [HttpPost]
-        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN)]
         public ActionResult Delete(int id)
         {
             try
@@ -101,7 +101,7 @@ namespace KIS.System.Advanced.MVC.Controllers
             }
         }
 
-        [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN)]
         public List<VendedorVM> GetAllActive()
         {
             var vendedores = _vendedorService.GetAll();
