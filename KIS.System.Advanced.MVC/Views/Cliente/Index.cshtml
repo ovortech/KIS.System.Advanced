@@ -1,11 +1,8 @@
-﻿@model IEnumerable<KIS.System.Advanced.MVC.ViewModels.VendedorVM>
+﻿@model IEnumerable<KIS.System.Advanced.MVC.ViewModels.ClienteVM>
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
-<!-- Bootstrap core CSS -->
 <link href="~/Content/bootstrap.min.css" rel="stylesheet">
 <link href="~/Content/produtos.css" rel="stylesheet">
 
@@ -23,7 +20,6 @@
             </div>
         </div>
     </header>
-
     <div class="container bkp-cont">
         <div class="theme-lockup">
             <h3 class="pad-top-20 text-center">Clientes</h3>
@@ -33,7 +29,7 @@
             <div class="col-md-12">
                 <div class="" id="box_configs">
                     <div>
-                        <a href="#" class="btn btn-finalizar" data-toggle="modal" data-target="#novo-Cliente" data-direction="bottom" onclick="javascript: ajustaTituloModal('Novo Vendedor')">Adicionar Novo Cliente</a>
+                        <a href="#" class="btn btn-finalizar" data-toggle="modal" data-target="#novo-cliente" data-direction="bottom" onclick="javascript: addCliente(0)">Adicionar Novo Cliente</a>
                         <nav class="navbar-light bg-light float-right">
                             <form class="form-inline">
                                 <input class="form-control mr-sm-2" id="inputPesquisa" type="search" placeholder="Pesquisar por..." aria-label="Search">
@@ -41,28 +37,28 @@
                         </nav>
                     </div>
                     <br>
-                    <table id="lista-Clientes" class=" tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%">
+                    <table id="lista-clientes" class=" tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%">
                         <thead>
                             <tr>
-                                <th>Nome Cliente</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
+                                <th width="0%"></th>
+                                <th width="20%">Nome Cliente</th>
+                                <th width="60%"></th>
+                                <th width="10%"></th>
+                                <th width="10%"></th>
                             </tr>
                         </thead>
                         <tbody>
-                       
+                            @foreach (var cliente in Model)
+                            {
                                 <tr>
-                                    <td class="tb-style" width="80%"><input type="hidden" value=""/>Adidas</td>
-                                    <td class="tb-style"></td>
-                                    <td class="tb-style"></td>
-                                    <td class="tb-style"></td>
-                                    <td><a data-toggle="modal" data-target="" data-direction="bottom" onclick="" class="btn btn-primary">Editar</a></td>
-                                    <td><a onclick="" class="btn btn-danger">Excluir</a></td>
+                                    <td class="tb-style" width="0%"><input type="hidden" value="@cliente.Id"/></td>
+                                    <td class="tb-style" width="20%">@cliente.Nome</td>
+                                    <td class="tb-style" width="60%"></td>
+                                    <td width="10%"><a data-toggle="modal" data-target="#novo-cliente" data-direction="bottom" onclick="javascript: editarCliente(@cliente.Id)" class="btn btn-primary">Editar</a></td>
+                                    <td width="10%"><a onclick="javascript: excluirCliente(@cliente.Id)" class="btn btn-danger">Excluir</a></td>
+
                                 </tr>
-                            
+                            }
                     </table>
                     <div class="clearfix"></div>
                     <div class="clearfix"></div>
@@ -70,28 +66,17 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade bottom" id="novo-Cliente" tabindex="-1" role="dialog" aria-labelledby="desativar" aria-hidden="true" novalidate="novalidate" style="display: none;">
+    <div class="modal fade bottom" id="novo-cliente" tabindex="-1" role="dialog" aria-labelledby="desativar" aria-hidden="true" novalidate="novalidate" style="display: none;">
         <div class="modal-dialog ">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Adicionar Cliente</h4>
+                    <h4 class="modal-title"></h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" onclick="javascript: resetaModal()">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="form-Cliente" autocomplete="off" novalidate="novalidate">
-                        <div class="form-group">
-                            <label class="control-label" for="Nome">Nome do Cliente</label>
-                            <input type="text" autocomplete="off" class="form-control" id="Nome" name="Nome" placeholder="Digite o nome do Cliente">
-                            <input type="hidden" id="Id">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger float-left" data-dismiss="modal" onclick="javascript: resetaModal()">Fechar</button>
-                            <button type="button" id="btnSalvarCliente" class="btn btn-finalizar" data-dismiss="modal" aria-label="Close" style="width: 70px;">Salvar</button>
-                        </div>
-                    </form>
+                    <div id="conteudoModal"></div>
                 </div>
             </div>
         </div>
@@ -99,8 +84,56 @@
 </body>
 @section scripts {
     <script type="text/javascript">
+
         function ajustaTituloModal(texto) {
             $(".modal-title").text(texto)
+        }
+
+        $("#inputPesquisa").on("keyup", function () {
+            let value = $(this).val().toLowerCase();
+            $("#lista-clientes tbody tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+
+        function addOuEditarCliente(idCliente) {
+            debugger;
+            $.ajax({
+                type: "GET",
+                processData: true,
+                async: false,
+                url: "/Cliente/AddOrEdit/" + idCliente,
+                success: function (resp) {
+                    $("#conteudoModal").html(resp);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        }
+
+        function addCliente(id) {
+            $(".modal-title").text('Novo Cliente');
+            addOuEditarCliente(id);
+        }
+
+        function editarCliente(id) {
+            $(".modal-title").text('Editar Cliente');
+            addOuEditarCliente(id);
+        }
+
+        function excluirCliente(idCliente) {
+            bootbox.confirm("Confirma a exclusão do cliente?", function (confirmou) {
+                if (confirmou) {
+                    let data = { idCliente: idCliente };
+                    callActionPost("Cliente", "Delete", data, 'Cliente/Index');
+                }
+            });
+        }
+
+        function resetaModal() {
+            $("#idCliente").val('0');
+            $("#nomeCliente").val('');
         }
     </script>
 }

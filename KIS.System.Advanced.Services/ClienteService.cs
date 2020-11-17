@@ -49,7 +49,7 @@ namespace KIS.System.Advanced.Services
 
         public void Update(Cliente cliente)
         {
-            _clienteBS.Save(cliente);
+            _clienteBS.Update(cliente);
         }
     }
 }

@@ -37,11 +37,9 @@
                         <nav class="navbar-light bg-light float-right">
                             <form class="form-inline">
                                 <input class="form-control mr-sm-2" id="inputPesquisa" type="search" placeholder="Pesquisar por..." aria-label="Search">
-                                @*<button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>*@
                             </form>
                         </nav>
                     </div>
-
                     <br>
                     <table id="lista-produtos" class=" tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%">
                         <thead>
@@ -77,20 +75,19 @@
     </div>
 
     <div class="modal fade bottom" id="novo-produto" tabindex="-1" role="dialog" aria-labelledby="desativar" aria-hidden="true" novalidate="novalidate" style="display: none;">
-      
-            <div class="modal-dialog ">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title"></h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true" onclick="javascript: resetaModal()">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div id="conteudoModal"></div>
-                    </div>
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" onclick="javascript: resetaModal()">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="conteudoModal"></div>
                 </div>
             </div>
+        </div>
     </div>
 </body>
 @section scripts {
