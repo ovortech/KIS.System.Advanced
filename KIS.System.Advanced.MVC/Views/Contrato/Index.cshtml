@@ -4,7 +4,8 @@
 
 }
 
-@model IEnumerable<KIS.System.Advanced.MVC.ViewModels.VendedorVM>
+@model KIS.System.Advanced.MVC.ViewModels.ContratoVM
+@using KIS.System.Advanced.MVC.Support
 
 <!-- Bootstrap core CSS -->
 <link href="~/Content/bootstrap.min.css" rel="stylesheet">
@@ -39,52 +40,26 @@
         <br>
         <div class="row">
             <div class="col-md-12">
-                <div class="" id="box_configs">
-                    <label class="float-left mg-10 mb-10">Cliente Contratos:   </label>
-                    <select class="mb-10 browser-default custom-select col-3">
-                        <option selected>Selecione</option>
-                        <option value="1">Adidas</option>
-                        <option value="2">Nike</option>
-                        <option value="3">Centauro</option>
-                        <option value="3">Lacoste</option>
+                <div class="" id="box_configs col-md-12">
+                    <label class="float-left mg-10 mb-10">Selecione o Vendedor:   </label>
+                    <select id="idCliente" class="mb-10 browser-default custom-select col-3">
+                        <option selected value="0">Selecione o vendedor</option>
+                        @foreach (var cliente in Model.Clientes)
+                        {
+                            <option value="@cliente.Id">@cliente.Nome</option>
+                        }
                     </select>
                 </div>
-
                 <div class="row" id="box_configs">
                     <label class="float-left mg-10 mb-10" style="margin-left: 15px;">Ínicio de exibição:</label>
-                    <input type="text" class="form-control text-center col-1" id="date_timepicker_start" />
+                    <input type="text" class="form-control text-center col-1" id="date_timepicker_start" value="@Model.DataInicio.ParseDateTimeToBr()" />
                     <label class="float-left mg-10 mb-10">&nbsp; &nbsp;Fim de exibição:</label>
-                    <input type="text" class="form-control text-center col-1" id="date_timepicker_end" />
-                    <button type="button" class="float-left btn-buscar">Buscar</button>
+                    <input type="text" class="form-control text-center col-1" id="date_timepicker_end" value="@Model.DataFim.ParseDateTimeToBr()" />
+                    <button type="button" class="float-left btn-buscar" onclick="javascript: showGrid()">Buscar</button>
                 </div>
+                <div id="conteudoGrid"></div>
 
                 <br>
-                <div class="tbs">
-                    <table id="lista-produtos" class="col-12 tb-b tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%" style="padding-left:0px;">
-                        <thead>
-                            <tr class="text-center">
-                                <th width="10%">ID Pedido</th>
-                                <th width="10%">Vendedor</th>
-                                <th width="30%">Observação</th>
-                                <th width="10%">Data da Venda</th>
-                                <th width="10%">Total do Pedido</th>
-                                <th width="10%">Faturar Pedido</th>
-                                <th width="10%">Detalhe do pedido</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="tb-style text-center" width="5%">05</td>
-                                <td class="tb-style text-center" width="5%">Paulo De Muro</td>
-                                <td class="tb-style text-center" width="20%">Não tínhamos o item no estoque, tive que correr para ir comprar</td>
-                                <td class="tb-style text-center" width="20%">02/11/2020</td>
-                                <td class="tb-style text-center" width="5%">220,00</td>
-                                <td class="tb-style text-center" width="3%"><input type="checkbox" id="myCheck"></td>
-                                <td class="tb-style text-center" width="3%"><button type="button" style=" width: 160px; !important" class="mb-10 mr-10 btn-add btn btn-block float-right" data-toggle="modal" data-target="#novo-Vendedor" data-direction="bottom" onclick="javascript: ajustaTituloModal('Detalhe do Pedido')">Detalhe do Pedido</button></td>
-                            </tr>
-                    </table>
-
-                </div>
                 <div class="col-12">
                     <label class="float-right mg-10 mr-10">
                         <strong>
@@ -99,7 +74,7 @@
 
                 <div class="clearfix"></div>
                 <div class="col-sm-12">
-                    <button type="button" class="mb-10 mr-10 btn-finalizar btn btn-block float-right" style="width: 235px !important; margin-top: 5px ;">Faturar Pedidos Selecionados</button>                   
+                    <button type="button" class="mb-10 mr-10 btn-finalizar btn btn-block float-right" style="width: 235px !important; margin-top: 5px ;">Faturar Pedidos Selecionados</button>
                 </div>
                 <br>
             </div>
@@ -150,120 +125,106 @@
             </div>
         </div>
     </div>
+    @* MODAL DETALHE PEDIDO *@
+    <div class="modal fade bottom" id="detalhe-Pedido" tabindex="-1" role="dialog" aria-labelledby="desativar" aria-hidden="true" novalidate="novalidate" style="display: none;">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Detalhes do Pedido </h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" onclick="javascript: resetaModal()">×</span>
+                    </button>
+                </div>
+                <div id="conteudoModalDetalhes"></div>
+
+            </div>
+        </div>
+    </div>
 </body>
 
 @section scripts {
     <script src="~/Scripts/jquery.datetimepicker.full.min.js"></script>
     <script type="text/javascript">
-        var count = 1;
         $(document).ready(function () {
-            $('#items').live('pageinit', function (event) {
-                $('#additem').click(function () {
-                    //alert("add clicked");
-                    var request = $.ajax({
-                        url: "http://www.furnguy.com/app-pages/additem.php",
-                        type: "POST",
-                        data: { COUNTER: count },
-                        dataType: "html"
-                    });
+            showGrid();
 
-                    request.done(function (html) {
-                        //alert("here");
-                        if (html != '') {
-                            $('#salesitems').append(html).trigger('create');
-                        }
-                    });
+            $.datetimepicker.setLocale('pt-BR');
 
-                    request.fail(function (jqXHR, textStatus) {
-                        alert("Request failed: " + textStatus);
-                    });
-                    count++;
+            jQuery(function () {
+                jQuery('#date_timepicker_start').datetimepicker({
+                    format: 'd/m/Y',
+                    onShow: function (ct) {
+                        this.setOptions({
+                            maxDate: jQuery('#date_timepicker_end').val() ? jQuery('#date_timepicker_end').val() : false
+                        })
+                    },
+                    timepicker: false
+                });
+                jQuery('#date_timepicker_end').datetimepicker({
+                    format: 'd/m/Y',
+                    onShow: function (ct) {
+                        this.setOptions({
+                            minDate: jQuery('#date_timepicker_start').val() ? jQuery('#date_timepicker_start').val() : false
+                        })
+                    },
+                    timepicker: false
                 });
             });
+
+            $(function () {
+                $('.selectpicker').selectpicker();
+            });
+
         });
 
 
-        function deleteItem() {
-            $('table').click(function () {
-                $(this).parent().remove();
-            });
-        };
-        function increaseQty() {
-            var currentVal = parseInt($("#qty").val());
-            if (currentVal != NaN) {
-                $("#qty").val(currentVal + 1);
+        function showGrid() {
+
+            let filtro = {
+                idCliente: $("#idCliente").val(),
+                dataInicio: $("#date_timepicker_start").val(),
+                dataFim: $("#date_timepicker_end").val()
             }
-        };
-        function decreaseQty() {
-            var currentVal = parseInt($("#qty").val());
-            if (currentVal != NaN) {
-                $("#qty").val(currentVal - 1);
+            if (filtro.dataInicio != "" && filtro.dataFim != "") {
+
+                $.ajax({
+                    type: "Post",
+                    url: '/Contrato/Grid',
+                    data: filtro,
+                    processData: true,
+                    async: false,
+                    success: function (data) {
+                        $("#conteudoGrid").html(data);
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                        console.log(XMLHttpRequest);
+                    }
+                });
             }
-        };
+            else {
+                bootbox.alert("Os campos de Data são obrigatórios");
+            }
 
-
-        $(function () {
-            $('.selectpicker').selectpicker();
-        });
-
-
-        $(document).ready(function () {
-            $('#dtVerticalScrollExample').DataTable({
-                "scrollY": "200px",
-                "scrollCollapse": true,
-            });
-            $('.dataTables_length').addClass('bs-select');
-        });
-
-        $(document).ready(function () {
-            $(document).on('keyup', '#userDropdown .bs-searchbox input', function (e) {
-                alert($(this).val());
-            });
-
-            $(document).on('keyup', '#cityDropdown .bs-searchbox input', function (e) {
-                alert($(this).val());
-            });
-        });
-
-        //Script do checkbox
-        function check() {
-            document.getElementById("myCheck").checked = true;
         }
 
-        function uncheck() {
-            document.getElementById("myCheck").checked = false;
+        function showDetalhe(idPedido) {
+            let IdPedido = { IdPedido: idPedido }
+            $.ajax({
+                type: "Post",
+                url: '/HistoricoVenda/Detalhes',
+                data: IdPedido,
+                processData: true,
+                async: false,
+                success: function (data) {
+
+                    $("#conteudoModalDetalhes").html(data);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
         }
-
-
-        //Script do datetimepicker
-        $.datetimepicker.setLocale('pt-BR');
-
-        jQuery(function () {
-            jQuery('#date_timepicker_start').datetimepicker({
-                format: 'd/m/Y',
-                onShow: function (ct) {
-                    this.setOptions({
-                        maxDate: jQuery('#date_timepicker_end').val() ? jQuery('#date_timepicker_end').val() : false
-                    })
-                },
-                timepicker: false
-            });
-            jQuery('#date_timepicker_end').datetimepicker({
-                format: 'd/m/Y',
-                onShow: function (ct) {
-                    this.setOptions({
-                        minDate: jQuery('#date_timepicker_start').val() ? jQuery('#date_timepicker_start').val() : false
-                    })
-                },
-                timepicker: false
-            });
-        });
-
-        //modal
-            type="text/javascript">
-            function ajustaTituloModal(texto) {
-                $(".modal-title").text(texto)
-            }
     </script>
 }
 

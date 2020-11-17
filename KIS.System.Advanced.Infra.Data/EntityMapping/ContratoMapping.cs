@@ -18,6 +18,7 @@ namespace KIS.System.Advanced.Infra.Data.EntityConfig
             Property(e => e.ID_CLIENTE_CONTRATO).IsRequired();
             Property(e => e.FATURADO_CONTRATO).IsRequired();
             Property(e => e.ATIVO).IsRequired();
+            Property(e => e.DATA_FATURAMENTO);
         }
     }
 }

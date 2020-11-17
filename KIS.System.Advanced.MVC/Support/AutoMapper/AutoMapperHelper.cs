@@ -55,6 +55,12 @@ namespace KIS.System.Advanced.MVC.Support
             MappingHistoricoVenda(cfg);
             MappingTipoCancelamento(cfg);
             MappingPedidoCancelamento(cfg);
+            MappingContrato(cfg);
+        }
+
+        private static void MappingContrato(IMapperConfigurationExpression cfg)
+        {
+            cfg.CreateMap<ContratoDto, ContratoVM>();
         }
 
         private static void MappingPedidoCancelamento(IMapperConfigurationExpression cfg)

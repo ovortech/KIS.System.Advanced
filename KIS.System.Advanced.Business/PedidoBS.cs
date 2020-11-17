@@ -1,4 +1,5 @@
-﻿using KIS.System.Advanced.Domain.Entities;
+﻿using KIS.System.Advanced.Domain.Dto;
+using KIS.System.Advanced.Domain.Entities;
 using KIS.System.Advanced.Domain.Interfaces;
 using KIS.System.Advanced.Infra.Data.Repositories;
 using System;
@@ -72,6 +73,19 @@ namespace KIS.System.Advanced.Business
             catch (Exception ex)
             {
                 throw new Exception($"Erro ao salvar Pedido: {ex.Message}.");
+            }
+        }
+
+        public List<ItemPedidoDto> DetalhePedidoDto(int idPedido)
+        {
+            try
+            {
+                HistoricoVendaBS historicoVendaBS = new HistoricoVendaBS();
+            return historicoVendaBS.GetHistoricoVendaItensPedidoDto(idPedido);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao buscar os detalhes do Pedido: {ex.Message}.");
             }
         }
 

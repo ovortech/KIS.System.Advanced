@@ -1,4 +1,5 @@
-﻿using KIS.System.Advanced.Domain.Entities;
+﻿using KIS.System.Advanced.Domain.Dto;
+using KIS.System.Advanced.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace KIS.System.Advanced.Services.Interfaces
     public interface IPedidoService
     {
         List<Pedido> GetAll();
+        List<ItemPedidoDto> DetalhePedidoDto(int IdPedido);
         void Save(Pedido pedido);
         Pedido Get(int idPedido);
         void Delete(int idPedido);

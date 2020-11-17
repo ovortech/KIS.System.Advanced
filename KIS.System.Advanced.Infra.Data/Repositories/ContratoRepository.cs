@@ -14,6 +14,35 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
         {
 
         }
-      
+
+        public List<ContratoDto> GetContratoDto(int IdCliente, DateTime dataInicio, DateTime dataFim)
+        {
+            dataFim = dataFim.AddDays(1).AddSeconds(-1);
+            List<ContratoDto> contratoDtos = new List<ContratoDto>();
+            var result = from contrato in Db.Contratos
+                         join pedido in Db.Pedidos on contrato.ID_PEDIDO_CONTRATO equals pedido.ID_PEDIDO
+                         join vendedor in Db.Vendedores on pedido.ID_VENDEDOR equals vendedor.ID_VENDEDOR
+                         join cliente in Db.Clientes on pedido.ID_CLIENTE equals cliente.ID_CLIENTE
+                         join cancelado in Db.PedidoCancelamentos on pedido.ID_PEDIDO equals cancelado.ID_PEDIDO into gjCancelado
+                         from subCancelado in gjCancelado.DefaultIfEmpty()
+                         where pedido.ID_CLIENTE == IdCliente &&
+                         (pedido.DATA_REG_PEDIDO >= dataInicio && pedido.DATA_REG_PEDIDO <= dataFim) &&
+                         subCancelado == null
+                         select new ContratoDto
+                         {
+                               IdContrato = contrato.ID_CONTRATO,
+                               IdPedido = contrato.ID_PEDIDO_CONTRATO,
+                                IdVendedor = pedido.ID_VENDEDOR,
+                                NomeVendedor = vendedor.NOME_VENDEDOR,
+                                NomeCliente = cliente.NOME_CLIENTE,
+                                Observacao = pedido.OBS_PEDIDO,
+                                DataVenda = pedido.DATA_REG_PEDIDO,
+                                TotalPedido = pedido.TOTAL_PEDIDO,
+                                Faturado = pedido.FATURADO_PEDIDO,
+                                DataFaturamento = contrato.DATA_FATURAMENTO
+                         };
+            contratoDtos = result.ToList();
+            return contratoDtos;
+        }
     }
 }

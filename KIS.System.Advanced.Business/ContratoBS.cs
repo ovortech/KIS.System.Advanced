@@ -1,4 +1,5 @@
-﻿using KIS.System.Advanced.Domain.Entities;
+﻿using KIS.System.Advanced.Domain.Dto;
+using KIS.System.Advanced.Domain.Entities;
 using KIS.System.Advanced.Domain.Interfaces;
 using KIS.System.Advanced.Infra.Data.Repositories;
 using System;
@@ -38,6 +39,20 @@ namespace KIS.System.Advanced.Business
                 throw new Exception($"Erro ao pesquisar Contratoes: {ex.Message}.");
             }
         }
+
+        public List<ContratoDto> GetContratoDto(int IdCliente, DateTime dataInicio, DateTime dataFim)
+        {
+
+            try
+            {
+                return dbContrato.GetContratoDto(IdCliente, dataInicio, dataFim);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar Contratoes: {ex.Message}.");
+            }
+        }
+
         public List<Contrato> GetAllInactive()
         {
             try

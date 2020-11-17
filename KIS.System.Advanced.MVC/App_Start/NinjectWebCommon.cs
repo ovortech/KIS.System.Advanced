@@ -74,6 +74,7 @@ namespace KIS.System.Advanced.MVC.App_Start
             kernel.Bind<IItemPedidoService>().To<ItemPedidoService>();
             kernel.Bind<IFormaPagamentoService>().To<FormaPagamentoService>();
             kernel.Bind<IHistoricoVendaService>().To<HistoricoVendaService>();
+            kernel.Bind<IContratoService>().To<ContratoService>();
         }
     }
 }

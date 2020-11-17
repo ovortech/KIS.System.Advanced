@@ -1,4 +1,5 @@
 ﻿using KIS.System.Advanced.Business;
+using KIS.System.Advanced.Domain.Dto;
 using KIS.System.Advanced.Domain.Entities;
 using KIS.System.Advanced.Services.Interfaces;
 using System;
@@ -47,6 +48,11 @@ namespace KIS.System.Advanced.Services
         public int SaveNewOrder(Pedido pedido, List<ItemPedido> itensPedido, List<FormaPg> formasPagamento, bool cancelar = false)
         {
             return _pedidoBS.SaveNewOrder(pedido, itensPedido, formasPagamento, cancelar);
+        }
+
+        public List<ItemPedidoDto> DetalhePedidoDto(int IdPedido)
+        {
+            return _pedidoBS.DetalhePedidoDto(IdPedido);
         }
     }
 }
