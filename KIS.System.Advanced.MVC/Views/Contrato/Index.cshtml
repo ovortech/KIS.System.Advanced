@@ -65,11 +65,14 @@
                         <strong>
                             Quantidade de pedidos selecionados: &nbsp;
                         </strong>
-                        <input class="mr-10 float-right wd-150 mb-10 form-control btn-disable" type="text" placeholder="">
+                        <input class="mr-10 float-right wd-150 mb-10 form-control btn-disable qtdPedido" type="text" placeholder="">
                 </div>
                 <div class="clearfix"></div>
                 <div class="col-12">
-                    <label class="float-right mg-10 mr-10"><strong>Total dos Pedidos Faturados no Período: &nbsp;</strong> <input class="mr-10 float-right wd-150 text-center mb-10 form-control btn-disable" type="text" placeholder=""></label>
+                    <label class="float-right mg-10 mr-10">
+                        <strong>Total dos Pedidos Faturados no Período: &nbsp;</strong>
+                        <input class="mr-10 float-right wd-150 text-center mb-10 form-control btn-disable totalPedido" type="text" placeholder="">
+                    </label>
                 </div>
 
                 <div class="clearfix"></div>
@@ -132,13 +135,33 @@
             $(function () {
                 $('.selectpicker').selectpicker();
             });
-            caculaTodos();
+            totalFatura();
         });
 
-        function caculaTodos() {            
+        function totalFatura() {
             let total = 0;
+            let qtd = 0;
             for (var i = 0; i < linhas.length; i++) {
-               
+                let idPedido = idPedidoLinha(linhas[i])
+                if (!temDataFaturamento(idPedido) && faturarLinhas(idPedido)) {
+                    qtd++
+                    let totalLinha = totalPedidoLinha(idPedido)
+                    total = total + totalLinha;
+                }
+            }
+            $(".qtdPedido").val(qtd)
+            $(".totalPedido").val(parseFloat(total).toFixed(2))
+        }
+
+
+        function desabilitaPedidosFaturados() {
+            for (var i = 0; i < linhas.length; i++) {
+                let idPedido = idPedidoLinha(linhas[i])
+                let isPago = temDataFaturamento(idPedido);
+                if (isPago) {
+                    $(linhas[i]).attr("style", "background-color: #FFB6C1")
+                    $(linhas[i]).find("td input[type=checkbox]").attr('disabled', true)
+                }
             }
         }
 
@@ -147,11 +170,15 @@
         }
 
         function totalPedidoLinha(idPedido) {
-            return $(`tr#linha_${idPedido} td.pedido`).html()
+            return parseFloat($(`tr#linha_${idPedido} td.totalPedido`).html().replace(',', '.')).toFixed(2)
         }
 
         function temDataFaturamento(idPedido) {
             return $(`tr#linha_${idPedido} td input.DataPg`).val() != ""
+        }
+
+        function faturarLinhas(idPedido) {
+            return $(`tr#linha_${idPedido} td input.Pagar`).prop("checked");
         }
 
         function showGrid() {
@@ -172,7 +199,8 @@
                     async: false,
                     success: function (data) {
                         $("#conteudoGrid").html(data);
-                        linhas = "#lista-contrato tr.linhas";
+                        linhas = $("#lista-contrato tr.linhas");
+                        desabilitaPedidosFaturados()
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
 
