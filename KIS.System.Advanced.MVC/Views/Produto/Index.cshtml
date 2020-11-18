@@ -93,8 +93,13 @@
 </body>
 @section scripts {
     <script type="text/javascript">
-
-        recarregaMascaras();
+        $(document).ready(function () {
+            $(".inputNumerico").each(function () {
+                let valor = parseFloat($(this).text().replace(',', '.'));
+                let valorFormatado = imprimeFormatadoSemSimbolo(valor);
+                $(this).text(valorFormatado);
+            });
+        });
 
         $("#inputPesquisa").on("keyup", function () {
             let value = $(this).val().toLowerCase();
@@ -143,7 +148,5 @@
             $("#isServico").val('true');
             $("#valorProduto").val('')
         }
-        recarregaMascaras();
-
     </script>
 }
