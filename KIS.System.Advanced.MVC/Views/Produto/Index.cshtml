@@ -44,11 +44,11 @@
                     <table id="lista-produtos" class=" tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%">
                         <thead>
                             <tr>
-                                <th></th>
-                                <th>Nome Produto</th>
-                                <th>É um Serviço?</th>
-                                <th>Valor Unitário</th>
-                                <th></th>
+                                <th width="0%"></th>
+                                <th width="25%">Nome Produto</th>
+                                <th width="10%">É um Serviço?</th>
+                                <th width="10%">Valor Unitário</th>
+                                <th width="30%"></th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -58,11 +58,12 @@
                             {
                                 var servico = produto.IsServico ? "Sim" : "Não";
                                 <tr>
-                                    <td class="tb-style" width="10%"><input type="hidden" value="@produto.IdProduto" /></td>
+                                    <td class="tb-style" width="0%"><input type="hidden" value="@produto.IdProduto" /></td>
                                     <td class="tb-style" width="25%">@produto.NomeProduto</td>
                                     <td class="tb-style" width="10%">@servico</td>
-                                    <td class="tb-style maskMoney" width="10%">@produto.ValorProduto</td>
-                                    <td class="tb-style" width="40%"></td>
+                                    <td class="tb-style inputNumerico" width="10%">@Math.Round(produto.ValorProduto, 2).ToString().Replace(".", ",")</td>
+
+                                    <td class="tb-style" width="30%"></td>
                                     <td><a data-toggle="modal" data-target="#novo-produto" data-direction="bottom" onclick="javascript: editarProduto(@produto.IdProduto)" class="btn btn-primary">Editar</a></td>
                                     <td><a onclick="javascript: excluirProduto(@produto.IdProduto)" class="btn btn-danger">Excluir</a></td>
                                 </tr>
@@ -92,7 +93,9 @@
 </body>
 @section scripts {
     <script type="text/javascript">
-        
+
+        recarregaMascaras();
+
         $("#inputPesquisa").on("keyup", function () {
             let value = $(this).val().toLowerCase();
             $("#lista-produtos tbody tr").filter(function () {
@@ -106,7 +109,7 @@
                 processData: true,
                 async: false,
                 url: "/Produto/AddOrEdit/" + idProduto,
-                success: function (resp) {                   
+                success: function (resp) {
                     $("#conteudoModal").html(resp);
                 },
                 error: function (err) {
@@ -115,12 +118,12 @@
             })
         }
 
-        function addProduto(id){
+        function addProduto(id) {
             $(".modal-title").text('Novo Produto');
             addOuEditarProduto(id);
         }
 
-        function editarProduto(id){
+        function editarProduto(id) {
             $(".modal-title").text('Editar Produto');
             addOuEditarProduto(id);
         }
@@ -140,5 +143,7 @@
             $("#isServico").val('true');
             $("#valorProduto").val('')
         }
+        recarregaMascaras();
+
     </script>
 }
