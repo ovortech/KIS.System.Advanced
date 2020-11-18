@@ -1,14 +1,7 @@
 ﻿@model KIS.System.Advanced.MVC.ViewModels.ProdutoVM
 
 <form method="POST" id="form-produto" autocomplete="off">
-    <div class="row">
-        <div class="col-md-3">
-            <div class="form-group">
-                <label class="control-label text-center" for=""></label>
-                <input type="hidden" id="idProduto" value="@Model.IdProduto">
-            </div>
-        </div>
-    </div>
+    <input type="hidden" id="idProduto" value="@Model.IdProduto">
     <div class="form-group">
         <label class="control-label" for="nomeProduto">Nome Produto</label>
         <input type="text" value="@Model.NomeProduto" autocomplete="off" class="form-control col-12" id="nomeProduto" name="nomeProduto" placeholder="Digite o nome do produto">
@@ -19,8 +12,24 @@
             <div class="form-group">
                 <label for="isServico" class="">É um serviço?</label>
                 <select class="form-control col-5 text-center" id="isServico" name="isServico">
-                    <option value="true">Sim</option>
-                    <option value="false">Não</option>
+                    @{
+                        if (Model.IsServico)
+                        {
+                            <option value="true" selected>Sim</option>
+                        }
+                        else
+                        {
+                            <option value="true">Sim</option>
+                        }
+                        if (!Model.IsServico)
+                        {
+                            <option value="false" selected>Não</option>
+                        }
+                        else
+                        {
+                            <option value="false">Não</option>
+                        }
+                    }
                 </select>
             </div>
         </div>

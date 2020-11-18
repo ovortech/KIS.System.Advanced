@@ -49,8 +49,8 @@ namespace KIS.System.Advanced.MVC.Controllers
             {
                 if (ModelState.IsValid)
                 {
-
                     var produto = AutoMapper.Mapper.Map<Produto>(produtoVM);
+                    produto.ATIVO = true;
                     if (produto.ID_PRODUTO > 0)
                         _produtoService.Update(produto);
                     else
