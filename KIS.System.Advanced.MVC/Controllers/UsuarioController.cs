@@ -43,15 +43,25 @@ namespace KIS.System.Advanced.MVC.Controllers
         [CustomAuthorize(IsPermission = AcessRole.ADMIN)]
         public ActionResult Save(UsuarioVM usuarioVM)
         {
+
             try
             {
-                var usuario = AutoMapper.Mapper.Map<Usuario>(usuarioVM);
-                usuario.SENHA_USUARIO = string.Empty;
-                if (usuario.ID_USUARIO > 0)
-                    _usuarioService.Update(usuario);
+                if (ModelState.IsValid)
+                {
+                    var usuario = AutoMapper.Mapper.Map<Usuario>(usuarioVM);
+                    usuario.ATIVO = true;
+                    usuario.SENHA_USUARIO = string.Empty;
+                    if (usuario.ID_USUARIO > 0)
+                        _usuarioService.Update(usuario);
+                    else
+                        _usuarioService.Save(usuario);
+
+                    return Json(new { isValid = true });
+                }
                 else
-                    _usuarioService.Save(usuario);
-                return RedirectToAction("Index");
+                {
+                    return Json(new { isValid = false, model = usuarioVM });
+                }
             }
             catch (Exception)
             {
@@ -62,11 +72,16 @@ namespace KIS.System.Advanced.MVC.Controllers
         [CustomAuthorize(IsPermission = AcessRole.ADMIN)]
         public PartialViewResult AddOrEdit(int id)
         {
-            var result = new UsuarioVM();
-            return PartialView(result);
+            if (id == 0)
+                return PartialView(new UsuarioVM());
+            else
+            {
+                var usuario = _usuarioService.Get(id);
+                var usuarioVM = AutoMapper.Mapper.Map<UsuarioVM>(usuario);
+                return PartialView(usuarioVM);
+            }
         }
 
-        // POST: Usuario/Delete/5
         [HttpPost]
         [CustomAuthorize(IsPermission = AcessRole.ADMIN)]
         public ActionResult Delete(int idUsuario)

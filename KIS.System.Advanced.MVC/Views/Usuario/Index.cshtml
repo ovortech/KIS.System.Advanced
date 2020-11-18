@@ -33,11 +33,10 @@
             <div class="col-md-12">
                 <div class="" id="box_configs">
                     <div>
-                        <a href="#" class="btn btn-finalizar" data-toggle="modal" data-target="#novo-usuario" data-direction="bottom" onclick="javascript: ajustaTituloModal('Novo Usuário')">Adicionar Novo Usuário</a>
+                        <a href="#" class="btn btn-finalizar" data-toggle="modal" data-target="#novo-usuario" data-direction="bottom" onclick="javascript: addUsuario(0)">Adicionar Novo Usuário</a>
                         <nav class="navbar-light bg-light float-right">
                             <form class="form-inline">
                                 <input class="form-control mr-sm-2" id="inputPesquisa" type="search" placeholder="Pesquisar por..." aria-label="Search">
-                                @*<button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>*@
                             </form>
                         </nav>
                     </div>
@@ -46,11 +45,11 @@
                     <table id="lista-usuarios" class=" tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%">
                         <thead>
                             <tr>
-                                <th>Login</th>
-                                <th>Nome</th>
-                                <th>E-mail</th>
-                                <th>Cargo</th>
-                                <th></th>
+                                <th width="10%">Login</th>
+                                <th width="20%">Nome</th>
+                                <th width="20%">E-mail</th>
+                                <th width="10%">Cargo</th>
+                                <th width="30%"></th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -85,51 +84,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="form-usuario" autocomplete="off" novalidate="novalidate">
-                        <div class="form-group">
-                            <label class="control-label" for="nome">Nome</label>
-                            <input type="hidden" id="idUsuario">
-                            <input type="text" autocomplete="off" class="form-control col-10" id="nomeUsuario" name="nome" placeholder="Digite o Nome do Usuário">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="email">E-mail</label>
-                            <input type="text" autocomplete="off" class="form-control col-10" id="email" name="email" placeholder="seuemail@email.com">
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label" for="login">Login</label>
-                                    <input type="text" autocomplete="off" class="form-control col-12" id="login" name="login" placeholder="Digite o Login" novalidate="novalidate">
-                                </div>
-                            </div>
-                            @*<div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="control-label" for="senha">Senha</label>
-                                        <input type="password" autocomplete="off" class="form-control" id="senha" name="senha" placeholder="Digite a senha" onkeyup="checkPasswordStrong(this)">
-                                        <span class="help-password" style="color: orange;">Senha Fraca.</span>
-                                    </div>
-                                </div>*@
-                        </div>
-                        <div class="form-group">
-                            <label for="funcaoUsuario">Função</label>
-                            <select class="form-control col-4" id="funcaoUsuario" name="funcaoUsuario">
-                                <option value="1">Gerente</option>
-                                <option value="2">Vendedor</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="tipoAcesso">Tipo Acesso</label>
-                            <select class="form-control col-4" id="tipoAcesso" name="tipoAcesso">
-                                <option value="1">Administrador</option>
-                                <option value="2">Vendas</option>
-                            </select>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger float-left" data-dismiss="modal" onclick="javascript: resetaModal()">Fechar</button>
-                            <button type="button" id="btnSalvarUsuario" class="btn btn-finalizar" data-dismiss="modal" aria-label="Close" style="width: 70px;">Salvar</button>
-                        </div>
-                    </form>
+                    <div id="conteudoModal"></div>
                 </div>
             </div>
         </div>
@@ -137,41 +92,41 @@
 </body>
 @section scripts {
     <script type="text/javascript"> 
-        $("#btnSalvarUsuario").click(() => {
-            let usuario = {
-                IdUsuario: $("#idUsuario").val(),
-                login: $("#login").val(),
-                Nome: $("#nomeUsuario").val(),
-                Email: $("#email").val(),
-                Funcao: $("#funcaoUsuario").val(),
-                TipoAcessos: $("#tipoAcesso").val()
-            };
-            callActionPost("Usuario", "Save", usuario, 'Usuario/Index');
-        });
+
+        function ajustaTituloModal(texto) {
+            $(".modal-title").text(texto);
+        }
 
         $("#inputPesquisa").on("keyup", function () {
             let value = $(this).val().toLowerCase();
             $("#lista-usuarios tbody tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
             });
         });
 
-        function editarUsuario(idUsuario) {
-            let data = { idUsuario: `${idUsuario}` };
-            let usuario = callActionGet("Usuario", "Get", data);
-            $("#idUsuario").val(usuario.IdUsuario);
-            $("#login").val(usuario.Login);
-            //$("#senha").val(usuario.Senha);
-            $("#nomeUsuario").val(usuario.Nome);
-            $("#email").val(usuario.Email);
-            $("#funcaoUsuario").val(usuario.Funcao);
-            $("#tipoAcesso").val(usuario.TipoAcessos);
-
-            ajustaTituloModal("Editar Usuario");
+        function addOuEditarUsuario(idUsuario) {
+            $.ajax({
+                type: "GET",
+                processData: true,
+                async: false,
+                url: "/Usuario/AddOrEdit/" + idUsuario,
+                success: function (resp) {
+                    $("#conteudoModal").html(resp);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
         }
 
-        function ajustaTituloModal(texto) {
-            $(".modal-title").text(texto)
+        function addUsuario(id) {
+            $(".modal-title").text('Novo Usuario');
+            addOuEditarUsuario(id);
+        }
+
+        function editarUsuario(id) {
+            $(".modal-title").text('Editar Usuario');
+            addOuEditarUsuario(id);
         }
 
         function excluirUsuario(idUsuario) {
@@ -186,7 +141,6 @@
         function resetaModal() {
             $("#idUsuario").val('0');
             $("#login").val('');
-            //$("#senha").val('');
             $("#nomeUsuario").val('');
             $("#email").val('')
             $("#funcaoUsuario").val('1');
