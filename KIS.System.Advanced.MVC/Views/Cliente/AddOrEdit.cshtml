@@ -8,6 +8,16 @@
         <input type="text" value="@Model.Nome" autocomplete="off" class="form-control col-12" id="nomeCliente" name="nomeCliente" placeholder="Digite o nome do cliente">
         @Html.ValidationMessageFor(model => model.Nome)
     </div>
+    <div class="form-group">
+        <label class="control-label" for="telefoneCliente">Telefone</label>
+        <input type="text" value="@Model.Telefone" autocomplete="off" class="form-control col-12" id="telefoneCliente" name="telefoneCliente" placeholder="Digite o telefone do cliente">
+        @Html.ValidationMessageFor(model => model.Telefone)
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="nomeCliente">Endereço</label>
+        <input type="text" value="@Model.Endereco" autocomplete="off" class="form-control col-12" id="enderecoCliente" name="enderecoCliente" placeholder="Digite o endereço do cliente">
+        @Html.ValidationMessageFor(model => model.Endereco)
+    </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-primary btn-danger float-left" data-dismiss="modal" onclick="javascript: resetaModal()">Fechar</button>
         <button type="button" id="btnSalvarCliente" class="btn btn-finalizar btn-primary" style=" width: 70px;">Salvar</button>
@@ -16,10 +26,26 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
+
+        $("#telefoneCliente").inputmask({
+            mask: ["(99) 9999-9999", "(99) X9999-9999"],
+            definitions: {
+                "X": { validator: "9" }
+            }
+        });
+
         $("#btnSalvarCliente").click(() => {
+            let numeroTelefone = $("#telefoneCliente").val().replace(/[^0-9\.]+/g, '');
+            if (numeroTelefone.length < 10) {
+                bootbox.alert("Preencha o telefone corretamente.")
+                return;
+            }
+
             let cliente = {
                 Id: $("#idCliente").val(),
                 Nome: $("#nomeCliente").val(),
+                Telefone: numeroTelefone,
+                Endereco: $("#enderecoCliente").val(),
             };
             salvaModel('Cliente', 'Save', cliente)
         });

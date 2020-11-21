@@ -225,13 +225,15 @@ namespace KIS.System.Advanced.MVC.Support
         {
             cfg.CreateMap<ClienteVM, Cliente>()
                 .ForMember(destinationMember: vm => vm.ID_CLIENTE, memberOptions: map => map.MapFrom(sourceMember: s => s.Id))
+                .ForMember(destinationMember: vm => vm.ENDERECO_CLIENTE, memberOptions: map => map.MapFrom(sourceMember: s => s.Endereco))
+                .ForMember(destinationMember: vm => vm.TELEFONE_CLIENTE, memberOptions: map => map.MapFrom(sourceMember: s => s.Telefone))
                 .ForMember(destinationMember: vm => vm.NOME_CLIENTE, memberOptions: map => map.MapFrom(sourceMember: s => s.Nome));
 
             cfg.CreateMap<Cliente, ClienteVM>()
                 .ForMember(destinationMember: vm => vm.Id, memberOptions: map => map.MapFrom(sourceMember: s => s.ID_CLIENTE))
+                .ForMember(destinationMember: vm => vm.Endereco, memberOptions: map => map.MapFrom(sourceMember: s => s.ENDERECO_CLIENTE))
+                .ForMember(destinationMember: vm => vm.Telefone, memberOptions: map => map.MapFrom(sourceMember: s => s.TELEFONE_CLIENTE))
                 .ForMember(destinationMember: vm => vm.Nome, memberOptions: map => map.MapFrom(sourceMember: s => s.NOME_CLIENTE));
         }
-
-        //clientes
     }
 }
