@@ -38,7 +38,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label class="control-label" for="valorProduto">Valor Unitário</label>
-                <input type="text" value="@Model.ValorProduto" autocomplete="off" class="form-control col-5 text-center" id="valorProduto" name="valorProduto" placeholder="Digite o Valor Unitário" novalidate="novalidate">
+                <input type="text" value="@Math.Round(Model.ValorProduto, 2).ToString().Replace(".", ",")" autocomplete="off" class="form-control col-5 text-center inputNumerico" id="valorProduto" name="valorProduto" placeholder="Digite o Valor Unitário" novalidate="novalidate">
                 @Html.ValidationMessageFor(model => model.ValorProduto)
             </div>
         </div>
@@ -52,12 +52,22 @@
 <script type="text/javascript">
    
     $(document).ready(function () {
+
+        $(".inputNumerico").each(function () {
+            let valor = parseFloat($(this).text().replace(',', '.'));
+            let valorFormatado = imprimeFormatadoSemSimbolo(valor);
+            $(this).text(valorFormatado);
+        });
+
+        recarregaMascaras();
+
+
         $("#btnSalvarProduto").click(() => {
             let produto = {
                 IdProduto: $("#idProduto").val(),
                 NomeProduto: $("#nomeProduto").val(),
                 IsServico: $("#isServico").val(),
-                ValorProduto: $("#valorProduto").val()
+                ValorProduto: parseFloat($("#valorProduto").val().replace(',', '.'))
             };
             salvaModel('Produto', 'Save', produto)
         });
