@@ -56,9 +56,10 @@
                     <label class="float-left mg-10 mb-10">&nbsp; &nbsp;Fim de exibição:</label>
                     <input type="text" class="form-control text-center col-1" id="date_timepicker_end" value="@Model.DataFim.ParseDateTimeToBr()" />
                     <button type="button" class="float-left btn-buscar" onclick="javascript: showGrid()">Buscar</button>
-                    <input class="form-control mr-sm-2" id="inputPesquisa" type="search" placeholder="Pesquisar por..." aria-label="Search">
                 </div>
-                <br>
+                <div style="display: flow-root">
+                    <input class="form-control mr-sm-2" id="inputPesquisa" type="search" placeholder="Pesquisar por..." aria-label="Search" style="float: right;">
+                </div>                
                 <div id="conteudoGrid"></div>
 
                 <div class="col-12">
