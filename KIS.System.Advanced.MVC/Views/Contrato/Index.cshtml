@@ -52,9 +52,9 @@
                 </div>
                 <div class="row" id="box_configs">
                     <label class="float-left mg-10 mb-10" style="margin-left: 15px;">Ínicio de exibição:</label>
-                    <input type="text" class="form-control text-center col-1" id="date_timepicker_start" value="@Model.DataInicio.ParseDateTimeToBr()" />
+                    <input type="text" class="form-control text-center col-1" id="date_timepicker_start" value="@Model.DataInicio.ParseDateTimeToBr()" onblur="javascript: definitionOptionDatepickerEnd()" />
                     <label class="float-left mg-10 mb-10">&nbsp; &nbsp;Fim de exibição:</label>
-                    <input type="text" class="form-control text-center col-1" id="date_timepicker_end" value="@Model.DataFim.ParseDateTimeToBr()" />
+                    <input type="text" class="form-control text-center col-1" id="date_timepicker_end" value="@Model.DataFim.ParseDateTimeToBr()" onblur="javascript: definitionOptionDatepickerStart()" />
                     <button type="button" class="float-left btn-buscar" onclick="javascript: showGrid()">Buscar</button>
                 </div>
                 <div style="display: flow-root">
@@ -148,6 +148,16 @@
             totalFatura();
         });
 
+        function definitionOpdtionDatepickerStart() {
+            let dtFinal = jQuery('#date_timepicker_end').val()
+            $('#date_timepicker_start').datepicker('option', 'maxDate', new Date(dtFinal));
+        }
+
+        function definitionOpdtionDatepickerEnd() {
+            let dtInicial = jQuery('#date_timepicker_start').val()
+            $('#date_timepicker_end').datepicker('option', 'minDate', new Date(dtInicial));
+        }
+
         function totalFatura() {
             let total = 0;
             let qtd = 0;
@@ -180,7 +190,7 @@
         }
 
         function totalPedidoLinha(idPedido) {
-            return parseFloat($(`tr#linha_${idPedido} td.totalPedido`).html().replace(',', '.')).toFixed(2)
+            return parseFloat($(`tr#linha_${idPedido} td.totalPedido`).html()).toFixed(2) * 1
         }
 
         function temDataFaturamento(idPedido) {
@@ -211,6 +221,8 @@
                         $("#conteudoGrid").html(data);
                         linhas = $("#lista-contrato tr.linhas");
                         desabilitaPedidosFaturados()
+                        $(".qtdPedido").val(0)
+                        $(".totalPedido").val(parseFloat(0).toFixed(2))
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
 
