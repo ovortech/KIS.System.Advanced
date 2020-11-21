@@ -8,5 +8,7 @@ namespace KIS.System.Advanced.MVC.ViewModels
         [Required]
         [Display(Name = "Nome Cliente")]
         public string Nome { get; set; }
+        public string Endereco { get; set; }
+        public string Telefone { get; set; }
     }
 }

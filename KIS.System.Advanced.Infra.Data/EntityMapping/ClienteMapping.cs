@@ -14,7 +14,9 @@ namespace KIS.System.Advanced.Infra.Data.EntityConfig
         {
             ToTable("CLIENTE");
             HasKey(e => e.ID_CLIENTE);
-            Property(e => e.NOME_CLIENTE).IsRequired();  // IsRequired() não permitir nulo
+            Property(e => e.NOME_CLIENTE).IsRequired();
+            Property(e => e.ENDERECO_CLIENTE);
+            Property(e => e.TELEFONE_CLIENTE);
             Property(e => e.ATIVO).IsRequired();
         }
     }
