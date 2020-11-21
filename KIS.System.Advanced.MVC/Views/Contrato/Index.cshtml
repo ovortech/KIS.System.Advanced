@@ -41,9 +41,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="" id="box_configs col-md-12">
-                    <label class="float-left mg-10 mb-10">Selecione o Vendedor:   </label>
+                    <label class="float-left mg-10 mb-10">Selecione o cliente:   </label>
                     <select id="idCliente" class="mb-10 browser-default custom-select col-3">
-                        <option selected value="0">Selecione o vendedor</option>
+                        <option selected value="0">Selecione o cliente</option>
                         @foreach (var cliente in Model.Clientes)
                         {
                             <option value="@cliente.Id">@cliente.Nome</option>
@@ -56,6 +56,7 @@
                     <label class="float-left mg-10 mb-10">&nbsp; &nbsp;Fim de exibição:</label>
                     <input type="text" class="form-control text-center col-1" id="date_timepicker_end" value="@Model.DataFim.ParseDateTimeToBr()" />
                     <button type="button" class="float-left btn-buscar" onclick="javascript: showGrid()">Buscar</button>
+                    <input class="form-control mr-sm-2" id="inputPesquisa" type="search" placeholder="Pesquisar por..." aria-label="Search">
                 </div>
                 <br>
                 <div id="conteudoGrid"></div>
@@ -66,6 +67,7 @@
                             Quantidade de pedidos selecionados: &nbsp;
                         </strong>
                         <input class="mr-10 float-right wd-150 mb-10 form-control btn-disable qtdPedido" type="text" placeholder="">
+                    </label>
                 </div>
                 <div class="clearfix"></div>
                 <div class="col-12">
@@ -105,6 +107,13 @@
     <script src="~/Scripts/jquery.datetimepicker.full.min.js"></script>
     <script type="text/javascript">
         let linhas = "";
+
+        $("#inputPesquisa").on("keyup", function () {
+            let value = $(this).val().toLowerCase();
+            $("#conteudoGrid tbody tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
 
         $(document).ready(function () {
             showGrid();
