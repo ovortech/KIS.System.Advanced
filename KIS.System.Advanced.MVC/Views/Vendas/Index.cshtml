@@ -286,7 +286,7 @@
             FormaPGVM.TipoPGVM = {};
             FormaPGVM.TipoPGVM.Id = $(`#formaPagamento1`).val();
             FormaPGVM.TipoPGVM.Nome = $(`#formaPagamento1 :selected`).text();
-            FormaPGVM.ValorPG = $(`#valorRecebidoFormaPagamento1`).val();
+            FormaPGVM.ValorPG = valorRecebidoA();
             pedido.FormaPGs.push(FormaPGVM)
 
             if (valorRecebidoA() !== valorTotalPedido()) {
@@ -294,7 +294,7 @@
                 FormaPGVM.TipoPGVM = {};
                 FormaPGVM.TipoPGVM.Id = $(`#formaPagamento2`).val();
                 FormaPGVM.TipoPGVM.Nome = $(`#formaPagamento2 :selected`).text();
-                FormaPGVM.ValorPG = $(`#valorRecebidoFormaPagamento2`).val();
+                FormaPGVM.ValorPG = valorRecebidoB();
                 pedido.FormaPGs.push(FormaPGVM)
             }
 
