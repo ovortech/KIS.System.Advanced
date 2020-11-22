@@ -44,5 +44,29 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
             contratoDtos = result.ToList();
             return contratoDtos;
         }
+        public void UpdateFaturamento(Contrato Contrato)
+        {
+            using (var tran = Db.Database.BeginTransaction())
+            {
+                try
+                {
+
+
+                    var contratoBase = GetById(Contrato.ID_CONTRATO);
+                    contratoBase.FATURADO_CONTRATO = Contrato.FATURADO_CONTRATO;
+                    contratoBase.DATA_FATURAMENTO = Contrato.DATA_FATURAMENTO;
+                    Update(contratoBase);
+                    PedidoRepository pedidoRepository = new PedidoRepository(Db);
+                    pedidoRepository.UpdateFaturamento(Contrato.ID_PEDIDO_CONTRATO, Contrato.FATURADO_CONTRATO);
+                    tran.Commit();
+
+                }
+                catch (Exception ex)
+                {
+                    tran.Rollback();
+                    throw new Exception($"Erro ao atualizar os dados do Contrato: {ex.Message}.");
+                }
+            }
+        }
     }
 }

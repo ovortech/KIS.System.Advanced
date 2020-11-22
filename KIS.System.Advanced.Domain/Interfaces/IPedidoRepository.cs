@@ -11,5 +11,6 @@ namespace KIS.System.Advanced.Domain.Interfaces
     {
         int GetNextOrderNumber();
         int SaveNewOrder(Pedido pedido, List<ItemPedido> itensPedido, List<FormaPg> formasPagamento, bool cancelar = false);
+        void UpdateFaturamento(int idPedido, bool faturado);
     }
 }

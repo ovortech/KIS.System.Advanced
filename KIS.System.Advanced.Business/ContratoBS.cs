@@ -91,8 +91,20 @@ namespace KIS.System.Advanced.Business
         public void Update(Contrato Contrato)
         {
             try
-            {
+            {                
                 dbContrato.Update(Contrato);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao atualizar os dados do Contrato: {ex.Message}.");
+            }
+        }
+
+        public void UpdateFaturamento(Contrato Contrato)
+        {
+            try
+            {                
+                dbContrato.UpdateFaturamento(Contrato);
             }
             catch (Exception ex)
             {

@@ -101,6 +101,21 @@ namespace KIS.System.Advanced.Business
             }
         }
 
+        public void UpdateFaturamento(int idPedido, bool faturado)
+        {
+            try
+            {
+                var pedido = dbPedido.GetById(idPedido);
+                pedido.FATURADO_PEDIDO = faturado;
+                dbPedido.Update(pedido);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao atualizar o Faturamento dos dados do Pedido: {ex.Message}.");
+            }
+        }
+
+
         public void Delete(int idPedido)
         {
             try

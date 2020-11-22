@@ -25,11 +25,10 @@
                     <td class="tb-style text-center" width="10%">@item.DataVenda</td>
                     <td class="tb-style text-center totalPedido" width="10%">@item.TotalPedido</td>
                     <td class="tb-style text-center" width="10%">
-                        @Html.CheckBox("Faturado", item.Faturado, new { @class = "Pagar", @onclick = "javascript: totalFatura()" })
-                        @*<input type="checkbox" id="@item.Faturado">*@ 
+                        @Html.CheckBox("Faturado", item.Faturado, new { @class = "Pagar", @onclick = "javascript: totalFatura()" })                        
                         <input type="hidden" class="DataPg" value="@item.DataFaturamento" />
-                    </td>
-                    @*<td class="tb-style text-center" width="3%"><button type="button" style=" width: 160px; !important" class="mb-10 mr-10 btn-add btn btn-block float-right" data-toggle="modal" data-target="#novo-Vendedor" data-direction="bottom" onclick="javascript: ajustaTituloModal('Detalhe do Pedido')">Detalhe do Pedido</button></td>*@
+                        <input type="hidden" class="idContrato" value="@item.IdContrato" />
+                    </td>                    
                     <td class="tb-style text-center" width="3%"><button type="button" style="width: 160px; !important" class="mb-10 btn-add btn " data-toggle="modal" data-target="#detalhe-Pedido" data-direction="bottom" onclick="javascript: showDetalhe(@item.IdPedido)">Detalhe</button></td>                    
                 </tr>
             }

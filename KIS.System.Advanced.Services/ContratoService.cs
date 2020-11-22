@@ -23,9 +23,9 @@ namespace KIS.System.Advanced.Services
             return contratoBS.GetContratoDto(IdCliente, dataInicio, dataFim);
         }
 
-        public void Save(Contrato contrato)
+        public void SaveFaturamento(Contrato contrato)
         {
-            contratoBS.Update(contrato);
+            contratoBS.UpdateFaturamento(contrato);
         }
     }
 }

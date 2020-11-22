@@ -11,6 +11,6 @@ namespace KIS.System.Advanced.Services.Interfaces
     public interface IContratoService
     {
         List<ContratoDto> GetContratoDto(int IdCliente, DateTime dataInicio, DateTime dataFim);
-        void Save(Contrato contrato);
+        void SaveFaturamento(Contrato contrato);
     }
 }

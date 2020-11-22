@@ -81,5 +81,21 @@ namespace KIS.System.Advanced.Infra.Data.Repositories
                 }
             }
         }
+
+
+        public void UpdateFaturamento(int idPedido, bool faturado)
+        {
+            try
+            {
+                var pedido = GetById(idPedido);
+                pedido.FATURADO_PEDIDO = faturado;
+                Update(pedido);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao atualizar o Faturamento dos dados do Pedido: {ex.Message}.");
+            }
+        }
+
     }
 }

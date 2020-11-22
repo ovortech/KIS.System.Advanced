@@ -1,4 +1,5 @@
-﻿using KIS.System.Advanced.MVC.Support;
+﻿using KIS.System.Advanced.Domain.Entities;
+using KIS.System.Advanced.MVC.Support;
 using KIS.System.Advanced.MVC.Support.Security;
 using KIS.System.Advanced.MVC.ViewModels;
 using KIS.System.Advanced.Services.Interfaces;
@@ -27,9 +28,9 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         // GET: Contrato
         [CustomAuthorize(IsPermission = Support.AcessRole.ADMIN)]
-        public ActionResult Index()
+        public ActionResult Index(ContratoVM model)
         {
-            ContratoVM model = CarregarModel();
+            model = CarregarModel(model);
 
             return View(model);
         }
@@ -61,9 +62,34 @@ namespace KIS.System.Advanced.MVC.Controllers
             return PartialView(grid);
         }
 
-        private ContratoVM CarregarModel()
+        [CustomAuthorize(IsPermission = AcessRole.ADMIN)]
+        [HttpPost]
+        public JsonResult Salvar(int idPedido, Boolean Faturado, int idCliente, int idContrato)
         {
-            var model = new ContratoVM();
+            try
+            {
+                var contrato = new Contrato
+                {
+                     ID_CONTRATO = idContrato,
+                    ID_PEDIDO_CONTRATO = idPedido,
+                    FATURADO_CONTRATO = Faturado,
+                    DATA_FATURAMENTO = DateTime.Now,
+                    ID_CLIENTE_CONTRATO = idCliente,
+                };
+                
+                _contratoService.SaveFaturamento(contrato);
+                return Json(new { IsValide = true });
+            }
+            catch (Exception)
+            {
+                return Json(new { IsValide = false });
+            }
+        }
+
+        private ContratoVM CarregarModel(ContratoVM model)
+        {
+            if (model == null)
+                model = new ContratoVM();
             var clientes = _clienteService.GetAllActive();
             var clienteVMs = AutoMapper.Mapper.Map<List<ClienteVM>>(clientes);
             model.Clientes = clienteVMs;
