@@ -1,9 +1,8 @@
-﻿@model IEnumerable<KIS.System.Advanced.MVC.ViewModels.VendedorVM>
+﻿@model KIS.System.Advanced.MVC.ViewModels.DespesaVM
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 
 <!-- Bootstrap core CSS -->
 <link href="~/Content/bootstrap.min.css" rel="stylesheet">
@@ -33,7 +32,7 @@
             <div class="col-md-12">
                 <div class="" id="box_configs">
                     <div>
-                        <a href="#" class="btn btn-finalizar" data-toggle="modal" data-target="#novo-Cliente" data-direction="bottom" onclick="javascript: ajustaTituloModal('Nova Despesa')">Adicionar Nova Despesa</a>
+                        <a href="#" class="btn btn-finalizar" data-toggle="modal" data-target="#nova-despesa" data-direction="bottom" onclick="javascript: ajustaTituloModal('Nova Despesa')">Adicionar Nova Despesa</a>
                         <nav class="navbar-light bg-light float-right">
                             <form class="form-inline">
                                 <input class="form-control mr-sm-2" id="inputPesquisa" type="search" placeholder="Pesquisar por..." aria-label="Search">
@@ -41,7 +40,7 @@
                         </nav>
                     </div>
                     <br>
-                    <table id="lista-Clientes" class=" tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%">
+                    <table id="lista-despesas" class=" tb-style table table-striped table-hover table-condensed dataTable display responsive nowrap" width="100%">
                         <thead>
                             <tr>
                                 <th>Despesa</th>
@@ -71,7 +70,7 @@
         </div>
     </div>
 
-    <div class="modal fade bottom" id="novo-Cliente" tabindex="-1" role="dialog" aria-labelledby="desativar" aria-hidden="true" novalidate="novalidate" style="display: none;">
+    <div class="modal fade bottom" id="nova-despesa" tabindex="-1" role="dialog" aria-labelledby="desativar" aria-hidden="true" novalidate="novalidate" style="display: none;">
         <div class="modal-dialog ">
             <div class="modal-content">
                 <div class="modal-header">
