@@ -56,6 +56,8 @@ namespace KIS.System.Advanced.MVC.Support
             MappingTipoCancelamento(cfg);
             MappingPedidoCancelamento(cfg);
             MappingContrato(cfg);
+            MappingDespesas(cfg);
+            MappingTipoDespesas(cfg);
         }
 
         private static void MappingContrato(IMapperConfigurationExpression cfg)
@@ -98,8 +100,7 @@ namespace KIS.System.Advanced.MVC.Support
                 .ForMember(destinationMember: vm => vm.PERCENTUAL_COMISSAO, memberOptions: map => map.MapFrom(sourceMember: s => s.PercComissao))
                 .ForMember(destinationMember: vm => vm.PAGO_COMISSAO, memberOptions: map => map.MapFrom(sourceMember: s => s.Pago))
                 .ForMember(destinationMember: vm => vm.ATIVO, memberOptions: map => map.MapFrom(sourceMember: s => s.Ativo))
-                .ForMember(destinationMember: vm => vm.DATA_PAGAMENTO_COMISSAO, memberOptions: map => map.MapFrom(sourceMember: s => s.DataVenda))
-                ;
+                .ForMember(destinationMember: vm => vm.DATA_PAGAMENTO_COMISSAO, memberOptions: map => map.MapFrom(sourceMember: s => s.DataVenda));
 
             cfg.CreateMap<ComissaoDto, ComissaoVM>()
                 ;
@@ -234,6 +235,36 @@ namespace KIS.System.Advanced.MVC.Support
                 .ForMember(destinationMember: vm => vm.Endereco, memberOptions: map => map.MapFrom(sourceMember: s => s.ENDERECO_CLIENTE))
                 .ForMember(destinationMember: vm => vm.Telefone, memberOptions: map => map.MapFrom(sourceMember: s => s.TELEFONE_CLIENTE))
                 .ForMember(destinationMember: vm => vm.Nome, memberOptions: map => map.MapFrom(sourceMember: s => s.NOME_CLIENTE));
+        }
+
+        private static void MappingDespesas(IMapperConfigurationExpression cfg)
+        {
+            cfg.CreateMap<DespesaVM, Despesa>()
+                .ForMember(destinationMember: vm => vm.ID_DESPESA, memberOptions: map => map.MapFrom(sourceMember: s => s.Id))
+                .ForMember(destinationMember: vm => vm.ID_LOGIN_DESPESA, memberOptions: map => map.MapFrom(sourceMember: s => s.IdLogin))
+                .ForMember(destinationMember: vm => vm.ID_TIPO_DESPESA, memberOptions: map => map.MapFrom(sourceMember: s => s.IdTipoDespesa))
+                .ForMember(destinationMember: vm => vm.DATA_DESPESA, memberOptions: map => map.MapFrom(sourceMember: s => s.Data))
+                .ForMember(destinationMember: vm => vm.DESC_DESPESA, memberOptions: map => map.MapFrom(sourceMember: s => s.Descritivo))
+                .ForMember(destinationMember: vm => vm.VALOR_DESPESA, memberOptions: map => map.MapFrom(sourceMember: s => s.ValorDespesa));
+
+            cfg.CreateMap<Despesa, DespesaVM>()
+                .ForMember(destinationMember: vm => vm.Id, memberOptions: map => map.MapFrom(sourceMember: s => s.ID_DESPESA))
+                .ForMember(destinationMember: vm => vm.IdLogin, memberOptions: map => map.MapFrom(sourceMember: s => s.ID_LOGIN_DESPESA))
+                .ForMember(destinationMember: vm => vm.IdTipoDespesa, memberOptions: map => map.MapFrom(sourceMember: s => s.ID_TIPO_DESPESA))
+                .ForMember(destinationMember: vm => vm.Data, memberOptions: map => map.MapFrom(sourceMember: s => s.DATA_DESPESA))
+                .ForMember(destinationMember: vm => vm.Descritivo, memberOptions: map => map.MapFrom(sourceMember: s => s.DESC_DESPESA))
+                .ForMember(destinationMember: vm => vm.ValorDespesa, memberOptions: map => map.MapFrom(sourceMember: s => s.VALOR_DESPESA));
+        }
+
+        private static void MappingTipoDespesas(IMapperConfigurationExpression cfg)
+        {
+            cfg.CreateMap<TipoDespesaVM, TipoDespesa>()
+                .ForMember(destinationMember: vm => vm.ID_TIPO_DESPESA, memberOptions: map => map.MapFrom(sourceMember: s => s.Id))
+                .ForMember(destinationMember: vm => vm.NOME_TIPO_DESPESA, memberOptions: map => map.MapFrom(sourceMember: s => s.NomeDespesa));
+
+            cfg.CreateMap<TipoDespesa, TipoDespesaVM>()
+                .ForMember(destinationMember: vm => vm.Id, memberOptions: map => map.MapFrom(sourceMember: s => s.ID_TIPO_DESPESA))
+                .ForMember(destinationMember: vm => vm.NomeDespesa, memberOptions: map => map.MapFrom(sourceMember: s => s.NOME_TIPO_DESPESA));
         }
     }
 }
