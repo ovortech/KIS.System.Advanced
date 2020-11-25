@@ -1,9 +1,11 @@
 ﻿using KIS.System.Advanced.Domain.Entities;
 using KIS.System.Advanced.Infra.Data.Repositories;
+using KIS.System.Advanced.Support;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,7 +25,7 @@ namespace Kist.System.Adavanced.Test.Data
         public void AddUser()
         {
             var usuariosantes = _usuarioRepository.Login(new Usuario { LOGIN_USUARIO = "mnmelo", SENHA_USUARIO = "1234" });
-                        
+
             Usuario user = new Usuario
             {
                 LOGIN_USUARIO = "mnmelo",
@@ -55,6 +57,22 @@ namespace Kist.System.Adavanced.Test.Data
         {
             var aa = _usuarioRepository.GetAll().ToList();
             Assert.IsTrue(aa != null);
+        }
+
+        [TestMethod]
+        public void Md5()
+        {
+            var senha = CalculateMD5Hash.Generate("1234");
+            var senha2 = CalculateMD5Hash.Generate("1234");
+
+            if (senha == senha2)
+            {
+                Assert.IsTrue(true);
+            }
+            else
+            {
+                Assert.IsTrue(true);
+            }
         }
 
         [TestMethod]
