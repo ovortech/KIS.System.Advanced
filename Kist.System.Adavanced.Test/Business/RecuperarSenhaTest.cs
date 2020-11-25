@@ -21,7 +21,7 @@ namespace Kist.System.Adavanced.Test.Business
         [TestMethod]
         public void AlterarSenha()
         {
-            var usuario = _recuperarSenhaBS.SendEmailNewPassword("mnmelo");
+            var usuario = _recuperarSenhaBS.SendEmailNewPassword("mnmelo", "http://localhost");
 
             Assert.IsTrue(usuario != null);
         }

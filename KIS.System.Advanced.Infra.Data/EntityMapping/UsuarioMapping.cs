@@ -17,7 +17,7 @@ namespace KIS.System.Advanced.Infra.Data.EntityConfig
             HasKey(e => e.ID_USUARIO);
 
             Property(e => e.LOGIN_USUARIO).HasMaxLength(50).IsRequired();
-            Property(e => e.SENHA_USUARIO).HasMaxLength(10).IsRequired();
+            Property(e => e.SENHA_USUARIO);
             Property(e => e.ID_TIPO_ACESSO_USUARIO).IsRequired();
             Property(e => e.NOME_USUARIO).HasMaxLength(50).IsRequired();
             Property(e => e.EMAIL_USUARIO).HasMaxLength(50).IsRequired();

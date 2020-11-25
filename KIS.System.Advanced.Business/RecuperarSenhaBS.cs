@@ -30,7 +30,7 @@ namespace KIS.System.Advanced.Business
 
         }
 
-        public Usuario SendEmailNewPassword(string userName)
+        public Usuario SendEmailNewPassword(string userName, string urlDomain)
         {
             try
             {
@@ -52,8 +52,8 @@ namespace KIS.System.Advanced.Business
 
 
                 body.AppendLine($"<p>Olá { usuario.NOME_USUARIO }</p>");
-                body.AppendLine($"<p>Acesse o link abaixo ou copie e cole esse url no navegador http://localhost:57162/AlterarSenha/?token={token} </p>");
-                body.AppendLine($"<a href=\"http://localhost:57162/AlterarSenha/?token={token}\" >Alterar Senha</a>");
+                body.AppendLine($"<p>Acesse o link abaixo ou copie e cole esse url no navegador {urlDomain}/AlterarSenha/?token={token} </p>");
+                body.AppendLine($"<a href=\"{urlDomain}/AlterarSenha/?token={token}\" >Alterar Senha</a>");
                 body.AppendLine("");
 
                 EmailManagement.Send("seguranca@chaveirokis.com.br", usuario.EMAIL_USUARIO, "Reupera senha | KIS", body.ToString());

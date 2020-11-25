@@ -65,9 +65,16 @@
 
 @section scripts {
     <script type="text/javascript">
+        $(document).keypress(function (e) {
+            if (e.which == 13)
+                logar();
+        });
         $('#logar').click(function () {
+            logar();
+        });
+        function logar() {
             var usuario = { "UserName": $("#UserName").val(), "Password": $("#pws").val() }
             callActionPost("Login", "Logar", usuario, "/Home");
-        });
+        }
     </script>
 }

@@ -10,7 +10,7 @@ namespace KIS.System.Advanced.Services.Interfaces
     public interface IRecuperarSenhaService
     {
         Usuario ValidateToken(String userName);
-        Usuario SendEmailNewPassword(string userName);
+        Usuario SendEmailNewPassword(string userName, string urlDomain);
         void NovaSenha(Usuario usuario);
     }
 }

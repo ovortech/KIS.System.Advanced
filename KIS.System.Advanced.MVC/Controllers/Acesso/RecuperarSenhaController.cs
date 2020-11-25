@@ -24,14 +24,14 @@ namespace KIS.System.Advanced.MVC.Controllers.Acesso
 
         public ActionResult SendEmail(string userName)
         {
-            var usuario =_recuperarSenhaService.SendEmailNewPassword(userName);
+            var usuario = _recuperarSenhaService.SendEmailNewPassword(userName, this.HttpContext.Request.Url.Scheme + "://" + this.HttpContext.Request.Url.Authority);
             string email = "";
             var emailSplit = usuario.EMAIL_USUARIO.Split();
             string user = usuario.EMAIL_USUARIO.Split('@')[0];
             string dominio = usuario.EMAIL_USUARIO.Split('@')[1];
             for (int i = 0; i < user.ToCharArray().Count(); i++)
             {
-                if(i < 3 || i >= (user.ToCharArray().Count() - 2))
+                if (i < 3 || i >= (user.ToCharArray().Count() - 2))
                 {
                     email += user[i];
                 }
@@ -40,7 +40,7 @@ namespace KIS.System.Advanced.MVC.Controllers.Acesso
                     email += 'x';
                 }
             }
-            email += "@"+ dominio;
+            email += "@" + dominio;
 
             return Json(email);
         }

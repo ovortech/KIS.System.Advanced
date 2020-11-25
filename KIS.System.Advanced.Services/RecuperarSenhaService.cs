@@ -22,9 +22,9 @@ namespace KIS.System.Advanced.Services
             return recuperarSenhaBS.ValidateToken(token);
         }
 
-        public Usuario SendEmailNewPassword(string userName)
+        public Usuario SendEmailNewPassword(string userName, string urlDomain)
         {
-            return recuperarSenhaBS.SendEmailNewPassword(userName);
+            return recuperarSenhaBS.SendEmailNewPassword(userName, urlDomain);
         }
 
         public void NovaSenha(Usuario usuario)
