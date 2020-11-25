@@ -65,10 +65,22 @@
 </html>
 @section scripts {
     <script type="text/javascript">
-        $('#confirmar').click(function () {
-            let data = { token: $("#txtToken").val(), senha1: $("#pws1").val(), senha2: $("#pws2").val() };
-            callActionGet("AlterarSenha", "NovaSenha", data);
+
+        $(document).keypress(function (e) {
+            const ENTER = 13;
+            if (e.which == ENTER)
+                alterarSenha();
         });
+
+        $('#confirmar').click(function () {
+            alterarSenha()
+        });
+
+        function alterarSenha() {
+            let data = { token: $("#txtToken").val(), senha1: $("#pws1").val(), senha2: $("#pws2").val() };
+            let msg = callActionGet("AlterarSenha", "NovaSenha", data);
+            alert(msg.result)
+        }
     </script>
 }
 

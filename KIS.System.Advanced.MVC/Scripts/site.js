@@ -8,11 +8,12 @@ function callActionPost(controler, action, parameter, redirect = null) {
         processData: true,
         async: false,
         success: function (data) {
-            if (redirect != "" && redirect != undefined) {
-                window.location = window.location.origin + '/' + redirect;
-            }
             if (data)
                 retorno = data;
+
+            if (redirect != "" && redirect != undefined) {
+                window.location = window.location.origin + '/' + redirect;
+            }            
         },
         error: function (err) {
             console.log(err);
@@ -31,11 +32,12 @@ function callActionGet(controler, action, parameter, redirect = null) {
         processData: true,
         async: false,
         success: function (data) {
-            if (redirect != "" && redirect != undefined) {
-                window.location = window.location.origin + '/' + redirect;
-            }
             if (data)
                 retorno = data;
+
+            if (redirect != "" && redirect != undefined) {
+                window.location = window.location.origin + '/' + redirect;
+            }           
         },
         error: function (err) {
             console.log(err);

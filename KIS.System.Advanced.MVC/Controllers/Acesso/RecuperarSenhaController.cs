@@ -22,7 +22,8 @@ namespace KIS.System.Advanced.MVC.Controllers.Acesso
             return View();
         }
 
-        public ActionResult SendEmail(string userName)
+        [HttpGet]
+        public JsonResult SendEmail(string userName)
         {
             var usuario = _recuperarSenhaService.SendEmailNewPassword(userName, this.HttpContext.Request.Url.Scheme + "://" + this.HttpContext.Request.Url.Authority);
             string email = "";
@@ -42,7 +43,7 @@ namespace KIS.System.Advanced.MVC.Controllers.Acesso
             }
             email += "@" + dominio;
 
-            return Json(email);
+            return Json(new { email = email }, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -66,7 +66,8 @@
 @section scripts {
     <script type="text/javascript">
         $(document).keypress(function (e) {
-            if (e.which == 13)
+            const ENTER = 13;
+            if (e.which == ENTER)
                 logar();
         });
         $('#logar').click(function () {

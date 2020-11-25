@@ -23,21 +23,22 @@ namespace KIS.System.Advanced.MVC.Controllers.Acesso
             return View(usuario);
         }
 
+        [HttpGet]
         public JsonResult NovaSenha(string token, string senha1, string senha2)
         {
             var usuario = _recuperarSenhaService.ValidateToken(token);
             if (usuario == null)
-                return Json("Erro ao validar usuario");
+                return Json(new { result = "Token invalido" }, JsonRequestBehavior.AllowGet);
 
             if (senha1 != senha2)
-                return Json("senha errad");
+                return Json("As senhas são diferentes");
             else
             {
                 usuario.SENHA_USUARIO = senha1;
                 _recuperarSenhaService.NovaSenha(usuario);
             }
 
-            return Json("sucesso");
+            return Json(new { result = "senha alterada com sucesso" }, JsonRequestBehavior.AllowGet);
         }
 
     }

@@ -53,10 +53,21 @@
 </html>
 @section scripts {
     <script type="text/javascript">
-        $('#recuperar').click(function () {
 
+        $(document).keypress(function (e) {
+            const ENTER = 13;
+            if (e.which == ENTER)
+                recuperarSenha()
+        });
+
+        function recuperarSenha() {
             let data = { userName: $("#UserName").val() };
-            alert("email de recuperação de senha enviado para " + callActionGet("RecuperarSenha", "SendEmail", data));
+            let result = callActionGet("RecuperarSenha", "SendEmail", data, "home");
+            alert("email de recuperação de senha enviado para " + result.email);
+        }
+
+        $('#recuperar').click(function () {
+            recuperarSenha()
         });
     </script>
 }
