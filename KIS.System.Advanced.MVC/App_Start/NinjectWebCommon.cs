@@ -70,10 +70,11 @@ namespace KIS.System.Advanced.MVC.App_Start
             kernel.Bind<IPedidoService>().To<PedidoService>();
             kernel.Bind<IClienteService>().To<ClienteService>();
             kernel.Bind<ITipoPagamentoService>().To<TipoPagamentoService>();
-            kernel.Bind<IComissaoService>().To<ComissaoService>();            
+            kernel.Bind<IComissaoService>().To<ComissaoService>();
             kernel.Bind<IItemPedidoService>().To<ItemPedidoService>();
             kernel.Bind<IFormaPagamentoService>().To<FormaPagamentoService>();
             kernel.Bind<IHistoricoVendaService>().To<HistoricoVendaService>();
+            kernel.Bind<IContratoService>().To<ContratoService>();
             kernel.Bind<ITipoDespesaService>().To<TipoDespesaService>();
             kernel.Bind<IDespesaService>().To<DespesaService>();
         }
