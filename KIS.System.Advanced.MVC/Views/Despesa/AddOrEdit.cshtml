@@ -1,1 +1,60 @@
-﻿
+﻿@model KIS.System.Advanced.MVC.ViewModels.DespesaVM
+
+<form method="POST" id="form-Cliente" autocomplete="off">
+    <input type="hidden" id="idDespesa" value="@Model.Id">
+    <div class="form-group">
+        <input type="hidden" id="idTipoDespesa" value="@Model.TipoDespesa.Id">
+        <label class="control-label" for="nomeDespesa">Despesa</label>
+        <input type="text" value="@Model.TipoDespesa.NomeDespesa" autocomplete="off" class="form-control col-12" id="nomeDespesa" name="nomeDespesa" placeholder="Digite o nome da Despesa">
+        @Html.ValidationMessageFor(model => model.TipoDespesa.NomeDespesa)
+
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="descricao">Descrição Despesa</label>
+        <input type="text" value="@Model.Descritivo" autocomplete="off" class="form-control col-12" id="" name="descricao" placeholder="Digite a descrição da Despesa">
+        @Html.ValidationMessageFor(model => model.Descritivo)
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="data">Data Ocorrência</label>
+        <input type="text" value="@Model.Data" autocomplete="off" class="form-control col-3 text-center" id="data" name="data" placeholder="">
+        @Html.ValidationMessageFor(model => model.Data)
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="valor">Valor</label>
+        <input type="text" value="@Model.ValorDespesa" autocomplete="off" class="form-control col-3 text-center inputNumerico" id="valor" name="valor" placeholder="">
+        @Html.ValidationMessageFor(model => model.ValorDespesa)
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger float-left" data-dismiss="modal" onclick="javascript: resetaModal()">Fechar</button>
+        <button type="button" id="btnSalvarDespesa" class="btn btn-finalizar" data-dismiss="modal" aria-label="Close" style="width: 70px;">Salvar</button>
+    </div>
+</form>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".inputNumerico").each(function () {
+            let valor = parseFloat($(this).text().replace(',', '.'));
+            let valorFormatado = imprimeFormatadoSemSimbolo(valor);
+            $(this).text(valorFormatado);
+        });
+
+        recarregaMascaras();
+
+        $("#btnSalvarDespesa").click(() => {
+            let despesa = {
+                Id: $("#idDespesa").val(),
+                IdTipoDespesa: $("#idTipoDespesa").val(),
+                Descritivo: $("#descricao").val(),
+                ValorDespesa: parseFloat($("#valor").val().replace(',', '.')),
+                Data: $("#data").val(),
+            };
+            salvaModel('Despesa', 'Save', despesa)
+        });
+    });
+
+</script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval");
+}

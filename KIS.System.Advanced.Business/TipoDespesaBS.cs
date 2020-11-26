@@ -40,6 +40,18 @@ namespace KIS.System.Advanced.Business
             }
         }
 
+        public TipoDespesa GetById(int id)
+        {
+            try
+            {
+                return dbTipoDespesa.GetById(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao pesquisar TipoDespesas: {ex.Message}.");
+            }
+        }
+
         public List<TipoDespesa> GetAllInactive()
         {
             try

@@ -11,6 +11,7 @@ namespace KIS.System.Advanced.Services.Interfaces
     {
         List<TipoDespesa> GetAll();
         List<TipoDespesa> GetAllActive();
+        TipoDespesa GetById(int id);
     }
 
 }

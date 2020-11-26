@@ -26,5 +26,9 @@ namespace KIS.System.Advanced.Services
         {
             return tipoDespesaBS.GetAllActive();
         }
+        public TipoDespesa GetById(int id)
+        {
+            return tipoDespesaBS.GetById(id);
+        }
     }
 }
