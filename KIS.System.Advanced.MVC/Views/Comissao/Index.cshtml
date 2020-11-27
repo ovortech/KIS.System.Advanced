@@ -4,7 +4,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model IEnumerable<KIS.System.Advanced.MVC.ViewModels.ComissaoVM>
+@model KIS.System.Advanced.MVC.ViewModels.ComissaoVM
+@using KIS.System.Advanced.MVC.Support
 
 <!-- Bootstrap core CSS -->
 <link href="~/Content/bootstrap.min.css" rel="stylesheet">
@@ -48,9 +49,9 @@
 
                 <div class="row" id="box_configs">
                     <label class="float-left mg-10 mb-10" style="margin-left: 15px;">Ínicio de exibição:</label>
-                    <input type="text" class="form-control text-center col-1" id="date_timepicker_start" />
+                    <input type="text" class="form-control text-center col-1" id="date_timepicker_start" value="@Model.DataInicio.ParseDateTimeToBr()" />
                     <label class="float-left mg-10 mb-10">&nbsp; &nbsp;Fim de exibição:</label>
-                    <input type="text" class="form-control text-center col-1" id="date_timepicker_end" />
+                    <input type="text" class="form-control text-center col-1" id="date_timepicker_end" value="@Model.DataFim.ParseDateTimeToBr()" />
                     <button type="button" class="float-left btn-buscar" onclick="javascript: filtraComissao()">Buscar</button>
                     <img src="https://i.gifer.com/ZKZg.gif" id="loading" width="25" height="25" style="display:none; margin:0px" />
 
@@ -101,12 +102,13 @@
         let linhas = "";
 
         $(document).ready(() => {
+
+
             $.datetimepicker.setLocale('pt-BR');
 
             jQuery(function () {
                 jQuery('#date_timepicker_start').datetimepicker({
                     format: 'd/m/Y',
-                    startDate: new Date(),
                     onShow: function (ct) {
                         this.setOptions({
                             maxDate: jQuery('#date_timepicker_end').val() ? jQuery('#date_timepicker_end').val() : false
@@ -116,7 +118,6 @@
                 });
                 jQuery('#date_timepicker_end').datetimepicker({
                     format: 'd/m/Y',
-                    startDate: new Date(),
                     onShow: function (ct) {
                         this.setOptions({
                             minDate: jQuery('#date_timepicker_start').val() ? jQuery('#date_timepicker_start').val() : false
@@ -125,8 +126,9 @@
                     timepicker: false
                 });
             });
-            $("#date_timepicker_start").val("@ViewBag.hoje");
-            $("#date_timepicker_end").val("@ViewBag.hoje");
+
+            @*$("#date_timepicker_start").val("@ViewBag.hoje");
+            $("#date_timepicker_end").val("@ViewBag.hoje");*@
 
             filtraComissao();
             //caculaTodos();
@@ -351,7 +353,7 @@
                 if (!isPago) {
                     let id = $(linhas[i]).find("td input.IdItemPedido").val();
                     calculaLucro(id, false, false);
-                }             
+                }
             }
         }
 

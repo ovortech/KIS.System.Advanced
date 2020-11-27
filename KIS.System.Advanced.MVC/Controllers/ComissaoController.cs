@@ -36,22 +36,24 @@ namespace KIS.System.Advanced.MVC.Controllers
 
         [CustomAuthorize(IsPermission = Support.AcessRole.ADMIN | AcessRole.VENDAS)]
         [HttpGet]
-        public ActionResult Index(List<ComissaoVM> comissoes)
+        public ActionResult Index(ComissaoVM comissoes)
         {
             ViewBag.hoje = DateTime.Now.Date;
             ViewBag.Vendedores = vendedores = AutoMapper.Mapper.Map<List<VendedorVM>>(_vendedorService.GetAllActive());
-            return View(comissoes ?? new List<ComissaoVM>());
+            return View(comissoes ?? new ComissaoVM());
         }
 
 
         [CustomAuthorize(IsPermission = AcessRole.ADMIN | AcessRole.VENDAS)]
         [HttpPost]
-        public PartialViewResult FiltraComissao(int idVendedor, DateTime dataInicio, DateTime dataFim)
+        public PartialViewResult FiltraComissao(int idVendedor, String dataInicio, String dataFim)
         {
+            DateTime dtInicio = dataInicio.ParseDateTimeBrToUs();
+            DateTime dtFim = dataFim.ParseDateTimeBrToUs();
             List<ComissaoVM> comissoes = new List<ComissaoVM>();
             if (idVendedor != 0)
             {
-                comissoes = AutoMapper.Mapper.Map<List<ComissaoVM>>(_comissaoService.GetDto(idVendedor, dataInicio, dataFim));
+                comissoes = AutoMapper.Mapper.Map<List<ComissaoVM>>(_comissaoService.GetDto(idVendedor, dtInicio, dtFim));
             }
             return PartialView(comissoes);
         }
